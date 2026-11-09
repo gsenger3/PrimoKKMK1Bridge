@@ -159,6 +159,7 @@ final class OSCLink {
                 : "cannot listen on UDP port \(receivePort) (errno \(e))")
         }
         _ = fcntl(fd, F_SETFL, O_NONBLOCK)
+        _ = fcntl(fd, F_SETFD, FD_CLOEXEC)  // a config restart (exec) must not inherit the bound port
         let src = DispatchSource.makeReadSource(fileDescriptor: fd, queue: .main)
         src.setEventHandler { [weak self] in self?.drain() }
         src.resume()

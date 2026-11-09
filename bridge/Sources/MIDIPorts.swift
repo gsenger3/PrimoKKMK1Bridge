@@ -129,6 +129,16 @@ final class MIDIPorts {
         onKeysChanged?(keysConnected.map(midiName))
     }
 
+    /// Remove the virtual ports and the MIDI client (before restarting with a new config).
+    func close() {
+        guard !dryRun else { return }
+        for e in keysConnected { MIDIPortDisconnectSource(keysPort, e) }
+        keysConnected = []
+        if destination != 0 { MIDIEndpointDispose(destination) }
+        if source != 0 { MIDIEndpointDispose(source) }
+        MIDIClientDispose(client)
+    }
+
     func send(_ status: UInt8, _ d1: UInt8, _ d2: UInt8) {
         guard !dryRun else { return }
         var word = UInt32(0x2000_0000) | UInt32(status) << 16 | UInt32(d1) << 8 | UInt32(d2)  // UMP MIDI 1.0 voice

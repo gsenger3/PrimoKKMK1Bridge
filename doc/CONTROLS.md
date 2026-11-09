@@ -161,7 +161,9 @@ The keyboard blanks its own displays when Preset ▲ / ▼ is pressed, so the br
 
 ## Changing assignments
 
-Everything in native mode can be changed in `bridge/PrimoKKMK1Bridge.json`; restart PrimoKKMK1Bridge afterwards. `build/PrimoKKMK1Bridge --print-default-config` prints every default.
+Everything in native mode can be changed with **PrimoKKMK1Bridge Editor** (`editor/build.sh`, then open
+`build/PrimoKKMK1Editor.app`), or directly in `bridge/PrimoKKMK1Bridge.json`. A running bridge applies a saved
+change by itself within a second or two. `build/PrimoKKMK1Bridge --print-default-config` prints every default.
 
 | To change | Config key |
 | --- | --- |

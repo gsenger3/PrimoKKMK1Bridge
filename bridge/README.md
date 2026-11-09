@@ -29,7 +29,7 @@ The source is in [Sources/](Sources/), one file per area:
 
 | File | What's in it |
 |---|---|
-| `main.swift` | Command line, replay mode, startup: the USB device watcher, sleep/wake and Ctrl-C handling |
+| `main.swift` | Command line, replay mode, startup: the USB device watcher, sleep/wake and Ctrl-C handling, and the restart when the config file changes |
 | `Hardware.swift` | The keyboard's USB IDs, HID report IDs, button bits and light slots |
 | `Config.swift` | Every config key, its default, and validation |
 | `MIDIPorts.swift` | The virtual MIDI port, DAW feedback, and the keyboard's keys merged in |
@@ -48,6 +48,38 @@ Good to know:
 - If the knobs ever go quiet while PrimoKKMK1Bridge is running, press a page arrow above the knobs. In MIDI mode that
   sends a page report, which PrimoKKMK1Bridge spots, and it switches the keyboard back to native mode.
 - On quit, PrimoKKMK1Bridge turns the button lights off and blanks the displays.
+- **Saved config changes apply by themselves.** PrimoKKMK1Bridge checks its `--config` file every second. When it
+  changes and is valid, the bridge restarts in place (same terminal, same arguments) with the new settings,
+  which takes a moment. A file it can't use is logged and ignored, and the bridge keeps its current settings.
+  The DAW sees the MIDI port drop out briefly during the restart.
+
+## Editor
+
+**PrimoKKMK1Bridge Editor** is a Mac app for changing the assignments without editing JSON. It shows a drawing
+of the keyboard: click a button, knob or strip, and the inspector beside it shows what it does and lets you
+change it. It has four pages:
+
+- **MIDI:** the CC each control sends.
+- **REAPER:** the REAPER command each button runs, alone and with Shift.
+- **Komplete Kontrol:** the Komplete Kontrol view's CCs, and its page and preset buttons.
+- **Settings:** the port name, channels, keys merge, lights, displays and REAPER connection.
+
+REAPER mode is switched on and off on the Settings page. While it's off, the REAPER and Komplete Kontrol pages are hidden.
+
+```bash
+editor/build.sh
+```
+
+```bash
+open build/PrimoKKMK1Editor.app
+```
+
+It opens `bridge/PrimoKKMK1Bridge.json` (File ▸ Open Config… for another file) and checks every change with the
+bridge's own rules. If something can't work, the status bar says why and Save stays off. **Save** (⌘S) writes
+the file, and a running bridge picks it up within a second or two. The toolbar shows whether the bridge is
+running (whether its MIDI port exists).
+
+Requires macOS 14 or later. The app is signed for this Mac only (ad hoc), not notarized.
 
 ## REAPER mode
 
@@ -203,7 +235,8 @@ In native mode the computer drives the 21 button lights (Octave −/+ and the Na
 
 ## Configuration
 
-Edit [PrimoKKMK1Bridge.json](PrimoKKMK1Bridge.json). Every key is optional; anything you leave out keeps its default.
+Use the [Editor](#editor), or edit [PrimoKKMK1Bridge.json](PrimoKKMK1Bridge.json) directly. Every key is
+optional; anything you leave out keeps its default. A running bridge applies a saved change by itself.
 `build/PrimoKKMK1Bridge --print-default-config` prints the full default file.
 
 | Key | Meaning |

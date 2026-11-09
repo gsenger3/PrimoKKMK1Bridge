@@ -9,7 +9,7 @@
 //  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
 //
 //  The entry point: the command line, replay mode, and startup (the USB device watcher, sleep/wake and
-//  Ctrl-C handling).
+//  Ctrl-C handling), and the restart in place when the config file changes.
 //
 //  PrimoKKMK1Bridge — every control on a Komplete Kontrol S-series MK1, as MIDI on a virtual port, with an
 //  optional link to REAPER over OSC (macOS).
@@ -231,6 +231,37 @@ if cfg.reaper.enabled {
     print("  REAPER: OSC to \(r.host):\(r.sendPort), listening on port \(r.receivePort); starts in \(r.view) view"
           + " (Instance: mix -> track -> komplete-kontrol). Hold Shift for the MIDI CC layer.")
     bridge.startReaper()
+}
+
+// Restart with the new settings whenever the config file changes (the editor saves it, or a text editor does).
+// A restart re-runs this program in place (same process, same terminal) with the same arguments.
+var configWatcher: DispatchSourceTimer?
+if let path = configPath {
+    let loaded = FileManager.default.contents(atPath: path)
+    var rejected: Data?
+    let timer = DispatchSource.makeTimerSource(queue: .main)
+    timer.schedule(deadline: .now() + 1, repeating: 1)
+    timer.setEventHandler {
+        guard let data = FileManager.default.contents(atPath: path), data != loaded, data != rejected else { return }
+        do {
+            try JSONDecoder().decode(Config.self, from: data).validate()
+        } catch {
+            rejected = data
+            bridge.log("config: \(path) changed but can't be used (\(error)); keeping the current settings")
+            return
+        }
+        bridge.log("config: \(path) changed; restarting with the new settings")
+        IOHIDManagerClose(manager, IOOptionBits(kIOHIDOptionsTypeNone))
+        midi.close()
+        fflush(stdout)
+        let exe = Bundle.main.executablePath ?? CommandLine.arguments[0]
+        var argv: [UnsafeMutablePointer<CChar>?] = CommandLine.arguments.map { strdup($0) } + [nil]
+        execv(exe, &argv)
+        fail("could not restart (errno \(errno)); start PrimoKKMK1Bridge again by hand")
+    }
+    timer.resume()
+    configWatcher = timer
+    print("  config: \(path) (saved changes apply automatically)")
 }
 print("  waiting for the keyboard… (Ctrl-C to quit)")
 CFRunLoopRun()
