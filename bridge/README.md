@@ -16,7 +16,7 @@ details are in [NOTES.md](../doc/NOTES.md).
 ## Build and run
 
 ```bash
-swiftc -O bridge/PrimoKKMK1Bridge.swift -o build/PrimoKKMK1Bridge
+mkdir -p build && swiftc -O bridge/Sources/*.swift -o build/PrimoKKMK1Bridge
 ```
 
 ```bash
@@ -24,6 +24,23 @@ build/PrimoKKMK1Bridge --config bridge/PrimoKKMK1Bridge.json --verbose
 ```
 
 `--verbose` prints every message it sends. Leave it running while you work; Ctrl-C quits.
+
+The source is in [Sources/](Sources/), one file per area:
+
+| File | What's in it |
+|---|---|
+| `main.swift` | Command line, replay mode, startup: the USB device watcher, sleep/wake and Ctrl-C handling |
+| `Hardware.swift` | The keyboard's USB IDs, HID report IDs, button bits and light slots |
+| `Config.swift` | Every config key, its default, and validation |
+| `MIDIPorts.swift` | The virtual MIDI port, DAW feedback, and the keyboard's keys merged in |
+| `Bridge.swift` | The bridge's state, the keyboard's connection, and HID reports turned into MIDI or REAPER commands |
+| `Bridge+Lights.swift` | The button lights |
+| `Bridge+Displays.swift` | What the displays show in each mode and view |
+| `Bridge+Reaper.swift` | REAPER events, and the Komplete Kontrol view's per-page knob memory |
+| `Displays.swift` | The displays' 16-segment font and HID reports |
+| `OSC.swift` | OSC over UDP, the link to REAPER |
+| `ReaperModel.swift` | REAPER commands, action IDs, track and send strips, views |
+| `ReaperSession.swift` | The REAPER session: handshake, project state, commands and knob turns |
 
 Good to know:
 - **After quitting, the keyboard stays in native mode** (its knobs send nothing) until you unplug and replug it.

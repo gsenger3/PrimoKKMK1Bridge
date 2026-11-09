@@ -9,7 +9,7 @@ Tested on an S61 MK1 (firmware 72) with macOS 26 and REAPER 7.61.
 
 | Where | What |
 | --- | --- |
-| [bridge/](bridge/README.md) | The bridge: one Swift file, its config, and how to build, run and set up REAPER |
+| [bridge/](bridge/README.md) | The bridge: its Swift sources, config, and how to build, run and set up REAPER |
 | [doc/CONTROLS.md](doc/CONTROLS.md) | Every control's job and CC in every mode |
 | [doc/NOTES.md](doc/NOTES.md) | The keyboard's USB HID protocol, as worked out here |
 | [doc/BUTTON_MAP.md](doc/BUTTON_MAP.md) | Which HID bit each button sets |
@@ -20,7 +20,7 @@ Tested on an S61 MK1 (firmware 72) with macOS 26 and REAPER 7.61.
 ## Quick start
 
 ```bash
-mkdir -p build && swiftc -O bridge/PrimoKKMK1Bridge.swift -o build/PrimoKKMK1Bridge
+mkdir -p build && swiftc -O bridge/Sources/*.swift -o build/PrimoKKMK1Bridge
 ```
 
 ```bash

@@ -1,5 +1,16 @@
-// midimon: log MIDI from sources whose name contains FILTER (default "KOMPLETE KONTROL").
-//   swiftc -O tools/midimon.swift -o build/midimon && build/midimon [seconds] ["Primo Komplete Kontrol MK1"]
+//
+//  midimon.swift
+//  PrimoKKMK1Bridge
+//
+//  Created by George Senger on 11/8/2026.
+//  Copyright © 2026 Primo Studios. All rights reserved.
+//
+//  Licensed under the MIT License. See LICENSE in the project root or
+//  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
+//
+//  midimon: log MIDI from sources whose name contains FILTER (default "KOMPLETE KONTROL").
+//    swiftc -O tools/midimon.swift -o build/midimon && build/midimon [seconds] ["Primo Komplete Kontrol MK1"]
+
 import CoreMIDI
 import Foundation
 

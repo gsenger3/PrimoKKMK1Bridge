@@ -1,6 +1,17 @@
-// midisend: send control changes to a MIDI destination by name (for testing PrimoKKMK1Bridge's light feedback).
-//   swiftc -O tools/midisend.swift -o build/midisend
-//   build/midisend "Primo Komplete Kontrol MK1" CHANNEL CC VALUE [CC VALUE ...]
+//
+//  midisend.swift
+//  PrimoKKMK1Bridge
+//
+//  Created by George Senger on 11/8/2026.
+//  Copyright © 2026 Primo Studios. All rights reserved.
+//
+//  Licensed under the MIT License. See LICENSE in the project root or
+//  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
+//
+//  midisend: send control changes to a MIDI destination by name (for testing PrimoKKMK1Bridge's light feedback).
+//    swiftc -O tools/midisend.swift -o build/midisend
+//    build/midisend "Primo Komplete Kontrol MK1" CHANNEL CC VALUE [CC VALUE ...]
+
 import CoreMIDI
 import Foundation
 

@@ -1,10 +1,20 @@
-// hidmon: read-only monitor for the Komplete Kontrol S61 MK1 vendor HID interface.
 //
-//   swiftc -O tools/hidmon.swift -o hidmon
-//   ./hidmon monitor [seconds]   # log input reports; decodes report 0x01 button bits and knobs
-//   ./hidmon features            # GET_REPORT every feature report the descriptor declares
+//  hidmon.swift
+//  PrimoKKMK1Bridge
 //
-// Never sends output reports or SET_REPORT, so it cannot change device state.
+//  Created by George Senger on 11/8/2026.
+//  Copyright © 2026 Primo Studios. All rights reserved.
+//
+//  Licensed under the MIT License. See LICENSE in the project root or
+//  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
+//
+//  hidmon: read-only monitor for the Komplete Kontrol S61 MK1 vendor HID interface.
+//
+//    swiftc -O tools/hidmon.swift -o hidmon
+//    ./hidmon monitor [seconds]   # log input reports; decodes report 0x01 button bits and knobs
+//    ./hidmon features            # GET_REPORT every feature report the descriptor declares
+//
+//  Never sends output reports or SET_REPORT, so it cannot change device state.
 
 import Foundation
 import IOKit.hid

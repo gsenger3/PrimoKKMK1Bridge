@@ -1,16 +1,26 @@
-// kkmap: guided control mapper for the Komplete Kontrol S61 MK1.
 //
-// Reads the "- item" lines of a Markdown file in order, prompts for each control, and records which
-// HID button bits, encoder nibbles and MIDI messages that control produces. Writes BUTTON_MAP.md,
-// button_map.json and a raw capture_mapping.log into OUT_DIR after every control.
+//  kkmap.swift
+//  PrimoKKMK1Bridge
 //
-//   swiftc -O tools/kkmap.swift -o build/kkmap
-//   build/kkmap [--native] "KKS61 Button Map.md" device
+//  Created by George Senger on 11/8/2026.
+//  Copyright © 2026 Primo Studios. All rights reserved.
 //
-// While running: s + Enter = skip this control, b + Enter = go back one, q + Enter = save and quit.
-// Without --native it is read-only toward the keyboard. With --native it sends one output report,
-// 0xA0 00 00 (the host "init" that DrivenByMoss sends), which switches the keyboard from MIDI mode to
-// native/host mode so Scale, Arp, the page arrows and knob touch report over HID. Replug to undo.
+//  Licensed under the MIT License. See LICENSE in the project root or
+//  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
+//
+//  kkmap: guided control mapper for the Komplete Kontrol S61 MK1.
+//
+//  Reads the "- item" lines of a Markdown file in order, prompts for each control, and records which
+//  HID button bits, encoder nibbles and MIDI messages that control produces. Writes BUTTON_MAP.md,
+//  button_map.json and a raw capture_mapping.log into OUT_DIR after every control.
+//
+//    swiftc -O tools/kkmap.swift -o build/kkmap
+//    build/kkmap [--native] "KKS61 Button Map.md" device
+//
+//  While running: s + Enter = skip this control, b + Enter = go back one, q + Enter = save and quit.
+//  Without --native it is read-only toward the keyboard. With --native it sends one output report,
+//  0xA0 00 00 (the host "init" that DrivenByMoss sends), which switches the keyboard from MIDI mode to
+//  native/host mode so Scale, Arp, the page arrows and knob touch report over HID. Replug to undo.
 
 import CoreMIDI
 import Foundation
