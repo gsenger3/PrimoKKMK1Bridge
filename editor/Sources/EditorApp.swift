@@ -8,8 +8,8 @@
 //  Licensed under the MIT License. See LICENSE in the project root or
 //  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
 //
-//  The editor app's entry point: its window, the File menu (Open, Save, Save As, Revert), and the prompt
-//  to save changes before quitting.
+//  The editor app's entry point: its window, the File menu (Open, Save, Save As, Revert), the Bridge menu
+//  (Start, Stop, Show Log), and the prompt to save changes before quitting.
 
 import AppKit
 import SwiftUI
@@ -37,6 +37,7 @@ struct PrimoKKMK1EditorApp: App {
         Window("Primo KK MK1 Control Editor", id: "editor") {
             ContentView()
                 .environmentObject(model)
+                .environmentObject(model.bridge)
                 .frame(minWidth: 1180, minHeight: 620)
                 .onAppear {
                     appDelegate.model = model
@@ -57,6 +58,12 @@ struct PrimoKKMK1EditorApp: App {
                     .keyboardShortcut("s", modifiers: [.command, .shift])
                 Button("Revert to Saved") { model.revert() }
                     .disabled(!model.isDirty)
+            }
+            CommandMenu("Bridge") {
+                Button("Start Bridge") { model.startBridge() }
+                Button("Stop Bridge") { model.bridge.stop() }
+                Divider()
+                Button("Show Bridge Log") { BridgeControl.showLog() }
             }
         }
     }

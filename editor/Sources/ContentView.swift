@@ -8,8 +8,8 @@
 //  Licensed under the MIT License. See LICENSE in the project root or
 //  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
 //
-//  The editor window: the toolbar (page, bridge status, Save), the drawn panel with the inspector beside it
-//  (or the Settings page), and the status bar with validation messages.
+//  The editor window: the toolbar (page, the bridge on/off switch, Save), the drawn panel with the inspector
+//  beside it (or the Settings page), and the status bar with validation messages.
 
 import SwiftUI
 
@@ -48,7 +48,7 @@ struct ContentView: View {
                 .fixedSize()
             }
             ToolbarItemGroup(placement: .primaryAction) {
-                BridgeStatus()
+                BridgeToggle()
                 Button("Revert") { model.revert() }
                     .disabled(!model.isDirty)
                 Button("Save") { model.save() }
@@ -77,22 +77,52 @@ struct ContentView: View {
     }
 }
 
-/// Whether the bridge is running (its MIDI port exists).
-struct BridgeStatus: View {
+/// The bridge switch: shows whether the bridge is running (its MIDI port is up) and starts or stops it.
+struct BridgeToggle: View {
     @EnvironmentObject var model: EditorModel
+    @EnvironmentObject var bridge: BridgeControl
+
+    private var label: String {
+        switch bridge.state {
+        case .running: return "Bridge running"
+        case .stopped: return "Bridge stopped"
+        case .starting: return "Starting bridge…"
+        case .stopping: return "Stopping bridge…"
+        }
+    }
+
+    private var color: Color {
+        switch bridge.state {
+        case .running: return .green
+        case .starting, .stopping: return .orange
+        case .stopped: return Color.secondary.opacity(0.5)
+        }
+    }
+
+    private var help: String {
+        switch bridge.state {
+        case .running, .stopping:
+            return "Turn off to stop the bridge, wherever it was started. Saving while it runs makes it restart with the new settings."
+        case .stopped, .starting:
+            return model.fileURL == nil
+                ? "Save the config first: the bridge runs from a config file."
+                : "Turn on to run the bridge in the background with \(model.fileName). It keeps running after you quit the editor; its log is in ~/Library/Logs/PrimoKKMK1Bridge.log."
+        }
+    }
 
     var body: some View {
-        HStack(spacing: 5) {
-            Circle()
-                .fill(model.bridgeRunning ? Color.green : Color.secondary.opacity(0.5))
-                .frame(width: 8, height: 8)
-            Text(model.bridgeRunning ? "Bridge running" : "Bridge not running")
-                .font(.callout)
-                .foregroundStyle(.secondary)
+        let on = bridge.state == .running || bridge.state == .starting
+        HStack(spacing: 8) {
+            Circle().fill(color).frame(width: 8, height: 8)
+            Text(label).font(.callout).foregroundStyle(.secondary)
+            Toggle("Bridge", isOn: Binding(get: { on }, set: { $0 ? model.startBridge() : bridge.stop() }))
+                .labelsHidden()
+                .toggleStyle(.switch)
+                .controlSize(.small)
+                .disabled(bridge.state == .starting || bridge.state == .stopping || (!on && model.fileURL == nil))
         }
-        .help(model.bridgeRunning
-              ? "The bridge's MIDI port is up. Saving makes it restart with the new settings."
-              : "No MIDI port named \(model.config.portName) yet. Start the bridge with --config pointing at this file.")
+        .padding(.horizontal, 12)  // room between the light / switch and the edges of the toolbar bubble
+        .help(help)
     }
 }
 

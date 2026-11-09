@@ -46,13 +46,13 @@ final class EditorModel: ObservableObject {
     @Published var status = ""
     @Published private(set) var fileURL: URL?
     @Published private(set) var savedJSON = Data()
-    @Published private(set) var bridgeRunning = false
+
+    /// The toolbar's bridge switch: starts, stops and watches the bridge.
+    let bridge = BridgeControl()
 
     private var fileDate: Date?
-    private var savedPortName = Config().portName
     private var lastTouchCCs = Array(22...29)
     private var timer: Timer?
-    private var midiClient = MIDIClientRef()
 
     static let encoder: JSONEncoder = {
         let e = JSONEncoder()
@@ -87,16 +87,13 @@ final class EditorModel: ObservableObject {
 
     func start() {
         guard timer == nil else { return }
-        MIDIClientCreateWithBlock("PrimoKKMK1Bridge Editor" as CFString, &midiClient) { [weak self] _ in
-            DispatchQueue.main.async { self?.checkBridge() }
-        }
         if let url = Self.initialURL() {
             load(url)
         } else {
             savedJSON = json
             status = "No config file yet: open the bridge's (File ▸ Open Config…) or save these defaults as a new one."
         }
-        checkBridge()
+        bridge.startWatching()
         timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in self?.tick() }
     }
 
@@ -117,7 +114,7 @@ final class EditorModel: ObservableObject {
             let c = try JSONDecoder().decode(Config.self, from: data)
             config = c
             savedJSON = json
-            savedPortName = c.portName
+            bridge.portName = c.portName
             if !c.knobTouchCCs.isEmpty { lastTouchCCs = c.knobTouchCCs }
             fileURL = url
             fileDate = Self.modificationDate(url)
@@ -141,11 +138,11 @@ final class EditorModel: ObservableObject {
             let data = json
             try data.write(to: url, options: .atomic)
             savedJSON = data
-            savedPortName = config.portName
+            bridge.portName = config.portName
             fileDate = Self.modificationDate(url)
-            status = bridgeRunning
+            status = bridge.isRunning
                 ? "Saved. The bridge restarts with the new settings within a second or two."
-                : "Saved. The bridge isn't running; it uses these settings when started with --config \(url.path)."
+                : "Saved. Turn the bridge on (toolbar) to run with these settings."
             return true
         } catch {
             alert("Can't save \(url.lastPathComponent)", error.localizedDescription)
@@ -217,7 +214,6 @@ final class EditorModel: ObservableObject {
     }
 
     private func tick() {
-        checkBridge()
         guard let url = fileURL, let d = Self.modificationDate(url), d != fileDate else { return }
         fileDate = d
         if isDirty {
@@ -227,18 +223,17 @@ final class EditorModel: ObservableObject {
         }
     }
 
-    /// The bridge is running when a MIDI source with its (saved) port name exists.
-    private func checkBridge() {
-        var found = false
-        for i in 0..<MIDIGetNumberOfSources() {
-            var cf: Unmanaged<CFString>?
-            MIDIObjectGetStringProperty(MIDIGetSource(i), kMIDIPropertyName, &cf)
-            if (cf?.takeRetainedValue() as String?) == savedPortName {
-                found = true
-                break
-            }
+    // MARK: the bridge
+
+    /// Start the bridge with the saved config file (the bridge reads the file, not the editor's unsaved changes).
+    func startBridge() {
+        guard let url = fileURL else {
+            status = "Save the config first: the bridge runs from a config file."
+            return
         }
-        if found != bridgeRunning { bridgeRunning = found }
+        bridge.start(config: url)
+        status = isDirty ? "Starting the bridge with the saved settings. Save to apply your unsaved changes."
+                         : "Starting the bridge with \(url.lastPathComponent)…"
     }
 
     // MARK: assignments

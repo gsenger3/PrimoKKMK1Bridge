@@ -76,8 +76,19 @@ open build/PrimoKKMK1Editor.app
 
 It opens `bridge/PrimoKKMK1Bridge.json` (File ▸ Open Config… for another file) and checks every change with the
 bridge's own rules. If something can't work, the status bar says why and Save stays off. **Save** (⌘S) writes
-the file, and a running bridge picks it up within a second or two. The toolbar shows whether the bridge is
-running (whether its MIDI port exists).
+the file, and a running bridge picks it up within a second or two.
+
+**The bridge switch** in the toolbar shows whether the bridge is running, and starts or stops it (also in the
+Bridge menu):
+
+- **On** starts the bridge in the background with the saved config file. That's the file on disk, so save first
+  if you want unsaved changes included. It uses the copy of the bridge built into the app.
+- **It keeps running after you quit the editor.** Its output goes to `~/Library/Logs/PrimoKKMK1Bridge.log`
+  (Bridge ▸ Show Bridge Log), which starts fresh each time.
+- **Off** stops any running bridge, including one started in Terminal. It quits the way Ctrl-C does: lights off,
+  displays blank.
+- The switch counts the bridge as running while its MIDI port exists, however it was started.
+- If a start fails, the editor shows the last lines of the log.
 
 Requires macOS 14 or later. The app is signed for this Mac only (ad hoc), not notarized.
 
