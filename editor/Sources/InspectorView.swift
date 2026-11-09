@@ -206,11 +206,6 @@ struct InspectorView: View {
                 note("Its light glows dimly while it has a CC and lights fully while held; a DAW can light it by sending the CC back to the \(model.config.portName) output.")
             }
         }
-        if model.config.reaper.enabled, let c = model.command(b, shift: false) {
-            Section("In REAPER mode") {
-                note("This button runs “\(commandTitle(c))” instead; its CC goes out only with Shift held. See the REAPER page.")
-            }
-        }
     }
 
     @ViewBuilder private func midiKnob(_ k: Int) -> some View {
@@ -248,10 +243,40 @@ struct InspectorView: View {
 
     // MARK: REAPER page
 
+    /// The Shift layer's channel; with the layer off, Shift + a button sends on the base channel.
+    private var shiftChannel: Int { model.config.shiftChannel ?? model.config.channel }
+
+    /// When a button's CC goes out in REAPER mode: when its press, or its Shift + press, has no REAPER command.
+    private func ccWhen(_ b: String) -> String? {
+        let ch = model.config.channel, sh = shiftChannel
+        switch (model.command(b, shift: false) == nil, model.command(b, shift: true) == nil) {
+        case (true, true):
+            return sh == ch ? "Sent on channel \(ch) when pressed, with or without Shift."
+                            : "Sent on channel \(ch) when pressed, and on channel \(sh) with Shift held."
+        case (true, false): return "Sent on channel \(ch) when pressed without Shift."
+        case (false, true): return "Sent on channel \(sh) when pressed with Shift held."
+        case (false, false): return nil
+        }
+    }
+
+    /// The button's MIDI CC, editable here while it's sent in REAPER mode (the MIDI page is hidden then).
+    @ViewBuilder private func reaperCCSection(_ b: String) -> some View {
+        if let when = ccWhen(b) {
+            Section("MIDI CC") {
+                CCField(title: "CC", value: midiCC(b), fallback: defaultCC(b))
+                note(when + " 127 when pressed, 0 when released.")
+            }
+        }
+    }
+
     @ViewBuilder private func reaperButton(_ b: String) -> some View {
         if b == "Shift" {
             Section("REAPER") {
-                note("Shift isn't a REAPER command: holding it selects the Shift + press commands, and sends every other button's CC on \(shiftText).")
+                note("Shift isn't a REAPER command: holding it selects the Shift + press commands, and sends the CC of a button with no Shift + press command on channel \(shiftChannel).")
+            }
+            Section("MIDI CC") {
+                CCField(title: "CC", value: midiCC(b), fallback: defaultCC(b))
+                note("Shift itself sends this on channel \(model.config.channel) when pressed and released, in REAPER mode too.")
             }
         } else {
             let cc = model.midiCC(b).map { "CC \($0)" } ?? "nothing (its CC is off)"
@@ -260,8 +285,9 @@ struct InspectorView: View {
             }
             Section("Shift + press") {
                 CommandPicker(title: "Command", command: command(b, shift: true),
-                              noneTitle: "Send its MIDI CC on \(shiftText)")
+                              noneTitle: "Send its MIDI CC on channel \(shiftChannel)")
             }
+            reaperCCSection(b)
             if let v = model.kkCC(b) {
                 Section("In the Komplete Kontrol view") {
                     note("This button sends CC \(v) there instead. See the Komplete Kontrol page.")
@@ -290,6 +316,10 @@ struct InspectorView: View {
                 Text(navigateTurnTitle("pages", cc: nil)).tag(Optional("pages"))
                 Text(navigateTurnTitle(nil, cc: model.config.navigateTurnCC)).tag(String?.none)
             }
+            CCField(title: "CC", value: $model.config.navigateTurnCC, fallback: 30)
+            note(model.config.reaper.navigateTurn == nil
+                 ? "Turning sends this CC on channel \(model.config.channel), and on channel \(shiftChannel) with Shift held."
+                 : "With Shift held, turning sends this CC on channel \(shiftChannel) instead.")
         }
         Section("Press") {
             CommandPicker(title: "Command", command: command("NavigateClick", shift: false),
@@ -297,8 +327,9 @@ struct InspectorView: View {
         }
         Section("Shift + press") {
             CommandPicker(title: "Command", command: command("NavigateClick", shift: true),
-                          noneTitle: "Send its MIDI CC on \(shiftText)")
+                          noneTitle: "Send its MIDI CC on channel \(shiftChannel)")
         }
+        reaperCCSection("NavigateClick")
     }
 
     // MARK: Komplete Kontrol page

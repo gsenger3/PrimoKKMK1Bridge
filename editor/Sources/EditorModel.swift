@@ -35,12 +35,13 @@ enum KKRole: String, CaseIterable, Identifiable {
 
 final class EditorModel: ObservableObject {
     @Published var config = Config() {
-        didSet { if !visiblePages.contains(page) { page = .midi } }  // REAPER mode turned off: leave its pages
+        // REAPER mode switched (or a file loaded): leave a page that's now hidden for the mode's first page.
+        didSet { if !visiblePages.contains(page) { page = visiblePages[0] } }
     }
     @Published var page: EditorPage = .midi
 
-    /// The REAPER and Komplete Kontrol pages only matter, and only show, while REAPER mode is on.
-    var visiblePages: [EditorPage] { config.reaper.enabled ? EditorPage.allCases : [.midi, .settings] }
+    /// The pages of the current mode: MIDI without REAPER mode; REAPER and Komplete Kontrol with it.
+    var visiblePages: [EditorPage] { config.reaper.enabled ? [.reaper, .kk, .settings] : [.midi, .settings] }
     @Published var selection: ControlID? = .button("Play")
     @Published var status = ""
     @Published private(set) var fileURL: URL?

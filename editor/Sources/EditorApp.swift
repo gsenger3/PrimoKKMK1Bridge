@@ -34,7 +34,7 @@ struct PrimoKKMK1EditorApp: App {
     @StateObject private var model = EditorModel()
 
     var body: some Scene {
-        Window("PrimoKKMK1Bridge Editor", id: "editor") {
+        Window("Primo KK MK1 Control Editor", id: "editor") {
             ContentView()
                 .environmentObject(model)
                 .frame(minWidth: 1180, minHeight: 620)

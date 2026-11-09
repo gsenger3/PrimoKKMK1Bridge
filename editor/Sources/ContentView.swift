@@ -37,7 +37,7 @@ struct ContentView: View {
             Divider()
             StatusBar()
         }
-        .navigationTitle("PrimoKKMK1Bridge Editor")
+        .navigationTitle("Primo KK MK1 Control Editor")
         .navigationSubtitle(model.fileName + (model.isDirty ? " — Edited" : ""))
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -58,7 +58,7 @@ struct ContentView: View {
         }
     }
 
-    /// What this page edits. (The REAPER and Komplete Kontrol pages only show while REAPER mode is on.)
+    /// What this page edits. (The MIDI page shows only with REAPER mode off; REAPER and Komplete Kontrol only with it on.)
     private var pageBanner: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
             Text(pageDescription).font(.callout).foregroundStyle(.secondary)
@@ -69,8 +69,7 @@ struct ContentView: View {
     private var pageDescription: String {
         switch model.page {
         case .midi:
-            let base = "MIDI: the CC each control sends (channel \(model.config.channel); Shift layer on \(model.config.shiftChannel.map { "channel \($0)" } ?? "off"))."
-            return model.config.reaper.enabled ? base + " In REAPER mode, buttons without a REAPER command still send these." : base
+            return "MIDI: the CC each control sends (channel \(model.config.channel); Shift layer on \(model.config.shiftChannel.map { "channel \($0)" } ?? "off"))."
         case .reaper: return "REAPER: the command each button runs, alone and with Shift. Instance switches the views: Mix → Track → Komplete Kontrol."
         case .kk: return "Komplete Kontrol view: the CCs the knobs and chosen buttons send for Komplete Kontrol's NKS template. Other buttons keep their REAPER jobs."
         case .settings: return ""

@@ -89,43 +89,19 @@ struct SettingsView: View {
 
             Section("REAPER") {
                 Toggle("REAPER mode", isOn: $model.config.reaper.enabled)
-                TextField("REAPER's address", text: $model.config.reaper.host)
-                IntField(title: "REAPER's local listen port", value: $model.config.reaper.sendPort, range: 1...65535)
-                IntField(title: "REAPER's device port", value: $model.config.reaper.receivePort, range: 1...65535)
-                Text("These match REAPER's Preferences ▸ Control/OSC/web ▸ OSC device: Local listen port (default 8000) and Device port (default 9000).")
-                    .font(.caption).foregroundStyle(.secondary)
+                // Everything else about REAPER and the Komplete Kontrol view only shows while REAPER mode is on.
+                if model.config.reaper.enabled {
+                    TextField("REAPER's address", text: $model.config.reaper.host)
+                    IntField(title: "REAPER's local listen port", value: $model.config.reaper.sendPort, range: 1...65535)
+                    IntField(title: "REAPER's device port", value: $model.config.reaper.receivePort, range: 1...65535)
+                    Text("These match REAPER's Preferences ▸ Control/OSC/web ▸ OSC device: Local listen port (default 8000) and Device port (default 9000).")
+                        .font(.caption).foregroundStyle(.secondary)
+                }
             }
 
-            Section("REAPER views") {
-                Picker("Start in", selection: startView) {
-                    Text("Mix view").tag("mix")
-                    Text("Track view").tag("track")
-                    Text("Komplete Kontrol view").tag("komplete-kontrol")
-                }
-                Toggle("Follow the track selected in REAPER", isOn: $model.config.reaper.followSelectedTrack)
-                Toggle("Select the keyboard's track in REAPER (track view)", isOn: $model.config.reaper.mirrorSelection)
-                LabeledContent("Track name shows for") {
-                    HStack {
-                        TextField("", value: $model.config.reaper.trackNameSeconds, format: .number.precision(.fractionLength(0...1)))
-                            .multilineTextAlignment(.trailing)
-                            .frame(width: 48)
-                        Stepper("", value: $model.config.reaper.trackNameSeconds, in: 0...30, step: 0.5).labelsHidden()
-                        Text("seconds")
-                    }
-                }
-                TextField("REAPER resource folder", text: $model.config.reaper.resourcePath)
-                Text("The resource folder is where REAPER keeps reaper-screensets.ini, for the screenset names on the displays.")
-                    .font(.caption).foregroundStyle(.secondary)
-            }
-
-            Section("Komplete Kontrol view") {
-                IntField(title: "MIDI channel", value: $model.config.reaper.kompleteKontrol.channel, range: 1...16)
-                Picker("Knob values", selection: $model.config.reaper.kompleteKontrol.encoderMode) {
-                    ForEach(turnModes, id: \.self) { Text(turnModeTitle($0)).tag($0) }
-                }
-                Toggle("Show the plugin's host parameters (experimental)", isOn: $model.config.reaper.kompleteKontrol.hostParameters)
-                Text("Host parameters are the instrument's full list, not Komplete Kontrol's NKS pages, so they don't line up with KK's knobs, and REAPER sends thousands of messages for them.")
-                    .font(.caption).foregroundStyle(.secondary)
+            if model.config.reaper.enabled {
+                reaperViews
+                kompleteKontrolView
             }
 
             Section {
@@ -142,5 +118,41 @@ struct SettingsView: View {
         .formStyle(.grouped)
         .frame(maxWidth: 720)
         .frame(maxWidth: .infinity)
+    }
+
+    private var reaperViews: some View {
+        Section("REAPER views") {
+            Picker("Start in", selection: startView) {
+                Text("Mix view").tag("mix")
+                Text("Track view").tag("track")
+                Text("Komplete Kontrol view").tag("komplete-kontrol")
+            }
+            Toggle("Follow the track selected in REAPER", isOn: $model.config.reaper.followSelectedTrack)
+            Toggle("Select the keyboard's track in REAPER (track view)", isOn: $model.config.reaper.mirrorSelection)
+            LabeledContent("Track name shows for") {
+                HStack {
+                    TextField("", value: $model.config.reaper.trackNameSeconds, format: .number.precision(.fractionLength(0...1)))
+                        .multilineTextAlignment(.trailing)
+                        .frame(width: 48)
+                    Stepper("", value: $model.config.reaper.trackNameSeconds, in: 0...30, step: 0.5).labelsHidden()
+                    Text("seconds")
+                }
+            }
+            TextField("REAPER resource folder", text: $model.config.reaper.resourcePath)
+            Text("The resource folder is where REAPER keeps reaper-screensets.ini, for the screenset names on the displays.")
+                .font(.caption).foregroundStyle(.secondary)
+        }
+    }
+
+    private var kompleteKontrolView: some View {
+        Section("Komplete Kontrol view") {
+            IntField(title: "MIDI channel", value: $model.config.reaper.kompleteKontrol.channel, range: 1...16)
+            Picker("Knob values", selection: $model.config.reaper.kompleteKontrol.encoderMode) {
+                ForEach(turnModes, id: \.self) { Text(turnModeTitle($0)).tag($0) }
+            }
+            Toggle("Show the plugin's host parameters (experimental)", isOn: $model.config.reaper.kompleteKontrol.hostParameters)
+            Text("Host parameters are the instrument's full list, not Komplete Kontrol's NKS pages, so they don't line up with KK's knobs, and REAPER sends thousands of messages for them.")
+                .font(.caption).foregroundStyle(.secondary)
+        }
     }
 }

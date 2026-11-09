@@ -45,7 +45,7 @@ struct PanelView: View {
                 .frame(width: panelSize.width, height: panelSize.height)
                 .onTapGesture { model.selection = nil }
 
-            Text("PrimoKKMK1Bridge  ·  S-series MK1")
+            Text("Primo KK MK1 Control Editor  ·  S-series MK1")
                 .font(.system(size: 9, weight: .medium))
                 .foregroundStyle(Color(white: 0.45))
                 .position(x: displayCenter(4).x + 30, y: 205)

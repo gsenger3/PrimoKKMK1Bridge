@@ -60,11 +60,11 @@ of the keyboard: click a button, knob or strip, and the inspector beside it show
 change it. It has four pages:
 
 - **MIDI:** the CC each control sends.
-- **REAPER:** the REAPER command each button runs, alone and with Shift.
+- **REAPER:** the REAPER command each button runs, alone and with Shift, and the MIDI CC of any button that sends one in REAPER mode.
 - **Komplete Kontrol:** the Komplete Kontrol view's CCs, and its page and preset buttons.
 - **Settings:** the port name, channels, keys merge, lights, displays and REAPER connection.
 
-REAPER mode is switched on and off on the Settings page. While it's off, the REAPER and Komplete Kontrol pages are hidden.
+REAPER mode is switched on and off on the Settings page. With it off, the editor shows the MIDI page; with it on, the REAPER and Komplete Kontrol pages instead.
 
 ```bash
 editor/build.sh
