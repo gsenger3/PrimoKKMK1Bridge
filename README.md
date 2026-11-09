@@ -18,7 +18,32 @@ Tested on an S61 MK1 (firmware 72) with macOS 26 and REAPER 7.61.
 | [tools/](tools/) | HID and MIDI monitors, the capture tool, and a stand-in REAPER for testing |
 | [device/](device/) | Raw captures and test results |
 
-## Quick start
+## Build and run
+
+**You need:**
+- macOS 14 or later
+- Xcode, or Apple's Command Line Tools (`xcode-select --install`). Tested with Xcode 27 (Swift 6.4).
+
+Run the commands from the repository's top folder. Everything is built into `build/`, which git ignores.
+
+### The editor app (includes the bridge)
+
+The usual way. `editor/build.sh` builds `build/PrimoKKMK1Editor.app`: the editor, a copy of the bridge inside
+it, and the app icon.
+
+```bash
+editor/build.sh
+```
+
+```bash
+open build/PrimoKKMK1Editor.app
+```
+
+In the editor, turn on the bridge switch in the toolbar. The bridge runs in the background with
+`bridge/PrimoKKMK1Bridge.json` and keeps running after you quit the editor. Whatever you save in the editor
+applies to the running bridge within a second or two.
+
+### The bridge on its own, in Terminal
 
 ```bash
 mkdir -p build && swiftc -O bridge/Sources/*.swift -o build/PrimoKKMK1Bridge
@@ -28,14 +53,18 @@ mkdir -p build && swiftc -O bridge/Sources/*.swift -o build/PrimoKKMK1Bridge
 build/PrimoKKMK1Bridge --config bridge/PrimoKKMK1Bridge.json --verbose
 ```
 
-To change assignments, build and open the editor; a running bridge applies what you save:
+`--verbose` prints every message the bridge sends; Ctrl-C quits. Run one bridge at a time: the editor's switch
+also stops a bridge started this way.
 
-```bash
-editor/build.sh && open build/PrimoKKMK1Editor.app
-```
+### After building
 
-The included config has REAPER mode on; switch it off on the editor's Settings page for plain MIDI CCs. See
-[bridge/README.md](bridge/README.md) for everything else.
+- **REAPER:** set up its OSC device and enable **Primo Komplete Kontrol MK1** as a MIDI input, as described in
+  [Set up REAPER](bridge/README.md#set-up-reaper-once).
+- **Plain MIDI CCs:** the included config has REAPER mode on. Switch it off on the editor's Settings page.
+- **Updates:** after pulling changes, run `editor/build.sh` again. It doesn't disturb a running bridge; turn the
+  bridge off and on in the editor to run the new copy.
+
+See [bridge/README.md](bridge/README.md) for everything else.
 
 Not affiliated with Native Instruments; Komplete Kontrol is their trademark. NI's firmware isn't included.
 
