@@ -1,0 +1,35 @@
+fake REAPER: listening on 18000, sending to 19000
+fake REAPER got /device/track/count 8
+fake REAPER got /device/send/count 16
+fake REAPER got /device/track/follows/last_touched 1.0
+fake REAPER got /action 41743
+fake REAPER got /track/2/volume 0.7027
+fake REAPER got /track/2/volume 0.6893
+fake REAPER got /track/2/volume 0.676
+fake REAPER got /track/2/volume 0.6627
+fake REAPER got /track/2/volume 0.6493
+fake REAPER got /track/2/volume 0.636
+fake REAPER got /track/2/volume 0.6227
+fake REAPER got /track/2/volume 0.6093
+fake REAPER got /track/2/volume 0.596
+fake REAPER got /track/2/volume 0.5827
+fake REAPER got /track/2/volume/db 0.0
+fake REAPER got /track/volume 0.7027
+fake REAPER got /track/volume 0.6893
+fake REAPER got /track/volume 0.676
+fake REAPER got /track/volume 0.6627
+fake REAPER got /track/volume 0.6493
+fake REAPER got /track/volume 0.636
+fake REAPER got /track/volume 0.6227
+fake REAPER got /track/volume 0.6093
+fake REAPER got /track/volume 0.596
+fake REAPER got /track/volume 0.5827
+fake REAPER got /track/volume/db 0.0
+fake REAPER got /track/pan 0.5133
+fake REAPER got /track/pan 0.5267
+fake REAPER got /track/pan 0.54
+fake REAPER got /track/pan 0.5533
+fake REAPER got /track/pan 0.5667
+fake REAPER got /track/pan 0.58
+fake REAPER got /track/pan 0.5
+fake REAPER: done

@@ -1,0 +1,94 @@
+[
+  {
+    "index" : 1,
+    "label" : "Scale (Edit)",
+    "line" : 5,
+    "reports" : [
+      "HID button bit 17 (byte 3, mask 0x02)"
+    ],
+    "section" : "Perform"
+  },
+  {
+    "index" : 2,
+    "label" : "Arp (Edit)",
+    "line" : 6,
+    "reports" : [
+      "HID button bit 18 (byte 3, mask 0x04)"
+    ],
+    "section" : "Perform"
+  },
+  {
+    "index" : 3,
+    "label" : "Left Arrow",
+    "line" : 10,
+    "reports" : [
+      "HID button bit 21 (byte 3, mask 0x20)"
+    ],
+    "section" : "Page arrows"
+  },
+  {
+    "index" : 4,
+    "label" : "Right Arrow",
+    "line" : 11,
+    "reports" : [
+      "HID button bit 20 (byte 3, mask 0x10)"
+    ],
+    "section" : "Page arrows"
+  },
+  {
+    "index" : 5,
+    "label" : "Encoder 1 (turn it)",
+    "line" : 15,
+    "reports" : [
+      "HID button bit 24 (byte 4, mask 0x01)",
+      "HID knob 1 position (bytes 7-8) (+346 steps)",
+      "HID button bit 25 (byte 4, mask 0x02)"
+    ],
+    "section" : "Knobs"
+  },
+  {
+    "index" : 6,
+    "label" : "Encoder 8 (turn it)",
+    "line" : 16,
+    "reports" : [
+      "HID button bit 25 (byte 4, mask 0x02)"
+    ],
+    "section" : "Knobs"
+  },
+  {
+    "index" : 7,
+    "label" : "Push the Navigate knob down (press it once)",
+    "line" : 20,
+    "reports" : [
+      "HID button bit 12 (byte 2, mask 0x10)"
+    ],
+    "section" : "Navigate"
+  },
+  {
+    "index" : 8,
+    "label" : "Pitch Strip",
+    "line" : 24,
+    "reports" : [
+      "MIDI pitch bend ch1 (Port 1) [2080..16383]"
+    ],
+    "section" : "Strips and keys"
+  },
+  {
+    "index" : 9,
+    "label" : "Mod Strip",
+    "line" : 25,
+    "reports" : [
+      "MIDI CC1 ch1 (Port 1) [1..110]"
+    ],
+    "section" : "Strips and keys"
+  },
+  {
+    "index" : 10,
+    "label" : "Play one key",
+    "line" : 26,
+    "reports" : [
+      "MIDI note 43 on ch1 (Port 1) = 14"
+    ],
+    "section" : "Strips and keys"
+  }
+]

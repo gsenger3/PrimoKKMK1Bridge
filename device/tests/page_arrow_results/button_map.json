@@ -1,0 +1,101 @@
+[
+  {
+    "index" : 1,
+    "label" : "Encoder 1 (turn it)",
+    "line" : 5,
+    "reports" : [
+      "MIDI CC14 ch1 (Port 1) [0..127]"
+    ],
+    "section" : "Baseline"
+  },
+  {
+    "index" : 2,
+    "label" : "Left Arrow",
+    "line" : 9,
+    "reports" : [
+      "HID report 0x0f byte 1 → 1"
+    ],
+    "section" : "Left twice"
+  },
+  {
+    "index" : 3,
+    "label" : "Encoder 1 (turn it)",
+    "line" : 10,
+    "reports" : [
+      "MIDI CC22 ch1 (Port 1) [1..127]"
+    ],
+    "section" : "Left twice"
+  },
+  {
+    "index" : 4,
+    "label" : "Left Arrow",
+    "line" : 11,
+    "reports" : [
+      "HID report 0x0f byte 1 → 0"
+    ],
+    "section" : "Left twice"
+  },
+  {
+    "index" : 5,
+    "label" : "Encoder 1 (turn it)",
+    "line" : 12,
+    "reports" : [
+      "MIDI CC14 ch1 (Port 1) [8..127]"
+    ],
+    "section" : "Left twice"
+  },
+  {
+    "index" : 6,
+    "label" : "Right Arrow",
+    "line" : 16,
+    "reports" : [
+      "HID report 0x0f byte 1 → 1"
+    ],
+    "section" : "Right twice"
+  },
+  {
+    "index" : 7,
+    "label" : "Encoder 1 (turn it)",
+    "line" : 17,
+    "reports" : [
+      "MIDI CC22 ch1 (Port 1) [6..127]"
+    ],
+    "section" : "Right twice"
+  },
+  {
+    "index" : 8,
+    "label" : "Right Arrow",
+    "line" : 18,
+    "reports" : [
+      "HID report 0x0f byte 1 → 0"
+    ],
+    "section" : "Right twice"
+  },
+  {
+    "index" : 9,
+    "label" : "Encoder 1 (turn it)",
+    "line" : 19,
+    "reports" : [
+      "MIDI CC14 ch1 (Port 1) [0..92]"
+    ],
+    "section" : "Right twice"
+  },
+  {
+    "index" : 10,
+    "label" : "Hold Shift and press Scale, then let go of both",
+    "line" : 23,
+    "reports" : [
+      "HID button bit 16 (byte 3, mask 0x01)"
+    ],
+    "section" : "Perform with Shift"
+  },
+  {
+    "index" : 11,
+    "label" : "Hold Shift and press Arp, then let go of both",
+    "line" : 24,
+    "reports" : [
+      "HID button bit 16 (byte 3, mask 0x01)"
+    ],
+    "section" : "Perform with Shift"
+  }
+]

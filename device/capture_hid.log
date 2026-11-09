@@ -1,0 +1,152 @@
+opened KOMPLETE KONTROL S61  version 72
+monitoring for 600 s — press buttons / turn knobs
+17:24:00.681 id=0x01 len=38  01 00 00 01 00 00 00 94 02 74 02 ef 00 43 00 51 01 a9 01 77 01 86 00 12 00 00 00 00 00 00 00 00 00 00 00 00 00 24
+17:24:01.094 id=0x01 len=38  BUTTON bit 16 (byte 3 mask 0x01) up
+17:24:08.737 id=0x01 len=38  BUTTON bit 19 (byte 3 mask 0x08) DOWN
+17:24:09.112 id=0x01 len=38  BUTTON bit 19 (byte 3 mask 0x08) up
+17:24:09.839 id=0x01 len=38  BUTTON bit 22 (byte 3 mask 0x40) DOWN
+17:24:10.239 id=0x01 len=38  BUTTON bit 22 (byte 3 mask 0x40) up
+17:24:10.882 id=0x01 len=38  BUTTON bit 23 (byte 3 mask 0x80) DOWN
+17:24:11.297 id=0x01 len=38  BUTTON bit 23 (byte 3 mask 0x80) up
+17:24:11.929 id=0x01 len=38  BUTTON bit 10 (byte 2 mask 0x04) DOWN
+17:24:12.365 id=0x01 len=38  BUTTON bit 10 (byte 2 mask 0x04) up
+17:24:12.802 id=0x01 len=38  BUTTON bit 9 (byte 2 mask 0x02) DOWN
+17:24:13.230 id=0x01 len=38  BUTTON bit 9 (byte 2 mask 0x02) up
+17:24:13.743 id=0x01 len=38  BUTTON bit 8 (byte 2 mask 0x01) DOWN
+17:24:14.198 id=0x01 len=38  BUTTON bit 8 (byte 2 mask 0x01) up
+17:24:15.010 id=0x0f len=4  0f 01 ff ff
+17:24:16.397 id=0x0f len=4  0f 00 ff ff
+17:24:20.941 id=0x01 len=38  BUTTON bit 4 (byte 1 mask 0x10) DOWN
+17:24:21.332 id=0x01 len=38  BUTTON bit 4 (byte 1 mask 0x10) up
+17:24:22.048 id=0x01 len=38  BUTTON bit 5 (byte 1 mask 0x20) DOWN
+17:24:22.510 id=0x01 len=38  BUTTON bit 5 (byte 1 mask 0x20) up
+17:24:23.088 id=0x01 len=38  BUTTON bit 14 (byte 2 mask 0x40) DOWN
+17:24:23.530 id=0x01 len=38  BUTTON bit 14 (byte 2 mask 0x40) up
+17:24:24.245 id=0x01 len=38  BUTTON bit 13 (byte 2 mask 0x20) DOWN
+17:24:24.675 id=0x01 len=38  BUTTON bit 13 (byte 2 mask 0x20) up
+17:24:25.316 id=0x01 len=38  BUTTON bit 15 (byte 2 mask 0x80) DOWN
+17:24:25.720 id=0x01 len=38  BUTTON bit 15 (byte 2 mask 0x80) up
+17:24:26.275 id=0x01 len=38  BUTTON bit 12 (byte 2 mask 0x10) DOWN
+17:24:26.630 id=0x01 len=38  BUTTON bit 12 (byte 2 mask 0x10) up
+17:24:27.205 id=0x01 len=38  BUTTON bit 1 (byte 1 mask 0x02) DOWN
+17:24:27.554 id=0x01 len=38  BUTTON bit 1 (byte 1 mask 0x02) up
+17:24:28.057 id=0x01 len=38  BUTTON bit 3 (byte 1 mask 0x08) DOWN
+17:24:28.414 id=0x01 len=38  BUTTON bit 3 (byte 1 mask 0x08) up
+17:24:28.914 id=0x01 len=38  BUTTON bit 2 (byte 1 mask 0x04) DOWN
+17:24:29.298 id=0x01 len=38  BUTTON bit 2 (byte 1 mask 0x04) up
+17:24:29.876 id=0x01 len=38  BUTTON bit 11 (byte 2 mask 0x08) DOWN
+17:24:30.294 id=0x01 len=38  BUTTON bit 11 (byte 2 mask 0x08) up
+17:24:30.822 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) DOWN
+17:24:30.852 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) up
+17:24:30.882 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) DOWN
+17:24:30.953 id=0x01 len=38  nibbles[6] 00->01
+17:24:30.964 id=0x01 len=38  nibbles[6] 01->02
+17:24:30.980 id=0x01 len=38  nibbles[6] 02->03
+17:24:30.993 id=0x01 len=38  nibbles[6] 03->04
+17:24:31.010 id=0x01 len=38  nibbles[6] 04->05
+17:24:31.052 id=0x01 len=38  nibbles[6] 05->06
+17:24:31.095 id=0x01 len=38  nibbles[6] 06->07
+17:24:31.117 id=0x01 len=38  nibbles[6] 07->08
+17:24:31.134 id=0x01 len=38  nibbles[6] 08->09
+17:24:31.148 id=0x01 len=38  nibbles[6] 09->0a
+17:24:31.166 id=0x01 len=38  nibbles[6] 0a->0b
+17:24:31.188 id=0x01 len=38  nibbles[6] 0b->0c
+17:24:31.212 id=0x01 len=38  nibbles[6] 0c->0d
+17:24:31.232 id=0x01 len=38  nibbles[6] 0d->0e
+17:24:31.254 id=0x01 len=38  nibbles[6] 0e->0f
+17:24:31.277 id=0x01 len=38  nibbles[6] 0f->00
+17:24:31.318 id=0x01 len=38  nibbles[6] 00->01
+17:24:31.377 id=0x01 len=38  nibbles[6] 01->02
+17:24:31.434 id=0x01 len=38  nibbles[6] 02->03
+17:24:31.503 id=0x01 len=38  nibbles[6] 03->04
+17:24:31.562 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) up
+17:24:31.582 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) DOWN
+17:24:31.748 id=0x01 len=38  nibbles[6] 04->03
+17:24:31.768 id=0x01 len=38  nibbles[6] 03->02
+17:24:31.788 id=0x01 len=38  nibbles[6] 02->01
+17:24:31.808 id=0x01 len=38  nibbles[6] 01->00
+17:24:31.831 id=0x01 len=38  nibbles[6] 00->0f
+17:24:31.842 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) up
+17:24:31.853 id=0x01 len=38  nibbles[6] 0f->0e
+17:24:31.874 id=0x01 len=38  nibbles[6] 0e->0d
+17:24:31.891 id=0x01 len=38  nibbles[6] 0d->0c
+17:24:31.908 id=0x01 len=38  nibbles[6] 0c->0b
+17:24:31.924 id=0x01 len=38  nibbles[6] 0b->0a
+17:24:31.941 id=0x01 len=38  nibbles[6] 0a->09
+17:24:31.958 id=0x01 len=38  nibbles[6] 09->08
+17:24:31.974 id=0x01 len=38  nibbles[6] 08->07
+17:24:31.992 id=0x01 len=38  nibbles[6] 07->06
+17:24:32.011 id=0x01 len=38  nibbles[6] 06->05
+17:24:32.048 id=0x01 len=38  nibbles[6] 05->04
+17:24:32.069 id=0x01 len=38  nibbles[6] 04->03
+17:24:32.094 id=0x01 len=38  nibbles[6] 03->02
+17:24:32.108 id=0x01 len=38  nibbles[6] 02->01
+17:24:32.125 id=0x01 len=38  nibbles[6] 01->00
+17:24:32.140 id=0x01 len=38  nibbles[6] 00->0f
+17:24:32.182 id=0x01 len=38  nibbles[6] 0f->0e
+17:24:32.242 id=0x01 len=38  nibbles[6] 0e->0d
+17:24:32.382 id=0x01 len=38  nibbles[6] 0d->0e
+17:24:32.391 id=0x01 len=38  nibbles[6] 0e->0f
+17:24:32.399 id=0x01 len=38  nibbles[6] 0f->00
+17:24:32.412 id=0x01 len=38  nibbles[6] 00->01
+17:24:32.424 id=0x01 len=38  nibbles[6] 01->02
+17:24:32.438 id=0x01 len=38  nibbles[6] 02->03
+17:24:32.480 id=0x01 len=38  nibbles[6] 03->04
+17:24:32.544 id=0x01 len=38  nibbles[6] 04->05
+17:24:32.562 id=0x01 len=38  nibbles[6] 05->06
+17:24:32.579 id=0x01 len=38  nibbles[6] 06->07
+17:24:32.593 id=0x01 len=38  nibbles[6] 07->08
+17:24:32.611 id=0x01 len=38  nibbles[6] 08->09
+17:24:32.629 id=0x01 len=38  nibbles[6] 09->0a
+17:24:32.650 id=0x01 len=38  nibbles[6] 0a->0b
+17:24:32.669 id=0x01 len=38  nibbles[6] 0b->0c
+17:24:32.687 id=0x01 len=38  nibbles[6] 0c->0d
+17:24:32.702 id=0x01 len=38  nibbles[6] 0d->0e
+17:24:32.719 id=0x01 len=38  nibbles[6] 0e->0f
+17:24:32.732 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) DOWN
+17:24:32.737 id=0x01 len=38  nibbles[6] 0f->00
+17:24:32.762 id=0x01 len=38  nibbles[6] 00->01
+17:24:32.787 id=0x01 len=38  nibbles[6] 01->02
+17:24:32.819 id=0x01 len=38  nibbles[6] 02->03
+17:24:32.849 id=0x01 len=38  nibbles[6] 03->04
+17:24:32.922 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) up
+17:24:33.055 id=0x01 len=38  nibbles[6] 04->03
+17:24:33.078 id=0x01 len=38  nibbles[6] 03->02
+17:24:33.092 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) DOWN
+17:24:33.100 id=0x01 len=38  nibbles[6] 02->01
+17:24:33.118 id=0x01 len=38  nibbles[6] 01->00
+17:24:33.136 id=0x01 len=38  nibbles[6] 00->0f
+17:24:33.154 id=0x01 len=38  nibbles[6] 0f->0e
+17:24:33.177 id=0x01 len=38  nibbles[6] 0e->0d
+17:24:33.200 id=0x01 len=38  nibbles[6] 0d->0c
+17:24:33.202 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) up
+17:24:33.219 id=0x01 len=38  nibbles[6] 0c->0b
+17:24:33.235 id=0x01 len=38  nibbles[6] 0b->0a
+17:24:33.255 id=0x01 len=38  nibbles[6] 0a->09
+17:24:33.285 id=0x01 len=38  nibbles[6] 09->08
+17:24:33.312 id=0x01 len=38  nibbles[6] 08->07
+17:24:33.322 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) DOWN
+17:24:33.334 id=0x01 len=38  nibbles[6] 07->06
+17:24:33.352 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) up
+17:24:33.353 id=0x01 len=38  nibbles[6] 06->05
+17:24:33.380 id=0x01 len=38  nibbles[6] 05->04
+17:24:33.408 id=0x01 len=38  nibbles[6] 04->03
+17:24:33.522 id=0x01 len=38  nibbles[6] 03->02
+17:24:33.552 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) DOWN
+17:24:33.692 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) up
+17:24:33.742 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) DOWN
+17:24:33.766 id=0x01 len=38  nibbles[6] 02->01
+17:24:33.817 id=0x01 len=38  nibbles[6] 01->00
+17:24:33.842 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) up
+17:24:33.882 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) DOWN
+17:24:33.942 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) up
+17:24:33.972 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) DOWN
+17:24:34.022 id=0x01 len=38  BUTTON bit 32 (byte 5 mask 0x01) up
+17:24:49.442 id=0x01 len=38  BUTTON bit 6 (byte 1 mask 0x40) DOWN  knob1 660->51  knob2 628->926  knob3 239->834  knob4 67->631  knob5 337->506  knob6 425->667  knob7 375->387  knob8 134->188  b37:24->18
+17:24:49.682 id=0x01 len=38  BUTTON bit 6 (byte 1 mask 0x40) up
+17:24:50.292 id=0x01 len=38  BUTTON bit 6 (byte 1 mask 0x40) DOWN  knob4 631->635  b37:18->0c
+17:24:50.502 id=0x01 len=38  BUTTON bit 6 (byte 1 mask 0x40) up
+17:24:51.232 id=0x01 len=38  BUTTON bit 7 (byte 1 mask 0x80) DOWN  knob6 667->663  b37:0c->18
+17:24:51.482 id=0x01 len=38  BUTTON bit 7 (byte 1 mask 0x80) up
+17:24:52.702 id=0x01 len=38  BUTTON bit 7 (byte 1 mask 0x80) DOWN  b37:18->24
+17:24:52.942 id=0x01 len=38  BUTTON bit 7 (byte 1 mask 0x80) up

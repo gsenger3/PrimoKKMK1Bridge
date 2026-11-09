@@ -1,0 +1,122 @@
+[
+  {
+    "index" : 1,
+    "label" : "Encoder 1 (turn it)",
+    "line" : 5,
+    "reports" : [
+      "HID button bit 24 (byte 4, mask 0x01)",
+      "HID knob 1 position (bytes 7-8) (+21 steps)"
+    ],
+    "section" : "Knobs"
+  },
+  {
+    "index" : 2,
+    "label" : "Encoder 2 (turn it)",
+    "line" : 6,
+    "reports" : [
+      "HID button bit 25 (byte 4, mask 0x02)",
+      "HID knob 2 position (bytes 9-10) (-82 steps)"
+    ],
+    "section" : "Knobs"
+  },
+  {
+    "index" : 3,
+    "label" : "Encoder 3 (turn it)",
+    "line" : 7,
+    "reports" : [
+      "HID button bit 25 (byte 4, mask 0x02)",
+      "HID button bit 26 (byte 4, mask 0x04)",
+      "HID knob 3 position (bytes 11-12) (+480 steps)"
+    ],
+    "section" : "Knobs"
+  },
+  {
+    "index" : 4,
+    "label" : "Encoder 4 (turn it)",
+    "line" : 8,
+    "reports" : [
+      "HID button bit 27 (byte 4, mask 0x08)",
+      "HID knob 4 position (bytes 13-14) (+34 steps)"
+    ],
+    "section" : "Knobs"
+  },
+  {
+    "index" : 5,
+    "label" : "Encoder 5 (turn it)",
+    "line" : 9,
+    "reports" : [
+      "HID button bit 28 (byte 4, mask 0x10)",
+      "HID knob 5 position (bytes 15-16) (+212 steps)"
+    ],
+    "section" : "Knobs"
+  },
+  {
+    "index" : 6,
+    "label" : "Encoder 6 (turn it)",
+    "line" : 10,
+    "reports" : [
+      "HID button bit 29 (byte 4, mask 0x20)",
+      "HID knob 6 position (bytes 17-18) (+216 steps)"
+    ],
+    "section" : "Knobs"
+  },
+  {
+    "index" : 7,
+    "label" : "Encoder 7 (turn it)",
+    "line" : 11,
+    "reports" : [
+      "HID button bit 30 (byte 4, mask 0x40)",
+      "HID knob 7 position (bytes 19-20) (+275 steps)"
+    ],
+    "section" : "Knobs"
+  },
+  {
+    "index" : 8,
+    "label" : "Encoder 8 (turn it)",
+    "line" : 12,
+    "reports" : [
+      "HID button bit 31 (byte 4, mask 0x80)",
+      "HID knob 8 position (bytes 21-22) (+386 steps)"
+    ],
+    "section" : "Knobs"
+  },
+  {
+    "index" : 9,
+    "label" : "Click the big Navigate knob straight in (press it, don't turn or tilt)",
+    "line" : 16,
+    "reports" : [
+      "HID button bit 32 (byte 5, mask 0x01)",
+      "HID button bit 0 (byte 1, mask 0x01)"
+    ],
+    "section" : "Navigate"
+  },
+  {
+    "index" : 10,
+    "label" : "Oct +",
+    "line" : 20,
+    "reports" : [
+      "HID button bit 7 (byte 1, mask 0x80)",
+      "base note 36 → 48"
+    ],
+    "section" : "Transpose"
+  },
+  {
+    "index" : 11,
+    "label" : "Play one key",
+    "line" : 21,
+    "reports" : [
+      "MIDI note 48 on ch1 (Port 1) = 38"
+    ],
+    "section" : "Transpose"
+  },
+  {
+    "index" : 12,
+    "label" : "Oct -",
+    "line" : 22,
+    "reports" : [
+      "HID button bit 6 (byte 1, mask 0x40)",
+      "base note 48 → 36"
+    ],
+    "section" : "Transpose"
+  }
+]

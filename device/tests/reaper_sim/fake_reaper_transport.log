@@ -1,0 +1,15 @@
+fake REAPER: listening on 18000, sending to 19000
+fake REAPER got /device/track/count 8
+fake REAPER got /device/send/count 16
+fake REAPER got /device/track/follows/last_touched 1.0
+fake REAPER got /action 41743
+fake REAPER got /action 40042
+fake REAPER got /action 40172
+fake REAPER got /action 40173
+fake REAPER got /action 40173
+fake REAPER got /stop 1.0
+fake REAPER got /rewind 1.0
+fake REAPER got /rewind 0.0
+fake REAPER got /rewind 1.0
+fake REAPER got /rewind 0.0
+fake REAPER: done

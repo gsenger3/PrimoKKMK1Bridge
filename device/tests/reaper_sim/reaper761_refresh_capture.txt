@@ -1,0 +1,2179 @@
+start → REAPER /device/track/count 8
+start → REAPER /device/send/count 16
+start → REAPER /device/track/follows/last_touched 1
+start → REAPER /action 41743
+start ← REAPER /track/pan 0.546667
+start REAPER connected (OSC on port 9000)
+             display |MIX     |        |        |        |        |        |        |        |        |
+             display |NO TRKS |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start ← REAPER /track/2/volume 0.268333
+start ← REAPER /track/3/volume 0.721667
+start ← REAPER /track/4/volume 0.698151
+start ← REAPER /bymarker 0
+start ← REAPER /editloop 0
+start ← REAPER /scroll/x/- 0
+start ← REAPER /scroll/x/+ 0
+start ← REAPER /scroll/y/- 0
+start ← REAPER /scroll/y/+ 0
+start ← REAPER /zoom/x/- 0
+start ← REAPER /zoom/x/+ 0
+start ← REAPER /zoom/y/- 0
+start ← REAPER /replace 0
+start ← REAPER /click 0
+start ← REAPER /repeat 1
+start ← REAPER /record 0
+start ← REAPER /stop 1
+start ← REAPER /pause 0
+start ← REAPER /play 0
+start ← REAPER /tempo 0.3125
+start ← REAPER /tempo/raw 120
+start ← REAPER /tempo/str "120"
+start ← REAPER /playrate 0.2
+start ← REAPER /playrate/raw 1
+start ← REAPER /playrate/str "1"
+start ← REAPER /autorecarm 0
+start ← REAPER /fxeq/hipass/str "HPF"
+start ← REAPER /fxeq/loshelf/str "Lo Shlf"
+start ← REAPER /fxeq/band/str "Band"
+start ← REAPER /fxeq/notch/str "Notch"
+start ← REAPER /fxeq/hishelf/str "Hi Shlf"
+start ← REAPER /fxeq/lopass/str "LPF"
+start ← REAPER /device/track/select/1 1
+start ← REAPER /device/track/select/2 0
+start ← REAPER /device/track/select/3 0
+start ← REAPER /device/track/select/4 0
+start ← REAPER /device/track/select/5 0
+start ← REAPER /device/track/select/6 0
+start ← REAPER /device/track/select/7 0
+start ← REAPER /device/track/select/8 0
+start ← REAPER /track/name "KK Keys"
+start ← REAPER /track/1/name "KK Keys"
+             display |MIX     |KK KEYS |        |        |        |        |        |        |        |
+             display |NO TRKS |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start ← REAPER /track/number/str "1"
+start REAPER selected track 1 "KK Keys"
+             display |TRACK   |KK KEYS |        |        |        |        |        |        |        |
+             display |1       |VOL     |        |PAN     |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start ← REAPER /track/1/number/str "1"
+start ← REAPER /track/select 0
+start ← REAPER /track/1/select 0
+start ← REAPER /track/volume/db -2.7336
+start ← REAPER /track/volume/str "-2.73dB"
+             display |TRACK   |KK KEYS |        |        |        |        |        |        |        |
+             display |1       |VOL     |-2.73DB  |PAN     |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start ← REAPER /track/volume 0.658333
+start ← REAPER /track/1/volume/db -2.7336
+start ← REAPER /track/1/volume/str "-2.73dB"
+start ← REAPER /track/1/volume 0.658333
+             display |TRACK   |KK KEYS |        |        |        |        |        |        |        |
+             display |1       |VOL     |-2.73DB  |PAN     |        |        |        |        |        |
+             display |         | ######  |         |         |         |         |         |         |         |
+start ← REAPER /track/panmode "Balance"
+start ← REAPER /track/1/panmode "Balance"
+start ← REAPER /track/pan2 1
+start ← REAPER /track/pan2/str "100W"
+start ← REAPER /track/1/pan2 1
+start ← REAPER /track/1/pan2/str "100W"
+start ← REAPER /track/pan 0.546667
+start ← REAPER /track/pan/str "9%R"
+             display |TRACK   |KK KEYS |        |        |        |        |        |        |        |
+             display |1       |VOL     |-2.73DB  |PAN     |9%R     |        |        |        |        |
+             display |         | ######  |         |         |         |         |         |         |         |
+start ← REAPER /track/1/pan 0.546667
+start ← REAPER /track/1/pan/str "9%R"
+start ← REAPER /track/mute 0
+start ← REAPER /track/mute/toggle 0
+start ← REAPER /track/1/mute 0
+start ← REAPER /track/1/mute/toggle 0
+start ← REAPER /track/solo 0
+start ← REAPER /track/solo/toggle 0
+start ← REAPER /track/1/solo 0
+start ← REAPER /track/1/solo/toggle 0
+start ← REAPER /track/recarm 1
+start ← REAPER /track/recarm/toggle 1
+start ← REAPER /track/1/recarm 1
+start ← REAPER /track/1/recarm/toggle 1
+start ← REAPER /track/monitor 1
+start ← REAPER /track/1/monitor 1
+start ← REAPER /track/autotrim 1
+start ← REAPER /track/1/autotrim 1
+start ← REAPER /track/autoread 0
+start ← REAPER /track/1/autoread 0
+start ← REAPER /track/autolatch 0
+start ← REAPER /track/1/autolatch 0
+start ← REAPER /track/autotouch 0
+start ← REAPER /track/1/autotouch 0
+start ← REAPER /track/autowrite 0
+start ← REAPER /track/1/autowrite 0
+start ← REAPER /track/send/1/name "AUX - Reverb"
+start ← REAPER /track/1/send/1/name "AUX - Reverb"
+start ← REAPER /track/send/1/volume/str "+12.0dB"
+start ← REAPER /track/send/1/volume 1
+start ← REAPER /track/1/send/1/volume/str "+12.0dB"
+start ← REAPER /track/1/send/1/volume 1
+start ← REAPER /track/send/1/pan/str "center"
+start ← REAPER /track/send/1/pan 0.5
+start ← REAPER /track/1/send/1/pan/str "center"
+start ← REAPER /track/1/send/1/pan 0.5
+start ← REAPER /track/send/2/name "AUX- Delay"
+start ← REAPER /track/1/send/2/name "AUX- Delay"
+start ← REAPER /track/send/2/volume/str "+12.0dB"
+start ← REAPER /track/send/2/volume 1
+start ← REAPER /track/1/send/2/volume/str "+12.0dB"
+start ← REAPER /track/1/send/2/volume 1
+start ← REAPER /track/send/2/pan/str "center"
+start ← REAPER /track/send/2/pan 0.5
+start ← REAPER /track/1/send/2/pan/str "center"
+start ← REAPER /track/1/send/2/pan 0.5
+start ← REAPER /track/send/3/name "Send 3"
+start ← REAPER /track/1/send/3/name "Send 3"
+start ← REAPER /track/send/3/volume/str "-inf dB"
+start ← REAPER /track/send/3/volume 0.00251387
+start ← REAPER /track/1/send/3/volume/str "-inf dB"
+start ← REAPER /track/1/send/3/volume 0.00251387
+start ← REAPER /track/send/3/pan/str "center"
+start ← REAPER /track/send/3/pan 0.5
+start ← REAPER /track/1/send/3/pan/str "center"
+start ← REAPER /track/1/send/3/pan 0.5
+start ← REAPER /track/send/4/name "Send 4"
+start ← REAPER /track/1/send/4/name "Send 4"
+start ← REAPER /track/send/4/volume/str "-inf dB"
+start ← REAPER /track/send/4/volume 0.00251387
+start ← REAPER /track/1/send/4/volume/str "-inf dB"
+start ← REAPER /track/1/send/4/volume 0.00251387
+start ← REAPER /track/send/4/pan/str "center"
+start ← REAPER /track/send/4/pan 0.5
+start ← REAPER /track/1/send/4/pan/str "center"
+start ← REAPER /track/1/send/4/pan 0.5
+start ← REAPER /track/send/5/name "Send 5"
+start ← REAPER /track/1/send/5/name "Send 5"
+start ← REAPER /track/send/5/volume/str "-inf dB"
+start ← REAPER /track/send/5/volume 0.00251387
+start ← REAPER /track/1/send/5/volume/str "-inf dB"
+start ← REAPER /track/1/send/5/volume 0.00251387
+start ← REAPER /track/send/5/pan/str "center"
+start ← REAPER /track/send/5/pan 0.5
+start ← REAPER /track/1/send/5/pan/str "center"
+start ← REAPER /track/1/send/5/pan 0.5
+start ← REAPER /track/send/6/name "Send 6"
+start ← REAPER /track/1/send/6/name "Send 6"
+start ← REAPER /track/send/6/volume/str "-inf dB"
+start ← REAPER /track/send/6/volume 0.00251387
+start ← REAPER /track/1/send/6/volume/str "-inf dB"
+start ← REAPER /track/1/send/6/volume 0.00251387
+start ← REAPER /track/send/6/pan/str "center"
+start ← REAPER /track/send/6/pan 0.5
+start ← REAPER /track/1/send/6/pan/str "center"
+start ← REAPER /track/1/send/6/pan 0.5
+start ← REAPER /track/send/7/name "Send 7"
+start ← REAPER /track/1/send/7/name "Send 7"
+start ← REAPER /track/send/7/volume/str "-inf dB"
+start ← REAPER /track/send/7/volume 0.00251387
+start ← REAPER /track/1/send/7/volume/str "-inf dB"
+start ← REAPER /track/1/send/7/volume 0.00251387
+start ← REAPER /track/send/7/pan/str "center"
+start ← REAPER /track/send/7/pan 0.5
+start ← REAPER /track/1/send/7/pan/str "center"
+start ← REAPER /track/1/send/7/pan 0.5
+start ← REAPER /track/send/8/name "Send 8"
+start ← REAPER /track/1/send/8/name "Send 8"
+start ← REAPER /track/send/8/volume/str "-inf dB"
+start ← REAPER /track/send/8/volume 0.00251387
+start ← REAPER /track/1/send/8/volume/str "-inf dB"
+start ← REAPER /track/1/send/8/volume 0.00251387
+start ← REAPER /track/send/8/pan/str "center"
+start ← REAPER /track/send/8/pan 0.5
+start ← REAPER /track/1/send/8/pan/str "center"
+start ← REAPER /track/1/send/8/pan 0.5
+start ← REAPER /track/send/9/name "Send 9"
+start ← REAPER /track/1/send/9/name "Send 9"
+start ← REAPER /track/send/9/volume/str "-inf dB"
+start ← REAPER /track/send/9/volume 0.00251387
+start ← REAPER /track/1/send/9/volume/str "-inf dB"
+start ← REAPER /track/1/send/9/volume 0.00251387
+start ← REAPER /track/send/9/pan/str "center"
+start ← REAPER /track/send/9/pan 0.5
+start ← REAPER /track/1/send/9/pan/str "center"
+start ← REAPER /track/1/send/9/pan 0.5
+start ← REAPER /track/send/10/name "Send 10"
+start ← REAPER /track/1/send/10/name "Send 10"
+start ← REAPER /track/send/10/volume/str "-inf dB"
+start ← REAPER /track/send/10/volume 0.00251387
+start ← REAPER /track/1/send/10/volume/str "-inf dB"
+start ← REAPER /track/1/send/10/volume 0.00251387
+start ← REAPER /track/send/10/pan/str "center"
+start ← REAPER /track/send/10/pan 0.5
+start ← REAPER /track/1/send/10/pan/str "center"
+start ← REAPER /track/1/send/10/pan 0.5
+start ← REAPER /track/send/11/name "Send 11"
+start ← REAPER /track/1/send/11/name "Send 11"
+start ← REAPER /track/send/11/volume/str "-inf dB"
+start ← REAPER /track/send/11/volume 0.00251387
+start ← REAPER /track/1/send/11/volume/str "-inf dB"
+start ← REAPER /track/1/send/11/volume 0.00251387
+start ← REAPER /track/send/11/pan/str "center"
+start ← REAPER /track/send/11/pan 0.5
+start ← REAPER /track/1/send/11/pan/str "center"
+start ← REAPER /track/1/send/11/pan 0.5
+start ← REAPER /track/send/12/name "Send 12"
+start ← REAPER /track/1/send/12/name "Send 12"
+start ← REAPER /track/send/12/volume/str "-inf dB"
+start ← REAPER /track/send/12/volume 0.00251387
+start ← REAPER /track/1/send/12/volume/str "-inf dB"
+start ← REAPER /track/1/send/12/volume 0.00251387
+start ← REAPER /track/send/12/pan/str "center"
+start ← REAPER /track/send/12/pan 0.5
+start ← REAPER /track/1/send/12/pan/str "center"
+start ← REAPER /track/1/send/12/pan 0.5
+start ← REAPER /track/send/13/name "Send 13"
+start ← REAPER /track/1/send/13/name "Send 13"
+start ← REAPER /track/send/13/volume/str "-inf dB"
+start ← REAPER /track/send/13/volume 0.00251387
+start ← REAPER /track/1/send/13/volume/str "-inf dB"
+start ← REAPER /track/1/send/13/volume 0.00251387
+start ← REAPER /track/send/13/pan/str "center"
+start ← REAPER /track/send/13/pan 0.5
+start ← REAPER /track/1/send/13/pan/str "center"
+start ← REAPER /track/1/send/13/pan 0.5
+start ← REAPER /track/send/14/name "Send 14"
+start ← REAPER /track/1/send/14/name "Send 14"
+start ← REAPER /track/send/14/volume/str "-inf dB"
+start ← REAPER /track/send/14/volume 0.00251387
+start ← REAPER /track/1/send/14/volume/str "-inf dB"
+start ← REAPER /track/1/send/14/volume 0.00251387
+start ← REAPER /track/send/14/pan/str "center"
+start ← REAPER /track/send/14/pan 0.5
+start ← REAPER /track/1/send/14/pan/str "center"
+start ← REAPER /track/1/send/14/pan 0.5
+start ← REAPER /track/send/15/name "Send 15"
+start ← REAPER /track/1/send/15/name "Send 15"
+start ← REAPER /track/send/15/volume/str "-inf dB"
+start ← REAPER /track/send/15/volume 0.00251387
+start ← REAPER /track/1/send/15/volume/str "-inf dB"
+start ← REAPER /track/1/send/15/volume 0.00251387
+start ← REAPER /track/send/15/pan/str "center"
+start ← REAPER /track/send/15/pan 0.5
+start ← REAPER /track/1/send/15/pan/str "center"
+start ← REAPER /track/1/send/15/pan 0.5
+start ← REAPER /track/send/16/name "Send 16"
+start ← REAPER /track/1/send/16/name "Send 16"
+start ← REAPER /track/send/16/volume/str "-inf dB"
+start ← REAPER /track/send/16/volume 0.00251387
+start ← REAPER /track/1/send/16/volume/str "-inf dB"
+start ← REAPER /track/1/send/16/volume 0.00251387
+start ← REAPER /track/send/16/pan/str "center"
+start ← REAPER /track/send/16/pan 0.5
+start ← REAPER /track/1/send/16/pan/str "center"
+start ← REAPER /track/1/send/16/pan 0.5
+start ← REAPER /track/recv/1/name "Recv 1"
+start ← REAPER /track/1/recv/1/name "Recv 1"
+start ← REAPER /track/recv/1/volume/str "-inf dB"
+start ← REAPER /track/recv/1/volume 0.00251387
+start ← REAPER /track/1/recv/1/volume/str "-inf dB"
+start ← REAPER /track/1/recv/1/volume 0.00251387
+start ← REAPER /track/recv/1/pan/str "center"
+start ← REAPER /track/recv/1/pan 0.5
+start ← REAPER /track/1/recv/1/pan/str "center"
+start ← REAPER /track/1/recv/1/pan 0.5
+start ← REAPER /track/recv/2/name "Recv 2"
+start ← REAPER /track/1/recv/2/name "Recv 2"
+start ← REAPER /track/recv/2/volume/str "-inf dB"
+start ← REAPER /track/recv/2/volume 0.00251387
+start ← REAPER /track/1/recv/2/volume/str "-inf dB"
+start ← REAPER /track/1/recv/2/volume 0.00251387
+start ← REAPER /track/recv/2/pan/str "center"
+start ← REAPER /track/recv/2/pan 0.5
+start ← REAPER /track/1/recv/2/pan/str "center"
+start ← REAPER /track/1/recv/2/pan 0.5
+start ← REAPER /track/recv/3/name "Recv 3"
+start ← REAPER /track/1/recv/3/name "Recv 3"
+start ← REAPER /track/recv/3/volume/str "-inf dB"
+start ← REAPER /track/recv/3/volume 0.00251387
+start ← REAPER /track/1/recv/3/volume/str "-inf dB"
+start ← REAPER /track/1/recv/3/volume 0.00251387
+start ← REAPER /track/recv/3/pan/str "center"
+start ← REAPER /track/recv/3/pan 0.5
+start ← REAPER /track/1/recv/3/pan/str "center"
+start ← REAPER /track/1/recv/3/pan 0.5
+start ← REAPER /track/recv/4/name "Recv 4"
+start ← REAPER /track/1/recv/4/name "Recv 4"
+start ← REAPER /track/recv/4/volume/str "-inf dB"
+start ← REAPER /track/recv/4/volume 0.00251387
+start ← REAPER /track/1/recv/4/volume/str "-inf dB"
+start ← REAPER /track/1/recv/4/volume 0.00251387
+start ← REAPER /track/recv/4/pan/str "center"
+start ← REAPER /track/recv/4/pan 0.5
+start ← REAPER /track/1/recv/4/pan/str "center"
+start ← REAPER /track/1/recv/4/pan 0.5
+start ← REAPER /fx/name "bx_console SSL 4000 G (Plugin Alliance)"
+start ← REAPER /fx/number/str "1"
+start ← REAPER /fx/preset "/Users/gsenger/Library/Audio/Presets/Plugin Alliance/bx_console SSL 4000 G/04 Vocals Dirty.vstpreset"
+start ← REAPER /fx/bypass 1
+start ← REAPER /fx/openui 0
+start ← REAPER /fxparam/1/name "Power"
+start ← REAPER /fxparam/1/value/str "On"
+start ← REAPER /fxparam/1/value 1
+start ← REAPER /fxparam/2/name "Mute"
+start ← REAPER /fxparam/2/value/str "Off"
+start ← REAPER /fxparam/2/value 0
+start ← REAPER /fxparam/3/name "Setting"
+start ← REAPER /fxparam/3/value/str "A"
+start ← REAPER /fxparam/3/value 0
+start ← REAPER /fxparam/4/name "In Gain"
+start ← REAPER /fxparam/4/value/str "4.3"
+start ← REAPER /fxparam/4/value 0.712578
+start ← REAPER /fxparam/5/name "Virtual Gain"
+start ← REAPER /fxparam/5/value/str "-70.0"
+start ← REAPER /fxparam/5/value 1
+start ← REAPER /fxparam/6/name "THD"
+start ← REAPER /fxparam/6/value/str "-30.0"
+start ← REAPER /fxparam/6/value 1
+start ← REAPER /fxparam/7/name "Phase"
+start ← REAPER /fxparam/7/value/str "Off"
+start ← REAPER /fxparam/7/value 0
+start ← REAPER /fxparam/8/name "Out Gain"
+start ← REAPER /fxparam/8/value/str "-1.0"
+start ← REAPER /fxparam/8/value 0.724856
+start ← REAPER /fx/1/name "bx_console SSL 4000 G (Plugin Alliance)"
+start ← REAPER /fx/1/number/str "1"
+start ← REAPER /fx/1/preset "/Users/gsenger/Library/Audio/Presets/Plugin Alliance/bx_console SSL 4000 G/04 Vocals Dirty.vstpreset"
+start ← REAPER /fx/1/bypass 1
+start ← REAPER /fx/1/openui 0
+start ← REAPER /fx/1/fxparam/1/name "Power"
+start ← REAPER /fx/1/fxparam/1/value/str "On"
+start ← REAPER /fx/1/fxparam/1/value 1
+start ← REAPER /fx/1/fxparam/2/name "Mute"
+start ← REAPER /fx/1/fxparam/2/value/str "Off"
+start ← REAPER /fx/1/fxparam/2/value 0
+start ← REAPER /fx/1/fxparam/3/name "Setting"
+start ← REAPER /fx/1/fxparam/3/value/str "A"
+start ← REAPER /fx/1/fxparam/3/value 0
+start ← REAPER /fx/1/fxparam/4/name "In Gain"
+start ← REAPER /fx/1/fxparam/4/value/str "4.3"
+start ← REAPER /fx/1/fxparam/4/value 0.712578
+start ← REAPER /fx/1/fxparam/5/name "Virtual Gain"
+start ← REAPER /fx/1/fxparam/5/value/str "-70.0"
+start ← REAPER /fx/1/fxparam/5/value 1
+start ← REAPER /fx/1/fxparam/6/name "THD"
+start ← REAPER /fx/1/fxparam/6/value/str "-30.0"
+start ← REAPER /fx/1/fxparam/6/value 1
+start ← REAPER /fx/1/fxparam/7/name "Phase"
+start ← REAPER /fx/1/fxparam/7/value/str "Off"
+start ← REAPER /fx/1/fxparam/7/value 0
+start ← REAPER /fx/1/fxparam/8/name "Out Gain"
+start ← REAPER /fx/1/fxparam/8/value/str "-1.0"
+start ← REAPER /fx/1/fxparam/8/value 0.724856
+start ← REAPER /track/1/fx/1/name "bx_console SSL 4000 G (Plugin Alliance)"
+start ← REAPER /track/1/fx/1/number/str "1"
+start ← REAPER /track/1/fx/1/preset "/Users/gsenger/Library/Audio/Presets/Plugin Alliance/bx_console SSL 4000 G/04 Vocals Dirty.vstpreset"
+start ← REAPER /track/1/fx/1/bypass 1
+start ← REAPER /track/1/fx/1/openui 0
+start ← REAPER /track/1/fx/1/fxparam/1/value 1
+start ← REAPER /track/1/fx/1/fxparam/2/value 0
+start ← REAPER /track/1/fx/1/fxparam/3/value 0
+start ← REAPER /track/1/fx/1/fxparam/4/value 0.712578
+start ← REAPER /track/1/fx/1/fxparam/5/value 1
+start ← REAPER /track/1/fx/1/fxparam/6/value 1
+start ← REAPER /track/1/fx/1/fxparam/7/value 0
+start ← REAPER /track/1/fx/1/fxparam/8/value 0.724856
+start ← REAPER /fxinst/name "Komplete Kontrol (Native Instruments) (32 out)"
+start ← REAPER /fxinst/preset "Program Change: Program Change MIDI channel 15 program 126"
+start ← REAPER /fxinst/bypass 1
+start ← REAPER /fxinst/openui 0
+start ← REAPER /track/1/fxinst/name "Komplete Kontrol (Native Instruments) (32 out)"
+start ← REAPER /track/1/fxinst/preset "Program Change: Program Change MIDI channel 15 program 126"
+start ← REAPER /track/1/fxinst/bypass 1
+start ← REAPER /track/1/fxinst/openui 0
+start ← REAPER /fx/2/name "Komplete Kontrol (Native Instruments) (32 out)"
+start ← REAPER /fx/2/number/str "2"
+start ← REAPER /fx/2/preset "Program Change: Program Change MIDI channel 15 program 126"
+start ← REAPER /fx/2/bypass 1
+start ← REAPER /fx/2/openui 0
+start ← REAPER /fx/2/fxparam/1/name "NIKB00"
+start ← REAPER /fx/2/fxparam/1/value/str ""
+start ← REAPER /fx/2/fxparam/1/value 0
+start ← REAPER /fx/2/fxparam/2/name "1 Scale On / Off"
+start ← REAPER /fx/2/fxparam/2/value/str "Off"
+start ← REAPER /fx/2/fxparam/2/value 0
+start ← REAPER /fx/2/fxparam/3/name "2 Scale Root Note"
+start ← REAPER /fx/2/fxparam/3/value/str "C"
+start ← REAPER /fx/2/fxparam/3/value 0
+start ← REAPER /fx/2/fxparam/4/name "3 Scale Type"
+start ← REAPER /fx/2/fxparam/4/value/str "Major"
+start ← REAPER /fx/2/fxparam/4/value 0.0714286
+start ← REAPER /fx/2/fxparam/5/name "4 Scale Key Mode"
+start ← REAPER /fx/2/fxparam/5/value/str "Mapped"
+start ← REAPER /fx/2/fxparam/5/value 0.333333
+start ← REAPER /fx/2/fxparam/6/name "5 -"
+start ← REAPER /fx/2/fxparam/6/value/str ""
+start ← REAPER /fx/2/fxparam/6/value 0
+start ← REAPER /fx/2/fxparam/7/name "6 Chord Mode"
+start ← REAPER /fx/2/fxparam/7/value/str "Off"
+start ← REAPER /fx/2/fxparam/7/value 0
+start ← REAPER /fx/2/fxparam/8/name "7 Chord Type"
+start ← REAPER /fx/2/fxparam/8/value/str "Major"
+start ← REAPER /fx/2/fxparam/8/value 0.214286
+start ← REAPER /track/1/fx/2/name "Komplete Kontrol (Native Instruments) (32 out)"
+start ← REAPER /track/1/fx/2/number/str "2"
+start ← REAPER /track/1/fx/2/preset "Program Change: Program Change MIDI channel 15 program 126"
+start ← REAPER /track/1/fx/2/bypass 1
+start ← REAPER /track/1/fx/2/openui 0
+start ← REAPER /track/1/fx/2/fxparam/1/value 0
+start ← REAPER /track/1/fx/2/fxparam/2/value 0
+start ← REAPER /track/1/fx/2/fxparam/3/value 0
+start ← REAPER /track/1/fx/2/fxparam/4/value 0.0714286
+start ← REAPER /track/1/fx/2/fxparam/5/value 0.333333
+start ← REAPER /track/1/fx/2/fxparam/6/value 0
+start ← REAPER /track/1/fx/2/fxparam/7/value 0
+start ← REAPER /track/1/fx/2/fxparam/8/value 0.214286
+start ← REAPER /fx/3/name ""
+start ← REAPER /fx/3/number/str ""
+start ← REAPER /fx/3/preset ""
+start ← REAPER /fx/3/bypass 0
+start ← REAPER /fx/3/openui 0
+start ← REAPER /fx/3/fxparam/1/name ""
+start ← REAPER /fx/3/fxparam/1/value/str ""
+start ← REAPER /fx/3/fxparam/1/value 0
+start ← REAPER /fx/3/fxparam/2/name ""
+start ← REAPER /fx/3/fxparam/2/value/str ""
+start ← REAPER /fx/3/fxparam/2/value 0
+start ← REAPER /fx/3/fxparam/3/name ""
+start ← REAPER /fx/3/fxparam/3/value/str ""
+start ← REAPER /fx/3/fxparam/3/value 0
+start ← REAPER /fx/3/fxparam/4/name ""
+start ← REAPER /fx/3/fxparam/4/value/str ""
+start ← REAPER /fx/3/fxparam/4/value 0
+start ← REAPER /fx/3/fxparam/5/name ""
+start ← REAPER /fx/3/fxparam/5/value/str ""
+start ← REAPER /fx/3/fxparam/5/value 0
+start ← REAPER /fx/3/fxparam/6/name ""
+start ← REAPER /fx/3/fxparam/6/value/str ""
+start ← REAPER /fx/3/fxparam/6/value 0
+start ← REAPER /fx/3/fxparam/7/name ""
+start ← REAPER /fx/3/fxparam/7/value/str ""
+start ← REAPER /fx/3/fxparam/7/value 0
+start ← REAPER /fx/3/fxparam/8/name ""
+start ← REAPER /fx/3/fxparam/8/value/str ""
+start ← REAPER /fx/3/fxparam/8/value 0
+start ← REAPER /track/1/fx/3/name ""
+start ← REAPER /track/1/fx/3/number/str ""
+start ← REAPER /track/1/fx/3/preset ""
+start ← REAPER /track/1/fx/3/bypass 0
+start ← REAPER /track/1/fx/3/openui 0
+start ← REAPER /track/1/fx/3/fxparam/1/value 0
+start ← REAPER /track/1/fx/3/fxparam/2/value 0
+start ← REAPER /track/1/fx/3/fxparam/3/value 0
+start ← REAPER /track/1/fx/3/fxparam/4/value 0
+start ← REAPER /track/1/fx/3/fxparam/5/value 0
+start ← REAPER /track/1/fx/3/fxparam/6/value 0
+start ← REAPER /track/1/fx/3/fxparam/7/value 0
+start ← REAPER /track/1/fx/3/fxparam/8/value 0
+start ← REAPER /fx/4/name ""
+start ← REAPER /fx/4/number/str ""
+start ← REAPER /fx/4/preset ""
+start ← REAPER /fx/4/bypass 0
+start ← REAPER /fx/4/openui 0
+start ← REAPER /fx/4/fxparam/1/name ""
+start ← REAPER /fx/4/fxparam/1/value/str ""
+start ← REAPER /fx/4/fxparam/1/value 0
+start ← REAPER /fx/4/fxparam/2/name ""
+start ← REAPER /fx/4/fxparam/2/value/str ""
+start ← REAPER /fx/4/fxparam/2/value 0
+start ← REAPER /fx/4/fxparam/3/name ""
+start ← REAPER /fx/4/fxparam/3/value/str ""
+start ← REAPER /fx/4/fxparam/3/value 0
+start ← REAPER /fx/4/fxparam/4/name ""
+start ← REAPER /fx/4/fxparam/4/value/str ""
+start ← REAPER /fx/4/fxparam/4/value 0
+start ← REAPER /fx/4/fxparam/5/name ""
+start ← REAPER /fx/4/fxparam/5/value/str ""
+start ← REAPER /fx/4/fxparam/5/value 0
+start ← REAPER /fx/4/fxparam/6/name ""
+start ← REAPER /fx/4/fxparam/6/value/str ""
+start ← REAPER /fx/4/fxparam/6/value 0
+start ← REAPER /fx/4/fxparam/7/name ""
+start ← REAPER /fx/4/fxparam/7/value/str ""
+start ← REAPER /fx/4/fxparam/7/value 0
+start ← REAPER /fx/4/fxparam/8/name ""
+start ← REAPER /fx/4/fxparam/8/value/str ""
+start ← REAPER /fx/4/fxparam/8/value 0
+start ← REAPER /track/1/fx/4/name ""
+start ← REAPER /track/1/fx/4/number/str ""
+start ← REAPER /track/1/fx/4/preset ""
+start ← REAPER /track/1/fx/4/bypass 0
+start ← REAPER /track/1/fx/4/openui 0
+start ← REAPER /track/1/fx/4/fxparam/1/value 0
+start ← REAPER /track/1/fx/4/fxparam/2/value 0
+start ← REAPER /track/1/fx/4/fxparam/3/value 0
+start ← REAPER /track/1/fx/4/fxparam/4/value 0
+start ← REAPER /track/1/fx/4/fxparam/5/value 0
+start ← REAPER /track/1/fx/4/fxparam/6/value 0
+start ← REAPER /track/1/fx/4/fxparam/7/value 0
+start ← REAPER /track/1/fx/4/fxparam/8/value 0
+start ← REAPER /fx/5/name ""
+start ← REAPER /fx/5/number/str ""
+start ← REAPER /fx/5/preset ""
+start ← REAPER /fx/5/bypass 0
+start ← REAPER /fx/5/openui 0
+start ← REAPER /fx/5/fxparam/1/name ""
+start ← REAPER /fx/5/fxparam/1/value/str ""
+start ← REAPER /fx/5/fxparam/1/value 0
+start ← REAPER /fx/5/fxparam/2/name ""
+start ← REAPER /fx/5/fxparam/2/value/str ""
+start ← REAPER /fx/5/fxparam/2/value 0
+start ← REAPER /fx/5/fxparam/3/name ""
+start ← REAPER /fx/5/fxparam/3/value/str ""
+start ← REAPER /fx/5/fxparam/3/value 0
+start ← REAPER /fx/5/fxparam/4/name ""
+start ← REAPER /fx/5/fxparam/4/value/str ""
+start ← REAPER /fx/5/fxparam/4/value 0
+start ← REAPER /fx/5/fxparam/5/name ""
+start ← REAPER /fx/5/fxparam/5/value/str ""
+start ← REAPER /fx/5/fxparam/5/value 0
+start ← REAPER /fx/5/fxparam/6/name ""
+start ← REAPER /fx/5/fxparam/6/value/str ""
+start ← REAPER /fx/5/fxparam/6/value 0
+start ← REAPER /fx/5/fxparam/7/name ""
+start ← REAPER /fx/5/fxparam/7/value/str ""
+start ← REAPER /fx/5/fxparam/7/value 0
+start ← REAPER /fx/5/fxparam/8/name ""
+start ← REAPER /fx/5/fxparam/8/value/str ""
+start ← REAPER /fx/5/fxparam/8/value 0
+start ← REAPER /track/1/fx/5/name ""
+start ← REAPER /track/1/fx/5/number/str ""
+start ← REAPER /track/1/fx/5/preset ""
+start ← REAPER /track/1/fx/5/bypass 0
+start ← REAPER /track/1/fx/5/openui 0
+start ← REAPER /track/1/fx/5/fxparam/1/value 0
+start ← REAPER /track/1/fx/5/fxparam/2/value 0
+start ← REAPER /track/1/fx/5/fxparam/3/value 0
+start ← REAPER /track/1/fx/5/fxparam/4/value 0
+start ← REAPER /track/1/fx/5/fxparam/5/value 0
+start ← REAPER /track/1/fx/5/fxparam/6/value 0
+start ← REAPER /track/1/fx/5/fxparam/7/value 0
+start ← REAPER /track/1/fx/5/fxparam/8/value 0
+start ← REAPER /fx/6/name ""
+start ← REAPER /fx/6/number/str ""
+start ← REAPER /fx/6/preset ""
+start ← REAPER /fx/6/bypass 0
+start ← REAPER /fx/6/openui 0
+start ← REAPER /fx/6/fxparam/1/name ""
+start ← REAPER /fx/6/fxparam/1/value/str ""
+start ← REAPER /fx/6/fxparam/1/value 0
+start ← REAPER /fx/6/fxparam/2/name ""
+start ← REAPER /fx/6/fxparam/2/value/str ""
+start ← REAPER /fx/6/fxparam/2/value 0
+start ← REAPER /fx/6/fxparam/3/name ""
+start ← REAPER /fx/6/fxparam/3/value/str ""
+start ← REAPER /fx/6/fxparam/3/value 0
+start ← REAPER /fx/6/fxparam/4/name ""
+start ← REAPER /fx/6/fxparam/4/value/str ""
+start ← REAPER /fx/6/fxparam/4/value 0
+start ← REAPER /fx/6/fxparam/5/name ""
+start ← REAPER /fx/6/fxparam/5/value/str ""
+start ← REAPER /fx/6/fxparam/5/value 0
+start ← REAPER /fx/6/fxparam/6/name ""
+start ← REAPER /fx/6/fxparam/6/value/str ""
+start ← REAPER /fx/6/fxparam/6/value 0
+start ← REAPER /fx/6/fxparam/7/name ""
+start ← REAPER /fx/6/fxparam/7/value/str ""
+start ← REAPER /fx/6/fxparam/7/value 0
+start ← REAPER /fx/6/fxparam/8/name ""
+start ← REAPER /fx/6/fxparam/8/value/str ""
+start ← REAPER /fx/6/fxparam/8/value 0
+start ← REAPER /track/1/fx/6/name ""
+start ← REAPER /track/1/fx/6/number/str ""
+start ← REAPER /track/1/fx/6/preset ""
+start ← REAPER /track/1/fx/6/bypass 0
+start ← REAPER /track/1/fx/6/openui 0
+start ← REAPER /track/1/fx/6/fxparam/1/value 0
+start ← REAPER /track/1/fx/6/fxparam/2/value 0
+start ← REAPER /track/1/fx/6/fxparam/3/value 0
+start ← REAPER /track/1/fx/6/fxparam/4/value 0
+start ← REAPER /track/1/fx/6/fxparam/5/value 0
+start ← REAPER /track/1/fx/6/fxparam/6/value 0
+start ← REAPER /track/1/fx/6/fxparam/7/value 0
+start ← REAPER /track/1/fx/6/fxparam/8/value 0
+start ← REAPER /fx/7/name ""
+start ← REAPER /fx/7/number/str ""
+start ← REAPER /fx/7/preset ""
+start ← REAPER /fx/7/bypass 0
+start ← REAPER /fx/7/openui 0
+start ← REAPER /fx/7/fxparam/1/name ""
+start ← REAPER /fx/7/fxparam/1/value/str ""
+start ← REAPER /fx/7/fxparam/1/value 0
+start ← REAPER /fx/7/fxparam/2/name ""
+start ← REAPER /fx/7/fxparam/2/value/str ""
+start ← REAPER /fx/7/fxparam/2/value 0
+start ← REAPER /fx/7/fxparam/3/name ""
+start ← REAPER /fx/7/fxparam/3/value/str ""
+start ← REAPER /fx/7/fxparam/3/value 0
+start ← REAPER /fx/7/fxparam/4/name ""
+start ← REAPER /fx/7/fxparam/4/value/str ""
+start ← REAPER /fx/7/fxparam/4/value 0
+start ← REAPER /fx/7/fxparam/5/name ""
+start ← REAPER /fx/7/fxparam/5/value/str ""
+start ← REAPER /fx/7/fxparam/5/value 0
+start ← REAPER /fx/7/fxparam/6/name ""
+start ← REAPER /fx/7/fxparam/6/value/str ""
+start ← REAPER /fx/7/fxparam/6/value 0
+start ← REAPER /fx/7/fxparam/7/name ""
+start ← REAPER /fx/7/fxparam/7/value/str ""
+start ← REAPER /fx/7/fxparam/7/value 0
+start ← REAPER /fx/7/fxparam/8/name ""
+start ← REAPER /fx/7/fxparam/8/value/str ""
+start ← REAPER /fx/7/fxparam/8/value 0
+start ← REAPER /track/1/fx/7/name ""
+start ← REAPER /track/1/fx/7/number/str ""
+start ← REAPER /track/1/fx/7/preset ""
+start ← REAPER /track/1/fx/7/bypass 0
+start ← REAPER /track/1/fx/7/openui 0
+start ← REAPER /track/1/fx/7/fxparam/1/value 0
+start ← REAPER /track/1/fx/7/fxparam/2/value 0
+start ← REAPER /track/1/fx/7/fxparam/3/value 0
+start ← REAPER /track/1/fx/7/fxparam/4/value 0
+start ← REAPER /track/1/fx/7/fxparam/5/value 0
+start ← REAPER /track/1/fx/7/fxparam/6/value 0
+start ← REAPER /track/1/fx/7/fxparam/7/value 0
+start ← REAPER /track/1/fx/7/fxparam/8/value 0
+start ← REAPER /fx/8/name ""
+start ← REAPER /fx/8/number/str ""
+start ← REAPER /fx/8/preset ""
+start ← REAPER /fx/8/bypass 0
+start ← REAPER /fx/8/openui 0
+start ← REAPER /fx/8/fxparam/1/name ""
+start ← REAPER /fx/8/fxparam/1/value/str ""
+start ← REAPER /fx/8/fxparam/1/value 0
+start ← REAPER /fx/8/fxparam/2/name ""
+start ← REAPER /fx/8/fxparam/2/value/str ""
+start ← REAPER /fx/8/fxparam/2/value 0
+start ← REAPER /fx/8/fxparam/3/name ""
+start ← REAPER /fx/8/fxparam/3/value/str ""
+start ← REAPER /fx/8/fxparam/3/value 0
+start ← REAPER /fx/8/fxparam/4/name ""
+start ← REAPER /fx/8/fxparam/4/value/str ""
+start ← REAPER /fx/8/fxparam/4/value 0
+start ← REAPER /fx/8/fxparam/5/name ""
+start ← REAPER /fx/8/fxparam/5/value/str ""
+start ← REAPER /fx/8/fxparam/5/value 0
+start ← REAPER /fx/8/fxparam/6/name ""
+start ← REAPER /fx/8/fxparam/6/value/str ""
+start ← REAPER /fx/8/fxparam/6/value 0
+start ← REAPER /fx/8/fxparam/7/name ""
+start ← REAPER /fx/8/fxparam/7/value/str ""
+start ← REAPER /fx/8/fxparam/7/value 0
+start ← REAPER /fx/8/fxparam/8/name ""
+start ← REAPER /fx/8/fxparam/8/value/str ""
+start ← REAPER /fx/8/fxparam/8/value 0
+start ← REAPER /track/1/fx/8/name ""
+start ← REAPER /track/1/fx/8/number/str ""
+start ← REAPER /track/1/fx/8/preset ""
+start ← REAPER /track/1/fx/8/bypass 0
+start ← REAPER /track/1/fx/8/openui 0
+start ← REAPER /track/1/fx/8/fxparam/1/value 0
+start ← REAPER /track/1/fx/8/fxparam/2/value 0
+start ← REAPER /track/1/fx/8/fxparam/3/value 0
+start ← REAPER /track/1/fx/8/fxparam/4/value 0
+start ← REAPER /track/1/fx/8/fxparam/5/value 0
+start ← REAPER /track/1/fx/8/fxparam/6/value 0
+start ← REAPER /track/1/fx/8/fxparam/7/value 0
+start ← REAPER /track/1/fx/8/fxparam/8/value 0
+start ← REAPER /device/fx/select/1 1
+start ← REAPER /device/fx/select/2 0
+start ← REAPER /device/fx/select/3 0
+start ← REAPER /device/fx/select/4 0
+start ← REAPER /device/fx/select/5 0
+start ← REAPER /device/fx/select/6 0
+start ← REAPER /device/fx/select/7 0
+start ← REAPER /device/fx/select/8 0
+start ← REAPER /device/fxparam/bank/str "1"
+start ← REAPER /device/fxinstparam/bank/str "1"
+start ← REAPER /fxinstparam/1/name "NIKB00"
+start ← REAPER /fxinstparam/1/value/str ""
+start ← REAPER /fxinstparam/1/value 0
+start ← REAPER /fxinstparam/2/name "1 Scale On / Off"
+start ← REAPER /fxinstparam/2/value/str "Off"
+start ← REAPER /fxinstparam/2/value 0
+start ← REAPER /fxinstparam/3/name "2 Scale Root Note"
+start ← REAPER /fxinstparam/3/value/str "C"
+start ← REAPER /fxinstparam/3/value 0
+start ← REAPER /fxinstparam/4/name "3 Scale Type"
+start ← REAPER /fxinstparam/4/value/str "Major"
+start ← REAPER /fxinstparam/4/value 0.0714286
+start ← REAPER /fxinstparam/5/name "4 Scale Key Mode"
+start ← REAPER /fxinstparam/5/value/str "Mapped"
+start ← REAPER /fxinstparam/5/value 0.333333
+start ← REAPER /fxinstparam/6/name "5 -"
+start ← REAPER /fxinstparam/6/value/str ""
+start ← REAPER /fxinstparam/6/value 0
+start ← REAPER /fxinstparam/7/name "6 Chord Mode"
+start ← REAPER /fxinstparam/7/value/str "Off"
+start ← REAPER /fxinstparam/7/value 0
+start ← REAPER /fxinstparam/8/name "7 Chord Type"
+start ← REAPER /fxinstparam/8/value/str "Major"
+start ← REAPER /fxinstparam/8/value 0.214286
+start ← REAPER /fxeq/preset ""
+start ← REAPER /fxeq/bypass 0
+start ← REAPER /fxeq/openui 0
+start ← REAPER /fxeq/hipass/freq/str "0Hz"
+start ← REAPER /fxeq/hipass/freq 0
+start ← REAPER /fxeq/hipass/q/str "1.0"
+start ← REAPER /fxeq/hipass/q 0.5
+start ← REAPER /fxeq/loshelf/freq/str "0Hz"
+start ← REAPER /fxeq/loshelf/freq 0
+start ← REAPER /fxeq/loshelf/gain/str "0dB"
+start ← REAPER /fxeq/loshelf/gain 0.5
+start ← REAPER /fxeq/loshelf/q/str "1.0"
+start ← REAPER /fxeq/loshelf/q 0.5
+start ← REAPER /fxeq/band/0/freq/str "0Hz"
+start ← REAPER /fxeq/band/0/freq 0
+start ← REAPER /fxeq/band/1/freq/str "0Hz"
+start ← REAPER /fxeq/band/1/freq 0
+start ← REAPER /fxeq/band/2/freq/str "0Hz"
+start ← REAPER /fxeq/band/2/freq 0
+start ← REAPER /fxeq/band/3/freq/str "0Hz"
+start ← REAPER /fxeq/band/3/freq 0
+start ← REAPER /fxeq/band/4/freq/str "0Hz"
+start ← REAPER /fxeq/band/4/freq 0
+start ← REAPER /fxeq/band/5/freq/str "0Hz"
+start ← REAPER /fxeq/band/5/freq 0
+start ← REAPER /fxeq/band/6/freq/str "0Hz"
+start ← REAPER /fxeq/band/6/freq 0
+start ← REAPER /fxeq/band/7/freq/str "0Hz"
+start ← REAPER /fxeq/band/7/freq 0
+start ← REAPER /fxeq/band/0/gain/str "0dB"
+start ← REAPER /fxeq/band/0/gain 0.5
+start ← REAPER /fxeq/band/1/gain/str "0dB"
+start ← REAPER /fxeq/band/1/gain 0.5
+start ← REAPER /fxeq/band/2/gain/str "0dB"
+start ← REAPER /fxeq/band/2/gain 0.5
+start ← REAPER /fxeq/band/3/gain/str "0dB"
+start ← REAPER /fxeq/band/3/gain 0.5
+start ← REAPER /fxeq/band/4/gain/str "0dB"
+start ← REAPER /fxeq/band/4/gain 0.5
+start ← REAPER /fxeq/band/5/gain/str "0dB"
+start ← REAPER /fxeq/band/5/gain 0.5
+start ← REAPER /fxeq/band/6/gain/str "0dB"
+start ← REAPER /fxeq/band/6/gain 0.5
+start ← REAPER /fxeq/band/7/gain/str "0dB"
+start ← REAPER /fxeq/band/7/gain 0.5
+start ← REAPER /fxeq/band/0/q/str "1.0"
+start ← REAPER /fxeq/band/0/q 0.5
+start ← REAPER /fxeq/band/1/q/str "1.0"
+start ← REAPER /fxeq/band/1/q 0.5
+start ← REAPER /fxeq/band/2/q/str "1.0"
+start ← REAPER /fxeq/band/2/q 0.5
+start ← REAPER /fxeq/band/3/q/str "1.0"
+start ← REAPER /fxeq/band/3/q 0.5
+start ← REAPER /fxeq/band/4/q/str "1.0"
+start ← REAPER /fxeq/band/4/q 0.5
+start ← REAPER /fxeq/band/5/q/str "1.0"
+start ← REAPER /fxeq/band/5/q 0.5
+start ← REAPER /fxeq/band/6/q/str "1.0"
+start ← REAPER /fxeq/band/6/q 0.5
+start ← REAPER /fxeq/band/7/q/str "1.0"
+start ← REAPER /fxeq/band/7/q 0.5
+start ← REAPER /fxeq/notch/freq/str "0Hz"
+start ← REAPER /fxeq/notch/freq 0
+start ← REAPER /fxeq/notch/gain/str "0dB"
+start ← REAPER /fxeq/notch/gain 0.5
+start ← REAPER /fxeq/notch/q/str "1.0"
+start ← REAPER /fxeq/notch/q 0.5
+start ← REAPER /fxeq/hishelf/freq/str "0Hz"
+start ← REAPER /fxeq/hishelf/freq 0
+start ← REAPER /fxeq/hishelf/gain/str "0dB"
+start ← REAPER /fxeq/hishelf/gain 0.5
+start ← REAPER /fxeq/hishelf/q/str "1.0"
+start ← REAPER /fxeq/hishelf/q 0.5
+start ← REAPER /fxeq/lopass/freq/str "0Hz"
+start ← REAPER /fxeq/lopass/freq 0
+start ← REAPER /fxeq/lopass/q/str "1.0"
+start ← REAPER /fxeq/lopass/q 0.5
+start ← REAPER /master/volume 0.716
+start ← REAPER /master/volume/str "0.00dB"
+start ← REAPER /master/pan 0.5
+start ← REAPER /master/pan/str "C"
+start ← REAPER /master/send/1/name "MON L"
+start ← REAPER /master/send/1/volume 0.716
+start ← REAPER /master/send/1/volume/str "0.00dB"
+start ← REAPER /master/send/1/pan 0.5
+start ← REAPER /master/send/1/pan/str "center"
+start ← REAPER /master/send/2/name "Aux 2"
+start ← REAPER /master/send/2/volume 0.00251387
+start ← REAPER /master/send/2/volume/str "-inf dB"
+start ← REAPER /master/send/2/pan 0.5
+start ← REAPER /master/send/2/pan/str "center"
+start ← REAPER /master/send/3/name "Aux 3"
+start ← REAPER /master/send/3/volume 0.00251387
+start ← REAPER /master/send/3/volume/str "-inf dB"
+start ← REAPER /master/send/3/pan 0.5
+start ← REAPER /master/send/3/pan/str "center"
+start ← REAPER /master/send/4/name "Aux 4"
+start ← REAPER /master/send/4/volume 0.00251387
+start ← REAPER /master/send/4/volume/str "-inf dB"
+start ← REAPER /master/send/4/pan 0.5
+start ← REAPER /master/send/4/pan/str "center"
+start ← REAPER /master/send/5/name "Aux 5"
+start ← REAPER /master/send/5/volume 0.00251387
+start ← REAPER /master/send/5/volume/str "-inf dB"
+start ← REAPER /master/send/5/pan 0.5
+start ← REAPER /master/send/5/pan/str "center"
+start ← REAPER /master/send/6/name "Aux 6"
+start ← REAPER /master/send/6/volume 0.00251387
+start ← REAPER /master/send/6/volume/str "-inf dB"
+start ← REAPER /master/send/6/pan 0.5
+start ← REAPER /master/send/6/pan/str "center"
+start ← REAPER /master/send/7/name "Aux 7"
+start ← REAPER /master/send/7/volume 0.00251387
+start ← REAPER /master/send/7/volume/str "-inf dB"
+start ← REAPER /master/send/7/pan 0.5
+start ← REAPER /master/send/7/pan/str "center"
+start ← REAPER /master/send/8/name "Aux 8"
+start ← REAPER /master/send/8/volume 0.00251387
+start ← REAPER /master/send/8/volume/str "-inf dB"
+start ← REAPER /master/send/8/pan 0.5
+start ← REAPER /master/send/8/pan/str "center"
+start ← REAPER /master/send/9/name "Aux 9"
+start ← REAPER /master/send/9/volume 0.00251387
+start ← REAPER /master/send/9/volume/str "-inf dB"
+start ← REAPER /master/send/9/pan 0.5
+start ← REAPER /master/send/9/pan/str "center"
+start ← REAPER /master/send/10/name "Aux 10"
+start ← REAPER /master/send/10/volume 0.00251387
+start ← REAPER /master/send/10/volume/str "-inf dB"
+start ← REAPER /master/send/10/pan 0.5
+start ← REAPER /master/send/10/pan/str "center"
+start ← REAPER /master/send/11/name "Aux 11"
+start ← REAPER /master/send/11/volume 0.00251387
+start ← REAPER /master/send/11/volume/str "-inf dB"
+start ← REAPER /master/send/11/pan 0.5
+start ← REAPER /master/send/11/pan/str "center"
+start ← REAPER /master/send/12/name "Aux 12"
+start ← REAPER /master/send/12/volume 0.00251387
+start ← REAPER /master/send/12/volume/str "-inf dB"
+start ← REAPER /master/send/12/pan 0.5
+start ← REAPER /master/send/12/pan/str "center"
+start ← REAPER /master/send/13/name "Aux 13"
+start ← REAPER /master/send/13/volume 0.00251387
+start ← REAPER /master/send/13/volume/str "-inf dB"
+start ← REAPER /master/send/13/pan 0.5
+start ← REAPER /master/send/13/pan/str "center"
+start ← REAPER /master/send/14/name "Aux 14"
+start ← REAPER /master/send/14/volume 0.00251387
+start ← REAPER /master/send/14/volume/str "-inf dB"
+start ← REAPER /master/send/14/pan 0.5
+start ← REAPER /master/send/14/pan/str "center"
+start ← REAPER /master/send/15/name "Aux 15"
+start ← REAPER /master/send/15/volume 0.00251387
+start ← REAPER /master/send/15/volume/str "-inf dB"
+start ← REAPER /master/send/15/pan 0.5
+start ← REAPER /master/send/15/pan/str "center"
+start ← REAPER /master/send/16/name "Aux 16"
+start ← REAPER /master/send/16/volume 0.00251387
+start ← REAPER /master/send/16/volume/str "-inf dB"
+start ← REAPER /master/send/16/pan 0.5
+start ← REAPER /master/send/16/pan/str "center"
+start ← REAPER /track/2/name "Guitar"
+             display |TRACK   |KK KEYS |        |        |        |        |        |        |        |
+             display |1       |VOL     |-2.73DB  |PAN     |9%R     |        |        |        |        |
+             display |         | ######  | ##+     |         |         |         |         |         |         |
+start ← REAPER /track/2/number/str "2"
+start ← REAPER /track/2/select 0
+start ← REAPER /track/2/volume/db -28.1339
+start ← REAPER /track/2/volume/str "-28.1dB"
+start ← REAPER /track/2/volume 0.268333
+start ← REAPER /track/2/panmode "Balance"
+start ← REAPER /track/2/pan2 1
+start ← REAPER /track/2/pan2/str "100W"
+start ← REAPER /track/2/pan 0.5
+start ← REAPER /track/2/pan/str "C"
+start ← REAPER /track/2/mute 0
+start ← REAPER /track/2/mute/toggle 0
+start ← REAPER /track/2/solo 0
+start ← REAPER /track/2/solo/toggle 0
+start ← REAPER /track/2/recarm 0
+start ← REAPER /track/2/recarm/toggle 0
+start ← REAPER /track/2/monitor 0
+start ← REAPER /track/2/autotrim 1
+start ← REAPER /track/2/autoread 0
+start ← REAPER /track/2/autolatch 0
+start ← REAPER /track/2/autotouch 0
+start ← REAPER /track/2/autowrite 0
+start ← REAPER /track/2/send/1/name "Send 1"
+start ← REAPER /track/2/send/1/volume/str "-inf dB"
+start ← REAPER /track/2/send/1/volume 0.00251387
+start ← REAPER /track/2/send/1/pan/str "center"
+start ← REAPER /track/2/send/1/pan 0.5
+start ← REAPER /track/2/send/2/name "Send 2"
+start ← REAPER /track/2/send/2/volume/str "-inf dB"
+start ← REAPER /track/2/send/2/volume 0.00251387
+start ← REAPER /track/2/send/2/pan/str "center"
+start ← REAPER /track/2/send/2/pan 0.5
+start ← REAPER /track/2/send/3/name "Send 3"
+start ← REAPER /track/2/send/3/volume/str "-inf dB"
+start ← REAPER /track/2/send/3/volume 0.00251387
+start ← REAPER /track/2/send/3/pan/str "center"
+start ← REAPER /track/2/send/3/pan 0.5
+start ← REAPER /track/2/send/4/name "Send 4"
+start ← REAPER /track/2/send/4/volume/str "-inf dB"
+start ← REAPER /track/2/send/4/volume 0.00251387
+start ← REAPER /track/2/send/4/pan/str "center"
+start ← REAPER /track/2/send/4/pan 0.5
+start ← REAPER /track/2/send/5/name "Send 5"
+start ← REAPER /track/2/send/5/volume/str "-inf dB"
+start ← REAPER /track/2/send/5/volume 0.00251387
+start ← REAPER /track/2/send/5/pan/str "center"
+start ← REAPER /track/2/send/5/pan 0.5
+start ← REAPER /track/2/send/6/name "Send 6"
+start ← REAPER /track/2/send/6/volume/str "-inf dB"
+start ← REAPER /track/2/send/6/volume 0.00251387
+start ← REAPER /track/2/send/6/pan/str "center"
+start ← REAPER /track/2/send/6/pan 0.5
+start ← REAPER /track/2/send/7/name "Send 7"
+start ← REAPER /track/2/send/7/volume/str "-inf dB"
+start ← REAPER /track/2/send/7/volume 0.00251387
+start ← REAPER /track/2/send/7/pan/str "center"
+start ← REAPER /track/2/send/7/pan 0.5
+start ← REAPER /track/2/send/8/name "Send 8"
+start ← REAPER /track/2/send/8/volume/str "-inf dB"
+start ← REAPER /track/2/send/8/volume 0.00251387
+start ← REAPER /track/2/send/8/pan/str "center"
+start ← REAPER /track/2/send/8/pan 0.5
+start ← REAPER /track/2/send/9/name "Send 9"
+start ← REAPER /track/2/send/9/volume/str "-inf dB"
+start ← REAPER /track/2/send/9/volume 0.00251387
+start ← REAPER /track/2/send/9/pan/str "center"
+start ← REAPER /track/2/send/9/pan 0.5
+start ← REAPER /track/2/send/10/name "Send 10"
+start ← REAPER /track/2/send/10/volume/str "-inf dB"
+start ← REAPER /track/2/send/10/volume 0.00251387
+start ← REAPER /track/2/send/10/pan/str "center"
+start ← REAPER /track/2/send/10/pan 0.5
+start ← REAPER /track/2/send/11/name "Send 11"
+start ← REAPER /track/2/send/11/volume/str "-inf dB"
+start ← REAPER /track/2/send/11/volume 0.00251387
+start ← REAPER /track/2/send/11/pan/str "center"
+start ← REAPER /track/2/send/11/pan 0.5
+start ← REAPER /track/2/send/12/name "Send 12"
+start ← REAPER /track/2/send/12/volume/str "-inf dB"
+start ← REAPER /track/2/send/12/volume 0.00251387
+start ← REAPER /track/2/send/12/pan/str "center"
+start ← REAPER /track/2/send/12/pan 0.5
+start ← REAPER /track/2/send/13/name "Send 13"
+start ← REAPER /track/2/send/13/volume/str "-inf dB"
+start ← REAPER /track/2/send/13/volume 0.00251387
+start ← REAPER /track/2/send/13/pan/str "center"
+start ← REAPER /track/2/send/13/pan 0.5
+start ← REAPER /track/2/send/14/name "Send 14"
+start ← REAPER /track/2/send/14/volume/str "-inf dB"
+start ← REAPER /track/2/send/14/volume 0.00251387
+start ← REAPER /track/2/send/14/pan/str "center"
+start ← REAPER /track/2/send/14/pan 0.5
+start ← REAPER /track/2/send/15/name "Send 15"
+start ← REAPER /track/2/send/15/volume/str "-inf dB"
+start ← REAPER /track/2/send/15/volume 0.00251387
+start ← REAPER /track/2/send/15/pan/str "center"
+start ← REAPER /track/2/send/15/pan 0.5
+start ← REAPER /track/2/send/16/name "Send 16"
+start ← REAPER /track/2/send/16/volume/str "-inf dB"
+start ← REAPER /track/2/send/16/volume 0.00251387
+start ← REAPER /track/2/send/16/pan/str "center"
+start ← REAPER /track/2/send/16/pan 0.5
+start ← REAPER /track/2/recv/1/name "Recv 1"
+start ← REAPER /track/2/recv/1/volume/str "-inf dB"
+start ← REAPER /track/2/recv/1/volume 0.00251387
+start ← REAPER /track/2/recv/1/pan/str "center"
+start ← REAPER /track/2/recv/1/pan 0.5
+start ← REAPER /track/2/recv/2/name "Recv 2"
+start ← REAPER /track/2/recv/2/volume/str "-inf dB"
+start ← REAPER /track/2/recv/2/volume 0.00251387
+start ← REAPER /track/2/recv/2/pan/str "center"
+start ← REAPER /track/2/recv/2/pan 0.5
+start ← REAPER /track/2/recv/3/name "Recv 3"
+start ← REAPER /track/2/recv/3/volume/str "-inf dB"
+start ← REAPER /track/2/recv/3/volume 0.00251387
+start ← REAPER /track/2/recv/3/pan/str "center"
+start ← REAPER /track/2/recv/3/pan 0.5
+start ← REAPER /track/2/recv/4/name "Recv 4"
+start ← REAPER /track/2/recv/4/volume/str "-inf dB"
+start ← REAPER /track/2/recv/4/volume 0.00251387
+start ← REAPER /track/2/recv/4/pan/str "center"
+start ← REAPER /track/2/recv/4/pan 0.5
+start ← REAPER /track/2/fx/1/name "bx_console SSL 4000 G (Plugin Alliance)"
+start ← REAPER /track/2/fx/1/number/str "1"
+start ← REAPER /track/2/fx/1/preset "/Users/gsenger/Library/Audio/Presets/Plugin Alliance/bx_console SSL 4000 G/12 Beats Big.vstpreset"
+start ← REAPER /track/2/fx/1/bypass 1
+start ← REAPER /track/2/fx/1/openui 0
+start ← REAPER /track/2/fx/1/fxparam/1/value 1
+start ← REAPER /track/2/fx/1/fxparam/2/value 0
+start ← REAPER /track/2/fx/1/fxparam/3/value 0
+start ← REAPER /track/2/fx/1/fxparam/4/value 0.5
+start ← REAPER /track/2/fx/1/fxparam/5/value 0.695638
+start ← REAPER /track/2/fx/1/fxparam/6/value 0.893758
+start ← REAPER /track/2/fx/1/fxparam/7/value 0
+start ← REAPER /track/2/fx/1/fxparam/8/value 0.697513
+start ← REAPER /track/2/fxinst/name ""
+start ← REAPER /track/2/fxinst/preset ""
+start ← REAPER /track/2/fxinst/bypass 0
+start ← REAPER /track/2/fxinst/openui 0
+start ← REAPER /track/2/fx/2/name "Little Plate (Soundtoys)"
+start ← REAPER /track/2/fx/2/number/str "2"
+start ← REAPER /track/2/fx/2/preset ""
+start ← REAPER /track/2/fx/2/bypass 1
+start ← REAPER /track/2/fx/2/openui 0
+start ← REAPER /track/2/fx/2/fxparam/1/value 0
+start ← REAPER /track/2/fx/2/fxparam/2/value 1
+start ← REAPER /track/2/fx/2/fxparam/3/value 1
+start ← REAPER /track/2/fx/2/fxparam/4/value 1
+start ← REAPER /track/2/fx/2/fxparam/5/value 1
+start ← REAPER /track/2/fx/2/fxparam/6/value 0
+start ← REAPER /track/2/fx/2/fxparam/7/value 1
+start ← REAPER /track/2/fx/2/wetdry/str "100"
+start ← REAPER /track/2/fx/2/wetdry 1
+start ← REAPER /track/2/fx/2/fxparam/8/value 0
+start ← REAPER /track/2/fx/3/name ""
+start ← REAPER /track/2/fx/3/number/str ""
+start ← REAPER /track/2/fx/3/preset ""
+start ← REAPER /track/2/fx/3/bypass 0
+start ← REAPER /track/2/fx/3/openui 0
+start ← REAPER /track/2/fx/3/fxparam/1/value 0
+start ← REAPER /track/2/fx/3/fxparam/2/value 0
+start ← REAPER /track/2/fx/3/fxparam/3/value 0
+start ← REAPER /track/2/fx/3/fxparam/4/value 0
+start ← REAPER /track/2/fx/3/fxparam/5/value 0
+start ← REAPER /track/2/fx/3/fxparam/6/value 0
+start ← REAPER /track/2/fx/3/fxparam/7/value 0
+start ← REAPER /track/2/fx/3/fxparam/8/value 0
+start ← REAPER /track/2/fx/4/name ""
+start ← REAPER /track/2/fx/4/number/str ""
+start ← REAPER /track/2/fx/4/preset ""
+start ← REAPER /track/2/fx/4/bypass 0
+start ← REAPER /track/2/fx/4/openui 0
+start ← REAPER /track/2/fx/4/fxparam/1/value 0
+start ← REAPER /track/2/fx/4/fxparam/2/value 0
+start ← REAPER /track/2/fx/4/fxparam/3/value 0
+start ← REAPER /track/2/fx/4/fxparam/4/value 0
+start ← REAPER /track/2/fx/4/fxparam/5/value 0
+start ← REAPER /track/2/fx/4/fxparam/6/value 0
+start ← REAPER /track/2/fx/4/fxparam/7/value 0
+start ← REAPER /track/2/fx/4/fxparam/8/value 0
+start ← REAPER /track/2/fx/5/name ""
+start ← REAPER /track/2/fx/5/number/str ""
+start ← REAPER /track/2/fx/5/preset ""
+start ← REAPER /track/2/fx/5/bypass 0
+start ← REAPER /track/2/fx/5/openui 0
+start ← REAPER /track/2/fx/5/fxparam/1/value 0
+start ← REAPER /track/2/fx/5/fxparam/2/value 0
+start ← REAPER /track/2/fx/5/fxparam/3/value 0
+start ← REAPER /track/2/fx/5/fxparam/4/value 0
+start ← REAPER /track/2/fx/5/fxparam/5/value 0
+start ← REAPER /track/2/fx/5/fxparam/6/value 0
+start ← REAPER /track/2/fx/5/fxparam/7/value 0
+start ← REAPER /track/2/fx/5/fxparam/8/value 0
+start ← REAPER /track/2/fx/6/name ""
+start ← REAPER /track/2/fx/6/number/str ""
+start ← REAPER /track/2/fx/6/preset ""
+start ← REAPER /track/2/fx/6/bypass 0
+start ← REAPER /track/2/fx/6/openui 0
+start ← REAPER /track/2/fx/6/fxparam/1/value 0
+start ← REAPER /track/2/fx/6/fxparam/2/value 0
+12:00:00.050 ← REAPER /track/2/fx/6/fxparam/3/value 0
+12:00:00.050 ← REAPER /track/2/fx/6/fxparam/4/value 0
+12:00:00.050 ← REAPER /track/2/fx/6/fxparam/5/value 0
+12:00:00.050 ← REAPER /track/2/fx/6/fxparam/6/value 0
+12:00:00.050 ← REAPER /track/2/fx/6/fxparam/7/value 0
+12:00:00.050 ← REAPER /track/2/fx/6/fxparam/8/value 0
+12:00:00.050 ← REAPER /track/2/fx/7/name ""
+12:00:00.050 ← REAPER /track/2/fx/7/number/str ""
+12:00:00.050 ← REAPER /track/2/fx/7/preset ""
+12:00:00.050 ← REAPER /track/2/fx/7/bypass 0
+12:00:00.050 ← REAPER /track/2/fx/7/openui 0
+12:00:00.050 ← REAPER /track/2/fx/7/fxparam/1/value 0
+12:00:00.050 ← REAPER /track/2/fx/7/fxparam/2/value 0
+12:00:00.050 ← REAPER /track/2/fx/7/fxparam/3/value 0
+12:00:00.050 ← REAPER /track/2/fx/7/fxparam/4/value 0
+12:00:00.050 ← REAPER /track/2/fx/7/fxparam/5/value 0
+12:00:00.050 ← REAPER /track/2/fx/7/fxparam/6/value 0
+12:00:00.050 ← REAPER /track/2/fx/7/fxparam/7/value 0
+12:00:00.050 ← REAPER /track/2/fx/7/fxparam/8/value 0
+12:00:00.050 ← REAPER /track/2/fx/8/name ""
+12:00:00.050 ← REAPER /track/2/fx/8/number/str ""
+12:00:00.050 ← REAPER /track/2/fx/8/preset ""
+12:00:00.050 ← REAPER /track/2/fx/8/bypass 0
+12:00:00.050 ← REAPER /track/2/fx/8/openui 0
+end ← REAPER /track/2/fx/8/fxparam/1/value 0
+end ← REAPER /track/2/fx/8/fxparam/2/value 0
+end ← REAPER /track/2/fx/8/fxparam/3/value 0
+end ← REAPER /track/2/fx/8/fxparam/4/value 0
+end ← REAPER /track/2/fx/8/fxparam/5/value 0
+end ← REAPER /track/2/fx/8/fxparam/6/value 0
+end ← REAPER /track/2/fx/8/fxparam/7/value 0
+end ← REAPER /track/2/fx/8/fxparam/8/value 0
+end ← REAPER /track/3/name "AUX - Reverb"
+             display |TRACK   |KK KEYS |        |        |        |        |        |        |        |
+             display |1       |VOL     |-2.73DB  |PAN     |9%R     |        |        |        |        |
+             display |         | ######  | ##+     | ######+ |         |         |         |         |         |
+end ← REAPER /track/3/number/str "3"
+end ← REAPER /track/3/select 0
+end ← REAPER /track/3/volume/db 0.250997
+end ← REAPER /track/3/volume/str "+0.25dB"
+end ← REAPER /track/3/volume 0.721667
+end ← REAPER /track/3/panmode "Balance"
+end ← REAPER /track/3/pan2 1
+end ← REAPER /track/3/pan2/str "100W"
+end ← REAPER /track/3/pan 0.5
+end ← REAPER /track/3/pan/str "C"
+end ← REAPER /track/3/mute 0
+end ← REAPER /track/3/mute/toggle 0
+end ← REAPER /track/3/solo 0
+end ← REAPER /track/3/solo/toggle 0
+end ← REAPER /track/3/recarm 0
+end ← REAPER /track/3/recarm/toggle 0
+end ← REAPER /track/3/monitor 0
+end ← REAPER /track/3/autotrim 1
+end ← REAPER /track/3/autoread 0
+end ← REAPER /track/3/autolatch 0
+end ← REAPER /track/3/autotouch 0
+end ← REAPER /track/3/autowrite 0
+end ← REAPER /track/3/send/1/name "Send 1"
+end ← REAPER /track/3/send/1/volume/str "-inf dB"
+end ← REAPER /track/3/send/1/volume 0.00251387
+end ← REAPER /track/3/send/1/pan/str "center"
+end ← REAPER /track/3/send/1/pan 0.5
+end ← REAPER /track/3/send/2/name "Send 2"
+end ← REAPER /track/3/send/2/volume/str "-inf dB"
+end ← REAPER /track/3/send/2/volume 0.00251387
+end ← REAPER /track/3/send/2/pan/str "center"
+end ← REAPER /track/3/send/2/pan 0.5
+end ← REAPER /track/3/send/3/name "Send 3"
+end ← REAPER /track/3/send/3/volume/str "-inf dB"
+end ← REAPER /track/3/send/3/volume 0.00251387
+end ← REAPER /track/3/send/3/pan/str "center"
+end ← REAPER /track/3/send/3/pan 0.5
+end ← REAPER /track/3/send/4/name "Send 4"
+end ← REAPER /track/3/send/4/volume/str "-inf dB"
+end ← REAPER /track/3/send/4/volume 0.00251387
+end ← REAPER /track/3/send/4/pan/str "center"
+end ← REAPER /track/3/send/4/pan 0.5
+end ← REAPER /track/3/send/5/name "Send 5"
+end ← REAPER /track/3/send/5/volume/str "-inf dB"
+end ← REAPER /track/3/send/5/volume 0.00251387
+end ← REAPER /track/3/send/5/pan/str "center"
+end ← REAPER /track/3/send/5/pan 0.5
+end ← REAPER /track/3/send/6/name "Send 6"
+end ← REAPER /track/3/send/6/volume/str "-inf dB"
+end ← REAPER /track/3/send/6/volume 0.00251387
+end ← REAPER /track/3/send/6/pan/str "center"
+end ← REAPER /track/3/send/6/pan 0.5
+end ← REAPER /track/3/send/7/name "Send 7"
+end ← REAPER /track/3/send/7/volume/str "-inf dB"
+end ← REAPER /track/3/send/7/volume 0.00251387
+end ← REAPER /track/3/send/7/pan/str "center"
+end ← REAPER /track/3/send/7/pan 0.5
+end ← REAPER /track/3/send/8/name "Send 8"
+end ← REAPER /track/3/send/8/volume/str "-inf dB"
+end ← REAPER /track/3/send/8/volume 0.00251387
+end ← REAPER /track/3/send/8/pan/str "center"
+end ← REAPER /track/3/send/8/pan 0.5
+end ← REAPER /track/3/send/9/name "Send 9"
+end ← REAPER /track/3/send/9/volume/str "-inf dB"
+end ← REAPER /track/3/send/9/volume 0.00251387
+end ← REAPER /track/3/send/9/pan/str "center"
+end ← REAPER /track/3/send/9/pan 0.5
+end ← REAPER /track/3/send/10/name "Send 10"
+end ← REAPER /track/3/send/10/volume/str "-inf dB"
+end ← REAPER /track/3/send/10/volume 0.00251387
+end ← REAPER /track/3/send/10/pan/str "center"
+end ← REAPER /track/3/send/10/pan 0.5
+end ← REAPER /track/3/send/11/name "Send 11"
+end ← REAPER /track/3/send/11/volume/str "-inf dB"
+end ← REAPER /track/3/send/11/volume 0.00251387
+end ← REAPER /track/3/send/11/pan/str "center"
+end ← REAPER /track/3/send/11/pan 0.5
+end ← REAPER /track/3/send/12/name "Send 12"
+end ← REAPER /track/3/send/12/volume/str "-inf dB"
+end ← REAPER /track/3/send/12/volume 0.00251387
+end ← REAPER /track/3/send/12/pan/str "center"
+end ← REAPER /track/3/send/12/pan 0.5
+end ← REAPER /track/3/send/13/name "Send 13"
+end ← REAPER /track/3/send/13/volume/str "-inf dB"
+end ← REAPER /track/3/send/13/volume 0.00251387
+end ← REAPER /track/3/send/13/pan/str "center"
+end ← REAPER /track/3/send/13/pan 0.5
+end ← REAPER /track/3/send/14/name "Send 14"
+end ← REAPER /track/3/send/14/volume/str "-inf dB"
+end ← REAPER /track/3/send/14/volume 0.00251387
+end ← REAPER /track/3/send/14/pan/str "center"
+end ← REAPER /track/3/send/14/pan 0.5
+end ← REAPER /track/3/send/15/name "Send 15"
+end ← REAPER /track/3/send/15/volume/str "-inf dB"
+end ← REAPER /track/3/send/15/volume 0.00251387
+end ← REAPER /track/3/send/15/pan/str "center"
+end ← REAPER /track/3/send/15/pan 0.5
+end ← REAPER /track/3/send/16/name "Send 16"
+end ← REAPER /track/3/send/16/volume/str "-inf dB"
+end ← REAPER /track/3/send/16/volume 0.00251387
+end ← REAPER /track/3/send/16/pan/str "center"
+end ← REAPER /track/3/send/16/pan 0.5
+end ← REAPER /track/3/recv/1/name "KK Keys"
+end ← REAPER /track/3/recv/1/volume/str "+12.0dB"
+end ← REAPER /track/3/recv/1/volume 1
+end ← REAPER /track/3/recv/1/pan/str "center"
+end ← REAPER /track/3/recv/1/pan 0.5
+end ← REAPER /track/3/recv/2/name "Recv 2"
+end ← REAPER /track/3/recv/2/volume/str "-inf dB"
+end ← REAPER /track/3/recv/2/volume 0.00251387
+end ← REAPER /track/3/recv/2/pan/str "center"
+end ← REAPER /track/3/recv/2/pan 0.5
+end ← REAPER /track/3/recv/3/name "Recv 3"
+end ← REAPER /track/3/recv/3/volume/str "-inf dB"
+end ← REAPER /track/3/recv/3/volume 0.00251387
+end ← REAPER /track/3/recv/3/pan/str "center"
+end ← REAPER /track/3/recv/3/pan 0.5
+end ← REAPER /track/3/recv/4/name "Recv 4"
+end ← REAPER /track/3/recv/4/volume/str "-inf dB"
+end ← REAPER /track/3/recv/4/volume 0.00251387
+end ← REAPER /track/3/recv/4/pan/str "center"
+end ← REAPER /track/3/recv/4/pan 0.5
+end ← REAPER /track/3/fx/1/name "bx_console SSL 4000 G (Plugin Alliance)"
+end ← REAPER /track/3/fx/1/number/str "1"
+end ← REAPER /track/3/fx/1/preset ""
+end ← REAPER /track/3/fx/1/bypass 1
+end ← REAPER /track/3/fx/1/openui 0
+end ← REAPER /track/3/fx/1/fxparam/1/value 1
+end ← REAPER /track/3/fx/1/fxparam/2/value 0
+end ← REAPER /track/3/fx/1/fxparam/3/value 0
+end ← REAPER /track/3/fx/1/fxparam/4/value 0.5
+end ← REAPER /track/3/fx/1/fxparam/5/value 0.5
+end ← REAPER /track/3/fx/1/fxparam/6/value 0.6
+end ← REAPER /track/3/fx/1/fxparam/7/value 0
+end ← REAPER /track/3/fx/1/fxparam/8/value 0.75
+end ← REAPER /track/3/fxinst/name ""
+end ← REAPER /track/3/fxinst/preset ""
+end ← REAPER /track/3/fxinst/bypass 0
+end ← REAPER /track/3/fxinst/openui 0
+end ← REAPER /track/3/fx/2/name "SP2016 Reverb (Eventide)"
+end ← REAPER /track/3/fx/2/number/str "2"
+end ← REAPER /track/3/fx/2/preset ""
+end ← REAPER /track/3/fx/2/bypass 1
+end ← REAPER /track/3/fx/2/openui 0
+end ← REAPER /track/3/fx/2/fxparam/1/value 0.8
+end ← REAPER /track/3/fx/2/fxparam/2/value 0.8
+end ← REAPER /track/3/fx/2/fxparam/3/value 1
+end ← REAPER /track/3/fx/2/fxparam/4/value 0
+end ← REAPER /track/3/fx/2/fxparam/5/value 0
+end ← REAPER /track/3/fx/2/fxparam/6/value 0
+end ← REAPER /track/3/fx/2/fxparam/7/value 0.0333333
+end ← REAPER /track/3/fx/2/fxparam/8/value 0.5
+end ← REAPER /track/3/fx/3/name ""
+end ← REAPER /track/3/fx/3/number/str ""
+end ← REAPER /track/3/fx/3/preset ""
+end ← REAPER /track/3/fx/3/bypass 0
+end ← REAPER /track/3/fx/3/openui 0
+end ← REAPER /track/3/fx/3/fxparam/1/value 0
+end ← REAPER /track/3/fx/3/fxparam/2/value 0
+end ← REAPER /track/3/fx/3/fxparam/3/value 0
+end ← REAPER /track/3/fx/3/fxparam/4/value 0
+end ← REAPER /track/3/fx/3/fxparam/5/value 0
+end ← REAPER /track/3/fx/3/fxparam/6/value 0
+end ← REAPER /track/3/fx/3/fxparam/7/value 0
+end ← REAPER /track/3/fx/3/fxparam/8/value 0
+end ← REAPER /track/3/fx/4/name ""
+end ← REAPER /track/3/fx/4/number/str ""
+end ← REAPER /track/3/fx/4/preset ""
+end ← REAPER /track/3/fx/4/bypass 0
+end ← REAPER /track/3/fx/4/openui 0
+end ← REAPER /track/3/fx/4/fxparam/1/value 0
+end ← REAPER /track/3/fx/4/fxparam/2/value 0
+end ← REAPER /track/3/fx/4/fxparam/3/value 0
+end ← REAPER /track/3/fx/4/fxparam/4/value 0
+end ← REAPER /track/3/fx/4/fxparam/5/value 0
+end ← REAPER /track/3/fx/4/fxparam/6/value 0
+end ← REAPER /track/3/fx/4/fxparam/7/value 0
+end ← REAPER /track/3/fx/4/fxparam/8/value 0
+end ← REAPER /track/3/fx/5/name ""
+end ← REAPER /track/3/fx/5/number/str ""
+end ← REAPER /track/3/fx/5/preset ""
+end ← REAPER /track/3/fx/5/bypass 0
+end ← REAPER /track/3/fx/5/openui 0
+end ← REAPER /track/3/fx/5/fxparam/1/value 0
+end ← REAPER /track/3/fx/5/fxparam/2/value 0
+end ← REAPER /track/3/fx/5/fxparam/3/value 0
+end ← REAPER /track/3/fx/5/fxparam/4/value 0
+end ← REAPER /track/3/fx/5/fxparam/5/value 0
+end ← REAPER /track/3/fx/5/fxparam/6/value 0
+end ← REAPER /track/3/fx/5/fxparam/7/value 0
+end ← REAPER /track/3/fx/5/fxparam/8/value 0
+end ← REAPER /track/3/fx/6/name ""
+end ← REAPER /track/3/fx/6/number/str ""
+end ← REAPER /track/3/fx/6/preset ""
+end ← REAPER /track/3/fx/6/bypass 0
+end ← REAPER /track/3/fx/6/openui 0
+end ← REAPER /track/3/fx/6/fxparam/1/value 0
+end ← REAPER /track/3/fx/6/fxparam/2/value 0
+end ← REAPER /track/3/fx/6/fxparam/3/value 0
+end ← REAPER /track/3/fx/6/fxparam/4/value 0
+end ← REAPER /track/3/fx/6/fxparam/5/value 0
+end ← REAPER /track/3/fx/6/fxparam/6/value 0
+end ← REAPER /track/3/fx/6/fxparam/7/value 0
+end ← REAPER /track/3/fx/6/fxparam/8/value 0
+end ← REAPER /track/3/fx/7/name ""
+end ← REAPER /track/3/fx/7/number/str ""
+end ← REAPER /track/3/fx/7/preset ""
+end ← REAPER /track/3/fx/7/bypass 0
+end ← REAPER /track/3/fx/7/openui 0
+end ← REAPER /track/3/fx/7/fxparam/1/value 0
+end ← REAPER /track/3/fx/7/fxparam/2/value 0
+end ← REAPER /track/3/fx/7/fxparam/3/value 0
+end ← REAPER /track/3/fx/7/fxparam/4/value 0
+end ← REAPER /track/3/fx/7/fxparam/5/value 0
+end ← REAPER /track/3/fx/7/fxparam/6/value 0
+end ← REAPER /track/3/fx/7/fxparam/7/value 0
+end ← REAPER /track/3/fx/7/fxparam/8/value 0
+end ← REAPER /track/3/fx/8/name ""
+end ← REAPER /track/3/fx/8/number/str ""
+end ← REAPER /track/3/fx/8/preset ""
+end ← REAPER /track/3/fx/8/bypass 0
+end ← REAPER /track/3/fx/8/openui 0
+end ← REAPER /track/3/fx/8/fxparam/1/value 0
+end ← REAPER /track/3/fx/8/fxparam/2/value 0
+end ← REAPER /track/3/fx/8/fxparam/3/value 0
+end ← REAPER /track/3/fx/8/fxparam/4/value 0
+end ← REAPER /track/3/fx/8/fxparam/5/value 0
+end ← REAPER /track/3/fx/8/fxparam/6/value 0
+end ← REAPER /track/3/fx/8/fxparam/7/value 0
+end ← REAPER /track/3/fx/8/fxparam/8/value 0
+end ← REAPER /track/4/name "AUX- Delay"
+             display |TRACK   |KK KEYS |        |        |        |        |        |        |        |
+             display |1       |VOL     |-2.73DB  |PAN     |9%R     |        |        |        |        |
+             display |         | ######  | ##+     | ######+ | ######+ |         |         |         |         |
+end ← REAPER /track/4/number/str "4"
+end ← REAPER /track/4/select 0
+end ← REAPER /track/4/volume/db -0.839677
+end ← REAPER /track/4/volume/str "-0.84dB"
+end ← REAPER /track/4/volume 0.698151
+end ← REAPER /track/4/panmode "Balance"
+end ← REAPER /track/4/pan2 1
+end ← REAPER /track/4/pan2/str "100W"
+end ← REAPER /track/4/pan 0.503333
+end ← REAPER /track/4/pan/str "0.7%R"
+end ← REAPER /track/4/mute 0
+end ← REAPER /track/4/mute/toggle 0
+end ← REAPER /track/4/solo 0
+end ← REAPER /track/4/solo/toggle 0
+end ← REAPER /track/4/recarm 0
+end ← REAPER /track/4/recarm/toggle 0
+end ← REAPER /track/4/monitor 0
+end ← REAPER /track/4/autotrim 1
+end ← REAPER /track/4/autoread 0
+end ← REAPER /track/4/autolatch 0
+end ← REAPER /track/4/autotouch 0
+end ← REAPER /track/4/autowrite 0
+end ← REAPER /track/4/send/1/name "Send 1"
+end ← REAPER /track/4/send/1/volume/str "-inf dB"
+end ← REAPER /track/4/send/1/volume 0.00251387
+end ← REAPER /track/4/send/1/pan/str "center"
+end ← REAPER /track/4/send/1/pan 0.5
+end ← REAPER /track/4/send/2/name "Send 2"
+end ← REAPER /track/4/send/2/volume/str "-inf dB"
+end ← REAPER /track/4/send/2/volume 0.00251387
+end ← REAPER /track/4/send/2/pan/str "center"
+end ← REAPER /track/4/send/2/pan 0.5
+end ← REAPER /track/4/send/3/name "Send 3"
+end ← REAPER /track/4/send/3/volume/str "-inf dB"
+end ← REAPER /track/4/send/3/volume 0.00251387
+end ← REAPER /track/4/send/3/pan/str "center"
+end ← REAPER /track/4/send/3/pan 0.5
+end ← REAPER /track/4/send/4/name "Send 4"
+end ← REAPER /track/4/send/4/volume/str "-inf dB"
+end ← REAPER /track/4/send/4/volume 0.00251387
+end ← REAPER /track/4/send/4/pan/str "center"
+end ← REAPER /track/4/send/4/pan 0.5
+end ← REAPER /track/4/send/5/name "Send 5"
+end ← REAPER /track/4/send/5/volume/str "-inf dB"
+end ← REAPER /track/4/send/5/volume 0.00251387
+end ← REAPER /track/4/send/5/pan/str "center"
+end ← REAPER /track/4/send/5/pan 0.5
+end ← REAPER /track/4/send/6/name "Send 6"
+end ← REAPER /track/4/send/6/volume/str "-inf dB"
+end ← REAPER /track/4/send/6/volume 0.00251387
+end ← REAPER /track/4/send/6/pan/str "center"
+end ← REAPER /track/4/send/6/pan 0.5
+end ← REAPER /track/4/send/7/name "Send 7"
+end ← REAPER /track/4/send/7/volume/str "-inf dB"
+end ← REAPER /track/4/send/7/volume 0.00251387
+end ← REAPER /track/4/send/7/pan/str "center"
+end ← REAPER /track/4/send/7/pan 0.5
+end ← REAPER /track/4/send/8/name "Send 8"
+end ← REAPER /track/4/send/8/volume/str "-inf dB"
+end ← REAPER /track/4/send/8/volume 0.00251387
+end ← REAPER /track/4/send/8/pan/str "center"
+end ← REAPER /track/4/send/8/pan 0.5
+end ← REAPER /track/4/send/9/name "Send 9"
+end ← REAPER /track/4/send/9/volume/str "-inf dB"
+end ← REAPER /track/4/send/9/volume 0.00251387
+end ← REAPER /track/4/send/9/pan/str "center"
+end ← REAPER /track/4/send/9/pan 0.5
+end ← REAPER /track/4/send/10/name "Send 10"
+end ← REAPER /track/4/send/10/volume/str "-inf dB"
+end ← REAPER /track/4/send/10/volume 0.00251387
+end ← REAPER /track/4/send/10/pan/str "center"
+end ← REAPER /track/4/send/10/pan 0.5
+end ← REAPER /track/4/send/11/name "Send 11"
+end ← REAPER /track/4/send/11/volume/str "-inf dB"
+end ← REAPER /track/4/send/11/volume 0.00251387
+end ← REAPER /track/4/send/11/pan/str "center"
+end ← REAPER /track/4/send/11/pan 0.5
+end ← REAPER /track/4/send/12/name "Send 12"
+end ← REAPER /track/4/send/12/volume/str "-inf dB"
+end ← REAPER /track/4/send/12/volume 0.00251387
+end ← REAPER /track/4/send/12/pan/str "center"
+end ← REAPER /track/4/send/12/pan 0.5
+end ← REAPER /track/4/send/13/name "Send 13"
+end ← REAPER /track/4/send/13/volume/str "-inf dB"
+end ← REAPER /track/4/send/13/volume 0.00251387
+end ← REAPER /track/4/send/13/pan/str "center"
+end ← REAPER /track/4/send/13/pan 0.5
+end ← REAPER /track/4/send/14/name "Send 14"
+end ← REAPER /track/4/send/14/volume/str "-inf dB"
+end ← REAPER /track/4/send/14/volume 0.00251387
+end ← REAPER /track/4/send/14/pan/str "center"
+end ← REAPER /track/4/send/14/pan 0.5
+end ← REAPER /track/4/send/15/name "Send 15"
+end ← REAPER /track/4/send/15/volume/str "-inf dB"
+end ← REAPER /track/4/send/15/volume 0.00251387
+end ← REAPER /track/4/send/15/pan/str "center"
+end ← REAPER /track/4/send/15/pan 0.5
+end ← REAPER /track/4/send/16/name "Send 16"
+end ← REAPER /track/4/send/16/volume/str "-inf dB"
+end ← REAPER /track/4/send/16/volume 0.00251387
+end ← REAPER /track/4/send/16/pan/str "center"
+end ← REAPER /track/4/send/16/pan 0.5
+end ← REAPER /track/4/recv/1/name "KK Keys"
+end ← REAPER /track/4/recv/1/volume/str "+12.0dB"
+end ← REAPER /track/4/recv/1/volume 1
+end ← REAPER /track/4/recv/1/pan/str "center"
+end ← REAPER /track/4/recv/1/pan 0.5
+end ← REAPER /track/4/recv/2/name "Recv 2"
+end ← REAPER /track/4/recv/2/volume/str "-inf dB"
+end ← REAPER /track/4/recv/2/volume 0.00251387
+end ← REAPER /track/4/recv/2/pan/str "center"
+end ← REAPER /track/4/recv/2/pan 0.5
+end ← REAPER /track/4/recv/3/name "Recv 3"
+end ← REAPER /track/4/recv/3/volume/str "-inf dB"
+end ← REAPER /track/4/recv/3/volume 0.00251387
+end ← REAPER /track/4/recv/3/pan/str "center"
+end ← REAPER /track/4/recv/3/pan 0.5
+end ← REAPER /track/4/recv/4/name "Recv 4"
+end ← REAPER /track/4/recv/4/volume/str "-inf dB"
+end ← REAPER /track/4/recv/4/volume 0.00251387
+end ← REAPER /track/4/recv/4/pan/str "center"
+end ← REAPER /track/4/recv/4/pan 0.5
+end ← REAPER /track/4/fx/1/name "bx_console SSL 4000 G (Plugin Alliance)"
+end ← REAPER /track/4/fx/1/number/str "1"
+end ← REAPER /track/4/fx/1/preset ""
+end ← REAPER /track/4/fx/1/bypass 1
+end ← REAPER /track/4/fx/1/openui 0
+end ← REAPER /track/4/fx/1/fxparam/1/value 1
+end ← REAPER /track/4/fx/1/fxparam/2/value 0
+end ← REAPER /track/4/fx/1/fxparam/3/value 0
+end ← REAPER /track/4/fx/1/fxparam/4/value 0.5
+end ← REAPER /track/4/fx/1/fxparam/5/value 0.5
+end ← REAPER /track/4/fx/1/fxparam/6/value 0.6
+end ← REAPER /track/4/fx/1/fxparam/7/value 0
+end ← REAPER /track/4/fx/1/fxparam/8/value 0.75
+end ← REAPER /track/4/fxinst/name ""
+end ← REAPER /track/4/fxinst/preset ""
+end ← REAPER /track/4/fxinst/bypass 0
+end ← REAPER /track/4/fxinst/openui 0
+end ← REAPER /track/4/fx/2/name "EchoBoy Jr (Soundtoys)"
+end ← REAPER /track/4/fx/2/number/str "2"
+end ← REAPER /track/4/fx/2/preset ""
+end ← REAPER /track/4/fx/2/bypass 1
+end ← REAPER /track/4/fx/2/openui 0
+end ← REAPER /track/4/fx/2/fxparam/1/value 0
+end ← REAPER /track/4/fx/2/fxparam/2/value 0.5
+end ← REAPER /track/4/fx/2/fxparam/3/value 0.5
+end ← REAPER /track/4/fx/2/fxparam/4/value 0.4
+end ← REAPER /track/4/fx/2/fxparam/5/value 0.5
+end ← REAPER /track/4/fx/2/fxparam/6/value 0
+end ← REAPER /track/4/fx/2/fxparam/7/value 1
+end ← REAPER /track/4/fx/2/fxparam/8/value 0.25
+end ← REAPER /track/4/fx/3/name ""
+end ← REAPER /track/4/fx/3/number/str ""
+end ← REAPER /track/4/fx/3/preset ""
+end ← REAPER /track/4/fx/3/bypass 0
+end ← REAPER /track/4/fx/3/openui 0
+end ← REAPER /track/4/fx/3/fxparam/1/value 0
+end ← REAPER /track/4/fx/3/fxparam/2/value 0
+end ← REAPER /track/4/fx/3/fxparam/3/value 0
+end ← REAPER /track/4/fx/3/fxparam/4/value 0
+end ← REAPER /track/4/fx/3/fxparam/5/value 0
+end ← REAPER /track/4/fx/3/fxparam/6/value 0
+end ← REAPER /track/4/fx/3/fxparam/7/value 0
+end ← REAPER /track/4/fx/3/fxparam/8/value 0
+end ← REAPER /track/4/fx/4/name ""
+end ← REAPER /track/4/fx/4/number/str ""
+end ← REAPER /track/4/fx/4/preset ""
+end ← REAPER /track/4/fx/4/bypass 0
+end ← REAPER /track/4/fx/4/openui 0
+end ← REAPER /track/4/fx/4/fxparam/1/value 0
+end ← REAPER /track/4/fx/4/fxparam/2/value 0
+end ← REAPER /track/4/fx/4/fxparam/3/value 0
+end ← REAPER /track/4/fx/4/fxparam/4/value 0
+end ← REAPER /track/4/fx/4/fxparam/5/value 0
+end ← REAPER /track/4/fx/4/fxparam/6/value 0
+end ← REAPER /track/4/fx/4/fxparam/7/value 0
+end ← REAPER /track/4/fx/4/fxparam/8/value 0
+end ← REAPER /track/4/fx/5/name ""
+end ← REAPER /track/4/fx/5/number/str ""
+end ← REAPER /track/4/fx/5/preset ""
+end ← REAPER /track/4/fx/5/bypass 0
+end ← REAPER /track/4/fx/5/openui 0
+end ← REAPER /track/4/fx/5/fxparam/1/value 0
+end ← REAPER /track/4/fx/5/fxparam/2/value 0
+end ← REAPER /track/4/fx/5/fxparam/3/value 0
+end ← REAPER /track/4/fx/5/fxparam/4/value 0
+end ← REAPER /track/4/fx/5/fxparam/5/value 0
+end ← REAPER /track/4/fx/5/fxparam/6/value 0
+end ← REAPER /track/4/fx/5/fxparam/7/value 0
+end ← REAPER /track/4/fx/5/fxparam/8/value 0
+end ← REAPER /track/4/fx/6/name ""
+end ← REAPER /track/4/fx/6/number/str ""
+end ← REAPER /track/4/fx/6/preset ""
+end ← REAPER /track/4/fx/6/bypass 0
+end ← REAPER /track/4/fx/6/openui 0
+end ← REAPER /track/4/fx/6/fxparam/1/value 0
+end ← REAPER /track/4/fx/6/fxparam/2/value 0
+end ← REAPER /track/4/fx/6/fxparam/3/value 0
+end ← REAPER /track/4/fx/6/fxparam/4/value 0
+end ← REAPER /track/4/fx/6/fxparam/5/value 0
+end ← REAPER /track/4/fx/6/fxparam/6/value 0
+end ← REAPER /track/4/fx/6/fxparam/7/value 0
+end ← REAPER /track/4/fx/6/fxparam/8/value 0
+end ← REAPER /track/4/fx/7/name ""
+end ← REAPER /track/4/fx/7/number/str ""
+end ← REAPER /track/4/fx/7/preset ""
+end ← REAPER /track/4/fx/7/bypass 0
+end ← REAPER /track/4/fx/7/openui 0
+end ← REAPER /track/4/fx/7/fxparam/1/value 0
+end ← REAPER /track/4/fx/7/fxparam/2/value 0
+end ← REAPER /track/4/fx/7/fxparam/3/value 0
+end ← REAPER /track/4/fx/7/fxparam/4/value 0
+end ← REAPER /track/4/fx/7/fxparam/5/value 0
+end ← REAPER /track/4/fx/7/fxparam/6/value 0
+end ← REAPER /track/4/fx/7/fxparam/7/value 0
+end ← REAPER /track/4/fx/7/fxparam/8/value 0
+end ← REAPER /track/4/fx/8/name ""
+end ← REAPER /track/4/fx/8/number/str ""
+end ← REAPER /track/4/fx/8/preset ""
+end ← REAPER /track/4/fx/8/bypass 0
+end ← REAPER /track/4/fx/8/openui 0
+end ← REAPER /track/4/fx/8/fxparam/1/value 0
+end ← REAPER /track/4/fx/8/fxparam/2/value 0
+end ← REAPER /track/4/fx/8/fxparam/3/value 0
+end ← REAPER /track/4/fx/8/fxparam/4/value 0
+end ← REAPER /track/4/fx/8/fxparam/5/value 0
+end ← REAPER /track/4/fx/8/fxparam/6/value 0
+end ← REAPER /track/4/fx/8/fxparam/7/value 0
+end ← REAPER /track/4/fx/8/fxparam/8/value 0
+end ← REAPER /track/5/name "Track 5"
+end ← REAPER /track/5/number/str "5"
+end ← REAPER /track/5/select 0
+end ← REAPER /track/5/volume/db -150
+end ← REAPER /track/5/volume/str "-inf dB"
+end ← REAPER /track/5/volume 0.00251387
+end ← REAPER /track/5/panmode "Balance"
+end ← REAPER /track/5/pan2 0.5
+end ← REAPER /track/5/pan2/str "0W"
+end ← REAPER /track/5/pan 0.5
+end ← REAPER /track/5/pan/str "C"
+end ← REAPER /track/5/mute 0
+end ← REAPER /track/5/mute/toggle 0
+end ← REAPER /track/5/solo 0
+end ← REAPER /track/5/solo/toggle 0
+end ← REAPER /track/5/recarm 0
+end ← REAPER /track/5/recarm/toggle 0
+end ← REAPER /track/5/monitor 0
+end ← REAPER /track/5/autotrim 1
+end ← REAPER /track/5/autoread 0
+end ← REAPER /track/5/autolatch 0
+end ← REAPER /track/5/autotouch 0
+end ← REAPER /track/5/autowrite 0
+end ← REAPER /track/5/send/1/name "Send 1"
+end ← REAPER /track/5/send/1/volume/str "-inf dB"
+end ← REAPER /track/5/send/1/volume 0.00251387
+end ← REAPER /track/5/send/1/pan/str "center"
+end ← REAPER /track/5/send/1/pan 0.5
+end ← REAPER /track/5/send/2/name "Send 2"
+end ← REAPER /track/5/send/2/volume/str "-inf dB"
+end ← REAPER /track/5/send/2/volume 0.00251387
+end ← REAPER /track/5/send/2/pan/str "center"
+end ← REAPER /track/5/send/2/pan 0.5
+end ← REAPER /track/5/send/3/name "Send 3"
+end ← REAPER /track/5/send/3/volume/str "-inf dB"
+end ← REAPER /track/5/send/3/volume 0.00251387
+end ← REAPER /track/5/send/3/pan/str "center"
+end ← REAPER /track/5/send/3/pan 0.5
+end ← REAPER /track/5/send/4/name "Send 4"
+end ← REAPER /track/5/send/4/volume/str "-inf dB"
+end ← REAPER /track/5/send/4/volume 0.00251387
+end ← REAPER /track/5/send/4/pan/str "center"
+end ← REAPER /track/5/send/4/pan 0.5
+end ← REAPER /track/5/send/5/name "Send 5"
+end ← REAPER /track/5/send/5/volume/str "-inf dB"
+end ← REAPER /track/5/send/5/volume 0.00251387
+end ← REAPER /track/5/send/5/pan/str "center"
+end ← REAPER /track/5/send/5/pan 0.5
+end ← REAPER /track/5/send/6/name "Send 6"
+end ← REAPER /track/5/send/6/volume/str "-inf dB"
+end ← REAPER /track/5/send/6/volume 0.00251387
+end ← REAPER /track/5/send/6/pan/str "center"
+end ← REAPER /track/5/send/6/pan 0.5
+end ← REAPER /track/5/send/7/name "Send 7"
+end ← REAPER /track/5/send/7/volume/str "-inf dB"
+end ← REAPER /track/5/send/7/volume 0.00251387
+end ← REAPER /track/5/send/7/pan/str "center"
+end ← REAPER /track/5/send/7/pan 0.5
+end ← REAPER /track/5/send/8/name "Send 8"
+end ← REAPER /track/5/send/8/volume/str "-inf dB"
+end ← REAPER /track/5/send/8/volume 0.00251387
+end ← REAPER /track/5/send/8/pan/str "center"
+end ← REAPER /track/5/send/8/pan 0.5
+end ← REAPER /track/5/send/9/name "Send 9"
+end ← REAPER /track/5/send/9/volume/str "-inf dB"
+end ← REAPER /track/5/send/9/volume 0.00251387
+end ← REAPER /track/5/send/9/pan/str "center"
+end ← REAPER /track/5/send/9/pan 0.5
+end ← REAPER /track/5/send/10/name "Send 10"
+end ← REAPER /track/5/send/10/volume/str "-inf dB"
+end ← REAPER /track/5/send/10/volume 0.00251387
+end ← REAPER /track/5/send/10/pan/str "center"
+end ← REAPER /track/5/send/10/pan 0.5
+end ← REAPER /track/5/send/11/name "Send 11"
+end ← REAPER /track/5/send/11/volume/str "-inf dB"
+end ← REAPER /track/5/send/11/volume 0.00251387
+end ← REAPER /track/5/send/11/pan/str "center"
+end ← REAPER /track/5/send/11/pan 0.5
+end ← REAPER /track/5/send/12/name "Send 12"
+end ← REAPER /track/5/send/12/volume/str "-inf dB"
+end ← REAPER /track/5/send/12/volume 0.00251387
+end ← REAPER /track/5/send/12/pan/str "center"
+end ← REAPER /track/5/send/12/pan 0.5
+end ← REAPER /track/5/send/13/name "Send 13"
+end ← REAPER /track/5/send/13/volume/str "-inf dB"
+end ← REAPER /track/5/send/13/volume 0.00251387
+end ← REAPER /track/5/send/13/pan/str "center"
+end ← REAPER /track/5/send/13/pan 0.5
+end ← REAPER /track/5/send/14/name "Send 14"
+end ← REAPER /track/5/send/14/volume/str "-inf dB"
+end ← REAPER /track/5/send/14/volume 0.00251387
+end ← REAPER /track/5/send/14/pan/str "center"
+end ← REAPER /track/5/send/14/pan 0.5
+end ← REAPER /track/5/send/15/name "Send 15"
+end ← REAPER /track/5/send/15/volume/str "-inf dB"
+end ← REAPER /track/5/send/15/volume 0.00251387
+end ← REAPER /track/5/send/15/pan/str "center"
+end ← REAPER /track/5/send/15/pan 0.5
+end ← REAPER /track/5/send/16/name "Send 16"
+end ← REAPER /track/5/send/16/volume/str "-inf dB"
+end ← REAPER /track/5/send/16/volume 0.00251387
+end ← REAPER /track/5/send/16/pan/str "center"
+end ← REAPER /track/5/send/16/pan 0.5
+end ← REAPER /track/5/recv/1/name "Recv 1"
+end ← REAPER /track/5/recv/1/volume/str "-inf dB"
+end ← REAPER /track/5/recv/1/volume 0.00251387
+end ← REAPER /track/5/recv/1/pan/str "center"
+end ← REAPER /track/5/recv/1/pan 0.5
+end ← REAPER /track/5/recv/2/name "Recv 2"
+end ← REAPER /track/5/recv/2/volume/str "-inf dB"
+end ← REAPER /track/5/recv/2/volume 0.00251387
+end ← REAPER /track/5/recv/2/pan/str "center"
+end ← REAPER /track/5/recv/2/pan 0.5
+end ← REAPER /track/5/recv/3/name "Recv 3"
+end ← REAPER /track/5/recv/3/volume/str "-inf dB"
+end ← REAPER /track/5/recv/3/volume 0.00251387
+end ← REAPER /track/5/recv/3/pan/str "center"
+end ← REAPER /track/5/recv/3/pan 0.5
+end ← REAPER /track/5/recv/4/name "Recv 4"
+end ← REAPER /track/5/recv/4/volume/str "-inf dB"
+end ← REAPER /track/5/recv/4/volume 0.00251387
+end ← REAPER /track/5/recv/4/pan/str "center"
+end ← REAPER /track/5/recv/4/pan 0.5
+end ← REAPER /track/5/fx/1/name ""
+end ← REAPER /track/5/fx/1/number/str ""
+end ← REAPER /track/5/fx/1/preset ""
+end ← REAPER /track/5/fx/1/bypass 0
+end ← REAPER /track/5/fx/1/openui 0
+end ← REAPER /track/5/fx/1/fxparam/1/value 0
+end ← REAPER /track/5/fx/1/fxparam/2/value 0
+end ← REAPER /track/5/fx/1/fxparam/3/value 0
+end ← REAPER /track/5/fx/1/fxparam/4/value 0
+end ← REAPER /track/5/fx/1/fxparam/5/value 0
+end ← REAPER /track/5/fx/1/fxparam/6/value 0
+end ← REAPER /track/5/fx/1/fxparam/7/value 0
+end ← REAPER /track/5/fx/1/fxparam/8/value 0
+end ← REAPER /track/5/fxinst/name ""
+end ← REAPER /track/5/fxinst/preset ""
+end ← REAPER /track/5/fxinst/bypass 0
+end ← REAPER /track/5/fxinst/openui 0
+end ← REAPER /track/5/fx/2/name ""
+end ← REAPER /track/5/fx/2/number/str ""
+end ← REAPER /track/5/fx/2/preset ""
+end ← REAPER /track/5/fx/2/bypass 0
+end ← REAPER /track/5/fx/2/openui 0
+end ← REAPER /track/5/fx/2/fxparam/1/value 0
+end ← REAPER /track/5/fx/2/fxparam/2/value 0
+end ← REAPER /track/5/fx/2/fxparam/3/value 0
+end ← REAPER /track/5/fx/2/fxparam/4/value 0
+end ← REAPER /track/5/fx/2/fxparam/5/value 0
+end ← REAPER /track/5/fx/2/fxparam/6/value 0
+end ← REAPER /track/5/fx/2/fxparam/7/value 0
+end ← REAPER /track/5/fx/2/fxparam/8/value 0
+end ← REAPER /track/5/fx/3/name ""
+end ← REAPER /track/5/fx/3/number/str ""
+end ← REAPER /track/5/fx/3/preset ""
+end ← REAPER /track/5/fx/3/bypass 0
+end ← REAPER /track/5/fx/3/openui 0
+end ← REAPER /track/5/fx/3/fxparam/1/value 0
+end ← REAPER /track/5/fx/3/fxparam/2/value 0
+end ← REAPER /track/5/fx/3/fxparam/3/value 0
+end ← REAPER /track/5/fx/3/fxparam/4/value 0
+end ← REAPER /track/5/fx/3/fxparam/5/value 0
+end ← REAPER /track/5/fx/3/fxparam/6/value 0
+end ← REAPER /track/5/fx/3/fxparam/7/value 0
+end ← REAPER /track/5/fx/3/fxparam/8/value 0
+end ← REAPER /track/5/fx/4/name ""
+end ← REAPER /track/5/fx/4/number/str ""
+end ← REAPER /track/5/fx/4/preset ""
+end ← REAPER /track/5/fx/4/bypass 0
+end ← REAPER /track/5/fx/4/openui 0
+end ← REAPER /track/5/fx/4/fxparam/1/value 0
+end ← REAPER /track/5/fx/4/fxparam/2/value 0
+end ← REAPER /track/5/fx/4/fxparam/3/value 0
+end ← REAPER /track/5/fx/4/fxparam/4/value 0
+end ← REAPER /track/5/fx/4/fxparam/5/value 0
+end ← REAPER /track/5/fx/4/fxparam/6/value 0
+end ← REAPER /track/5/fx/4/fxparam/7/value 0
+end ← REAPER /track/5/fx/4/fxparam/8/value 0
+end ← REAPER /track/5/fx/5/name ""
+end ← REAPER /track/5/fx/5/number/str ""
+end ← REAPER /track/5/fx/5/preset ""
+end ← REAPER /track/5/fx/5/bypass 0
+end ← REAPER /track/5/fx/5/openui 0
+end ← REAPER /track/5/fx/5/fxparam/1/value 0
+end ← REAPER /track/5/fx/5/fxparam/2/value 0
+end ← REAPER /track/5/fx/5/fxparam/3/value 0
+end ← REAPER /track/5/fx/5/fxparam/4/value 0
+end ← REAPER /track/5/fx/5/fxparam/5/value 0
+end ← REAPER /track/5/fx/5/fxparam/6/value 0
+end ← REAPER /track/5/fx/5/fxparam/7/value 0
+end ← REAPER /track/5/fx/5/fxparam/8/value 0
+end ← REAPER /track/5/fx/6/name ""
+end ← REAPER /track/5/fx/6/number/str ""
+end ← REAPER /track/5/fx/6/preset ""
+end ← REAPER /track/5/fx/6/bypass 0
+end ← REAPER /track/5/fx/6/openui 0
+end ← REAPER /track/5/fx/6/fxparam/1/value 0
+end ← REAPER /track/5/fx/6/fxparam/2/value 0
+end ← REAPER /track/5/fx/6/fxparam/3/value 0
+end ← REAPER /track/5/fx/6/fxparam/4/value 0
+end ← REAPER /track/5/fx/6/fxparam/5/value 0
+end ← REAPER /track/5/fx/6/fxparam/6/value 0
+end ← REAPER /track/5/fx/6/fxparam/7/value 0
+end ← REAPER /track/5/fx/6/fxparam/8/value 0
+end ← REAPER /track/5/fx/7/name ""
+end ← REAPER /track/5/fx/7/number/str ""
+end ← REAPER /track/5/fx/7/preset ""
+end ← REAPER /track/5/fx/7/bypass 0
+end ← REAPER /track/5/fx/7/openui 0
+end ← REAPER /track/5/fx/7/fxparam/1/value 0
+end ← REAPER /track/5/fx/7/fxparam/2/value 0
+end ← REAPER /track/5/fx/7/fxparam/3/value 0
+end ← REAPER /track/5/fx/7/fxparam/4/value 0
+end ← REAPER /track/5/fx/7/fxparam/5/value 0
+end ← REAPER /track/5/fx/7/fxparam/6/value 0
+end ← REAPER /track/5/fx/7/fxparam/7/value 0
+end ← REAPER /track/5/fx/7/fxparam/8/value 0
+end ← REAPER /track/5/fx/8/name ""
+end ← REAPER /track/5/fx/8/number/str ""
+end ← REAPER /track/5/fx/8/preset ""
+end ← REAPER /track/5/fx/8/bypass 0
+end ← REAPER /track/5/fx/8/openui 0
+end ← REAPER /track/5/fx/8/fxparam/1/value 0
+end ← REAPER /track/5/fx/8/fxparam/2/value 0
+end ← REAPER /track/5/fx/8/fxparam/3/value 0
+end ← REAPER /track/5/fx/8/fxparam/4/value 0
+end ← REAPER /track/5/fx/8/fxparam/5/value 0
+end ← REAPER /track/5/fx/8/fxparam/6/value 0
+end ← REAPER /track/5/fx/8/fxparam/7/value 0
+end ← REAPER /track/5/fx/8/fxparam/8/value 0
+end ← REAPER /track/6/name "Track 6"
+end ← REAPER /track/6/number/str "6"
+end ← REAPER /track/6/select 0
+end ← REAPER /track/6/volume/db -150
+end ← REAPER /track/6/volume/str "-inf dB"
+end ← REAPER /track/6/volume 0.00251387
+end ← REAPER /track/6/panmode "Balance"
+end ← REAPER /track/6/pan2 0.5
+end ← REAPER /track/6/pan2/str "0W"
+end ← REAPER /track/6/pan 0.5
+end ← REAPER /track/6/pan/str "C"
+end ← REAPER /track/6/mute 0
+end ← REAPER /track/6/mute/toggle 0
+end ← REAPER /track/6/solo 0
+end ← REAPER /track/6/solo/toggle 0
+end ← REAPER /track/6/recarm 0
+end ← REAPER /track/6/recarm/toggle 0
+end ← REAPER /track/6/monitor 0
+end ← REAPER /track/6/autotrim 1
+end ← REAPER /track/6/autoread 0
+end ← REAPER /track/6/autolatch 0
+end ← REAPER /track/6/autotouch 0
+end ← REAPER /track/6/autowrite 0
+end ← REAPER /track/6/send/1/name "Send 1"
+end ← REAPER /track/6/send/1/volume/str "-inf dB"
+end ← REAPER /track/6/send/1/volume 0.00251387
+end ← REAPER /track/6/send/1/pan/str "center"
+end ← REAPER /track/6/send/1/pan 0.5
+end ← REAPER /track/6/send/2/name "Send 2"
+end ← REAPER /track/6/send/2/volume/str "-inf dB"
+end ← REAPER /track/6/send/2/volume 0.00251387
+end ← REAPER /track/6/send/2/pan/str "center"
+end ← REAPER /track/6/send/2/pan 0.5
+end ← REAPER /track/6/send/3/name "Send 3"
+end ← REAPER /track/6/send/3/volume/str "-inf dB"
+end ← REAPER /track/6/send/3/volume 0.00251387
+end ← REAPER /track/6/send/3/pan/str "center"
+end ← REAPER /track/6/send/3/pan 0.5
+end ← REAPER /track/6/send/4/name "Send 4"
+end ← REAPER /track/6/send/4/volume/str "-inf dB"
+end ← REAPER /track/6/send/4/volume 0.00251387
+end ← REAPER /track/6/send/4/pan/str "center"
+end ← REAPER /track/6/send/4/pan 0.5
+end ← REAPER /track/6/send/5/name "Send 5"
+end ← REAPER /track/6/send/5/volume/str "-inf dB"
+end ← REAPER /track/6/send/5/volume 0.00251387
+end ← REAPER /track/6/send/5/pan/str "center"
+end ← REAPER /track/6/send/5/pan 0.5
+end ← REAPER /track/6/send/6/name "Send 6"
+end ← REAPER /track/6/send/6/volume/str "-inf dB"
+end ← REAPER /track/6/send/6/volume 0.00251387
+end ← REAPER /track/6/send/6/pan/str "center"
+end ← REAPER /track/6/send/6/pan 0.5
+end ← REAPER /track/6/send/7/name "Send 7"
+end ← REAPER /track/6/send/7/volume/str "-inf dB"
+end ← REAPER /track/6/send/7/volume 0.00251387
+end ← REAPER /track/6/send/7/pan/str "center"
+end ← REAPER /track/6/send/7/pan 0.5
+end ← REAPER /track/6/send/8/name "Send 8"
+end ← REAPER /track/6/send/8/volume/str "-inf dB"
+end ← REAPER /track/6/send/8/volume 0.00251387
+end ← REAPER /track/6/send/8/pan/str "center"
+end ← REAPER /track/6/send/8/pan 0.5
+end ← REAPER /track/6/send/9/name "Send 9"
+end ← REAPER /track/6/send/9/volume/str "-inf dB"
+end ← REAPER /track/6/send/9/volume 0.00251387
+end ← REAPER /track/6/send/9/pan/str "center"
+end ← REAPER /track/6/send/9/pan 0.5
+end ← REAPER /track/6/send/10/name "Send 10"
+end ← REAPER /track/6/send/10/volume/str "-inf dB"
+end ← REAPER /track/6/send/10/volume 0.00251387
+end ← REAPER /track/6/send/10/pan/str "center"
+end ← REAPER /track/6/send/10/pan 0.5
+end ← REAPER /track/6/send/11/name "Send 11"
+end ← REAPER /track/6/send/11/volume/str "-inf dB"
+end ← REAPER /track/6/send/11/volume 0.00251387
+end ← REAPER /track/6/send/11/pan/str "center"
+end ← REAPER /track/6/send/11/pan 0.5
+end ← REAPER /track/6/send/12/name "Send 12"
+end ← REAPER /track/6/send/12/volume/str "-inf dB"
+end ← REAPER /track/6/send/12/volume 0.00251387
+end ← REAPER /track/6/send/12/pan/str "center"
+end ← REAPER /track/6/send/12/pan 0.5
+end ← REAPER /track/6/send/13/name "Send 13"
+end ← REAPER /track/6/send/13/volume/str "-inf dB"
+end ← REAPER /track/6/send/13/volume 0.00251387
+end ← REAPER /track/6/send/13/pan/str "center"
+end ← REAPER /track/6/send/13/pan 0.5
+end ← REAPER /track/6/send/14/name "Send 14"
+end ← REAPER /track/6/send/14/volume/str "-inf dB"
+end ← REAPER /track/6/send/14/volume 0.00251387
+end ← REAPER /track/6/send/14/pan/str "center"
+end ← REAPER /track/6/send/14/pan 0.5
+end ← REAPER /track/6/send/15/name "Send 15"
+end ← REAPER /track/6/send/15/volume/str "-inf dB"
+end ← REAPER /track/6/send/15/volume 0.00251387
+end ← REAPER /track/6/send/15/pan/str "center"
+end ← REAPER /track/6/send/15/pan 0.5
+end ← REAPER /track/6/send/16/name "Send 16"
+end ← REAPER /track/6/send/16/volume/str "-inf dB"
+end ← REAPER /track/6/send/16/volume 0.00251387
+end ← REAPER /track/6/send/16/pan/str "center"
+end ← REAPER /track/6/send/16/pan 0.5
+end ← REAPER /track/6/recv/1/name "Recv 1"
+end ← REAPER /track/6/recv/1/volume/str "-inf dB"
+end ← REAPER /track/6/recv/1/volume 0.00251387
+end ← REAPER /track/6/recv/1/pan/str "center"
+end ← REAPER /track/6/recv/1/pan 0.5
+end ← REAPER /track/6/recv/2/name "Recv 2"
+end ← REAPER /track/6/recv/2/volume/str "-inf dB"
+end ← REAPER /track/6/recv/2/volume 0.00251387
+end ← REAPER /track/6/recv/2/pan/str "center"
+end ← REAPER /track/6/recv/2/pan 0.5
+end ← REAPER /track/6/recv/3/name "Recv 3"
+end ← REAPER /track/6/recv/3/volume/str "-inf dB"
+end ← REAPER /track/6/recv/3/volume 0.00251387
+end ← REAPER /track/6/recv/3/pan/str "center"
+end ← REAPER /track/6/recv/3/pan 0.5
+end ← REAPER /track/6/recv/4/name "Recv 4"
+end ← REAPER /track/6/recv/4/volume/str "-inf dB"
+end ← REAPER /track/6/recv/4/volume 0.00251387
+end ← REAPER /track/6/recv/4/pan/str "center"
+end ← REAPER /track/6/recv/4/pan 0.5
+end ← REAPER /track/6/fx/1/name ""
+end ← REAPER /track/6/fx/1/number/str ""
+end ← REAPER /track/6/fx/1/preset ""
+end ← REAPER /track/6/fx/1/bypass 0
+end ← REAPER /track/6/fx/1/openui 0
+end ← REAPER /track/6/fx/1/fxparam/1/value 0
+end ← REAPER /track/6/fx/1/fxparam/2/value 0
+end ← REAPER /track/6/fx/1/fxparam/3/value 0
+end ← REAPER /track/6/fx/1/fxparam/4/value 0
+end ← REAPER /track/6/fx/1/fxparam/5/value 0
+end ← REAPER /track/6/fx/1/fxparam/6/value 0
+end ← REAPER /track/6/fx/1/fxparam/7/value 0
+end ← REAPER /track/6/fx/1/fxparam/8/value 0
+end ← REAPER /track/6/fxinst/name ""
+end ← REAPER /track/6/fxinst/preset ""
+end ← REAPER /track/6/fxinst/bypass 0
+end ← REAPER /track/6/fxinst/openui 0
+end ← REAPER /track/6/fx/2/name ""
+end ← REAPER /track/6/fx/2/number/str ""
+end ← REAPER /track/6/fx/2/preset ""
+end ← REAPER /track/6/fx/2/bypass 0
+end ← REAPER /track/6/fx/2/openui 0
+end ← REAPER /track/6/fx/2/fxparam/1/value 0
+end ← REAPER /track/6/fx/2/fxparam/2/value 0
+end ← REAPER /track/6/fx/2/fxparam/3/value 0
+end ← REAPER /track/6/fx/2/fxparam/4/value 0
+end ← REAPER /track/6/fx/2/fxparam/5/value 0
+end ← REAPER /track/6/fx/2/fxparam/6/value 0
+end ← REAPER /track/6/fx/2/fxparam/7/value 0
+end ← REAPER /track/6/fx/2/fxparam/8/value 0
+end ← REAPER /track/6/fx/3/name ""
+end ← REAPER /track/6/fx/3/number/str ""
+end ← REAPER /track/6/fx/3/preset ""
+end ← REAPER /track/6/fx/3/bypass 0
+end ← REAPER /track/6/fx/3/openui 0
+end ← REAPER /track/6/fx/3/fxparam/1/value 0
+end ← REAPER /track/6/fx/3/fxparam/2/value 0
+end ← REAPER /track/6/fx/3/fxparam/3/value 0
+end ← REAPER /track/6/fx/3/fxparam/4/value 0
+end ← REAPER /track/6/fx/3/fxparam/5/value 0
+end ← REAPER /track/6/fx/3/fxparam/6/value 0
+end ← REAPER /track/6/fx/3/fxparam/7/value 0
+end ← REAPER /track/6/fx/3/fxparam/8/value 0
+end ← REAPER /track/6/fx/4/name ""
+end ← REAPER /track/6/fx/4/number/str ""
+end ← REAPER /track/6/fx/4/preset ""
+end ← REAPER /track/6/fx/4/bypass 0
+end ← REAPER /track/6/fx/4/openui 0
+end ← REAPER /track/6/fx/4/fxparam/1/value 0
+end ← REAPER /track/6/fx/4/fxparam/2/value 0
+end ← REAPER /track/6/fx/4/fxparam/3/value 0
+end ← REAPER /track/6/fx/4/fxparam/4/value 0
+end ← REAPER /track/6/fx/4/fxparam/5/value 0
+end ← REAPER /track/6/fx/4/fxparam/6/value 0
+end ← REAPER /track/6/fx/4/fxparam/7/value 0
+end ← REAPER /track/6/fx/4/fxparam/8/value 0
+end ← REAPER /track/6/fx/5/name ""
+end ← REAPER /track/6/fx/5/number/str ""
+end ← REAPER /track/6/fx/5/preset ""
+end ← REAPER /track/6/fx/5/bypass 0
+end ← REAPER /track/6/fx/5/openui 0
+end ← REAPER /track/6/fx/5/fxparam/1/value 0
+end ← REAPER /track/6/fx/5/fxparam/2/value 0
+end ← REAPER /track/6/fx/5/fxparam/3/value 0
+end ← REAPER /track/6/fx/5/fxparam/4/value 0
+end ← REAPER /track/6/fx/5/fxparam/5/value 0
+end ← REAPER /track/6/fx/5/fxparam/6/value 0
+end ← REAPER /track/6/fx/5/fxparam/7/value 0
+end ← REAPER /track/6/fx/5/fxparam/8/value 0
+end ← REAPER /track/6/fx/6/name ""
+end ← REAPER /track/6/fx/6/number/str ""
+end ← REAPER /track/6/fx/6/preset ""
+end ← REAPER /track/6/fx/6/bypass 0
+end ← REAPER /track/6/fx/6/openui 0
+end ← REAPER /track/6/fx/6/fxparam/1/value 0
+end ← REAPER /track/6/fx/6/fxparam/2/value 0
+end ← REAPER /track/6/fx/6/fxparam/3/value 0
+end ← REAPER /track/6/fx/6/fxparam/4/value 0
+end ← REAPER /track/6/fx/6/fxparam/5/value 0
+end ← REAPER /track/6/fx/6/fxparam/6/value 0
+end ← REAPER /track/6/fx/6/fxparam/7/value 0
+end ← REAPER /track/6/fx/6/fxparam/8/value 0
+end ← REAPER /track/6/fx/7/name ""
+end ← REAPER /track/6/fx/7/number/str ""
+end ← REAPER /track/6/fx/7/preset ""
+end ← REAPER /track/6/fx/7/bypass 0
+end ← REAPER /track/6/fx/7/openui 0
+end ← REAPER /track/6/fx/7/fxparam/1/value 0
+end ← REAPER /track/6/fx/7/fxparam/2/value 0
+end ← REAPER /track/6/fx/7/fxparam/3/value 0
+end ← REAPER /track/6/fx/7/fxparam/4/value 0
+end ← REAPER /track/6/fx/7/fxparam/5/value 0
+end ← REAPER /track/6/fx/7/fxparam/6/value 0
+end ← REAPER /track/6/fx/7/fxparam/7/value 0
+end ← REAPER /track/6/fx/7/fxparam/8/value 0
+end ← REAPER /track/6/fx/8/name ""
+end ← REAPER /track/6/fx/8/number/str ""
+end ← REAPER /track/6/fx/8/preset ""
+end ← REAPER /track/6/fx/8/bypass 0
+end ← REAPER /track/6/fx/8/openui 0
+end ← REAPER /track/6/fx/8/fxparam/1/value 0
+end ← REAPER /track/6/fx/8/fxparam/2/value 0
+end ← REAPER /track/6/fx/8/fxparam/3/value 0
+end ← REAPER /track/6/fx/8/fxparam/4/value 0
+end ← REAPER /track/6/fx/8/fxparam/5/value 0
+end ← REAPER /track/6/fx/8/fxparam/6/value 0
+end ← REAPER /track/6/fx/8/fxparam/7/value 0
+end ← REAPER /track/6/fx/8/fxparam/8/value 0
+end ← REAPER /track/7/name "Track 7"
+end ← REAPER /track/7/number/str "7"
+end ← REAPER /track/7/select 0
+end ← REAPER /track/7/volume/db -150
+end ← REAPER /track/7/volume/str "-inf dB"
+end ← REAPER /track/7/volume 0.00251387
+end ← REAPER /track/7/panmode "Balance"
+end ← REAPER /track/7/pan2 0.5
+end ← REAPER /track/7/pan2/str "0W"
+end ← REAPER /track/7/pan 0.5
+end ← REAPER /track/7/pan/str "C"
+end ← REAPER /track/7/mute 0
+end ← REAPER /track/7/mute/toggle 0
+end ← REAPER /track/7/solo 0
+end ← REAPER /track/7/solo/toggle 0
+end ← REAPER /track/7/recarm 0
+end ← REAPER /track/7/recarm/toggle 0
+end ← REAPER /track/7/monitor 0
+end ← REAPER /track/7/autotrim 1
+end ← REAPER /track/7/autoread 0
+end ← REAPER /track/7/autolatch 0
+end ← REAPER /track/7/autotouch 0
+end ← REAPER /track/7/autowrite 0
+end ← REAPER /track/7/send/1/name "Send 1"
+end ← REAPER /track/7/send/1/volume/str "-inf dB"
+end ← REAPER /track/7/send/1/volume 0.00251387
+end ← REAPER /track/7/send/1/pan/str "center"
+end ← REAPER /track/7/send/1/pan 0.5
+end ← REAPER /track/7/send/2/name "Send 2"
+end ← REAPER /track/7/send/2/volume/str "-inf dB"
+end ← REAPER /track/7/send/2/volume 0.00251387
+end ← REAPER /track/7/send/2/pan/str "center"
+end ← REAPER /track/7/send/2/pan 0.5
+end ← REAPER /track/7/send/3/name "Send 3"
+end ← REAPER /track/7/send/3/volume/str "-inf dB"
+end ← REAPER /track/7/send/3/volume 0.00251387
+end ← REAPER /track/7/send/3/pan/str "center"
+end ← REAPER /track/7/send/3/pan 0.5
+end ← REAPER /track/7/send/4/name "Send 4"
+end ← REAPER /track/7/send/4/volume/str "-inf dB"
+end ← REAPER /track/7/send/4/volume 0.00251387
+end ← REAPER /track/7/send/4/pan/str "center"
+end ← REAPER /track/7/send/4/pan 0.5
+end ← REAPER /track/7/send/5/name "Send 5"
+end ← REAPER /track/7/send/5/volume/str "-inf dB"
+end ← REAPER /track/7/send/5/volume 0.00251387
+end ← REAPER /track/7/send/5/pan/str "center"
+end ← REAPER /track/7/send/5/pan 0.5
+end ← REAPER /track/7/send/6/name "Send 6"
+end ← REAPER /track/7/send/6/volume/str "-inf dB"
+end ← REAPER /track/7/send/6/volume 0.00251387
+end ← REAPER /track/7/send/6/pan/str "center"
+end ← REAPER /track/7/send/6/pan 0.5
+end ← REAPER /track/7/send/7/name "Send 7"
+end ← REAPER /track/7/send/7/volume/str "-inf dB"
+end ← REAPER /track/7/send/7/volume 0.00251387
+end ← REAPER /track/7/send/7/pan/str "center"
+end ← REAPER /track/7/send/7/pan 0.5
+end ← REAPER /track/7/send/8/name "Send 8"
+end ← REAPER /track/7/send/8/volume/str "-inf dB"
+end ← REAPER /track/7/send/8/volume 0.00251387
+end ← REAPER /track/7/send/8/pan/str "center"
+end ← REAPER /track/7/send/8/pan 0.5
+end ← REAPER /track/7/send/9/name "Send 9"
+end ← REAPER /track/7/send/9/volume/str "-inf dB"
+end ← REAPER /track/7/send/9/volume 0.00251387
+end ← REAPER /track/7/send/9/pan/str "center"
+end ← REAPER /track/7/send/9/pan 0.5
+end ← REAPER /track/7/send/10/name "Send 10"
+end ← REAPER /track/7/send/10/volume/str "-inf dB"
+end ← REAPER /track/7/send/10/volume 0.00251387
+end ← REAPER /track/7/send/10/pan/str "center"
+end ← REAPER /track/7/send/10/pan 0.5
+end ← REAPER /track/7/send/11/name "Send 11"
+end ← REAPER /track/7/send/11/volume/str "-inf dB"
+end ← REAPER /track/7/send/11/volume 0.00251387
+end ← REAPER /track/7/send/11/pan/str "center"
+end ← REAPER /track/7/send/11/pan 0.5
+end ← REAPER /track/7/send/12/name "Send 12"
+end ← REAPER /track/7/send/12/volume/str "-inf dB"
+end ← REAPER /track/7/send/12/volume 0.00251387
+end ← REAPER /track/7/send/12/pan/str "center"
+end ← REAPER /track/7/send/12/pan 0.5
+end ← REAPER /track/7/send/13/name "Send 13"
+end ← REAPER /track/7/send/13/volume/str "-inf dB"
+end ← REAPER /track/7/send/13/volume 0.00251387
+end ← REAPER /track/7/send/13/pan/str "center"
+end ← REAPER /track/7/send/13/pan 0.5
+end ← REAPER /track/7/send/14/name "Send 14"
+end ← REAPER /track/7/send/14/volume/str "-inf dB"
+end ← REAPER /track/7/send/14/volume 0.00251387
+end ← REAPER /track/7/send/14/pan/str "center"
+end ← REAPER /track/7/send/14/pan 0.5
+end ← REAPER /track/7/send/15/name "Send 15"
+end ← REAPER /track/7/send/15/volume/str "-inf dB"
+end ← REAPER /track/7/send/15/volume 0.00251387
+end ← REAPER /track/7/send/15/pan/str "center"
+end ← REAPER /track/7/send/15/pan 0.5
+end ← REAPER /track/7/send/16/name "Send 16"
+end ← REAPER /track/7/send/16/volume/str "-inf dB"
+end ← REAPER /track/7/send/16/volume 0.00251387
+end ← REAPER /track/7/send/16/pan/str "center"
+end ← REAPER /track/7/send/16/pan 0.5
+end ← REAPER /track/7/recv/1/name "Recv 1"
+end ← REAPER /track/7/recv/1/volume/str "-inf dB"
+end ← REAPER /track/7/recv/1/volume 0.00251387
+end ← REAPER /track/7/recv/1/pan/str "center"
+end ← REAPER /track/7/recv/1/pan 0.5
+end ← REAPER /track/7/recv/2/name "Recv 2"
+end ← REAPER /track/7/recv/2/volume/str "-inf dB"
+end ← REAPER /track/7/recv/2/volume 0.00251387
+end ← REAPER /track/7/recv/2/pan/str "center"
+end ← REAPER /track/7/recv/2/pan 0.5
+end ← REAPER /track/7/recv/3/name "Recv 3"
+end ← REAPER /track/7/recv/3/volume/str "-inf dB"
+end ← REAPER /track/7/recv/3/volume 0.00251387
+end ← REAPER /track/7/recv/3/pan/str "center"
+end ← REAPER /track/7/recv/3/pan 0.5
+end ← REAPER /track/7/recv/4/name "Recv 4"
+end ← REAPER /track/7/recv/4/volume/str "-inf dB"
+end ← REAPER /track/7/recv/4/volume 0.00251387
+end ← REAPER /track/7/recv/4/pan/str "center"
+end ← REAPER /track/7/recv/4/pan 0.5
+end ← REAPER /track/7/fx/1/name ""
+end ← REAPER /track/7/fx/1/number/str ""
+end ← REAPER /track/7/fx/1/preset ""
+end ← REAPER /track/7/fx/1/bypass 0
+end ← REAPER /track/7/fx/1/openui 0
+end ← REAPER /track/7/fx/1/fxparam/1/value 0
+end ← REAPER /track/7/fx/1/fxparam/2/value 0
+end ← REAPER /track/7/fx/1/fxparam/3/value 0
+end ← REAPER /track/7/fx/1/fxparam/4/value 0
+end ← REAPER /track/7/fx/1/fxparam/5/value 0
+replayed 1 HID reports from /private/tmp/claude-501/-Users-gsenger-Library-Application-Support-Claude-scratch-workspaces-3abcdea9-698c-409d-874e-1a1b0a19f59d-09c346c5-e632-4ba3-88c3-7e9e4d2bfa60-scratch-2026-11-07-fefe78/2ecd5336-9166-4b30-a2e5-c51815dbe3e6/scratchpad/idle.log

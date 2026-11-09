@@ -1,0 +1,12 @@
+# Build output
+build/
+
+# macOS
+.DS_Store
+
+# Native Instruments' firmware images (their copyright). Recreate them from your own copy of NI's
+# firmware updater with tools/extract_kks_mk1_fw.py.
+firmware/extracted/
+
+# Contains this keyboard's serial number
+device/s61_feature_reports.txt

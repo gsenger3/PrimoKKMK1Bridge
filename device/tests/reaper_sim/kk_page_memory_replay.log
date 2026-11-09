@@ -1,0 +1,226 @@
+start → REAPER /device/track/count 8
+start → REAPER /device/send/count 16
+start → REAPER /device/fx/count 16
+start → REAPER /device/fx/follows/device 1
+start → REAPER /device/fxparam/count 1
+start → REAPER /device/track/follows/last_touched 1
+start → REAPER /action 41743
+start REAPER connected (OSC on port 19000)
+             display |MIX     |        |        |        |        |        |        |        |        |
+             display |NO TRKS |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |-       |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |        |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-      |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |        |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start REAPER selected track 1 "Kick"
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:00.610 Instance down
+12:00:00.610 REAPER track view
+             display |KICK    |VOLUME  |PAN     |MUTE    |SOLO    |REC ARM |DRUM BUS|REVERB  |DELAY   |
+             display |TRK 1   |0.00DB   |CENTER  |OFF     |OFF     |OFF     |-6.24DB  |-6.24DB  |-6.24DB  |
+             display |         | ######+ |     #   |         |         |         | ####+   | ####+   | ####+   |
+12:00:00.690 Instance down
+12:00:00.690 → REAPER /device/fxparam/count 1
+12:00:00.690 REAPER komplete-kontrol view
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |64      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.770 Knob 1 turn (KK) +2     CC21 ch1 = 66
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |66      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.780 Knob 1 turn (KK) +2     CC21 ch1 = 68
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |68      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.790 Knob 1 turn (KK) +2     CC21 ch1 = 70
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |70      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.800 Knob 1 turn (KK) +2     CC21 ch1 = 72
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |72      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.810 Knob 1 turn (KK) +2     CC21 ch1 = 74
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |74      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.820 Knob 1 turn (KK) +2     CC21 ch1 = 76
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |76      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.830 Knob 1 turn (KK) +2     CC21 ch1 = 78
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |78      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.840 Knob 1 turn (KK) +2     CC21 ch1 = 80
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |80      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ######  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.850 Knob 1 turn (KK) +2     CC21 ch1 = 82
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |82      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ######  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.860 Knob 1 turn (KK) +2     CC21 ch1 = 84
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |84      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ######  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.870 NavRight down (KK)      CC43 ch1 = 127
+12:00:00.870 KK page 2
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 2  |64      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.880 NavRight up (KK)        CC43 ch1 = 0
+12:00:00.950 Knob 1 turn (KK) -2     CC21 ch1 = 62
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 2  |62      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.960 Knob 1 turn (KK) -2     CC21 ch1 = 60
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 2  |60      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.970 Knob 1 turn (KK) -2     CC21 ch1 = 58
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 2  |58      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####    | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.980 Knob 1 turn (KK) -2     CC21 ch1 = 56
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 2  |56      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####    | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:00.990 Knob 1 turn (KK) -2     CC21 ch1 = 54
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 2  |54      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####    | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.000 NavLeft down (KK)       CC42 ch1 = 127
+12:00:01.000 KK page 1
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |84      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ######  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.010 NavLeft up (KK)         CC42 ch1 = 0
+12:00:01.080 Knob 1 turn (KK) +2     CC21 ch1 = 86
+             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
+             display |PAGE 1  |86      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ######  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.090 Navigate turn +1
+12:00:01.090 → REAPER /device/track/+ 1
+             display |TRK 1   |SNARE   |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:01.090 REAPER selected track 2 "Snare"
+             display |TRK 2   |SNARE   |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:01.160 Knob 1 turn (KK) +2     CC21 ch1 = 66
+12:00:01.170 Navigate turn -1
+12:00:01.170 → REAPER /device/track/- 1
+             display |TRK 2   |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:01.170 REAPER selected track 1 "Kick"
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:01.240 Knob 1 turn (KK) +2     CC21 ch1 = 88
+12:00:01.250 PresetUp down (KK)      CC37 ch1 = 127
+12:00:01.250 KK preset change: page 1, knob values reset
+12:00:01.260 PresetUp up (KK)        CC37 ch1 = 0
+12:00:01.330 Knob 1 turn (KK) +2     CC21 ch1 = 66
+replayed 153 HID reports from device/tests/reaper_sim/kk_page_memory_test.log

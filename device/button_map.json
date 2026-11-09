@@ -1,0 +1,310 @@
+[
+  {
+    "index": 1,
+    "label": "Oct -",
+    "line": 5,
+    "reports": [
+      "HID button bit 6 (byte 1, mask 0x40)"
+    ],
+    "section": "Transpose"
+  },
+  {
+    "index": 2,
+    "label": "Oct +",
+    "line": 6,
+    "reports": [
+      "HID button bit 7 (byte 1, mask 0x80)",
+      "base note 24 → 36"
+    ],
+    "section": "Transpose"
+  },
+  {
+    "index": 3,
+    "label": "Pitch Strip",
+    "line": 7,
+    "reports": [
+      "MIDI pitch bend ch1 (Port 1) [112..16383]"
+    ],
+    "section": "Transpose"
+  },
+  {
+    "index": 4,
+    "label": "Mod Strip",
+    "line": 8,
+    "reports": [
+      "MIDI CC1 ch1 (Port 1) [0..113]"
+    ],
+    "section": "Transpose"
+  },
+  {
+    "index": 5,
+    "label": "Shift",
+    "line": 12,
+    "reports": [
+      "HID button bit 16 (byte 3, mask 0x01)"
+    ],
+    "section": "Perform"
+  },
+  {
+    "index": 6,
+    "label": "Scale (Edit)",
+    "line": 13,
+    "reports": [
+      "nothing (no HID, no MIDI)"
+    ],
+    "section": "Perform"
+  },
+  {
+    "index": 7,
+    "label": "Arp (Edit)",
+    "line": 14,
+    "reports": [
+      "nothing (no HID, no MIDI)"
+    ],
+    "section": "Perform"
+  },
+  {
+    "index": 8,
+    "label": "Loop",
+    "line": 18,
+    "reports": [
+      "HID button bit 19 (byte 3, mask 0x08)"
+    ],
+    "section": "Transport"
+  },
+  {
+    "index": 9,
+    "label": "RWD",
+    "line": 19,
+    "reports": [
+      "HID button bit 22 (byte 3, mask 0x40)"
+    ],
+    "section": "Transport"
+  },
+  {
+    "index": 10,
+    "label": "FFW",
+    "line": 20,
+    "reports": [
+      "HID button bit 23 (byte 3, mask 0x80)"
+    ],
+    "section": "Transport"
+  },
+  {
+    "index": 11,
+    "label": "Play (Restart)",
+    "line": 21,
+    "reports": [
+      "HID button bit 10 (byte 2, mask 0x04)"
+    ],
+    "section": "Transport"
+  },
+  {
+    "index": 12,
+    "label": "REC (Count In)",
+    "line": 22,
+    "reports": [
+      "HID button bit 9 (byte 2, mask 0x02)"
+    ],
+    "section": "Transport"
+  },
+  {
+    "index": 13,
+    "label": "Stop",
+    "line": 23,
+    "reports": [
+      "HID button bit 8 (byte 2, mask 0x01)"
+    ],
+    "section": "Transport"
+  },
+  {
+    "index": 14,
+    "label": "Left Arrow",
+    "line": 27,
+    "reports": [
+      "HID report 0x0f byte 1 = knob page (either arrow toggles page 0 ↔ 1; page 1 moves knob 1 from CC14 to CC22)"
+    ],
+    "section": "Encoders"
+  },
+  {
+    "index": 15,
+    "label": "Right Arrow",
+    "line": 28,
+    "reports": [
+      "HID report 0x0f byte 1 = knob page (either arrow toggles page 0 ↔ 1; page 1 moves knob 1 from CC14 to CC22)"
+    ],
+    "section": "Encoders"
+  },
+  {
+    "index": 16,
+    "label": "Encoder 1",
+    "line": 29,
+    "reports": [
+      "MIDI CC14 ch1 (Port 1) [56..127]"
+    ],
+    "section": "Encoders"
+  },
+  {
+    "index": 17,
+    "label": "Encoder 2",
+    "line": 30,
+    "reports": [
+      "MIDI CC15 ch1 (Port 1) [41..87]"
+    ],
+    "section": "Encoders"
+  },
+  {
+    "index": 18,
+    "label": "Encoder 3",
+    "line": 31,
+    "reports": [
+      "MIDI CC16 ch1 (Port 1) [79..127]"
+    ],
+    "section": "Encoders"
+  },
+  {
+    "index": 19,
+    "label": "Encoder 4",
+    "line": 32,
+    "reports": [
+      "MIDI CC17 ch1 (Port 1) [75..127]"
+    ],
+    "section": "Encoders"
+  },
+  {
+    "index": 20,
+    "label": "Encoder 5",
+    "line": 33,
+    "reports": [
+      "MIDI CC18 ch1 (Port 1) [22..73]"
+    ],
+    "section": "Encoders"
+  },
+  {
+    "index": 21,
+    "label": "Encoder 6",
+    "line": 34,
+    "reports": [
+      "MIDI CC19 ch1 (Port 1) [33..77]"
+    ],
+    "section": "Encoders"
+  },
+  {
+    "index": 22,
+    "label": "Encoder 7",
+    "line": 35,
+    "reports": [
+      "MIDI CC20 ch1 (Port 1) [73..127]"
+    ],
+    "section": "Encoders"
+  },
+  {
+    "index": 23,
+    "label": "Encoder 8",
+    "line": 36,
+    "reports": [
+      "MIDI CC21 ch1 (Port 1) [68..118]"
+    ],
+    "section": "Encoders"
+  },
+  {
+    "index": 24,
+    "label": "Browse",
+    "line": 40,
+    "reports": [
+      "HID button bit 4 (byte 1, mask 0x10)"
+    ],
+    "section": "Navigate"
+  },
+  {
+    "index": 25,
+    "label": "Instance",
+    "line": 41,
+    "reports": [
+      "HID button bit 5 (byte 1, mask 0x20)"
+    ],
+    "section": "Navigate"
+  },
+  {
+    "index": 26,
+    "label": "Back",
+    "line": 42,
+    "reports": [
+      "HID button bit 14 (byte 2, mask 0x40)"
+    ],
+    "section": "Navigate"
+  },
+  {
+    "index": 27,
+    "label": "Left",
+    "line": 43,
+    "reports": [
+      "HID button bit 13 (byte 2, mask 0x20)"
+    ],
+    "section": "Navigate"
+  },
+  {
+    "index": 28,
+    "label": "Knob",
+    "line": 44,
+    "reports": [
+      "HID button bit 32 (byte 5, mask 0x01)",
+      "HID encoder, byte 6 low nibble (+9 steps)"
+    ],
+    "section": "Navigate"
+  },
+  {
+    "index": 29,
+    "label": "Up",
+    "line": 45,
+    "reports": [
+      "HID button bit 15 (byte 2, mask 0x80)"
+    ],
+    "section": "Navigate"
+  },
+  {
+    "index": 30,
+    "label": "Down",
+    "line": 46,
+    "reports": [
+      "HID button bit 12 (byte 2, mask 0x10)"
+    ],
+    "section": "Navigate"
+  },
+  {
+    "index": 31,
+    "label": "Preset Up",
+    "line": 47,
+    "reports": [
+      "HID button bit 1 (byte 1, mask 0x02)"
+    ],
+    "section": "Navigate"
+  },
+  {
+    "index": 32,
+    "label": "Preset Down",
+    "line": 48,
+    "reports": [
+      "HID button bit 3 (byte 1, mask 0x08)"
+    ],
+    "section": "Navigate"
+  },
+  {
+    "index": 33,
+    "label": "Enter",
+    "line": 49,
+    "reports": [
+      "HID button bit 2 (byte 1, mask 0x04)"
+    ],
+    "section": "Navigate"
+  },
+  {
+    "index": 34,
+    "label": "Right (second “Down” in the list)",
+    "line": 50,
+    "reports": [
+      "HID button bit 11 (byte 2, mask 0x08)"
+    ],
+    "section": "Navigate"
+  }
+]

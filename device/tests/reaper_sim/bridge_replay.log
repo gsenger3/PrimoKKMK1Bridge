@@ -1,0 +1,583 @@
+start → REAPER /device/track/count 8
+start → REAPER /device/send/count 16
+start → REAPER /device/track/follows/last_touched 1
+start → REAPER /action 41743
+start REAPER connected (OSC on port 19000)
+             display |MIX     |        |        |        |        |        |        |        |        |
+             display |NO TRKS |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |-       |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |        |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-      |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+start REAPER selected track 1 "Kick"
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |        |PAN     |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |0.00DB   |PAN     |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |0.00DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.100 → REAPER /track/1/volume/touch 1
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |0.00DB   |        |        |        |        |        |        |        |
+             display |         |[######+]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.150 → REAPER /track/1/volume 0.726
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |0.24DB   |        |        |        |        |        |        |        |
+             display |         |[######+]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.200 → REAPER /track/1/volume 0.736
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |0.48DB   |        |        |        |        |        |        |        |
+             display |         |[######+]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.250 → REAPER /track/1/volume 0.746
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |0.48DB   |        |        |        |        |        |        |        |
+             display |         |[#######]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |0.71DB   |        |        |        |        |        |        |        |
+             display |         |[#######]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.300 → REAPER /track/1/volume 0.756
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |0.94DB   |        |        |        |        |        |        |        |
+             display |         |[#######]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.350 → REAPER /track/1/volume 0.766
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |1.17DB   |        |        |        |        |        |        |        |
+             display |         |[#######]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.400 → REAPER /track/1/volume 0.776
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |1.40DB   |        |        |        |        |        |        |        |
+             display |         |[#######]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.450 → REAPER /track/1/volume 0.786
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |1.62DB   |        |        |        |        |        |        |        |
+             display |         |[#######]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.500 → REAPER /track/1/volume 0.796
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |1.62DB   |        |        |        |        |        |        |        |
+             display |         |[#######]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |1.84DB   |        |        |        |        |        |        |        |
+             display |         |[#######]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.550 → REAPER /track/1/volume 0.806
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |2.06DB   |        |        |        |        |        |        |        |
+             display |         |[#######]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.600 → REAPER /track/1/volume 0.816
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |VOLUME  |2.27DB   |        |        |        |        |        |        |        |
+             display |         |[#######]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.650 → REAPER /track/1/volume/touch 0
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |2.27DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.700 PageRight down
+12:00:00.700 → REAPER /device/track/bank/+ 1
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |TRACK 12|KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |TRACK 12|KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |TRACK 12|KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |-INF DB |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |TRACK 13|LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |TRACK 13|LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |TRACK 13|LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |-INF DB |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |LEAD VCL|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |TRACK 14|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         | ######+ | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |TRACK 14|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         |         | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |TRACK 14|BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |-INF DB |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         |         | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |BCK VCLS|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |        |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         |         | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |TRACK 15|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |        |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         |         | ######+ | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |TRACK 15|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |        |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |TRACK 15|GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |        |-INF DB |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |        |GUITAR  |
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |        |TRACK 16|
+             display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |        |TRACK 16|
+             display |9-16    |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         | ######+ |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |        |TRACK 16|
+             display |9-16    |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |0.00DB   |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |        |TRACK 16|
+             display |9-16    |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |-INF DB |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |        |        |
+             display |9-11    |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+12:00:00.800 → REAPER /track/2/volume/touch 1
+             display |TRK 10  |REVERB  |        |        |        |        |        |        |        |
+             display |VOLUME  |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |[######+]| ######+ |         |         |         |         |         |
+12:00:00.850 → REAPER /track/2/volume 0.706
+             display |TRK 10  |REVERB  |        |        |        |        |        |        |        |
+             display |VOLUME  |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |[######+]| ######+ |         |         |         |         |         |
+             display |TRK 10  |REVERB  |        |        |        |        |        |        |        |
+             display |VOLUME  |-0.24DB  |        |        |        |        |        |        |        |
+             display |         | ######+ |[######+]| ######+ |         |         |         |         |         |
+12:00:00.900 → REAPER /track/2/volume 0.696
+             display |TRK 10  |REVERB  |        |        |        |        |        |        |        |
+             display |VOLUME  |-0.49DB  |        |        |        |        |        |        |        |
+             display |         | ######+ |[######+]| ######+ |         |         |         |         |         |
+12:00:00.950 → REAPER /track/2/volume 0.686
+             display |TRK 10  |REVERB  |        |        |        |        |        |        |        |
+             display |VOLUME  |-0.74DB  |        |        |        |        |        |        |        |
+             display |         | ######+ |[######+]| ######+ |         |         |         |         |         |
+12:00:01.000 → REAPER /track/2/volume/touch 0
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |        |        |
+             display |9-11    |0.00DB   |-0.74DB  |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+12:00:01.300 PageLeft down
+12:00:01.300 → REAPER /device/track/bank/- 1
+             display |MIX     |KICK    |REVERB  |DELAY   |        |        |        |        |        |
+             display |9-11    |0.00DB   |-0.74DB  |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |REVERB  |DELAY   |        |        |        |        |        |
+             display |1-11    |0.00DB   |-0.74DB  |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |REVERB  |DELAY   |        |        |        |        |        |
+             display |1-11    |0.00DB   |-0.74DB  |0.00DB   |        |        |        |        |        |
+             display |         | ####### | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |REVERB  |DELAY   |        |        |        |        |        |
+             display |1-11    |2.27DB   |-0.74DB  |0.00DB   |        |        |        |        |        |
+             display |         | ####### | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |DELAY   |        |        |        |        |        |
+             display |1-11    |2.27DB   |-0.74DB  |0.00DB   |        |        |        |        |        |
+             display |         | ####### | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |DELAY   |        |        |        |        |        |
+             display |1-11    |2.27DB   |-0.74DB  |0.00DB   |        |        |        |        |        |
+             display |         | ####### | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |DELAY   |        |        |        |        |        |
+             display |1-11    |2.27DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ####### | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-11    |2.27DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ####### | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |2.27DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ####### | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-12    |2.27DB   |0.00DB   |0.00DB   |-INF DB |        |        |        |        |
+             display |         | ####### | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |2.27DB   |0.00DB   |0.00DB   |-INF DB |        |        |        |        |
+             display |         | ####### | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |2.27DB   |0.00DB   |0.00DB   |-INF DB |        |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-13    |2.27DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-14    |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-15    |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-16    |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |-INF DB |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |2.27DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:01.400 PresetDown down
+12:00:01.400 → REAPER /device/track/+ 1
+12:00:01.400 REAPER selected track 2 "Snare"
+             display |TRACK   |SNARE   |        |        |        |        |        |        |        |
+             display |2       |VOL     |2.27DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |TRACK   |SNARE   |        |        |        |        |        |        |        |
+             display |2       |VOL     |0.00DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:01.500 PresetDown down
+12:00:01.500 → REAPER /device/track/+ 1
+             display |TRACK   |TRACK 3 |        |        |        |        |        |        |        |
+             display |2       |VOL     |0.00DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:01.500 REAPER selected track 3 "Track 3"
+             display |TRACK   |TRACK 3 |        |        |        |        |        |        |        |
+             display |3       |VOL     |0.00DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:01.600 Navigate turn -1
+12:00:01.600 → REAPER /device/track/- 1
+             display |TRACK   |SNARE   |        |        |        |        |        |        |        |
+             display |3       |VOL     |0.00DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:01.600 REAPER selected track 2 "Snare"
+             display |TRACK   |SNARE   |        |        |        |        |        |        |        |
+             display |2       |VOL     |0.00DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ####### | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:01.650 Instance down
+12:00:01.650 REAPER track view
+             display |SNARE   |VOLUME  |PAN     |MUTE    |SOLO    |DRUM BUS|REVERB  |        |        |
+             display |TRK 2   |0.00DB   |CENTER  |OFF     |OFF     |-6.24DB  |-6.24DB  |        |        |
+             display |         | ######+ |     #   |         |         | ####+   | ####+   |         |         |
+12:00:01.750 → REAPER /track/volume/touch 1
+             display |TRK 2   |VOLUME  |        |        |        |        |        |        |        |
+             display |        |0.00DB   |        |        |        |        |        |        |        |
+             display |         |[######+]|     #   |         |         | ####+   | ####+   |         |         |
+12:00:01.800 → REAPER /track/volume 0.706
+             display |TRK 2   |VOLUME  |        |        |        |        |        |        |        |
+             display |        |0.00DB   |        |        |        |        |        |        |        |
+             display |         |[######+]|     #   |         |         | ####+   | ####+   |         |         |
+             display |TRK 2   |VOLUME  |        |        |        |        |        |        |        |
+             display |        |-0.24DB  |        |        |        |        |        |        |        |
+             display |         |[######+]|     #   |         |         | ####+   | ####+   |         |         |
+12:00:01.850 → REAPER /track/volume 0.696
+             display |TRK 2   |VOLUME  |        |        |        |        |        |        |        |
+             display |        |-0.49DB  |        |        |        |        |        |        |        |
+             display |         |[######+]|     #   |         |         | ####+   | ####+   |         |         |
+12:00:01.900 → REAPER /track/volume 0.686
+             display |TRK 2   |VOLUME  |        |        |        |        |        |        |        |
+             display |        |-0.74DB  |        |        |        |        |        |        |        |
+             display |         |[######+]|     #   |         |         | ####+   | ####+   |         |         |
+12:00:01.950 → REAPER /track/volume 0.676
+             display |TRK 2   |VOLUME  |        |        |        |        |        |        |        |
+             display |        |-0.74DB  |        |        |        |        |        |        |        |
+             display |         |[###### ]|     #   |         |         | ####+   | ####+   |         |         |
+             display |TRK 2   |VOLUME  |        |        |        |        |        |        |        |
+             display |        |-1.00DB  |        |        |        |        |        |        |        |
+             display |         |[###### ]|     #   |         |         | ####+   | ####+   |         |         |
+12:00:02.000 → REAPER /track/volume/touch 0
+             display |SNARE   |VOLUME  |PAN     |MUTE    |SOLO    |DRUM BUS|REVERB  |        |        |
+             display |TRK 2   |-1.00DB  |CENTER  |OFF     |OFF     |-6.24DB  |-6.24DB  |        |        |
+             display |         | ######  |     #   |         |         | ####+   | ####+   |         |         |
+12:00:02.050 → REAPER /track/pan/touch 1
+             display |TRK 2   |PAN     |        |        |        |        |        |        |        |
+             display |        |CENTER  |        |        |        |        |        |        |        |
+             display |         | ######  |[    #  ]|         |         | ####+   | ####+   |         |         |
+12:00:02.100 → REAPER /track/pan 0.49
+             display |TRK 2   |PAN     |        |        |        |        |        |        |        |
+             display |        |2%L     |        |        |        |        |        |        |        |
+             display |         | ######  |[    #  ]|         |         | ####+   | ####+   |         |         |
+12:00:02.150 → REAPER /track/pan 0.48
+             display |TRK 2   |PAN     |        |        |        |        |        |        |        |
+             display |        |4%L     |        |        |        |        |        |        |        |
+             display |         | ######  |[    #  ]|         |         | ####+   | ####+   |         |         |
+12:00:02.200 → REAPER /track/pan 0.47
+             display |TRK 2   |PAN     |        |        |        |        |        |        |        |
+             display |        |6%L     |        |        |        |        |        |        |        |
+             display |         | ######  |[    #  ]|         |         | ####+   | ####+   |         |         |
+12:00:02.250 → REAPER /track/pan 0.46
+             display |TRK 2   |PAN     |        |        |        |        |        |        |        |
+             display |        |8%L     |        |        |        |        |        |        |        |
+             display |         | ######  |[    #  ]|         |         | ####+   | ####+   |         |         |
+12:00:02.300 → REAPER /track/pan 0.45
+             display |TRK 2   |PAN     |        |        |        |        |        |        |        |
+             display |        |10%L    |        |        |        |        |        |        |        |
+             display |         | ######  |[    #  ]|         |         | ####+   | ####+   |         |         |
+12:00:02.350 → REAPER /track/pan/touch 0
+             display |SNARE   |VOLUME  |PAN     |MUTE    |SOLO    |DRUM BUS|REVERB  |        |        |
+             display |TRK 2   |-1.00DB  |10%L    |OFF     |OFF     |-6.24DB  |-6.24DB  |        |        |
+             display |         | ######  |     #   |         |         | ####+   | ####+   |         |         |
+             display |TRK 2   |MUTE    |        |        |        |        |        |        |        |
+             display |        |OFF     |        |        |        |        |        |        |        |
+             display |         | ######  |     #   |[       ]|         | ####+   | ####+   |         |         |
+12:00:02.550 → REAPER /track/mute 1
+             display |TRK 2   |MUTE    |        |        |        |        |        |        |        |
+             display |        |ON      |        |        |        |        |        |        |        |
+             display |         | ######  |     #   |[#######]|         | ####+   | ####+   |         |         |
+             display |SNARE   |VOLUME  |PAN     |MUTE    |SOLO    |DRUM BUS|REVERB  |        |        |
+             display |TRK 2   |-1.00DB  |10%L    |ON      |OFF     |-6.24DB  |-6.24DB  |        |        |
+             display |         | ######  |     #   | ####### |         | ####+   | ####+   |         |         |
+             display |TRK 2   |MUTE    |        |        |        |        |        |        |        |
+             display |        |ON      |        |        |        |        |        |        |        |
+             display |         | ######  |     #   |[#######]|         | ####+   | ####+   |         |         |
+12:00:02.850 → REAPER /track/mute 0
+             display |TRK 2   |MUTE    |        |        |        |        |        |        |        |
+             display |        |OFF     |        |        |        |        |        |        |        |
+             display |         | ######  |     #   |[       ]|         | ####+   | ####+   |         |         |
+             display |SNARE   |VOLUME  |PAN     |MUTE    |SOLO    |DRUM BUS|REVERB  |        |        |
+             display |TRK 2   |-1.00DB  |10%L    |OFF     |OFF     |-6.24DB  |-6.24DB  |        |        |
+             display |         | ######  |     #   |         |         | ####+   | ####+   |         |         |
+             display |TRK 2   |SOLO    |        |        |        |        |        |        |        |
+             display |        |OFF     |        |        |        |        |        |        |        |
+             display |         | ######  |     #   |         |[       ]| ####+   | ####+   |         |         |
+12:00:03.150 → REAPER /track/solo 1
+             display |TRK 2   |SOLO    |        |        |        |        |        |        |        |
+             display |        |ON      |        |        |        |        |        |        |        |
+             display |         | ######  |     #   |         |[#######]| ####+   | ####+   |         |         |
+             display |SNARE   |VOLUME  |PAN     |MUTE    |SOLO    |DRUM BUS|REVERB  |        |        |
+             display |TRK 2   |-1.00DB  |10%L    |OFF     |ON      |-6.24DB  |-6.24DB  |        |        |
+             display |         | ######  |     #   |         | ####### | ####+   | ####+   |         |         |
+             display |TRK 2   |DRUM BUS|        |        |        |        |        |        |        |
+             display |SEND 1  |-6.24DB  |        |        |        |        |        |        |        |
+             display |         | ######  |     #   |         | ####### |[####+  ]| ####+   |         |         |
+12:00:03.350 → REAPER /track/send/1/volume 0.51
+             display |TRK 2   |DRUM BUS|        |        |        |        |        |        |        |
+             display |SEND 1  |-5.89DB  |        |        |        |        |        |        |        |
+             display |         | ######  |     #   |         | ####### |[####+  ]| ####+   |         |         |
+12:00:03.400 → REAPER /track/send/1/volume 0.52
+             display |TRK 2   |DRUM BUS|        |        |        |        |        |        |        |
+             display |SEND 1  |-5.89DB  |        |        |        |        |        |        |        |
+             display |         | ######  |     #   |         | ####### |[#####  ]| ####+   |         |         |
+             display |TRK 2   |DRUM BUS|        |        |        |        |        |        |        |
+             display |SEND 1  |-5.56DB  |        |        |        |        |        |        |        |
+             display |         | ######  |     #   |         | ####### |[#####  ]| ####+   |         |         |
+12:00:03.450 → REAPER /track/send/1/volume 0.53
+             display |TRK 2   |DRUM BUS|        |        |        |        |        |        |        |
+             display |SEND 1  |-5.23DB  |        |        |        |        |        |        |        |
+             display |         | ######  |     #   |         | ####### |[#####  ]| ####+   |         |         |
+             display |SNARE   |VOLUME  |PAN     |MUTE    |SOLO    |DRUM BUS|REVERB  |        |        |
+             display |TRK 2   |-1.00DB  |10%L    |OFF     |ON      |-5.23DB  |-6.24DB  |        |        |
+             display |         | ######  |     #   |         | ####### | #####   | ####+   |         |         |
+12:00:03.800 PresetUp down
+12:00:03.800 → REAPER /device/track/- 1
+             display |KICK    |VOLUME  |PAN     |MUTE    |SOLO    |DRUM BUS|REVERB  |        |        |
+             display |TRK 2   |-1.00DB  |10%L    |OFF     |ON      |-5.23DB  |-6.24DB  |        |        |
+             display |         | ######  |     #   |         | ####### | #####   | ####+   |         |         |
+12:00:03.800 REAPER selected track 1 "Kick"
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |-1.00DB  |PAN     |10%L    |        |SOLO    |        |        |
+             display |         | ######  |     #   |         | ####### | #####   | ####+   |         |         |
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |-1.00DB  |PAN     |10%L    |        |SOLO    |        |        |
+             display |         | ####### |     #   |         | ####### | #####   | ####+   |         |         |
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |2.27DB   |PAN     |10%L    |        |SOLO    |        |        |
+             display |         | ####### |     #   |         | ####### | #####   | ####+   |         |         |
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |2.27DB   |PAN     |CENTER  |        |SOLO    |        |        |
+             display |         | ####### |     #   |         | ####### | #####   | ####+   |         |         |
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |2.27DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ####### |     #   |         |         | #####   | ####+   |         |         |
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |2.27DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ####### |     #   |         |         | ####+   | ####+   |         |         |
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |2.27DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ####### |     #   |         |         | ####+   | ####+   | ####+   |         |
+             display |TRACK   |KICK    |        |        |        |        |        |        |        |
+             display |1       |VOL     |2.27DB   |PAN     |CENTER  |        |        |        |        |
+             display |         | ####### |     #   |         |         | ####+   | ####+   | ####+   | ####+   |
+12:00:03.900 PageRight down
+             display |KICK    |SDCHN   |ROOM    |        |        |        |        |        |        |
+             display |PAGE 2/2|-6.24DB  |-6.24DB  |        |        |        |        |        |        |
+             display |         | ####+   | ####+   |         |         |         |         |         |         |
+             display |TRK 1   |SIDECHAI|N       |        |        |        |        |        |        |
+             display |SEND 5  |-6.24DB  |        |        |        |        |        |        |        |
+             display |         |[####+  ]| ####+   |         |         |         |         |         |         |
+12:00:04.050 → REAPER /track/send/5/volume 0.51
+             display |TRK 1   |SIDECHAI|N       |        |        |        |        |        |        |
+             display |SEND 5  |-5.89DB  |        |        |        |        |        |        |        |
+             display |         |[####+  ]| ####+   |         |         |         |         |         |         |
+12:00:04.100 → REAPER /track/send/5/volume 0.52
+             display |TRK 1   |SIDECHAI|N       |        |        |        |        |        |        |
+             display |SEND 5  |-5.89DB  |        |        |        |        |        |        |        |
+             display |         |[#####  ]| ####+   |         |         |         |         |         |         |
+             display |TRK 1   |SIDECHAI|N       |        |        |        |        |        |        |
+             display |SEND 5  |-5.56DB  |        |        |        |        |        |        |        |
+             display |         |[#####  ]| ####+   |         |         |         |         |         |         |
+12:00:04.150 → REAPER /track/send/5/volume 0.53
+             display |TRK 1   |SIDECHAI|N       |        |        |        |        |        |        |
+             display |SEND 5  |-5.23DB  |        |        |        |        |        |        |        |
+             display |         |[#####  ]| ####+   |         |         |         |         |         |         |
+             display |KICK    |SDCHN   |ROOM    |        |        |        |        |        |        |
+             display |PAGE 2/2|-5.23DB  |-6.24DB  |        |        |        |        |        |        |
+             display |         | #####   | ####+   |         |         |         |         |         |         |
+12:00:04.250 PageRight down
+12:00:04.350 Instance down
+12:00:04.350 REAPER mix view
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |2.27DB   |-1.00DB  |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ####### | ######  | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:04.450 Play down
+12:00:04.450 → REAPER /play 1
+12:00:04.550 Loop down
+12:00:04.550 → REAPER /repeat 1
+12:00:04.650 Shift down              CC108 ch1 = 127
+12:00:04.700 Play down               CC102 ch2 = 127
+12:00:04.750 Play up                 CC102 ch2 = 0
+12:00:04.800 Shift up                CC108 ch1 = 0
+12:00:04.850 Browse down             CC115 ch1 = 127
+12:00:04.900 Browse up               CC115 ch1 = 0
+12:00:04.950 NavUp down              CC86 ch1 = 127
+12:00:05.000 NavUp up                CC86 ch1 = 0
+12:00:05.050 Stop down
+12:00:05.050 → REAPER /stop 1
+replayed 102 HID reports from device/tests/reaper_sim/synthetic_reaper_test.log

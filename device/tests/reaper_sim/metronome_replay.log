@@ -1,0 +1,428 @@
+start → REAPER /device/track/count 8
+start → REAPER /device/send/count 16
+start → REAPER /device/track/follows/last_touched 1
+start → REAPER /action 41743
+start ← REAPER /track/1/name "Kick"
+start REAPER connected (OSC on port 19000)
+             display |MIX     |        |        |        |        |        |        |        |        |
+             display |NO TRKS |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |-       |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start ← REAPER /track/1/number/str "1"
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start ← REAPER /track/1/volume 0.716
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |        |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+start ← REAPER /track/1/volume/str "0.00dB"
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+start ← REAPER /track/1/volume/db 0
+start ← REAPER /track/1/pan 0.5
+start ← REAPER /track/1/pan/str "center"
+start ← REAPER /track/1/pan2 1
+start ← REAPER /track/1/pan2/str "100W"
+start ← REAPER /track/1/mute 0
+start ← REAPER /track/1/solo 0
+start ← REAPER /track/2/name "Snare"
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-      |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+start ← REAPER /track/2/number/str "2"
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+start ← REAPER /track/2/volume 0.716
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+start ← REAPER /track/2/volume/str "0.00dB"
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+start ← REAPER /track/2/volume/db 0
+start ← REAPER /track/2/pan 0.5
+start ← REAPER /track/2/pan/str "center"
+start ← REAPER /track/2/pan2 1
+start ← REAPER /track/2/pan2/str "100W"
+start ← REAPER /track/2/mute 0
+start ← REAPER /track/2/solo 0
+start ← REAPER /track/3/name "Track 3"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+start ← REAPER /track/3/number/str "3"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+start ← REAPER /track/3/volume 0.716
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+start ← REAPER /track/3/volume/str "0.00dB"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+start ← REAPER /track/3/volume/db 0
+start ← REAPER /track/3/pan 0.5
+start ← REAPER /track/3/pan/str "center"
+start ← REAPER /track/3/pan2 1
+start ← REAPER /track/3/pan2/str "100W"
+start ← REAPER /track/3/mute 0
+start ← REAPER /track/3/solo 0
+start ← REAPER /track/4/name "Bass"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+start ← REAPER /track/4/number/str "4"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+start ← REAPER /track/4/volume 0.716
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+start ← REAPER /track/4/volume/str "0.00dB"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+start ← REAPER /track/4/volume/db 0
+start ← REAPER /track/4/pan 0.5
+start ← REAPER /track/4/pan/str "center"
+start ← REAPER /track/4/pan2 1
+start ← REAPER /track/4/pan2/str "100W"
+start ← REAPER /track/4/mute 0
+start ← REAPER /track/4/solo 0
+start ← REAPER /track/5/name "Keys"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+start ← REAPER /track/5/number/str "5"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+start ← REAPER /track/5/volume 0.716
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+start ← REAPER /track/5/volume/str "0.00dB"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+start ← REAPER /track/5/volume/db 0
+start ← REAPER /track/5/pan 0.5
+start ← REAPER /track/5/pan/str "center"
+start ← REAPER /track/5/pan2 1
+start ← REAPER /track/5/pan2/str "100W"
+start ← REAPER /track/5/mute 0
+start ← REAPER /track/5/solo 0
+start ← REAPER /track/6/name "Lead Vocal"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+start ← REAPER /track/6/number/str "6"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+start ← REAPER /track/6/volume 0.716
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+start ← REAPER /track/6/volume/str "0.00dB"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+start ← REAPER /track/6/volume/db 0
+start ← REAPER /track/6/pan 0.5
+start ← REAPER /track/6/pan/str "center"
+start ← REAPER /track/6/pan2 1
+start ← REAPER /track/6/pan2/str "100W"
+start ← REAPER /track/6/mute 0
+start ← REAPER /track/6/solo 0
+start ← REAPER /track/7/name "Backing Vocals"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+start ← REAPER /track/7/number/str "7"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+start ← REAPER /track/7/volume 0.716
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+start ← REAPER /track/7/volume/str "0.00dB"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+start ← REAPER /track/7/volume/db 0
+start ← REAPER /track/7/pan 0.5
+start ← REAPER /track/7/pan/str "center"
+start ← REAPER /track/7/pan2 1
+start ← REAPER /track/7/pan2/str "100W"
+start ← REAPER /track/7/mute 0
+start ← REAPER /track/7/solo 0
+start ← REAPER /track/8/name "Guitar"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+start ← REAPER /track/8/number/str "8"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+start ← REAPER /track/8/volume 0.716
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+start ← REAPER /track/8/volume/str "0.00dB"
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+start ← REAPER /track/8/volume/db 0
+start ← REAPER /track/8/pan 0.5
+start ← REAPER /track/8/pan/str "center"
+start ← REAPER /track/8/pan2 1
+start ← REAPER /track/8/pan2/str "100W"
+start ← REAPER /track/8/mute 0
+start ← REAPER /track/8/solo 0
+start ← REAPER /track/name "Kick"
+             display |        |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start ← REAPER /track/number/str "1"
+start REAPER selected track 1 "Kick"
+             display |1       |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start ← REAPER /track/volume 0.716
+start ← REAPER /track/volume/str "0.00dB"
+start ← REAPER /track/volume/db 0
+start ← REAPER /track/pan 0.5
+start ← REAPER /track/pan/str "center"
+start ← REAPER /track/pan2 1
+start ← REAPER /track/pan2/str "100W"
+start ← REAPER /track/mute 0
+start ← REAPER /track/solo 0
+start ← REAPER /track/send/1/name "Drum Bus"
+start ← REAPER /track/send/1/volume 0.5
+start ← REAPER /track/send/1/volume/str "-6.24dB"
+start ← REAPER /track/send/2/name "Reverb"
+start ← REAPER /track/send/2/volume 0.5
+start ← REAPER /track/send/2/volume/str "-6.24dB"
+start ← REAPER /track/send/3/name "Delay"
+start ← REAPER /track/send/3/volume 0.5
+start ← REAPER /track/send/3/volume/str "-6.24dB"
+start ← REAPER /track/send/4/name "Parallel Comp"
+start ← REAPER /track/send/4/volume 0.5
+start ← REAPER /track/send/4/volume/str "-6.24dB"
+start ← REAPER /track/send/5/name "Sidechain"
+start ← REAPER /track/send/5/volume 0.5
+start ← REAPER /track/send/5/volume/str "-6.24dB"
+start ← REAPER /track/send/6/name "Room"
+start ← REAPER /track/send/6/volume 0.5
+start ← REAPER /track/send/6/volume/str "-6.24dB"
+start ← REAPER /track/send/7/name "Send 7"
+start ← REAPER /track/send/7/volume 0.00251387
+start ← REAPER /track/send/7/volume/str "-inf dB"
+start ← REAPER /track/send/8/name "Send 8"
+start ← REAPER /track/send/8/volume 0.00251387
+start ← REAPER /track/send/8/volume/str "-inf dB"
+start ← REAPER /track/send/9/name "Send 9"
+start ← REAPER /track/send/9/volume 0.00251387
+start ← REAPER /track/send/9/volume/str "-inf dB"
+start ← REAPER /track/send/10/name "Send 10"
+start ← REAPER /track/send/10/volume 0.00251387
+start ← REAPER /track/send/10/volume/str "-inf dB"
+start ← REAPER /track/send/11/name "Send 11"
+start ← REAPER /track/send/11/volume 0.00251387
+start ← REAPER /track/send/11/volume/str "-inf dB"
+start ← REAPER /track/send/12/name "Send 12"
+start ← REAPER /track/send/12/volume 0.00251387
+start ← REAPER /track/send/12/volume/str "-inf dB"
+start ← REAPER /track/send/13/name "Send 13"
+start ← REAPER /track/send/13/volume 0.00251387
+start ← REAPER /track/send/13/volume/str "-inf dB"
+start ← REAPER /track/send/14/name "Send 14"
+start ← REAPER /track/send/14/volume 0.00251387
+start ← REAPER /track/send/14/volume/str "-inf dB"
+start ← REAPER /track/send/15/name "Send 15"
+start ← REAPER /track/send/15/volume 0.00251387
+start ← REAPER /track/send/15/volume/str "-inf dB"
+start ← REAPER /track/send/16/name "Send 16"
+start ← REAPER /track/send/16/volume 0.00251387
+start ← REAPER /track/send/16/volume/str "-inf dB"
+start ← REAPER /track/1/name "Kick"
+start ← REAPER /track/1/number/str "1"
+start ← REAPER /track/1/volume 0.716
+start ← REAPER /track/1/volume/str "0.00dB"
+start ← REAPER /track/1/volume/db 0
+start ← REAPER /track/1/pan 0.5
+start ← REAPER /track/1/pan/str "center"
+start ← REAPER /track/1/pan2 1
+start ← REAPER /track/1/pan2/str "100W"
+start ← REAPER /track/1/mute 0
+start ← REAPER /track/1/solo 0
+start ← REAPER /track/2/name "Snare"
+start ← REAPER /track/2/number/str "2"
+start ← REAPER /track/2/volume 0.716
+start ← REAPER /track/2/volume/str "0.00dB"
+start ← REAPER /track/2/volume/db 0
+start ← REAPER /track/2/pan 0.5
+start ← REAPER /track/2/pan/str "center"
+start ← REAPER /track/2/pan2 1
+start ← REAPER /track/2/pan2/str "100W"
+start ← REAPER /track/2/mute 0
+start ← REAPER /track/2/solo 0
+start ← REAPER /track/3/name "Track 3"
+start ← REAPER /track/3/number/str "3"
+start ← REAPER /track/3/volume 0.716
+start ← REAPER /track/3/volume/str "0.00dB"
+start ← REAPER /track/3/volume/db 0
+start ← REAPER /track/3/pan 0.5
+start ← REAPER /track/3/pan/str "center"
+start ← REAPER /track/3/pan2 1
+start ← REAPER /track/3/pan2/str "100W"
+start ← REAPER /track/3/mute 0
+start ← REAPER /track/3/solo 0
+start ← REAPER /track/4/name "Bass"
+start ← REAPER /track/4/number/str "4"
+start ← REAPER /track/4/volume 0.716
+start ← REAPER /track/4/volume/str "0.00dB"
+start ← REAPER /track/4/volume/db 0
+start ← REAPER /track/4/pan 0.5
+start ← REAPER /track/4/pan/str "center"
+start ← REAPER /track/4/pan2 1
+start ← REAPER /track/4/pan2/str "100W"
+start ← REAPER /track/4/mute 0
+start ← REAPER /track/4/solo 0
+start ← REAPER /track/5/name "Keys"
+start ← REAPER /track/5/number/str "5"
+start ← REAPER /track/5/volume 0.716
+start ← REAPER /track/5/volume/str "0.00dB"
+start ← REAPER /track/5/volume/db 0
+start ← REAPER /track/5/pan 0.5
+start ← REAPER /track/5/pan/str "center"
+start ← REAPER /track/5/pan2 1
+start ← REAPER /track/5/pan2/str "100W"
+start ← REAPER /track/5/mute 0
+start ← REAPER /track/5/solo 0
+start ← REAPER /track/6/name "Lead Vocal"
+start ← REAPER /track/6/number/str "6"
+start ← REAPER /track/6/volume 0.716
+start ← REAPER /track/6/volume/str "0.00dB"
+start ← REAPER /track/6/volume/db 0
+start ← REAPER /track/6/pan 0.5
+start ← REAPER /track/6/pan/str "center"
+start ← REAPER /track/6/pan2 1
+start ← REAPER /track/6/pan2/str "100W"
+start ← REAPER /track/6/mute 0
+start ← REAPER /track/6/solo 0
+start ← REAPER /track/7/name "Backing Vocals"
+start ← REAPER /track/7/number/str "7"
+start ← REAPER /track/7/volume 0.716
+start ← REAPER /track/7/volume/str "0.00dB"
+start ← REAPER /track/7/volume/db 0
+start ← REAPER /track/7/pan 0.5
+start ← REAPER /track/7/pan/str "center"
+start ← REAPER /track/7/pan2 1
+start ← REAPER /track/7/pan2/str "100W"
+start ← REAPER /track/7/mute 0
+start ← REAPER /track/7/solo 0
+start ← REAPER /track/8/name "Guitar"
+start ← REAPER /track/8/number/str "8"
+start ← REAPER /track/8/volume 0.716
+start ← REAPER /track/8/volume/str "0.00dB"
+start ← REAPER /track/8/volume/db 0
+start ← REAPER /track/8/pan 0.5
+start ← REAPER /track/8/pan/str "center"
+start ← REAPER /track/8/pan2 1
+start ← REAPER /track/8/pan2/str "100W"
+start ← REAPER /track/8/mute 0
+start ← REAPER /track/8/solo 0
+start ← REAPER /track/name "Kick"
+start ← REAPER /track/number/str "1"
+start ← REAPER /track/volume 0.716
+start ← REAPER /track/volume/str "0.00dB"
+start ← REAPER /track/volume/db 0
+start ← REAPER /track/pan 0.5
+start ← REAPER /track/pan/str "center"
+start ← REAPER /track/pan2 1
+start ← REAPER /track/pan2/str "100W"
+start ← REAPER /track/mute 0
+start ← REAPER /track/solo 0
+start ← REAPER /track/send/1/name "Drum Bus"
+start ← REAPER /track/send/1/volume 0.5
+start ← REAPER /track/send/1/volume/str "-6.24dB"
+start ← REAPER /track/send/2/name "Reverb"
+start ← REAPER /track/send/2/volume 0.5
+start ← REAPER /track/send/2/volume/str "-6.24dB"
+start ← REAPER /track/send/3/name "Delay"
+start ← REAPER /track/send/3/volume 0.5
+start ← REAPER /track/send/3/volume/str "-6.24dB"
+start ← REAPER /track/send/4/name "Parallel Comp"
+start ← REAPER /track/send/4/volume 0.5
+start ← REAPER /track/send/4/volume/str "-6.24dB"
+start ← REAPER /track/send/5/name "Sidechain"
+start ← REAPER /track/send/5/volume 0.5
+start ← REAPER /track/send/5/volume/str "-6.24dB"
+start ← REAPER /track/send/6/name "Room"
+start ← REAPER /track/send/6/volume 0.5
+start ← REAPER /track/send/6/volume/str "-6.24dB"
+start ← REAPER /track/send/7/name "Send 7"
+start ← REAPER /track/send/7/volume 0.00251387
+start ← REAPER /track/send/7/volume/str "-inf dB"
+start ← REAPER /track/send/8/name "Send 8"
+start ← REAPER /track/send/8/volume 0.00251387
+start ← REAPER /track/send/8/volume/str "-inf dB"
+start ← REAPER /track/send/9/name "Send 9"
+start ← REAPER /track/send/9/volume 0.00251387
+start ← REAPER /track/send/9/volume/str "-inf dB"
+start ← REAPER /track/send/10/name "Send 10"
+start ← REAPER /track/send/10/volume 0.00251387
+start ← REAPER /track/send/10/volume/str "-inf dB"
+start ← REAPER /track/send/11/name "Send 11"
+start ← REAPER /track/send/11/volume 0.00251387
+start ← REAPER /track/send/11/volume/str "-inf dB"
+start ← REAPER /track/send/12/name "Send 12"
+start ← REAPER /track/send/12/volume 0.00251387
+start ← REAPER /track/send/12/volume/str "-inf dB"
+start ← REAPER /track/send/13/name "Send 13"
+start ← REAPER /track/send/13/volume 0.00251387
+start ← REAPER /track/send/13/volume/str "-inf dB"
+start ← REAPER /track/send/14/name "Send 14"
+start ← REAPER /track/send/14/volume 0.00251387
+start ← REAPER /track/send/14/volume/str "-inf dB"
+start ← REAPER /track/send/15/name "Send 15"
+start ← REAPER /track/send/15/volume 0.00251387
+start ← REAPER /track/send/15/volume/str "-inf dB"
+start ← REAPER /track/send/16/name "Send 16"
+start ← REAPER /track/send/16/volume 0.00251387
+start ← REAPER /track/send/16/volume/str "-inf dB"
+start ← REAPER /play 0
+start ← REAPER /record 0
+start ← REAPER /repeat 0
+start ← REAPER /click 0
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:00.610 Shift down              CC108 ch1 = 127
+12:00:00.620 Shift + Rec down
+12:00:00.620 → REAPER /click 1
+12:00:00.620 ← REAPER /click 1
+12:00:00.840 Shift + Rec down
+12:00:00.840 → REAPER /click 1
+12:00:00.840 ← REAPER /click 0
+12:00:00.860 Shift up                CC108 ch1 = 0
+12:00:01.070 Rec down
+12:00:01.070 → REAPER /record 1
+12:00:01.070 ← REAPER /record 1
+12:00:01.290 Shift down              CC108 ch1 = 127
+12:00:01.300 Play down               CC102 ch2 = 127
+12:00:01.310 Play up                 CC102 ch2 = 0
+12:00:01.320 Shift up                CC108 ch1 = 0
+replayed 162 HID reports from device/tests/reaper_sim/metronome_test.log
