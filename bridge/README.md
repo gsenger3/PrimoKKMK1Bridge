@@ -16,7 +16,7 @@ details are in [NOTES.md](../doc/NOTES.md).
 ## Build and run
 
 ```bash
-mkdir -p build && swiftc -O bridge/Sources/*.swift -o build/PrimoKKMK1Bridge
+bridge/build.sh
 ```
 
 ```bash
@@ -24,6 +24,10 @@ build/PrimoKKMK1Bridge --verbose
 ```
 
 `--verbose` prints every message it sends. Leave it running while you work; Ctrl-C quits.
+
+`bridge/build.sh` stamps the version first (see [Versions](../README.md#versions)), so building with a bare `swiftc`
+command no longer works. `build/PrimoKKMK1Bridge --version` prints the version, such as
+`PrimoKKMK1Bridge 1.0 (20261109.2315)`.
 
 The config file is `~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json`. The bridge creates it with every default the first time it runs (REAPER mode off),
 and `--config FILE` uses another file instead.

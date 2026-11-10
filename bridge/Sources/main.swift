@@ -36,7 +36,7 @@
 //  from the Shift shortcuts in reaper.shiftButtons and the volume/pan resets. Buttons with no REAPER command
 //  send their CCs.
 //
-//    swiftc -O bridge/Sources/*.swift -o build/PrimoKKMK1Bridge
+//    bridge/build.sh   (stamps the version into build/Version.swift and compiles it in)
 //    build/PrimoKKMK1Bridge [--config FILE] [--verbose]
 //    build/PrimoKKMK1Bridge --print-default-config
 //    build/PrimoKKMK1Bridge --replay device/tests/native_knobs_results/capture_mapping.log [--config ...]
@@ -44,6 +44,7 @@
 //  The config: ~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json, created with every
 //  default the first time the bridge runs, unless --config names another file.
 //    build/PrimoKKMK1Bridge --show-font
+//    build/PrimoKKMK1Bridge --version
 //
 //  Native mode is not persistent: replugging returns the keyboard to MIDI mode. After PrimoKKMK1Bridge quits,
 //  the keyboard stays in native mode (knobs silent on its own MIDI port) until it is replugged.
@@ -69,6 +70,7 @@ let usage = """
            PrimoKKMK1Bridge --print-default-config
            PrimoKKMK1Bridge --replay CAPTURE_LOG [--config FILE] [--log-osc]
            PrimoKKMK1Bridge --show-font
+           PrimoKKMK1Bridge --version
     """
 
 var args = Array(CommandLine.arguments.dropFirst())
@@ -86,6 +88,7 @@ func takeValue(_ flag: String) -> String? {
 }
 
 if takeFlag("-h", "--help") { print(usage); exit(0) }
+if takeFlag("--version") { print("PrimoKKMK1Bridge \(appVersionString)"); exit(0) }
 let printDefault = takeFlag("--print-default-config")
 let fontTest = takeFlag("--show-font")
 let verbose = takeFlag("-v", "--verbose")
@@ -220,7 +223,7 @@ for sig in [SIGINT, SIGTERM] {
     signalSources.append(s)
 }
 
-print("PrimoKKMK1Bridge: Komplete Kontrol MK1 → virtual MIDI port \"\(cfg.portName)\"")
+print("PrimoKKMK1Bridge \(appVersionString): Komplete Kontrol MK1 → virtual MIDI port \"\(cfg.portName)\"")
 print("  buttons on ch\(cfg.channel)" + (cfg.shiftChannel.map { " (ch\($0) while Shift is held)" } ?? "")
       + ", knobs \(ranges(cfg.knobCCs)) \(cfg.knobMode.rawValue), knob touch \(ranges(cfg.knobTouchCCs))")
 print("  Navigate turn \(cfg.navigateTurnCC.map { "CC\($0) \(cfg.navigateTurnMode.rawValue)" } ?? "off")"

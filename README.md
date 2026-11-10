@@ -46,7 +46,7 @@ applies to the running bridge within a second or two.
 ### The bridge on its own, in Terminal
 
 ```bash
-mkdir -p build && swiftc -O bridge/Sources/*.swift -o build/PrimoKKMK1Bridge
+bridge/build.sh
 ```
 
 ```bash
@@ -65,6 +65,16 @@ also stops a bridge started this way.
 - **REAPER mode:** a new config starts in plain MIDI mode. Turn REAPER mode on in the editor's Settings page.
 - **Updates:** after pulling changes, run `editor/build.sh` again. It doesn't disturb a running bridge; turn the
   bridge off and on in the editor to run the new copy.
+
+### Versions
+
+Both apps carry a version of the form **Major.minor (Build ID)**, such as `1.0 (20261109.2315)`:
+
+- **Major.minor** comes from the [VERSION](VERSION) file. Edit it to release a new version.
+- **Build ID** is the date and time of the build (YYYYMMDD.HHMM). `editor/build.sh` and `bridge/build.sh` stamp a
+  new one on every build, using `tools/stamp_version.sh`, and the editor and its built-in bridge share it.
+- **Where to see it:** in the editor, choose **About PrimoKKMK1Bridge Editor** from the app menu. For the bridge,
+  run `build/PrimoKKMK1Bridge --version`; it also prints the version when it starts.
 
 See [bridge/README.md](bridge/README.md) for everything else.
 

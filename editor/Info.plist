@@ -14,10 +14,11 @@
     <string>PrimoKKMK1Bridge Editor</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
+    <!-- Set by editor/build.sh from VERSION and the build's date and time (tools/stamp_version.sh). -->
     <key>CFBundleShortVersionString</key>
-    <string>1.0</string>
+    <string>0.0</string>
     <key>CFBundleVersion</key>
-    <string>1</string>
+    <string>unstamped</string>
     <key>LSMinimumSystemVersion</key>
     <string>14.0</string>
     <key>LSApplicationCategoryType</key>
