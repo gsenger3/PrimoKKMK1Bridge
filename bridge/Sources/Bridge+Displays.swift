@@ -178,39 +178,17 @@ extension Bridge {
         }
         overlay = nil
         switch r.view {
-        case .kk where !cfg.reaper.kompleteKontrol.hostParameters || r.nks.isEmpty:
-            // The CC each knob sends, its value and a bar (absolute), or REL; the page KK should be on.
+        case .kk:
+            // Like Novation's Launchkey: Komplete Kontrol's parameter names and values aren't available, so each
+            // display shows its knob's number, and a bar of the value the knob last sent (absolute values).
             let kk = cfg.reaper.kompleteKontrol
             displays.write(row: 0, cell: 0, "KOMPLETE")
-            displays.write(row: 1, cell: 0, kk.pageButtons.isEmpty ? "KONTROL" : "PAGE \(r.kkPage + 1)")
+            displays.write(row: 1, cell: 0, "KONTROL")
             for k in 0..<8 {
-                let cc = kk.encoderCCs[k]
-                displays.write(row: 0, cell: k + 1, "CC \(cc)")
-                if kk.encoderMode == .absolute {
-                    let v = absValues[kk.channel * 128 + cc] ?? 64
-                    displays.write(row: 1, cell: k + 1, "\(v)")
-                    displays.setBar(cell: k + 1, Double(v) / 127, framed: touched.contains(k))
-                } else {
-                    displays.write(row: 1, cell: k + 1, "REL")
-                    displays.setBar(cell: k + 1, nil, framed: touched.contains(k))
-                }
-            }
-            return
-        case .kk:  // experimental (hostParameters): the KK plugin's host parameters, 8 per page
-            displays.write(row: 0, cell: 0, "KOMPLETE")
-            guard r.kkFX != nil else {
-                displays.write(row: 1, cell: 0, "KONTROL")
-                displays.write(row: 0, cell: 1, "no Komplete Kontrol plugin on this track", span: 8)
-                return
-            }
-            let nks = r.nks, page = r.kkPage
-            displays.write(row: 1, cell: 0, nks.isEmpty ? "KONTROL" : "PAGE \(page + 1)/\(r.nksPages)")
-            for k in 0..<8 {
-                guard let p = nks[page * 8 + k] else { displays.setBar(cell: k + 1, nil, framed: touched.contains(k)); continue }
-                let value = p.text.isEmpty ? p.value.map { "\(Int(($0 * 100).rounded()))%" } ?? "" : p.text
-                displays.write(row: 0, cell: k + 1, abbreviate(p.name, cellWidth))
-                displays.write(row: 1, cell: k + 1, fitValue(value, cellWidth))
-                displays.setBar(cell: k + 1, p.value, framed: touched.contains(k))
+                displays.write(row: 0, cell: k + 1, "ENCODER")
+                displays.write(row: 1, cell: k + 1, "\(k + 1)")
+                let v = kk.encoderMode == .absolute ? absValues[kk.channel * 128 + kk.encoderCCs[k]] ?? 64 : nil
+                displays.setBar(cell: k + 1, v.map { Double($0) / 127 }, framed: touched.contains(k))
             }
             return
         case .mix:

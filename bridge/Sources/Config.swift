@@ -24,26 +24,20 @@ enum TurnMode: String, Codable {
 }
 
 /// The Komplete Kontrol view: the knobs and navigation buttons send fixed MIDI CCs on the virtual port (an
-/// NKS-style assignment like the Novation Launchkey MK4's) for Komplete Kontrol to pick up.
+/// NKS-style assignment like the Novation Launchkey MK4's) for Komplete Kontrol to pick up. Like the
+/// Launchkey, the bridge doesn't follow KK's pages or presets: it keeps one set of 8 knob values.
+/// (Configs with the earlier pageButtons, presetButtons or hostParameters keys still load; those are ignored.)
 struct KKViewConfig: Codable {
     var channel = 1
     var encoderCCs = Array(21...28)
     var encoderMode = TurnMode.absolute
     var buttons: [String: Int?] = [
         "PresetUp": 37, "PresetDown": 36, "NavUp": 41, "NavDown": 40, "NavLeft": 42, "NavRight": 43,
+        "PageLeft": 42, "PageRight": 43,  // the arrows next to the knobs page KK's NKS pages too, like Navigate ◀ / ▶
     ]
-    /// The buttons that make Komplete Kontrol show the previous / next NKS page, so the displays follow.
-    var pageButtons = ["NavLeft", "NavRight"]
-    /// Experimental, off: show the KK plugin's host parameters from "101" on, 8 per page. These are the loaded
-    /// instrument's full parameter list, not KK's curated NKS pages, so they don't line up with KK's knobs,
-    /// and asking REAPER for 256 parameters makes it send thousands of messages.
-    var hostParameters = false
-    /// The buttons that load the previous / next preset in Komplete Kontrol: the remembered knob values of that
-    /// track are dropped and the page goes back to 1.
-    var presetButtons = ["PresetUp", "PresetDown"]
 
     enum CodingKeys: String, CodingKey {
-        case channel, encoderCCs, encoderMode, buttons, pageButtons, hostParameters, presetButtons
+        case channel, encoderCCs, encoderMode, buttons
     }
 
     init() {}
@@ -54,9 +48,6 @@ struct KKViewConfig: Codable {
         channel = try c.decodeIfPresent(Int.self, forKey: .channel) ?? channel
         encoderCCs = try c.decodeIfPresent([Int].self, forKey: .encoderCCs) ?? encoderCCs
         encoderMode = try c.decodeIfPresent(TurnMode.self, forKey: .encoderMode) ?? encoderMode
-        pageButtons = try c.decodeIfPresent([String].self, forKey: .pageButtons) ?? pageButtons
-        hostParameters = try c.decodeIfPresent(Bool.self, forKey: .hostParameters) ?? hostParameters
-        presetButtons = try c.decodeIfPresent([String].self, forKey: .presetButtons) ?? presetButtons
         if let user = try c.decodeIfPresent([String: Int?].self, forKey: .buttons) {
             for (name, cc) in user {
                 guard name != "Shift", buttonDefs.contains(where: { $0.name == name }) else {
@@ -70,12 +61,6 @@ struct KKViewConfig: Codable {
     func validate() throws {
         guard (1...16).contains(channel) else {
             throw ConfigError(description: "reaper.kompleteKontrol.channel must be 1-16, got \(channel)")
-        }
-        guard presetButtons.allSatisfy({ buttons[$0] != nil }) else {
-            throw ConfigError(description: "reaper.kompleteKontrol.presetButtons must be buttons from its buttons list")
-        }
-        guard pageButtons.isEmpty || (pageButtons.count == 2 && pageButtons.allSatisfy { buttons[$0] != nil }) else {
-            throw ConfigError(description: "reaper.kompleteKontrol.pageButtons needs 2 buttons from its buttons list (previous, next), or []")
         }
         guard encoderCCs.count == 8, encoderCCs.allSatisfy({ (0...127).contains($0) }) else {
             throw ConfigError(description: "reaper.kompleteKontrol.encoderCCs needs 8 CCs, each 0-127")

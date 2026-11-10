@@ -31,7 +31,7 @@ On its own the keyboard sends only the keys, the two strips and the 8 knobs, all
 | --- | --- |
 | Knobs 1–8, page 1 (at power-on) | CC14–21, absolute 0–127 |
 | Knobs 1–8, page 2 | CC22–29 (only knob 1 confirmed) |
-| Page ◀ / ▶ (arrows above the knobs) | Either arrow switches between knob pages 1 and 2. No MIDI of its own |
+| Page ◀ / ▶ (arrows next to the knobs) | Either arrow switches between knob pages 1 and 2. No MIDI of its own |
 | Keys, pitch strip, mod strip, Octave − / + | As in *Modes at a glance* |
 | Every other button | Nothing over MIDI. Scale and Arp are silent everywhere in this mode |
 | Knob touch, Navigate knob turn and touch | Nothing over MIDI |
@@ -52,7 +52,7 @@ With REAPER mode off, every control sends a CC on *Primo Komplete Kontrol MK1*, 
 | Scale | 109 | 127 / 0 | Channel 2 |
 | Arp | 110 | 127 / 0 | Channel 2 |
 | Octave − / + | 111 / 112 | 127 / 0, and the keys transpose | Channel 2 |
-| Page ◀ / ▶ (above the knobs) | 113 / 114 | 127 / 0 | Channel 2 |
+| Page ◀ / ▶ (next to the knobs) | 113 / 114 | 127 / 0 | Channel 2 |
 | Browse | 115 | 127 / 0 | Channel 2 |
 | Instance | 116 | 127 / 0 | Channel 2 |
 | Back | 117 | 127 / 0 | Channel 2 |
@@ -90,7 +90,7 @@ In REAPER mode most buttons run REAPER commands over OSC. A Shift combination no
 | Navigate knob turn | Scroll through tracks | CC30, channel 2 |
 | Navigate ◀ / ▶ | CC88 / 89, channel 1 (Komplete Kontrol view: CC42 / 43) | CC88 / 89, channel 2 |
 | Preset ▲ / ▼ | CC119 / 85, channel 1 (Komplete Kontrol view: CC37 / 36) | CC119 / 85, channel 2 |
-| Page ◀ / ▶ | Mix: previous / next 8 tracks. Track: previous / next knob page. Komplete Kontrol: nothing | CC113 / 114, channel 2 |
+| Page ◀ / ▶ | Mix: previous / next 8 tracks. Track: previous / next knob page. Komplete Kontrol: CC42 / 43, like Navigate ◀ / ▶ | CC113 / 114, channel 2 |
 | Octave − / + | Transpose the keys, plus CC111 / 112, channel 1 | CC111 / 112, channel 2 |
 | Shift | Holds the Shift layer; also sends CC108, channel 1 | — |
 
@@ -128,23 +128,23 @@ The left display shows the track name and *TRK n*, or the page, such as *PAGE 2/
 
 ## REAPER Komplete Kontrol view
 
-The knobs and six navigation buttons send fixed CCs on *Primo Komplete Kontrol MK1*, channel 1, for Komplete Kontrol's NKS MIDI template. The Instance light is at full brightness. All other buttons keep their jobs from the table above.
+The knobs and eight navigation buttons send fixed CCs on *Primo Komplete Kontrol MK1*, channel 1, for Komplete Kontrol's NKS MIDI template. The Instance light is at full brightness. All other buttons keep their jobs from the table above.
 
 | Control | CC | Values | Also |
 | --- | --- | --- | --- |
-| Knobs 1–8 turn | 21–28 | Absolute 0–127 | Remembered per track and page |
-| Preset ▲ | 37 | 127 press, 0 release | Next preset; the bridge goes back to page 1 and forgets that track's knob values |
-| Preset ▼ | 36 | 127 / 0 | Previous preset; same reset |
+| Knobs 1–8 turn | 21–28 | Absolute 0–127 | One set of values for every page, track and preset |
+| Preset ▲ | 37 | 127 press, 0 release | Next preset in KK |
+| Preset ▼ | 36 | 127 / 0 | Previous preset in KK |
 | Navigate ▲ | 41 | 127 / 0 | No track change in this view |
 | Navigate ▼ | 40 | 127 / 0 | No track change in this view |
-| Navigate ◀ | 42 | 127 / 0 | Previous NKS page in KK; the bridge follows |
-| Navigate ▶ | 43 | 127 / 0 | Next NKS page in KK; the bridge follows |
+| Navigate ◀ | 42 | 127 / 0 | Previous NKS page in KK |
+| Navigate ▶ | 43 | 127 / 0 | Next NKS page in KK |
 | Shift + knob turn | 14–21, channel 2 | Absolute | The CC mapping's Shift layer |
-| Page ◀ / ▶ (above the knobs) | — | — | Nothing in this view |
+| Page ◀ / ▶ (next to the knobs) | 42 / 43 | 127 / 0 | Previous / next NKS page in KK, the same as Navigate ◀ / ▶ |
 
-Komplete Kontrol reads the knob CCs as positions, so the bridge remembers where each knob was left on each page of each track and carries on from there. A page you haven't used yet starts at 64, so its first turn can still jump, as can a parameter you moved with the mouse. The bridge doesn't know how many pages KK has: pressing ▶ past the last page puts its page count ahead of KK's until the next preset change.
+Like Novation's Launchkey, the bridge doesn't follow KK's pages or presets, whose parameter names and values aren't available to it. It keeps one set of 8 knob values, starting at 64, and each knob carries on from the value it last sent. A knob can still jump when that value doesn't match the parameter it now controls, after a page or preset change or a mouse edit.
 
-The left display shows *KOMPLETE* and the page (*PAGE 2*); each knob's display shows its CC, the value it last sent and a bar. For KK to receive all this, its REAPER track needs *Primo Komplete Kontrol MK1* as input and must be record-armed or monitored.
+The left display shows *KOMPLETE KONTROL*; each knob's display shows *ENCODER* and its number (1–8), with a bar of the value it last sent. For KK to receive all this, its REAPER track needs *Primo Komplete Kontrol MK1* as input and must be record-armed or monitored.
 
 ## Lights and displays
 
@@ -153,7 +153,7 @@ The lights and displays are driven only in native mode. Octave − / + and the N
 | What | CC mapping | REAPER mode |
 | --- | --- | --- |
 | Button lights | Mapped buttons glow dimly and light fully while held. A CC sent back to the *Primo Komplete Kontrol MK1* output lights its button (any value above 0) or dims it (0); channel 2 feedback shows while Shift is held | Play, Rec and Loop follow REAPER's transport. Browse is lit while one of the selected track's plugin windows is open. Instance shows the view: off in Mix, medium in Track, full in Komplete Kontrol. While Shift is held, Rec shows the metronome and Loop shows auto-punch. Other buttons glow dimly and light fully while held |
-| Left display | *MIDI* and the channel in use (*CH 1*, or *CH 2* while Shift is held) | *MIX* with the tracks on the knobs, the track with *TRK n* and its page, or *KOMPLETE* with the page |
+| Left display | *MIDI* and the channel in use (*CH 1*, or *CH 2* while Shift is held) | *MIX* with the tracks on the knobs, the track with *TRK n* and its page, or *KOMPLETE KONTROL* in the Komplete Kontrol view |
 | Knob displays | Each knob's CC, its value and a bar; the Shift layer's while Shift is held | Track names, values and bars, as in each view above. Touching a knob frames its bar and leaves the other displays as they are |
 | Short messages | — | *PANIC*, *SAVE*, *RENDER*, *SCREEN SET n* with the screenset's name on the third display, *FX 2/3* with the plugin's name, and the new record mode. Until REAPER answers: *waiting for OSC from REAPER* |
 
@@ -175,6 +175,6 @@ change by itself within a second or two. `build/PrimoKKMK1Bridge --print-default
 | REAPER commands | `reaper.buttons` and `reaper.shiftButtons` (button name → command, `action:<ID>` for any REAPER action, or `null` for the button's CC) |
 | What the Navigate knob scrolls in REAPER mode | `reaper.navigateTurn`: `tracks`, `pages`, or `null` for its CC |
 | The view at start | `reaper.view`: `mix`, `track` or `komplete-kontrol` |
-| Komplete Kontrol CCs | `reaper.kompleteKontrol`: `channel`, `encoderCCs`, `encoderMode`, `buttons`, `pageButtons`, `presetButtons` |
+| Komplete Kontrol CCs | `reaper.kompleteKontrol`: `channel`, `encoderCCs`, `encoderMode`, `buttons` |
 
 The full list of keys is in [bridge/README.md](../bridge/README.md#configuration) under *Configuration*.

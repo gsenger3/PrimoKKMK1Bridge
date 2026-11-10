@@ -61,8 +61,6 @@ final class Bridge {
     let reaperShiftCommands: [Int: ReaperCommand]  // button bit -> REAPER command while Shift is held
     let kkButtonCCs: [Int: Int]                    // button bit -> CC in the Komplete Kontrol view
     var pressCC: [Int: Int] = [:]                  // button bit -> CC its press sent, when not its usual one
-    var kkKnobSent = [Date](repeating: .distantPast, count: 8)  // when each knob last sent its KK CC
-    var kkMemory: [String: [Int]] = [:]  // "track/page" -> the 8 knob values left there (Komplete Kontrol view)
     var reaperHeld: [Int: ReaperCommand] = [:]     // buttons whose press went to REAPER, and the command it ran
 
     init(cfg: Config, midi: MIDIPorts, verbose: Bool) {
@@ -199,12 +197,6 @@ final class Bridge {
                     pressChannel[def.bit] = ch
                     pressCC[def.bit] = cc
                     sendCC(ch, cc, 127, "\(def.name) down (KK)")
-                    let kk = cfg.reaper.kompleteKontrol
-                    if let i = kk.pageButtons.firstIndex(of: def.name) {  // KK changes its NKS page: follow it
-                        kkChangePage(r, by: i == 0 ? -1 : 1)
-                    } else if kk.presetButtons.contains(def.name) {   // a new preset: start over on page 1
-                        kkForgetTrack(r)
-                    }
                 } else if let r = reaper, let command = (shiftHeld ? reaperShiftCommands : reaperCommands)[def.bit] {
                     reaperHeld[def.bit] = command
                     if verbose { log("\(shiftHeld ? "Shift + " : "")\(def.name) down") }
@@ -285,17 +277,16 @@ final class Bridge {
                     break
                 }
             }
-            if toReaper, let r = reaper, r.view == .kk {  // Komplete Kontrol view: the knob's CC
+            // Komplete Kontrol view: the knob's CC. Like Novation's Launchkey, the bridge keeps one set of 8 knob
+            // values (absValues) for all pages, tracks and presets: KK's page count and parameter values aren't
+            // available to it, so it doesn't follow pages.
+            if toReaper, let r = reaper, r.view == .kk {
                 let kk = cfg.reaper.kompleteKontrol
                 knobAccum[k] += d
                 let steps = knobAccum[k] / cfg.knobStepsPerCC
                 guard steps != 0 else { continue }
                 knobAccum[k] -= steps * cfg.knobStepsPerCC
                 turn(channel: kk.channel, cc: kk.encoderCCs[k], steps: steps, mode: kk.encoderMode, what: "Knob \(k + 1) turn (KK)")
-                kkKnobSent[k] = Date()
-                if let v = absValues[kk.channel * 128 + kk.encoderCCs[k]] {  // remember it for this track and page
-                    kkMemory[kkKey(r), default: Array(repeating: 64, count: 8)][k] = v
-                }
                 continue
             }
             if toReaper, let r = reaper {

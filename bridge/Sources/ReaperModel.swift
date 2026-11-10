@@ -121,7 +121,6 @@ enum ReaperEvent {  // trackData: a value of the selected track
     case connected, track, trackData, bank, values, transport, view, recordMode
     case pluginShown(Int), pluginsClosed, noPlugins  // Browse / Shift + Browse
     case panic, saved, render, screenset(Int)
-    case kkParam(Int)  // a host parameter of the device FX (the Komplete Kontrol plugin in that view) changed
 }
 
 /// What a knob controls in the current view and page.

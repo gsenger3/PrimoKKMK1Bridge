@@ -24,15 +24,6 @@ enum EditorPage: String, CaseIterable, Identifiable {
     var id: Self { self }
 }
 
-/// What a button does in the Komplete Kontrol view besides sending its CC.
-enum KKRole: String, CaseIterable, Identifiable {
-    case none = "Just its CC"
-    case previousPage = "Previous NKS page"
-    case nextPage = "Next NKS page"
-    case preset = "Loads a preset"
-    var id: Self { self }
-}
-
 final class EditorModel: ObservableObject {
     @Published var config = Config() {
         // REAPER mode switched (or a file loaded): leave a page that's now hidden for the mode's first page.
@@ -67,12 +58,8 @@ final class EditorModel: ObservableObject {
     var fileName: String { fileURL?.lastPathComponent ?? "Untitled" }
     var canSave: Bool { validationError == nil && (isDirty || fileURL == nil) }
 
-    /// Why the config can't be saved, in the editor's words where the bridge's would be unclear.
+    /// Why the config can't be saved (the bridge's own checks).
     var validationError: String? {
-        let pages = config.reaper.kompleteKontrol.pageButtons
-        if pages.count == 2, pages.contains("") {
-            return "Komplete Kontrol page: pick both a previous-page and a next-page button, or neither."
-        }
         do {
             try config.validate()
             return nil
@@ -258,38 +245,6 @@ final class EditorModel: ObservableObject {
 
     func setKKCC(_ button: String, _ cc: Int?) {
         config.reaper.kompleteKontrol.buttons.updateValue(cc, forKey: button)
-        if cc == nil { setKKRole(button, .none) }
-    }
-
-    private var kkPagePair: (prev: String?, next: String?) {
-        let p = config.reaper.kompleteKontrol.pageButtons
-        guard p.count == 2 else { return (nil, nil) }
-        return (p[0].isEmpty ? nil : p[0], p[1].isEmpty ? nil : p[1])
-    }
-
-    func kkRole(_ button: String) -> KKRole {
-        let pair = kkPagePair
-        if pair.prev == button { return .previousPage }
-        if pair.next == button { return .nextPage }
-        if config.reaper.kompleteKontrol.presetButtons.contains(button) { return .preset }
-        return .none
-    }
-
-    /// Page buttons are a pair (previous, next) or none; "" marks the half not picked yet, which validation flags.
-    func setKKRole(_ button: String, _ role: KKRole) {
-        var kk = config.reaper.kompleteKontrol
-        var (prev, next) = kkPagePair
-        if prev == button { prev = nil }
-        if next == button { next = nil }
-        kk.presetButtons.removeAll { $0 == button }
-        switch role {
-        case .previousPage: prev = button
-        case .nextPage: next = button
-        case .preset: kk.presetButtons.append(button)
-        case .none: break
-        }
-        kk.pageButtons = prev == nil && next == nil ? [] : [prev ?? "", next ?? ""]
-        config.reaper.kompleteKontrol = kk
     }
 
     var knobTouchOn: Bool {
@@ -327,20 +282,15 @@ final class EditorModel: ObservableObject {
             let press = page == .kk ? kkCC("NavigateClick").map { "CC \($0)" } : nil
             return [turn, "push " + (press ?? command("NavigateClick", shift: false).map(commandShort) ?? cc(midiCC("NavigateClick")))]
         case (.kk, .button(let b)):
-            guard let v = kkCC(b) else { return ["—"] }
-            switch kkRole(b) {
-            case .previousPage: return ["CC \(v)", "◀ page"]
-            case .nextPage: return ["CC \(v)", "page ▶"]
-            case .preset: return ["CC \(v)", "preset"]
-            case .none: return ["CC \(v)"]
-            }
+            return [kkCC(b).map { "CC \($0)" } ?? "—"]
         default:
             return []
         }
     }
 
     /// The two text rows of display 0-8. As on the keyboard, the display under a knob says what the knob does:
-    /// its CC (and touch CC) on the MIDI and Komplete Kontrol pages, its track in REAPER's mix view.
+    /// its CC (and touch CC) on the MIDI page, its track in REAPER's mix view; on the Komplete Kontrol page,
+    /// ENCODER as on the keyboard (which shows ENCODER and the knob's number) and the CC it sends.
     func displayText(_ i: Int) -> (String, String) {
         switch page {
         case .midi:
@@ -353,8 +303,8 @@ final class EditorModel: ObservableObject {
             return ("TRACK \(i)", "VOLUME")
         case .kk:
             let kk = config.reaper.kompleteKontrol
-            if i == 0 { return ("KOMPLETE", "PAGE 1") }
-            return ("CC \(kk.encoderCCs[i - 1])", kk.encoderMode == .absolute ? "ABS" : "REL")
+            if i == 0 { return ("KOMPLETE", "KONTROL") }
+            return ("ENCODER", "CC \(kk.encoderCCs[i - 1])")
         case .settings:
             return ("", "")
         }

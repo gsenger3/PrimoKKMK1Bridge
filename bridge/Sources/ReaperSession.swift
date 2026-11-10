@@ -27,50 +27,6 @@ final class ReaperSession {
     private var lastShown: Int?                                          // the plugin Browse last opened
     var plugins: [Int] { fxNames.indices.filter { !fxNames[$0].isEmpty } }
 
-    // Komplete Kontrol view. The KK plugin exposes the loaded instrument's NKS parameters to the host, in NKS
-    // page order, from its parameter "101 <name>" on (8 per page; "NNN -" is an empty slot). The bridge has
-    // REAPER report the KK plugin's parameters (/fxparam/N/...) and mirrors them all, since REAPER only sends
-    // values that changed.
-    struct HostParam { var name = "", value: Double? = nil, text = "" }
-    private(set) var devParams: [Int: HostParam] = [:]   // device FX host parameter N (1-based)
-    private var deviceFX: Int?                           // the FX (0-based) REAPER reports parameters for
-    private var kkPageByTrack: [String: Int] = [:]       // KK's NKS page, per track
-    var kkFX: Int? { fxNames.firstIndex { pluginName($0).hasPrefix("Komplete Kontrol") } }
-    var kkPage: Int {
-        get { kkPageByTrack[track.number] ?? 0 }
-        set { kkPageByTrack[track.number] = newValue }
-    }
-    /// NKS slot (0-based: page * 8 + knob) of a KK host parameter named "101 Volume" and on.
-    static func nksSlot(_ name: String) -> Int? {
-        guard let label = Int(name.prefix { $0.isNumber }), label >= 101 else { return nil }
-        return label - 101
-    }
-    /// The NKS parameters (by slot) of the KK plugin; empty slots ("NNN -") are left out.
-    var nks: [Int: HostParam] {
-        guard deviceFX != nil, deviceFX == kkFX else { return [:] }
-        var out: [Int: HostParam] = [:]
-        for (_, p) in devParams {
-            guard let slot = Self.nksSlot(p.name) else { continue }
-            let name = String(p.name.drop { $0.isNumber }).trimmingCharacters(in: .whitespaces)
-            guard !name.isEmpty, name != "-" else { continue }
-            out[slot] = HostParam(name: name, value: p.value, text: p.text)
-        }
-        return out
-    }
-    var nksPages: Int { (nks.keys.max() ?? 0) / 8 + 1 }
-
-    /// All 256 parameters of the device FX (the KK plugin's NKS ones start at 102) in the Komplete Kontrol view;
-    /// just 1 in the other views, so a track change there doesn't bring a burst of plugin parameters.
-    private func setParamReporting(_ on: Bool) {
-        send("/device/fxparam/count", [.int(on && cfg.kompleteKontrol.hostParameters ? 256 : 1)])
-    }
-
-    /// In the Komplete Kontrol view, have REAPER report the selected track's KK plugin's parameters.
-    func ensureKKSelected() {
-        guard view == .kk, cfg.kompleteKontrol.hostParameters, let idx = kkFX, idx != deviceFX else { return }
-        deviceFX = idx
-        send("/device/fx/select", [.int(Int32(idx + 1))])
-    }
     /// REAPER doesn't report the record mode over OSC, so this is the mode we last set (or saw an action report).
     private(set) var autoPunch = false
     private(set) var connected = false
@@ -110,8 +66,9 @@ final class ReaperSession {
         send("/device/send/count", [.int(Int32(sendSlots))])
         send("/device/fx/count", [.int(Int32(fxSlots))])
         send("/device/fx/follows/device")
-        setParamReporting(view == .kk)
-        deviceFX = nil
+        // The bridge doesn't use plugin parameters (the Komplete Kontrol view shows none, like Novation's
+        // Launchkey), so ask REAPER for as few as it allows: it otherwise sends them on every track change.
+        send("/device/fxparam/count", [.int(1)])
         if cfg.followSelectedTrack { send("/device/track/follows/last_touched") }
         send("/action", [.int(refreshSurfacesAction)])
     }
@@ -170,8 +127,6 @@ final class ReaperSession {
             case .kk: view = .mix
             }
             sendPage = 0
-            if view == .kk { setParamReporting(true); deviceFX = nil; ensureKKSelected() }
-            if view == .mix { setParamReporting(false) }
             onEvent?(.view)
         case .mute: send("/track/mute/toggle")
         case .metronome: send("/click")  // toggles
@@ -467,7 +422,7 @@ final class ReaperSession {
                 let changed = s.number != track.number || s.name != track.name
                 track = s
                 if changed && view == .track { sendPage = 0 }
-                if changed { lastShown = nil; deviceFX = nil; ensureKKSelected() }
+                if changed { lastShown = nil }
                 onEvent?(changed ? .track : .trackData)
             }
         case "play" where p.count == 1: playing = (args.first?.number ?? 0) > 0.5; onEvent?(.transport)
@@ -477,24 +432,11 @@ final class ReaperSession {
         case "fx" where p.count == 3:  // /fx/N/name, /fx/N/openui: the selected track's plugins
             guard let n = Int(p[1]), (1...fxSlots).contains(n) else { return }
             switch p[2] {
-            case "name":
-                fxNames[n - 1] = args.first?.text ?? ""
-                ensureKKSelected()
+            case "name": fxNames[n - 1] = args.first?.text ?? ""
             case "openui": fxOpen[n - 1] = (args.first?.number ?? 0) > 0.5
             default: return
             }
             onEvent?(.values)
-        case "fxparam" where p.count >= 3:  // /fxparam/N/name, value, value/str: the device FX's parameters
-            guard let n = Int(p[1]), n >= 1 else { return }
-            var hp = devParams[n] ?? HostParam()
-            switch p.dropFirst(2).joined(separator: "/") {
-            case "name": hp.name = args.first?.text ?? ""
-            case "value": hp.value = args.first?.number
-            case "value/str": hp.text = args.first?.text ?? ""
-            default: return
-            }
-            devParams[n] = hp
-            onEvent?(.kkParam(n))
         case "action" where p.count == 2 && (args.first?.number ?? 0) > 0.5:  // action state, if REAPER reports it
             if p[1] == String(recordAutoPunchAction) { autoPunch = true; onEvent?(.transport) }
             if p[1] == String(recordNormalAction) { autoPunch = false; onEvent?(.transport) }

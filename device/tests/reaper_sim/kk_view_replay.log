@@ -1,6 +1,8 @@
 start → REAPER /device/track/count 8
 start → REAPER /device/send/count 16
 start → REAPER /device/fx/count 16
+start → REAPER /device/fx/follows/device 1
+start → REAPER /device/fxparam/count 1
 start → REAPER /device/track/follows/last_touched 1
 start → REAPER /action 41743
 start REAPER connected (OSC on port 19000)
@@ -117,28 +119,19 @@ start REAPER selected track 1 "Kick"
              display |         | ######+ |     #   |         |         |         | ####+   | ####+   | ####+   |
 12:00:00.710 Instance down
 12:00:00.710 REAPER komplete-kontrol view
-             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
-             display |KONTROL |64      |64      |64      |64      |64      |64      |64      |64      |
+             display |KOMPLETE|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
              display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.810 Knob 1 turn (KK) +2     CC21 ch1 = 66
-             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
-             display |KONTROL |66      |64      |64      |64      |64      |64      |64      |64      |
+             display |KOMPLETE|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
              display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.820 Knob 1 turn (KK) +2     CC21 ch1 = 68
-             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
-             display |KONTROL |68      |64      |64      |64      |64      |64      |64      |64      |
-             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.830 Knob 1 turn (KK) +2     CC21 ch1 = 70
-             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
-             display |KONTROL |70      |64      |64      |64      |64      |64      |64      |64      |
-             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.840 Knob 8 turn (KK) -2     CC28 ch1 = 62
-             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
-             display |KONTROL |70      |64      |64      |64      |64      |64      |64      |62      |
-             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.850 Knob 8 turn (KK) -2     CC28 ch1 = 60
-             display |KOMPLETE|CC 21   |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |
-             display |KONTROL |70      |64      |64      |64      |64      |64      |64      |60      |
+             display |KOMPLETE|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
              display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.910 PresetUp down (KK)      CC37 ch1 = 127
 12:00:00.920 PresetUp up (KK)        CC37 ch1 = 0

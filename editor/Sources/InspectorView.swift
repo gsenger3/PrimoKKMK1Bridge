@@ -341,15 +341,11 @@ struct InspectorView: View {
             Section("Komplete Kontrol view") {
                 CCField(title: "CC on channel \(model.config.reaper.kompleteKontrol.channel)", value: kkCC(b), fallback: 44,
                         offText: "Off")
-                Picker("Also", selection: Binding(get: { model.kkRole(b) }, set: { model.setKKRole(b, $0) })) {
-                    ForEach(KKRole.allCases) { Text($0.rawValue).tag($0) }
-                }
-                .disabled(model.kkCC(b) == nil)
                 if model.kkCC(b) == nil {
                     let job = model.command(b, shift: false).map(commandTitle) ?? "sending its MIDI CC"
                     note("Off here: in this view the button keeps its REAPER job (\(job)).")
                 } else {
-                    note("Sends 127 when pressed and 0 when released. Page buttons tell the bridge which NKS page Komplete Kontrol shows, for the knob memory; a preset button resets that memory.")
+                    note("Sends 127 when pressed and 0 when released. Komplete Kontrol's NKS template decides what it does, such as the next page or preset.")
                 }
             }
         }
@@ -358,6 +354,7 @@ struct InspectorView: View {
     @ViewBuilder private func kkKnob(_ k: Int) -> some View {
         Section("Knob \(k + 1)") {
             IntField(title: "CC", value: $model.config.reaper.kompleteKontrol.encoderCCs[k], range: 0...127)
+            note("Its display on the keyboard reads ENCODER \(k + 1), with a bar of the value it last sent.")
         }
         kkKnobSettings
     }
@@ -368,7 +365,7 @@ struct InspectorView: View {
             Picker("Turn values", selection: $model.config.reaper.kompleteKontrol.encoderMode) {
                 ForEach(turnModes, id: \.self) { Text(turnModeTitle($0)).tag($0) }
             }
-            note("Komplete Kontrol's NKS template reads absolute values; relative values left its parameters stuck near 50%.")
+            note("Komplete Kontrol's NKS template reads absolute values; relative values left its parameters stuck near 50%. Like Novation's Launchkey, the bridge keeps one set of 8 knob values for every page, track and preset; Komplete Kontrol's parameter names and values aren't available to it.")
         }
     }
 

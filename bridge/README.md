@@ -36,7 +36,7 @@ The source is in [Sources/](Sources/), one file per area:
 | `Bridge.swift` | The bridge's state, the keyboard's connection, and HID reports turned into MIDI or REAPER commands |
 | `Bridge+Lights.swift` | The button lights |
 | `Bridge+Displays.swift` | What the displays show in each mode and view |
-| `Bridge+Reaper.swift` | REAPER events, and the Komplete Kontrol view's per-page knob memory |
+| `Bridge+Reaper.swift` | REAPER events and screenset names |
 | `Displays.swift` | The displays' 16-segment font and HID reports |
 | `OSC.swift` | OSC over UDP, the link to REAPER |
 | `ReaperModel.swift` | REAPER commands, action IDs, track and send strips, views |
@@ -128,25 +128,20 @@ the remaining knobs stay blank. The left display shows the track and *TRK n*, or
 | Control | CC | | Control | CC |
 |---|---|---|---|---|
 | Knobs 1–8 | 21–28 | | Navigate ▲ / ▼ | 41 / 40 |
-| Preset ▲ / ▼ | 37 / 36 | | Navigate ◀ / ▶ | 42 / 43 |
+| Preset ▲ / ▼ | 37 / 36 | | Navigate ◀ / ▶, and Page ◀ / ▶ next to the knobs | 42 / 43 |
 
 The knobs send absolute values (0–127) and the buttons 127 on press and 0 on release.
 
-**No jumps when paging (per-page memory):** Komplete Kontrol reads these CCs as absolute positions, so a
-knob has to start from somewhere when you change page. PrimoKKMK1Bridge follows KK's page from your
-**Navigate ◀ / ▶** presses (`pageButtons`) and remembers where each knob was left on each page of each track;
-back on a page, the knobs carry on from there. A page you haven't used yet starts from the middle (64), so
-its first turn can still jump, as can a parameter changed with the mouse. **Preset ▲ / ▼** (`presetButtons`)
-load a new sound, so that track's remembered values are dropped and the page goes back to 1. KK's page count
-isn't known to the bridge: pressing ▶ past the last page puts the bridge's page ahead of KK's until the next
-preset change. Relative knob values would avoid all this, but KK's template takes them as positions.
+**Knob values, like Novation's Launchkey:** Komplete Kontrol reads these CCs as absolute positions, and its
+parameter names and values aren't available to the bridge. The KK plugin only gives REAPER the instrument's full
+parameter list, in its own order, and sends its NKS page layout only to keyboards it supports itself. So the
+bridge doesn't follow KK's pages or presets. It keeps **one set of 8 knob values**, starting at 64, and each knob
+carries on from the value it last sent, whatever page, track or preset KK shows. A knob can still jump when its
+value doesn't match the parameter it now controls, after a page or preset change or a mouse edit.
 
-**Displays:** *KOMPLETE* and the page (*PAGE 2*) on the left; each knob's CC and the value it last sent, with a bar.
-Komplete Kontrol's curated NKS pages (which parameter is on which knob, and its name) aren't available to the
-bridge: the KK plugin only gives REAPER the instrument's full parameter list, in the plugin's own order, and
-sends its page layout only to NKS keyboards it supports itself. `hostParameters: true` shows that full list
-anyway, 8 per page, but it doesn't line up with KK's knobs and makes REAPER send thousands of messages. Everything else keeps its job from the other
-views (transport, Shift shortcuts, Browse, Back, Enter …); Page ◀ / ▶ do nothing here. For Komplete Kontrol to
+**Displays:** *KOMPLETE KONTROL* on the left, and **ENCODER 1**–**ENCODER 8** on the displays under the knobs, each with a bar of
+the value the knob last sent. Everything else keeps its job from the other
+views (transport, Shift shortcuts, Browse, Back, Enter …). For Komplete Kontrol to
 get these, the track with the Komplete Kontrol plugin needs **Primo Komplete Kontrol MK1** as its MIDI input (which also
 carries the keys) and must be record-armed or monitored; CCs, the knob channel and the relative/absolute
 mode can be changed under `reaper.kompleteKontrol`.
@@ -275,7 +270,7 @@ optional; anything you leave out keeps its default. A running bridge applies a s
 | `reaper.trackNameSeconds` | After a track change, how long only the track's number and name show before the knobs' values (default 2; 0 = only until REAPER has sent the new track's values). Touching a knob ends it early |
 | `reaper.mirrorSelection` | `true` (default): in track view, a track picked with ▲ / ▼ or the Navigate knob becomes REAPER's only selected track and is scrolled into view. Clicking tracks in REAPER is never overridden |
 | `reaper.resourcePath` | REAPER's resource folder, for the screenset names in `reaper-screensets.ini` (default `~/Library/Application Support/REAPER`) |
-| `reaper.kompleteKontrol` | The Komplete Kontrol view: `channel` (default 1), `encoderCCs` (8 CCs, default 21–28), `encoderMode` (same modes as `knobMode`, default `absolute`), and `buttons` (button name → CC; default Preset Up 37, Preset Down 36, Nav Up 41, Nav Down 40, Nav Left 42, Nav Right 43), and `pageButtons` (the two buttons that change Komplete Kontrol's NKS page, previous / next; default `["NavLeft", "NavRight"]`); `hostParameters` (experimental, default `false`, see the Komplete Kontrol view); `presetButtons` (the buttons that load another preset in KK, default `["PresetUp", "PresetDown"]`) |
+| `reaper.kompleteKontrol` | The Komplete Kontrol view: `channel` (default 1), `encoderCCs` (8 CCs, default 21–28), `encoderMode` (same modes as `knobMode`, default `absolute`), and `buttons` (button name → CC; default Preset Up 37, Preset Down 36, Nav Up 41, Nav Down 40, Nav Left 42, Nav Right 43, Page Left 42, Page Right 43). The earlier `pageButtons`, `presetButtons` and `hostParameters` keys are ignored |
 | `reaper.navigateTurn` | What turning the Navigate knob steps through: `tracks` (default), `pages`, or `null` for its CC |
 | `reaper.buttons` | Button name → REAPER command, or `null` to give the button back its CC. Commands: `play`, `stop`, `record`, `repeat`, `rewind`, `forward`, `metronome` (on/off), `record-mode` (normal / time-selection auto-punch), `go-to-start`, `previous-marker`, `next-marker`, `undo`, `redo`, `browse-fx`, `close-fx`, `panic` (all notes off), `save-project`, `render-project`, `screenset:1` … `screenset:10` (load that window set), `previous-track`, `next-track`, `previous-page`, `next-page`, `toggle-view`, `mute`, `solo` (the selected track), or `action:<ID>` to run any REAPER action (right-click it in REAPER's Action List → *Copy selected action command ID*) |
 | `reaper.shiftButtons` | The same, for buttons pressed while Shift is held (default: Rec → `metronome`, Loop → `record-mode`, Stop → `go-to-start`, Rewind → `previous-marker`, FastForward → `next-marker`, Back → `redo`, Browse → `close-fx`, Enter → `render-project`). Shift + a button not listed here sends its CC on the Shift channel |

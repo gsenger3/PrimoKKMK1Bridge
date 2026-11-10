@@ -150,9 +150,6 @@ struct SettingsView: View {
             Picker("Knob values", selection: $model.config.reaper.kompleteKontrol.encoderMode) {
                 ForEach(turnModes, id: \.self) { Text(turnModeTitle($0)).tag($0) }
             }
-            Toggle("Show the plugin's host parameters (experimental)", isOn: $model.config.reaper.kompleteKontrol.hostParameters)
-            Text("Host parameters are the instrument's full list, not Komplete Kontrol's NKS pages, so they don't line up with KK's knobs, and REAPER sends thousands of messages for them.")
-                .font(.caption).foregroundStyle(.secondary)
         }
     }
 }
