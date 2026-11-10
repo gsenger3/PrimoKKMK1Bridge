@@ -45,11 +45,7 @@ final class EditorModel: ObservableObject {
     private var lastTouchCCs = Array(22...29)
     private var timer: Timer?
 
-    static let encoder: JSONEncoder = {
-        let e = JSONEncoder()
-        e.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
-        return e
-    }()
+    static let encoder = Config.fileEncoder  // the same format the bridge writes
 
     // MARK: state
 
@@ -74,24 +70,15 @@ final class EditorModel: ObservableObject {
 
     func start() {
         guard timer == nil else { return }
-        if let url = Self.initialURL() {
-            load(url)
-        } else {
+        do {
+            let created = try Config.createDefaultFileIfMissing()
+            if load(Config.defaultURL), created { status = "Created \(Config.defaultURL.path) with the default settings." }
+        } catch {
             savedJSON = json
-            status = "No config file yet: open the bridge's (File ▸ Open Config…) or save these defaults as a new one."
+            status = "Can't create \(Config.defaultURL.path) (\(error.localizedDescription)). Use File ▸ Save As… to save these settings elsewhere."
         }
         bridge.startWatching()
         timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in self?.tick() }
-    }
-
-    /// The file opened last, else the bridge's own config next to this app (build/ → bridge/PrimoKKMK1Bridge.json).
-    static func initialURL() -> URL? {
-        if let p = UserDefaults.standard.string(forKey: "configPath"), FileManager.default.fileExists(atPath: p) {
-            return URL(fileURLWithPath: p)
-        }
-        let repo = Bundle.main.bundleURL.deletingLastPathComponent().deletingLastPathComponent()
-        let url = repo.appendingPathComponent("bridge/PrimoKKMK1Bridge.json")
-        return FileManager.default.fileExists(atPath: url.path) ? url : nil
     }
 
     @discardableResult
@@ -105,7 +92,6 @@ final class EditorModel: ObservableObject {
             if !c.knobTouchCCs.isEmpty { lastTouchCCs = c.knobTouchCCs }
             fileURL = url
             fileDate = Self.modificationDate(url)
-            UserDefaults.standard.set(url.path, forKey: "configPath")
             status = "Opened \(url.path)"
             return true
         } catch {
@@ -144,7 +130,6 @@ final class EditorModel: ObservableObject {
         panel.nameFieldStringValue = fileURL?.lastPathComponent ?? "PrimoKKMK1Bridge.json"
         guard panel.runModal() == .OK, let url = panel.url else { return false }
         fileURL = url
-        UserDefaults.standard.set(url.path, forKey: "configPath")
         savedJSON = Data()  // a new file: always written
         return save()
     }
@@ -153,7 +138,7 @@ final class EditorModel: ObservableObject {
         guard !isDirty || confirmDiscard(before: "opening another file") else { return }
         let panel = NSOpenPanel()
         panel.allowedContentTypes = [.json]
-        panel.message = "Choose the bridge's config file (the one you pass with --config)."
+        panel.message = "Choose a config file. The bridge's own is in ~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge."
         if let url = fileURL { panel.directoryURL = url.deletingLastPathComponent() }
         guard panel.runModal() == .OK, let url = panel.url else { return }
         load(url)

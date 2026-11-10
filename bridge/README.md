@@ -20,10 +20,13 @@ mkdir -p build && swiftc -O bridge/Sources/*.swift -o build/PrimoKKMK1Bridge
 ```
 
 ```bash
-build/PrimoKKMK1Bridge --config bridge/PrimoKKMK1Bridge.json --verbose
+build/PrimoKKMK1Bridge --verbose
 ```
 
 `--verbose` prints every message it sends. Leave it running while you work; Ctrl-C quits.
+
+The config file is `~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json`. The bridge creates it with every default the first time it runs (REAPER mode off),
+and `--config FILE` uses another file instead.
 
 The source is in [Sources/](Sources/), one file per area:
 
@@ -45,10 +48,10 @@ The source is in [Sources/](Sources/), one file per area:
 Good to know:
 - **After quitting, the keyboard stays in native mode** (its knobs send nothing) until you unplug and replug it.
 - Unplugging and replugging while PrimoKKMK1Bridge runs is fine: it re-sends the init on reconnect, and also after the Mac wakes from sleep.
-- If the knobs ever go quiet while PrimoKKMK1Bridge is running, press a page arrow above the knobs. In MIDI mode that
+- If the knobs ever go quiet while PrimoKKMK1Bridge is running, press a page arrow next to the knobs. In MIDI mode that
   sends a page report, which PrimoKKMK1Bridge spots, and it switches the keyboard back to native mode.
 - On quit, PrimoKKMK1Bridge turns the button lights off and blanks the displays.
-- **Saved config changes apply by themselves.** PrimoKKMK1Bridge checks its `--config` file every second. When it
+- **Saved config changes apply by themselves.** PrimoKKMK1Bridge checks its config file every second. When it
   changes and is valid, the bridge restarts in place (same terminal, same arguments) with the new settings,
   which takes a moment. A file it can't use is logged and ignored, and the bridge keeps its current settings.
   The DAW sees the MIDI port drop out briefly during the restart.
@@ -74,8 +77,8 @@ editor/build.sh
 open build/PrimoKKMK1Editor.app
 ```
 
-It opens `bridge/PrimoKKMK1Bridge.json` (File ▸ Open Config… for another file) and checks every change with the
-bridge's own rules. If something can't work, the status bar says why and Save stays off. **Save** (⌘S) writes
+It opens the bridge's config file, `~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json`, creating it with the defaults if it's missing (File ▸ Open Config… for
+another file). It checks every change with the bridge's own rules. If something can't work, the status bar says why and Save stays off. **Save** (⌘S) writes
 the file, and a running bridge picks it up within a second or two.
 
 **The bridge switch** in the toolbar shows whether the bridge is running, and starts or stops it (also in the
@@ -241,8 +244,9 @@ In native mode the computer drives the 21 button lights (Octave −/+ and the Na
 
 ## Configuration
 
-Use the [Editor](#editor), or edit [PrimoKKMK1Bridge.json](PrimoKKMK1Bridge.json) directly. Every key is
-optional; anything you leave out keeps its default. A running bridge applies a saved change by itself.
+Use the [Editor](#editor), or edit the config file directly: `~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json`. The bridge and the editor create it with every
+default if it's missing, and `--config FILE` makes the bridge use another file. Every key is optional; anything you
+leave out keeps its default. A running bridge applies a saved change by itself.
 `build/PrimoKKMK1Bridge --print-default-config` prints the full default file.
 
 | Key | Meaning |
@@ -300,8 +304,10 @@ display while switching tracks. They were first tested against a simulated REAPE
 display contents as text:
 
 ```bash
-build/PrimoKKMK1Bridge --replay device/tests/native_knobs_results/capture_mapping.log --config bridge/PrimoKKMK1Bridge.json
+build/PrimoKKMK1Bridge --replay device/tests/native_knobs_results/capture_mapping.log
 ```
+
+Without `--config`, a replay uses the default settings and doesn't read or create your config file.
 
 For REAPER mode, start the stand-in REAPER first, then replay with a config that points at it:
 
@@ -317,7 +323,7 @@ build/PrimoKKMK1Bridge --replay device/tests/reaper_sim/synthetic_reaper_test.lo
 
 ## Start at login (optional, not installed)
 
-[local.PrimoKKMK1Bridge.plist](local.PrimoKKMK1Bridge.plist) is a LaunchAgent template with this folder's paths. To install it:
+[local.PrimoKKMK1Bridge.plist](local.PrimoKKMK1Bridge.plist) is a LaunchAgent template with this folder's paths. It runs the bridge with its default config file. To install it:
 
 ```bash
 cp bridge/local.PrimoKKMK1Bridge.plist ~/Library/LaunchAgents/

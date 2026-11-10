@@ -7,8 +7,6 @@
     <key>ProgramArguments</key>
     <array>
         <string>/Users/gsenger/Developer/KKS61/build/PrimoKKMK1Bridge</string>
-        <string>--config</string>
-        <string>/Users/gsenger/Developer/KKS61/bridge/PrimoKKMK1Bridge.json</string>
     </array>
     <key>RunAtLoad</key>
     <true/>

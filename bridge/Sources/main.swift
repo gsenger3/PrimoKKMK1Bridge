@@ -37,9 +37,12 @@
 //  send their CCs.
 //
 //    swiftc -O bridge/Sources/*.swift -o build/PrimoKKMK1Bridge
-//    build/PrimoKKMK1Bridge [--config bridge/PrimoKKMK1Bridge.json] [--verbose]
-//    build/PrimoKKMK1Bridge --print-default-config > bridge/PrimoKKMK1Bridge.json
+//    build/PrimoKKMK1Bridge [--config FILE] [--verbose]
+//    build/PrimoKKMK1Bridge --print-default-config
 //    build/PrimoKKMK1Bridge --replay device/tests/native_knobs_results/capture_mapping.log [--config ...]
+//
+//  The config: ~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json, created with every
+//  default the first time the bridge runs, unless --config names another file.
 //    build/PrimoKKMK1Bridge --show-font
 //
 //  Native mode is not persistent: replugging returns the keyboard to MIDI mode. After PrimoKKMK1Bridge quits,
@@ -61,6 +64,8 @@ setvbuf(stdout, nil, _IOLBF, 0)
 
 let usage = """
     usage: PrimoKKMK1Bridge [--config FILE] [--verbose] [--log-osc]
+             (without --config: ~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json,
+              created with the defaults if it isn't there)
            PrimoKKMK1Bridge --print-default-config
            PrimoKKMK1Bridge --replay CAPTURE_LOG [--config FILE] [--log-osc]
            PrimoKKMK1Bridge --show-font
@@ -92,14 +97,24 @@ guard args.isEmpty else { fail("unknown argument(s): \(args.joined(separator: " 
 if fontTest { showFont(); exit(0) }
 
 if printDefault {
-    let enc = JSONEncoder()
-    enc.outputFormatting = [.prettyPrinted, .sortedKeys]
-    print(String(decoding: try! enc.encode(Config()), as: UTF8.self))
+    print(String(decoding: try! Config.fileEncoder.encode(Config()), as: UTF8.self))
     exit(0)
 }
 
+// The config file: --config FILE, else (when running, not replaying) the default one in
+// ~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/, created with every default the first time.
+// A replay without --config uses the defaults and touches no file.
+let configFile: String? = configPath ?? (replayPath == nil ? Config.defaultURL.path : nil)
+if configPath == nil, replayPath == nil {
+    do {
+        if try Config.createDefaultFileIfMissing() { print("created \(Config.defaultURL.path) with the default settings") }
+    } catch {
+        fail("cannot create \(Config.defaultURL.path): \(error.localizedDescription)")
+    }
+}
+
 var cfg = Config()
-if let path = configPath {
+if let path = configFile {
     guard let data = FileManager.default.contents(atPath: path) else { fail("cannot read \(path)") }
     do { cfg = try JSONDecoder().decode(Config.self, from: data) } catch { fail("\(path): \(error)") }
 }
@@ -236,7 +251,7 @@ if cfg.reaper.enabled {
 // Restart with the new settings whenever the config file changes (the editor saves it, or a text editor does).
 // A restart re-runs this program in place (same process, same terminal) with the same arguments.
 var configWatcher: DispatchSourceTimer?
-if let path = configPath {
+if let path = configFile {
     let loaded = FileManager.default.contents(atPath: path)
     var rejected: Data?
     let timer = DispatchSource.makeTimerSource(queue: .main)

@@ -262,3 +262,31 @@ struct Config: Codable {
         return warnings
     }
 }
+
+// MARK: - Config file
+
+extension Config {
+    /// Where the bridge and the editor keep the config, unless told otherwise (--config, or the editor's Open):
+    /// ~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json
+    static var defaultURL: URL {
+        FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json")
+    }
+
+    /// How config files are written: every key, sorted, readable.
+    static let fileEncoder: JSONEncoder = {
+        let e = JSONEncoder()
+        e.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
+        return e
+    }()
+
+    /// Create the default config file, with every default, if it isn't there yet. True when it was created.
+    @discardableResult
+    static func createDefaultFileIfMissing() throws -> Bool {
+        let url = defaultURL
+        guard !FileManager.default.fileExists(atPath: url.path) else { return false }
+        try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try fileEncoder.encode(Config()).write(to: url, options: .atomic)
+        return true
+    }
+}

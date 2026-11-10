@@ -40,7 +40,7 @@ open build/PrimoKKMK1Editor.app
 ```
 
 In the editor, turn on the bridge switch in the toolbar. The bridge runs in the background with
-`bridge/PrimoKKMK1Bridge.json` and keeps running after you quit the editor. Whatever you save in the editor
+its config file and keeps running after you quit the editor. Whatever you save in the editor
 applies to the running bridge within a second or two.
 
 ### The bridge on its own, in Terminal
@@ -50,7 +50,7 @@ mkdir -p build && swiftc -O bridge/Sources/*.swift -o build/PrimoKKMK1Bridge
 ```
 
 ```bash
-build/PrimoKKMK1Bridge --config bridge/PrimoKKMK1Bridge.json --verbose
+build/PrimoKKMK1Bridge --verbose
 ```
 
 `--verbose` prints every message the bridge sends; Ctrl-C quits. Run one bridge at a time: the editor's switch
@@ -60,7 +60,9 @@ also stops a bridge started this way.
 
 - **REAPER:** set up its OSC device and enable **Primo Komplete Kontrol MK1** as a MIDI input, as described in
   [Set up REAPER](bridge/README.md#set-up-reaper-once).
-- **Plain MIDI CCs:** the included config has REAPER mode on. Switch it off on the editor's Settings page.
+- **Config file:** `~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json`. The bridge (or the editor) creates it with every default the first time, and saves go
+  there. `--config FILE` runs the bridge with another file.
+- **REAPER mode:** a new config starts in plain MIDI mode. Turn REAPER mode on in the editor's Settings page.
 - **Updates:** after pulling changes, run `editor/build.sh` again. It doesn't disturb a running bridge; turn the
   bridge off and on in the editor to run the new copy.
 
