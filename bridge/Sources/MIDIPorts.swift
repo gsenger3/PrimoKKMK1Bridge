@@ -45,6 +45,16 @@ func controlChanges(in bytes: [UInt8]) -> [(channel: Int, cc: Int, value: Int)] 
     return out
 }
 
+/// Complete SysEx messages (F0 … F7) in a raw MIDI 1.0 byte stream; a message split across packets is skipped.
+func sysExMessages(in bytes: [UInt8]) -> [[UInt8]] {
+    var out: [[UInt8]] = []
+    var start: Int?
+    for (i, b) in bytes.enumerated() {
+        if b == 0xF0 { start = i } else if b == 0xF7, let s = start { out.append(Array(bytes[s...i])); start = nil }
+    }
+    return out
+}
+
 func midiName(_ e: MIDIEndpointRef) -> String {
     var cf: Unmanaged<CFString>?
     MIDIObjectGetStringProperty(e, kMIDIPropertyDisplayName, &cf)
@@ -58,6 +68,8 @@ final class MIDIPorts {
     private let dryRun: Bool
     /// Called on the main queue for every control change the DAW sends to the destination.
     var onControlChange: ((Int, Int, Int) -> Void)?
+    /// Called on the main queue for every SysEx message sent to the destination (the REAPER track-colour script's).
+    var onSysEx: (([UInt8]) -> Void)?
     private(set) var feedbackAvailable = false
 
     /// Keyboard merge: everything the keyboard's own MIDI port sends (keys, pitch and mod strips, pedals) is
@@ -95,14 +107,20 @@ final class MIDIPorts {
         let dataOffset = MemoryLayout<MIDIPacket>.offset(of: \MIDIPacket.data) ?? 10
         st = MIDIDestinationCreateWithBlock(client, name as CFString, &destination) { [weak self] list, _ in
             var found: [(channel: Int, cc: Int, value: Int)] = []
+            var sysEx: [[UInt8]] = []
             var pkt = UnsafeRawPointer(list) + listHeader
             for _ in 0..<list.pointee.numPackets {
                 let len = Int(pkt.loadUnaligned(fromByteOffset: lengthOffset, as: UInt16.self))
-                found += controlChanges(in: Array(UnsafeRawBufferPointer(start: pkt + dataOffset, count: len)))
+                let bytes = Array(UnsafeRawBufferPointer(start: pkt + dataOffset, count: len))
+                found += controlChanges(in: bytes)
+                sysEx += sysExMessages(in: bytes)
                 pkt = UnsafeRawPointer(MIDIPacketNext(pkt.assumingMemoryBound(to: MIDIPacket.self)))
             }
-            guard !found.isEmpty else { return }
-            DispatchQueue.main.async { for m in found { self?.onControlChange?(m.channel, m.cc, m.value) } }
+            guard !found.isEmpty || !sysEx.isEmpty else { return }
+            DispatchQueue.main.async {
+                for m in found { self?.onControlChange?(m.channel, m.cc, m.value) }
+                for m in sysEx { self?.onSysEx?(m) }
+            }
         }
         if st == noErr {
             MIDIObjectSetIntegerProperty(destination, kMIDIPropertyUniqueID, stableUniqueID(name + " feedback"))

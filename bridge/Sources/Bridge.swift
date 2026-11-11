@@ -63,6 +63,10 @@ final class Bridge {
     var pressCC: [Int: Int] = [:]                  // button bit -> CC its press sent, when not its usual one
     var reaperHeld: [Int: ReaperCommand] = [:]     // buttons whose press went to REAPER, and the command it ran
 
+    var devicePID = 0                              // the connected model, for its key count
+    var trackColor: (red: Int, green: Int, blue: Int)?  // the selected REAPER track's colour (0-127 each), from the script
+    var lightGuideSent: [UInt8]?                   // the last light guide report, to skip repeats
+
     init(cfg: Config, midi: MIDIPorts, verbose: Bool) {
         self.cfg = cfg
         self.midi = midi
@@ -97,6 +101,8 @@ final class Bridge {
     func attached(_ dev: IOHIDDevice) {
         let pid = (IOHIDDeviceGetProperty(dev, kIOHIDProductIDKey as CFString) as? Int) ?? 0
         device = dev
+        devicePID = pid
+        lightGuideSent = nil
         prev = nil
         pressChannel = [:]
         pressCC = [:]
@@ -137,6 +143,7 @@ final class Bridge {
             sendLights(force: true)
             renderDisplays()
             flushDisplays(force: true)
+            lightGuideAfterConnect()
         }
     }
 

@@ -35,6 +35,7 @@ codesign --force --sign - build/PrimoKKMK1Bridge.tmp 2>/dev/null
 mv build/PrimoKKMK1Editor.tmp $app/Contents/MacOS/PrimoKKMK1Editor
 mv build/PrimoKKMK1Bridge.tmp $app/Contents/MacOS/PrimoKKMK1Bridge
 cp editor/Info.plist $app/Contents/Info.plist
+cp reaper/PrimoKKMK1Bridge_TrackColor.lua $app/Contents/Resources/  # for REAPER (Bridge ▸ Show REAPER Track Colour Script)
 # The About box shows "Version <CFBundleShortVersionString> (<CFBundleVersion>)": 1.0 (Build ID).
 plutil -replace CFBundleShortVersionString -string "$APP_VERSION" $app/Contents/Info.plist
 plutil -replace CFBundleVersion -string "$APP_BUILD_ID" $app/Contents/Info.plist

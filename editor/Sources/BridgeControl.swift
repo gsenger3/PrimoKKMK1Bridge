@@ -142,6 +142,18 @@ final class BridgeControl: ObservableObject {
         if FileManager.default.fileExists(atPath: logURL.path) { NSWorkspace.shared.open(logURL) }
     }
 
+    /// Reveal the REAPER script that sends track colours for the light guide (bundled in the app's Resources).
+    static func showTrackColourScript() {
+        if let url = Bundle.main.url(forResource: "PrimoKKMK1Bridge_TrackColor", withExtension: "lua") {
+            NSWorkspace.shared.activateFileViewerSelecting([url])
+        } else {
+            let a = NSAlert()
+            a.messageText = "The REAPER script isn't in this copy of the app."
+            a.informativeText = "It's reaper/PrimoKKMK1Bridge_TrackColor.lua in the project. Build the app with editor/build.sh to include it."
+            a.runModal()
+        }
+    }
+
     /// The last few lines of the log, for an error message.
     static func logTail(lines: Int = 4) -> String {
         guard let text = try? String(contentsOf: logURL, encoding: .utf8) else { return "There's no log yet." }

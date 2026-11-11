@@ -21,7 +21,8 @@ It comes as two programs:
 5. [The editor](#the-editor)
 6. [MIDI mode](#midi-mode)
 7. [REAPER mode](#reaper-mode): [buttons](#buttons-in-every-view), [Mix view](#mix-view),
-   [Track view](#track-view), [Komplete Kontrol view](#komplete-kontrol-view)
+   [Track view](#track-view), [Komplete Kontrol view](#komplete-kontrol-view),
+   [track colour on the keys](#track-colour-on-the-keys)
 8. [Default assignments](#default-assignments)
 9. [Lights and displays](#lights-and-displays)
 10. [The config file](#the-config-file)
@@ -133,14 +134,14 @@ The pages, chosen in the toolbar, follow the mode you're in:
 - the MIDI port's name, channel and Shift layer
 - whether the keys are merged into the port
 - the lights and displays
-- REAPER mode on or off, with REAPER's address and ports, the starting view, and the Komplete Kontrol view's
-  channel and knob mode
+- REAPER mode on or off, with REAPER's address and ports, the starting view,
+  [the track colour on the keys](#track-colour-on-the-keys), and the Komplete Kontrol view's channel and knob mode
 
 Other things in the editor:
 - **Saving:** **Save** (⌘S) writes the config file, and a running bridge picks it up within a second or two.
   **Revert** throws away unsaved edits. If a change can't work, the status bar says why and Save stays off.
 - **The bridge switch** shows whether the bridge is running, however it was started, and starts or stops it. The
-  same commands are in the **Bridge** menu, with **Show Bridge Log**.
+  same commands are in the **Bridge** menu, with **Show Bridge Log** and **Show REAPER Track Colour Script**.
 - **File ▸ Open Config…** edits another config file for the session. Normally you don't need it.
 - **Help ▸ Primo KK MK1 Control Editor Help** opens this guide.
 
@@ -256,6 +257,48 @@ Komplete Kontrol's parameter names and values aren't available to the bridge, so
 For Komplete Kontrol to receive the CCs, its track needs **Primo Komplete Kontrol MK1** as input and must be
 record-armed or monitored.
 
+### Track colour on the keys
+
+In REAPER mode, the keyboard's light guide (the lights above the keys) shows the **selected track's colour on
+every key**.
+- **Brightness:** set on the editor's Settings page, 50% by default. The colour is corrected so a white track looks
+  white rather than purple.
+- **No colour:** a track without a colour of its own leaves the keys dark, and so does having no track selected.
+- **Turning it off:** use **Show the selected track's colour on the keys** in Settings.
+
+REAPER's OSC doesn't report track colours, so a small script inside REAPER sends them to the bridge as MIDI. Set
+it up once:
+
+1. **Install the script.** On the editor's Settings page, under **Track colour on the keys**, click
+   **Install in REAPER…**. It does two things:
+   - copies `PrimoKKMK1Bridge_TrackColor.lua` into the **Scripts/Primo Studios** folder of REAPER's resource folder
+   - adds a line to `Scripts/__startup.lua`, which REAPER runs every time it starts. An existing `__startup.lua` is
+     backed up first and kept as it is; the line goes at the end.
+
+   Once it's installed, the row shows **Uninstall…** instead (see below). After an update of the app, **Update…**
+   appears next to it to replace an older script; **Repair…** puts back a part that's missing.
+2. **Let REAPER send to the bridge.** In **Preferences ▸ Audio ▸ MIDI Outputs** (*MIDI Devices* in older
+   versions), enable **Primo Komplete Kontrol MK1** as an output. Only the script uses it: tracks don't send there
+   unless you route them to it.
+3. **Restart REAPER.** The keys take the selected track's colour, and follow as you select other tracks or change
+   a colour.
+
+To install it by hand instead, reveal the script with **Bridge ▸ Show REAPER Track Colour Script**, then:
+- copy it into REAPER's Scripts folder (Options ▸ Show REAPER resource path in explorer/finder)
+- add this line to `Scripts/__startup.lua`, adjusting the path to where you put it:
+  ```lua
+  dofile(reaper.GetResourcePath() .. "/Scripts/PrimoKKMK1Bridge_TrackColor.lua")
+  ```
+
+The script sends the colour when the selection or a colour changes, and every 2 seconds, so a restarted bridge
+catches up. When REAPER quits, the keys go dark.
+
+**To remove it,** click **Uninstall…** in the same place. It deletes the script, and the **Primo Studios** folder
+too if nothing else is in it, and takes the script's lines out of `Scripts/__startup.lua` (backing it up first). The
+rest of `__startup.lua` stays as it is, and so does the file itself, unless starting the script was all it did. A
+script that's already running stops when you restart REAPER. The MIDI output can then be turned off again in
+REAPER's preferences, if nothing else uses it.
+
 ## Default assignments
 
 These are the defaults a new config starts with. Change any of them in the editor.
@@ -335,13 +378,14 @@ section of REAPER's Action List.
 
 ## Lights and displays
 
-The bridge drives the 21 button lights and the nine displays. Octave − / + and the Navigate knob have no light.
+The bridge drives the 21 button lights, the nine displays and the light guide. Octave − / + and the Navigate knob have no light.
 
 | | MIDI mode | REAPER mode |
 | --- | --- | --- |
 | Button lights | A button with a CC glows dimly and lights fully while held; the DAW can light it ([MIDI mode](#midi-mode)) | Play, Rec and Loop follow REAPER's transport; Browse is lit while a plugin window of the track is open; Instance shows the view. While Shift is held, Rec shows the metronome and Loop shows auto-punch. Other buttons glow dimly and light fully while held |
 | Left display | *MIDI* and the channel (*CH 2* while Shift is held) | *MIX* and the tracks, the track and *TRK n*, or *KOMPLETE KONTROL* |
 | Knob displays | Each knob's CC, its value and a bar | Each view's names, values and bars, as described above. Touching a knob frames its bar |
+| Light guide (above the keys) | Off | The selected track's colour, with the REAPER script ([Track colour on the keys](#track-colour-on-the-keys)) |
 | Short notices | — | *PANIC*, *SAVE*, *RENDER*, *SCREEN SET n* with the screenset's name, *FX 2/3* with the plugin's name, and the new record mode |
 
 ## The config file

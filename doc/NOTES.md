@@ -80,6 +80,10 @@ Preset Up, Instance, Preset Down, Back, Nav Up, Enter, Nav Left, Nav Down, Nav R
 
 ## Other HID reports (from the descriptor; to be confirmed)
 - Out 0x80: 25 bytes, button LEDs (0–127 brightness). Out 0x82: 183 bytes = 61 keys × RGB light guide. Out 0xe0: display writes.
+- **Light guide (out 0x82), confirmed on the S61 MK1 in native mode (2026-11-11):** 3 bytes per key in the order
+  red, green, blue, 0–127 each, key 1 = the lowest key; all 61 keys respond. The LEDs aren't balanced: equal values
+  look purple-white, and red ×0.75, green ×1, blue ×0.67 looks neutral (also at half brightness). The lights stay as
+  set until the next report.
 
 ### Displays (out 0xe0, 248 bytes) — from DrivenByMoss `Kontrol1UsbDevice.java` (LGPLv3); not yet seen on hardware
 - Nine displays of 8 characters × 2 rows: one left of knob 1, then one above each knob (72 columns per row).

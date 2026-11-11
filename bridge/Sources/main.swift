@@ -165,6 +165,7 @@ let midi = MIDIPorts(name: cfg.portName, dryRun: false, keysSource: cfg.keyboard
 let bridge = Bridge(cfg: cfg, midi: midi, verbose: verbose)
 bridge.logOSC = logOSC
 midi.onControlChange = { bridge.feedback(channel: $0, cc: $1, value: $2) }
+midi.onSysEx = { bridge.sysEx($0) }
 let ctx = Unmanaged.passUnretained(bridge).toOpaque()
 
 let manager = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
@@ -216,6 +217,7 @@ for sig in [SIGINT, SIGTERM] {
         bridge.releaseHeld()
         bridge.sendLights(force: true, allOff: true)
         bridge.blankDisplays()
+        bridge.sendLightGuide(off: true)
         print("\nPrimoKKMK1Bridge stopped. The keyboard stays in native mode (knobs send no MIDI) until you replug it.")
         exit(0)
     }

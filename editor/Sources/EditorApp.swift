@@ -71,6 +71,7 @@ struct PrimoKKMK1EditorApp: App {
                 Button("Stop Bridge") { model.bridge.stop() }
                 Divider()
                 Button("Show Bridge Log") { BridgeControl.showLog() }
+                Button("Show REAPER Track Colour Script") { BridgeControl.showTrackColourScript() }
             }
         }
     }

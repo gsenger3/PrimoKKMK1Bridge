@@ -21,6 +21,11 @@ let reportPage: UInt8 = 0x0f  // input: knob page; only sent while the keyboard 
 let reportLights: UInt8 = 0x80  // output: 25 button-light brightness bytes
 let reportInit: UInt8 = 0xa0  // output: switch to native mode
 let reportDisplay: UInt8 = 0xe0  // output: one display row (value bars and dots, or text)
+let reportLightGuide: UInt8 = 0x82  // output: the light guide, red, green, blue (0-127) per key, lowest key first
+/// Keys per model: the light guide report has 3 bytes per key (183 on the S61, checked on the keyboard 2026-11-11).
+let mk1KeyCount: [Int: Int] = [0x1340: 25, 0x1350: 49, 0x1360: 61, 0x1410: 88]
+/// At equal values the light guide looks purple-white; this balance looked neutral on an S61 MK1 (2026-11-11).
+let lightGuideWhiteBalance = (red: 0.75, green: 1.0, blue: 0.67)
 let lightCount = 25
 
 struct ButtonDef { let name: String; let bit: Int; let cc: Int }

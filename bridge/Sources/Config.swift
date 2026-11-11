@@ -85,6 +85,8 @@ struct ReaperConfig: Codable {
     var trackNameSeconds = 2.0  // after a track change, how long only its number and name show
     var mirrorSelection = true  // track view: a track picked on the keyboard becomes REAPER's selected track
     var resourcePath = "~/Library/Application Support/REAPER"  // where REAPER keeps reaper-screensets.ini
+    var lightGuide = true          // show the selected track's colour on the keys (sent by reaper/PrimoKKMK1Bridge_TrackColor.lua)
+    var lightGuideBrightness = 50  // percent
     var kompleteKontrol = KKViewConfig()
     var buttons: [String: String?] = [
         "Play": "play", "Stop": "stop", "Rec": "record", "Loop": "repeat", "Rewind": "rewind", "FastForward": "forward",
@@ -109,6 +111,7 @@ struct ReaperConfig: Codable {
     enum CodingKeys: String, CodingKey {
         case enabled, host, sendPort, receivePort, view, followSelectedTrack, knobFullRange, navigateTurn, buttons
         case shiftButtons, trackNameSeconds, mirrorSelection, resourcePath, kompleteKontrol
+        case lightGuide, lightGuideBrightness
     }
 
     init() {}
@@ -127,6 +130,8 @@ struct ReaperConfig: Codable {
         trackNameSeconds = try c.decodeIfPresent(Double.self, forKey: .trackNameSeconds) ?? trackNameSeconds
         mirrorSelection = try c.decodeIfPresent(Bool.self, forKey: .mirrorSelection) ?? mirrorSelection
         resourcePath = try c.decodeIfPresent(String.self, forKey: .resourcePath) ?? resourcePath
+        lightGuide = try c.decodeIfPresent(Bool.self, forKey: .lightGuide) ?? lightGuide
+        lightGuideBrightness = try c.decodeIfPresent(Int.self, forKey: .lightGuideBrightness) ?? lightGuideBrightness
         kompleteKontrol = try c.decodeIfPresent(KKViewConfig.self, forKey: .kompleteKontrol) ?? kompleteKontrol
         func merge(_ key: CodingKeys, into map: inout [String: String?]) throws {
             guard let user = try c.decodeIfPresent([String: String?].self, forKey: key) else { return }
@@ -152,6 +157,9 @@ struct ReaperConfig: Codable {
             throw ConfigError(description: "reaper.view must be \"mix\", \"track\" or \"komplete-kontrol\", got \"\(view)\"")
         }
         guard knobFullRange >= 10 else { throw ConfigError(description: "reaper.knobFullRange must be at least 10") }
+        guard (1...100).contains(lightGuideBrightness) else {
+            throw ConfigError(description: "reaper.lightGuideBrightness must be 1-100 (percent), got \(lightGuideBrightness)")
+        }
         guard (0...30).contains(trackNameSeconds) else {
             throw ConfigError(description: "reaper.trackNameSeconds must be 0-30, got \(trackNameSeconds)")
         }

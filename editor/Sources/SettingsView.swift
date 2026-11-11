@@ -16,6 +16,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var model: EditorModel
+    @State private var scriptStatus = ReaperScriptInstaller.Status()
 
     private var shiftOn: Binding<Bool> {
         Binding(get: { model.config.shiftChannel != nil }, set: { model.config.shiftChannel = $0 ? 2 : nil })
@@ -101,6 +102,7 @@ struct SettingsView: View {
 
             if model.config.reaper.enabled {
                 reaperViews
+                lightGuideSettings
                 kompleteKontrolView
             }
 
@@ -142,6 +144,116 @@ struct SettingsView: View {
             Text("The resource folder is where REAPER keeps reaper-screensets.ini, for the screenset names on the displays.")
                 .font(.caption).foregroundStyle(.secondary)
         }
+    }
+
+    private var lightGuideSettings: some View {
+        Section("Track colour on the keys") {
+            Toggle("Show the selected track's colour on the keys", isOn: $model.config.reaper.lightGuide)
+            if model.config.reaper.lightGuide {
+                LabeledContent("Brightness") {
+                    HStack {
+                        Slider(value: Binding(get: { Double(model.config.reaper.lightGuideBrightness) },
+                                              set: { model.config.reaper.lightGuideBrightness = Int($0.rounded()) }),
+                               in: 5...100, step: 5)
+                            .frame(width: 180)
+                        Text("\(model.config.reaper.lightGuideBrightness)%").monospacedDigit().frame(width: 44, alignment: .trailing)
+                    }
+                }
+            }
+            LabeledContent("REAPER script") {
+                HStack(spacing: 8) {
+                    Text(scriptStatusText).foregroundStyle(.secondary)
+                    if scriptStatus.anyInstalled {
+                        if !scriptStatus.installed {
+                            Button(scriptStatus.scriptInstalled && !scriptStatus.scriptUpToDate ? "Update…" : "Repair…") { installScript() }
+                        }
+                        Button("Uninstall…") { uninstallScript() }
+                    } else {
+                        Button("Install in REAPER…") { installScript() }
+                            .disabled(!scriptStatus.resourceFolderFound)
+                    }
+                }
+            }
+            Text("REAPER doesn't send track colours over OSC, so a small script inside REAPER sends them. Install puts it in REAPER's Scripts folder (under Primo Studios) and has REAPER start it. Then enable Primo Komplete Kontrol MK1 as a MIDI output in REAPER's preferences, and restart REAPER. Uninstall removes the script and the line that starts it. Tracks without a colour leave the keys dark.")
+                .font(.caption).foregroundStyle(.secondary)
+        }
+        .onAppear { refreshScriptStatus() }
+        .onChange(of: model.config.reaper.resourcePath) { _, _ in refreshScriptStatus() }
+    }
+
+    private func refreshScriptStatus() {
+        scriptStatus = ReaperScriptInstaller.status(resourcePath: model.config.reaper.resourcePath)
+    }
+
+    private var scriptStatusText: String {
+        let s = scriptStatus
+        if !s.resourceFolderFound { return "REAPER's resource folder not found" }
+        if s.installed { return "Installed; REAPER starts it" }
+        if s.scriptInstalled && !s.scriptUpToDate { return "An older version is installed" }
+        if s.scriptInstalled { return "Installed, but REAPER doesn't start it" }
+        if s.startsWithREAPER { return "REAPER starts it, but the script is missing" }
+        return "Not installed"
+    }
+
+    private func installScript() {
+        let resource = ReaperScriptInstaller.resourceURL(model.config.reaper.resourcePath)
+        let confirm = NSAlert()
+        confirm.messageText = "Install the track colour script in REAPER?"
+        confirm.informativeText = """
+            This copies PrimoKKMK1Bridge_TrackColor.lua to Scripts/\(ReaperScriptInstaller.folderName) in \(resource.path), \
+            and adds a line to Scripts/__startup.lua so REAPER starts it (an existing __startup.lua is backed up first).
+            """
+        confirm.addButton(withTitle: "Install")
+        confirm.addButton(withTitle: "Cancel")
+        guard confirm.runModal() == .alertFirstButtonReturn else { return }
+        let result = NSAlert()
+        do {
+            let done = try ReaperScriptInstaller.install(resourcePath: model.config.reaper.resourcePath)
+            result.messageText = "Installed the track colour script"
+            result.informativeText = done.joined(separator: "\n") + """
+
+
+                Two steps left in REAPER:
+                1. Preferences ▸ Audio ▸ MIDI Outputs: enable Primo Komplete Kontrol MK1.
+                2. Restart REAPER (or run the script once from the Action List).
+                """
+        } catch {
+            result.alertStyle = .warning
+            result.messageText = "Couldn't install the script"
+            result.informativeText = "\(error)"
+        }
+        result.runModal()
+        refreshScriptStatus()
+    }
+
+    private func uninstallScript() {
+        let resource = ReaperScriptInstaller.resourceURL(model.config.reaper.resourcePath)
+        let confirm = NSAlert()
+        confirm.messageText = "Uninstall the track colour script from REAPER?"
+        confirm.informativeText = """
+            This removes PrimoKKMK1Bridge_TrackColor.lua from Scripts/\(ReaperScriptInstaller.folderName) in \(resource.path), \
+            and the line that starts it from Scripts/__startup.lua (which is backed up first). Your other scripts stay.
+            """
+        confirm.addButton(withTitle: "Uninstall")
+        confirm.addButton(withTitle: "Cancel")
+        guard confirm.runModal() == .alertFirstButtonReturn else { return }
+        let result = NSAlert()
+        do {
+            let done = try ReaperScriptInstaller.uninstall(resourcePath: model.config.reaper.resourcePath)
+            result.messageText = "Uninstalled the track colour script"
+            result.informativeText = done.joined(separator: "\n") + """
+
+
+                If REAPER is open, the script keeps running until you restart REAPER. You can also turn off \
+                Primo Komplete Kontrol MK1 under Preferences ▸ Audio ▸ MIDI Outputs if nothing else uses it.
+                """
+        } catch {
+            result.alertStyle = .warning
+            result.messageText = "Couldn't uninstall the script"
+            result.informativeText = "\(error)"
+        }
+        result.runModal()
+        refreshScriptStatus()
     }
 
     private var kompleteKontrolView: some View {

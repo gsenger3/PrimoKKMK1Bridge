@@ -15,6 +15,7 @@ Tested on an S61 MK1 (firmware 72) with macOS 26 and REAPER 7.61.
 | [doc/NOTES.md](doc/NOTES.md) | The keyboard's USB HID protocol, as worked out here |
 | [doc/BUTTON_MAP.md](doc/BUTTON_MAP.md) | Which HID bit each button sets |
 | [design/](design/nks.md) | The spec for the Komplete Kontrol view |
+| [reaper/](reaper/PrimoKKMK1Bridge_TrackColor.lua) | A script for REAPER that sends the selected track's colour to the bridge, for the keys' light guide |
 | [tools/](tools/) | HID and MIDI monitors, the capture tool, and a stand-in REAPER for testing |
 | [device/](device/) | Raw captures and test results |
 
