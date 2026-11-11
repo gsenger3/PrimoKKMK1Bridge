@@ -11,7 +11,8 @@ and DrivenByMoss send. That switches it from MIDI mode to native mode, where eve
 and knob turn is reported over USB HID. PrimoKKMK1Bridge translates those reports into MIDI CCs. Protocol
 details are in [NOTES.md](../doc/NOTES.md).
 
-**Every control's job and CC in every mode, on one page:** [CONTROLS.md](../doc/CONTROLS.md).
+**Using it:** the [user guide](../doc/GUIDE.md) covers installing, setup, every mode and view, and every default
+assignment. This README is about building, configuring and testing the bridge.
 
 ## Build and run
 
@@ -334,17 +335,8 @@ issues #11, #12 and #13 changed the defaults, so they keep testing what they wer
 
 `build/PrimoKKMK1Bridge --show-font` draws every character the displays can show.
 
-## Start at login (optional, not installed)
+## Start at login
 
-[local.PrimoKKMK1Bridge.plist](local.PrimoKKMK1Bridge.plist) is a LaunchAgent template with this folder's paths. It runs the bridge with its default config file. To install it:
-
-```bash
-cp bridge/local.PrimoKKMK1Bridge.plist ~/Library/LaunchAgents/
-```
-
-```bash
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/local.PrimoKKMK1Bridge.plist
-```
-
-Logs go to `/tmp/PrimoKKMK1Bridge.log`. To remove it, run `launchctl bootout gui/$(id -u)/local.PrimoKKMK1Bridge` and delete the file.
-Running from a LaunchAgent hasn't been tested yet.
+See [Start the bridge at login](../doc/GUIDE.md#start-the-bridge-at-login) in the user guide. It sets up a
+LaunchAgent for the bridge inside the editor app, which restarts it after a crash but not after you turn it off
+with the editor's switch.

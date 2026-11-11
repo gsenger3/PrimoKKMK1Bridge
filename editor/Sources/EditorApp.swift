@@ -9,7 +9,7 @@
 //  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
 //
 //  The editor app's entry point: its window, the File menu (Open, Save, Save As, Revert), the Bridge menu
-//  (Start, Stop, Show Log), and the prompt to save changes before quitting.
+//  (Start, Stop, Show Log), the Help menu (the user guide on GitHub), and the prompt to save changes before quitting.
 
 import AppKit
 import SwiftUI
@@ -27,6 +27,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return model.confirmDiscard(before: "quitting") ? .terminateNow : .terminateCancel
     }
 }
+
+/// The user guide, doc/GUIDE.md, on GitHub.
+let userGuideURL = URL(string: "https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/doc/GUIDE.md")!
 
 @main
 struct PrimoKKMK1EditorApp: App {
@@ -58,6 +61,10 @@ struct PrimoKKMK1EditorApp: App {
                     .keyboardShortcut("s", modifiers: [.command, .shift])
                 Button("Revert to Saved") { model.revert() }
                     .disabled(!model.isDirty)
+            }
+            CommandGroup(replacing: .help) {
+                Button("Primo KK MK1 Control Editor Help") { NSWorkspace.shared.open(userGuideURL) }
+                    .keyboardShortcut("?", modifiers: .command)
             }
             CommandMenu("Bridge") {
                 Button("Start Bridge") { model.startBridge() }

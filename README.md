@@ -11,7 +11,7 @@ Tested on an S61 MK1 (firmware 72) with macOS 26 and REAPER 7.61.
 | --- | --- |
 | [bridge/](bridge/README.md) | The bridge: its Swift sources, config, and how to build, run and set up REAPER |
 | [editor/](bridge/README.md#editor) | PrimoKKMK1Bridge Editor, a Mac app for changing the assignments on a drawing of the keyboard |
-| [doc/CONTROLS.md](doc/CONTROLS.md) | Every control's job and CC in every mode |
+| [doc/GUIDE.md](doc/GUIDE.md) | **The user guide:** installing, setup, starting at login, every mode and view, and every default assignment, with pictures. The editor's Help menu opens it |
 | [doc/NOTES.md](doc/NOTES.md) | The keyboard's USB HID protocol, as worked out here |
 | [doc/BUTTON_MAP.md](doc/BUTTON_MAP.md) | Which HID bit each button sets |
 | [design/](design/nks.md) | The spec for the Komplete Kontrol view |
