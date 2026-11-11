@@ -21,7 +21,8 @@ enum ReaperCommand: Equatable {
     case goToStart, previousMarker, nextMarker, recordMode, undo, redo, browseFX, closeFX, panic
     case saveProject, renderProject
     case screenset(Int)  // REAPER window set 1-10
-    case action(Int)
+    case action(Int)      // a main-section REAPER action, by command ID
+    case midiAction(Int)  // a MIDI Editor action, by its own command ID (it acts on the open MIDI editor)
 
     static let named: [(String, ReaperCommand)] = [
         ("play", .play), ("stop", .stop), ("record", .record), ("repeat", .repeatToggle),
@@ -35,7 +36,8 @@ enum ReaperCommand: Equatable {
         ("save-project", .saveProject), ("render-project", .renderProject),
     ]
     static var validNames: String {
-        named.map(\.0).joined(separator: ", ") + ", screenset:<1-10>, action:<REAPER command ID>"
+        named.map(\.0).joined(separator: ", ")
+            + ", screenset:<1-10>, action:<REAPER command ID>, midiaction:<MIDI Editor command ID>"
     }
 
     init?(_ s: String) {
@@ -47,6 +49,11 @@ enum ReaperCommand: Equatable {
         if s.hasPrefix("action:") {
             guard let id = Int(s.dropFirst(7)), id > 0, id <= Int(Int32.max) else { return nil }
             self = .action(id)
+            return
+        }
+        if s.hasPrefix("midiaction:") {
+            guard let id = Int(s.dropFirst(11)), id > 0, id <= Int(Int32.max) else { return nil }
+            self = .midiAction(id)
             return
         }
         guard let c = Self.named.first(where: { $0.0 == s })?.1 else { return nil }

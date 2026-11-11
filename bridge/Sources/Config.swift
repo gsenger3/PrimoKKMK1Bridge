@@ -88,15 +88,20 @@ struct ReaperConfig: Codable {
     var kompleteKontrol = KKViewConfig()
     var buttons: [String: String?] = [
         "Play": "play", "Stop": "stop", "Rec": "record", "Loop": "repeat", "Rewind": "rewind", "FastForward": "forward",
-        "NavUp": "next-track", "NavDown": "previous-track",  // the buttons under the big knob: track number up / down
+        "NavUp": "action:1012", "NavDown": "action:1011",  // under the big knob: View: Zoom in / out horizontal
         "PageLeft": "previous-page", "PageRight": "next-page", "Instance": "toggle-view", "Back": "undo",
         "Browse": "browse-fx", "NavigateClick": "panic", "Enter": "save-project",
-        "Scale": "screenset:1", "Arp": "screenset:2",
+        "PresetUp": "screenset:1", "PresetDown": "screenset:2",
+        "Scale": "action:40716",  // View: toggle show MIDI editor windows
+        "Arp": "action:40403",    // Automation: Set track automation mode to write
     ]
     /// Commands for buttons pressed while Shift is held; other Shift + button presses send their CC on the Shift channel.
     var shiftButtons: [String: String?] = [
         "Rec": "metronome", "Stop": "go-to-start", "Rewind": "previous-marker", "FastForward": "next-marker",
         "Loop": "record-mode", "Back": "redo", "Browse": "close-fx", "Enter": "render-project",
+        "Scale": "midiaction:40481",  // MIDI Editor: Options: MIDI inputs as step input mode
+        "Arp": "action:40400",        // Automation: Set track automation mode to trim/read
+        "NavUp": "action:40111", "NavDown": "action:40112",  // View: Zoom in / out vertical
     ]
 
     enum CodingKeys: String, CodingKey {

@@ -83,13 +83,13 @@ In REAPER mode most buttons run REAPER commands over OSC. A Shift combination no
 | Enter | Save project | Open the Render dialog (click *Render* there) |
 | Browse | Open the selected track's first plugin window; each press opens the next one | Close the selected track's plugin windows |
 | Navigate knob press | MIDI panic: all notes off, all sounds off | CC90, channel 2 |
-| Scale | Load screenset 1 | CC109, channel 2 |
-| Arp | Load screenset 2 | CC110, channel 2 |
+| Scale | Show / hide the MIDI editor windows | MIDI inputs as step input, on / off (in the open MIDI editor) |
+| Arp | Track automation mode: write | Track automation mode: trim/read |
 | Instance | Next view | CC116, channel 2 |
-| Navigate ▲ / ▼ | Next / previous track (Komplete Kontrol view: CC41 / 40) | CC86 / 87, channel 2 |
+| Navigate ▲ / ▼ | Zoom in / out horizontally (Komplete Kontrol view: CC41 / 40) | Zoom in / out vertically |
 | Navigate knob turn | Scroll through tracks | CC30, channel 2 |
 | Navigate ◀ / ▶ | CC88 / 89, channel 1 (Komplete Kontrol view: CC42 / 43) | CC88 / 89, channel 2 |
-| Preset ▲ / ▼ | CC119 / 85, channel 1 (Komplete Kontrol view: CC37 / 36) | CC119 / 85, channel 2 |
+| Preset ▲ / ▼ | Load screenset 1 / 2 (Komplete Kontrol view: CC37 / 36) | CC119 / 85, channel 2 |
 | Page ◀ / ▶ | Mix: previous / next 8 tracks. Track: previous / next knob page. Komplete Kontrol: CC42 / 43, like Navigate ◀ / ▶ | CC113 / 114, channel 2 |
 | Octave − / + | Transpose the keys, plus CC111 / 112, channel 1 | CC111 / 112, channel 2 |
 | Shift | Holds the Shift layer; also sends CC108, channel 1 | — |
@@ -111,7 +111,7 @@ The left display shows *MIX* and the tracks on the knobs, such as *9-16*. Each k
 
 ## REAPER Track view
 
-The knobs control the selected track, and the Instance light is at medium brightness. Picking a track with Navigate ▲ / ▼ or the Navigate knob also makes it REAPER's only selected track and scrolls it into view.
+The knobs control the selected track, and the Instance light is at medium brightness. Picking a track with the Navigate knob also makes it REAPER's only selected track and scrolls it into view.
 
 | Knob | Page 1 | Shift + turn on page 1 |
 | --- | --- | --- |

@@ -1,3 +1,12 @@
 {
-  "reaper": { "enabled": true, "sendPort": 18000, "receivePort": 19000 }
+  "_note": "The REAPER button assignments these recorded tests were made with, before issues #11 and #12 changed the defaults (Navigate up/down: tracks; Scale/Arp: screensets 1/2; Preset up/down: their CCs). reaper_defaults_test uses reaper_defaults_config.json, which has the current defaults.",
+  "reaper": {
+    "enabled": true, "sendPort": 18000, "receivePort": 19000,
+    "buttons": {
+      "NavUp": "next-track", "NavDown": "previous-track",
+      "Scale": "screenset:1", "Arp": "screenset:2",
+      "PresetUp": null, "PresetDown": null
+    },
+    "shiftButtons": { "Scale": null, "Arp": null, "NavUp": null, "NavDown": null }
+  }
 }

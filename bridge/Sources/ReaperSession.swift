@@ -158,6 +158,9 @@ final class ReaperSession {
             onEvent?(.recordMode)
         case .solo: send("/track/solo/toggle")
         case .action(let id): send("/action", [.int(Int32(id))])
+        // MIDI Editor actions have their own command IDs, which overlap the main section's (40481 there saves
+        // window set #08), so they go out as /midiaction, which REAPER runs in the open MIDI editor.
+        case .midiAction(let id): send("/midiaction", [.int(Int32(id))])
         case .rewind, .forward: break
         }
     }

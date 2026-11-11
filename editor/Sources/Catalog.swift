@@ -150,6 +150,18 @@ let commandSections: [CommandSection] = [
         CommandInfo(name: "close-fx", title: "Close the selected track's plugin windows", short: "Close FX"),
         CommandInfo(name: "panic", title: "MIDI panic: all notes off", short: "Panic"),
     ]),
+    // REAPER actions by command ID that the REAPER-mode defaults use, with names (IDs checked in REAPER 7.61).
+    // MIDI Editor actions have their own IDs and go out as midiaction:<ID>.
+    CommandSection(title: "REAPER actions", items: [
+        CommandInfo(name: "action:1012", title: "View: Zoom in horizontal", short: "Zoom in"),
+        CommandInfo(name: "action:1011", title: "View: Zoom out horizontal", short: "Zoom out"),
+        CommandInfo(name: "action:40111", title: "View: Zoom in vertical", short: "Zoom in ↕"),
+        CommandInfo(name: "action:40112", title: "View: Zoom out vertical", short: "Zoom out ↕"),
+        CommandInfo(name: "action:40403", title: "Automation: track mode write", short: "Auto write"),
+        CommandInfo(name: "action:40400", title: "Automation: track mode trim/read", short: "Auto trim"),
+        CommandInfo(name: "action:40716", title: "View: Show / hide MIDI editor windows", short: "MIDI editor"),
+        CommandInfo(name: "midiaction:40481", title: "MIDI Editor: MIDI inputs as step input", short: "Step input"),
+    ]),
 ]
 
 let commandsByName: [String: CommandInfo] = Dictionary(
@@ -157,12 +169,15 @@ let commandsByName: [String: CommandInfo] = Dictionary(
 
 /// The default REAPER action ID offered when you pick "Run a REAPER action" (Transport: Play/stop).
 let defaultActionID = 40044
+/// The default MIDI Editor action ID offered when you pick "Run a MIDI Editor action" (step input on / off).
+let defaultMIDIActionID = 40481
 
 func commandTitle(_ command: String?) -> String {
     guard let c = command else { return "None" }
     if let info = commandsByName[c] { return info.title }
     if c.hasPrefix("screenset:") { return "Load screenset \(c.dropFirst(10))" }
     if c.hasPrefix("action:") { return "Run REAPER action \(c.dropFirst(7))" }
+    if c.hasPrefix("midiaction:") { return "Run MIDI Editor action \(c.dropFirst(11))" }
     return c
 }
 
@@ -171,6 +186,7 @@ func commandShort(_ command: String?) -> String {
     if let info = commandsByName[c] { return info.short }
     if c.hasPrefix("screenset:") { return "Screen \(c.dropFirst(10))" }
     if c.hasPrefix("action:") { return "Act \(c.dropFirst(7))" }
+    if c.hasPrefix("midiaction:") { return "MIDI \(c.dropFirst(11))" }
     return c
 }
 

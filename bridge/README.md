@@ -157,7 +157,8 @@ mode can be changed under `reaper.kompleteKontrol`.
 
 | Control | Does |
 |---|---|
-| Navigate ▲ / ▼ (under the big knob), turning the Navigate knob | ▲ selects the next track (number up), ▼ the previous one (in the Komplete Kontrol view ▲ / ▼ send their CCs instead); turning the knob scrolls through tracks. While you switch, the displays show only *TRK* and the track number (left) and its name across the others; the knobs' values appear 2 seconds after you stop (`reaper.trackNameSeconds`), or as soon as you touch a knob. In track view the track also becomes REAPER's selected track (only it) and is scrolled into view (`reaper.mirrorSelection`) |
+| Navigate ▲ / ▼ (under the big knob) | Zoom in / out horizontally (REAPER's *View: Zoom in / out horizontal*, actions 1012 / 1011); Shift + ▲ / ▼: zoom in / out vertically (*View: Zoom in / out vertical*, 40111 / 40112). In the Komplete Kontrol view ▲ / ▼ send their CCs instead |
+| Turning the Navigate knob | Scrolls through tracks. While you switch, the displays show only *TRK* and the track number (left) and its name across the others; the knobs' values appear 2 seconds after you stop (`reaper.trackNameSeconds`), or as soon as you touch a knob. In track view the track also becomes REAPER's selected track (only it) and is scrolled into view (`reaper.mirrorSelection`) |
 | Touch a knob | Frames its value bar while the display updates in place (the other displays stay as they are, so you can adjust several at once), and tells REAPER the fader is touched (for *Touch* automation) |
 | Play, Stop, Rec, Loop, ◀◀, ▶▶ | REAPER's transport; Play, Rec and Loop light up with REAPER's state |
 | Shift + Rec | Metronome on / off; while Shift is held, the Rec light shows whether it's on |
@@ -172,8 +173,10 @@ mode can be changed under `reaper.kompleteKontrol`.
 | Browse | Opens the selected track's first plugin window; each press closes it and opens the next one (after the last, back to the first). The displays show which (*FX 2/3* and its name). Lit while a plugin window of the track is open |
 | Pressing the big Navigate knob | MIDI panic: REAPER's *Send all-notes-off and all-sounds-off to all MIDI outputs/plug-ins*; the displays show *PANIC* for a moment |
 | Enter | Save the project (REAPER's *File: Save project*) |
-| Scale / Arp | Load REAPER screenset (window set) 1 / 2; the displays show *SCREEN · SET 1* and the screenset's name on the third display |
-| Preset ▲ / ▼, Navigate ◀ / ▶, Octave −/+ | Their MIDI CCs on channel 1, for MIDI learn (Preset and Navigate: the Komplete Kontrol CCs in that view) |
+| Preset ▲ / ▼ | Load REAPER screenset (window set) 1 / 2; the displays show *SCREEN · SET 1* and the screenset's name on the third display. In the Komplete Kontrol view they send their CCs instead |
+| Scale | Show / hide the MIDI editor windows (*View: toggle show MIDI editor windows*, 40716); Shift + Scale: MIDI inputs as step input on / off, in the open MIDI editor (MIDI Editor action 40481) |
+| Arp | Set the selected track's automation mode to write (*Automation: Set track automation mode to write*, 40403); Shift + Arp: trim/read (40400) |
+| Navigate ◀ / ▶, Octave −/+ | Their MIDI CCs on channel 1, for MIDI learn (Navigate: the Komplete Kontrol CCs in that view) |
 
 The selected track also follows the track you click in REAPER (`followSelectedTrack`). Send levels and pages
 cover up to 16 sends per track; the master track isn't on the knobs.
@@ -276,12 +279,12 @@ leave out keeps its default. A running bridge applies a saved change by itself.
 | `reaper.followSelectedTrack` | `true`: the selected track follows the track last clicked in REAPER |
 | `reaper.knobFullRange` | How far to turn a knob for a fader's full range, in raw knob units (default 600; lower = faster) |
 | `reaper.trackNameSeconds` | After a track change, how long only the track's number and name show before the knobs' values (default 2; 0 = only until REAPER has sent the new track's values). Touching a knob ends it early |
-| `reaper.mirrorSelection` | `true` (default): in track view, a track picked with ▲ / ▼ or the Navigate knob becomes REAPER's only selected track and is scrolled into view. Clicking tracks in REAPER is never overridden |
+| `reaper.mirrorSelection` | `true` (default): in track view, a track picked with the Navigate knob (or a button set to `next-track` / `previous-track`) becomes REAPER's only selected track and is scrolled into view. Clicking tracks in REAPER is never overridden |
 | `reaper.resourcePath` | REAPER's resource folder, for the screenset names in `reaper-screensets.ini` (default `~/Library/Application Support/REAPER`) |
 | `reaper.kompleteKontrol` | The Komplete Kontrol view: `channel` (default 1), `encoderCCs` (8 CCs, default 21–28), `encoderMode` (same modes as `knobMode`, default `absolute`), and `buttons` (button name → CC; default Preset Up 37, Preset Down 36, Nav Up 41, Nav Down 40, Nav Left 42, Nav Right 43, Page Left 42, Page Right 43). The earlier `pageButtons`, `presetButtons` and `hostParameters` keys are ignored |
 | `reaper.navigateTurn` | What turning the Navigate knob steps through: `tracks` (default), `pages`, or `null` for its CC |
-| `reaper.buttons` | Button name → REAPER command, or `null` to give the button back its CC. Commands: `play`, `stop`, `record`, `repeat`, `rewind`, `forward`, `metronome` (on/off), `record-mode` (normal / time-selection auto-punch), `go-to-start`, `previous-marker`, `next-marker`, `undo`, `redo`, `browse-fx`, `close-fx`, `panic` (all notes off), `save-project`, `render-project`, `screenset:1` … `screenset:10` (load that window set), `previous-track`, `next-track`, `previous-page`, `next-page`, `toggle-view`, `mute`, `solo` (the selected track), or `action:<ID>` to run any REAPER action (right-click it in REAPER's Action List → *Copy selected action command ID*) |
-| `reaper.shiftButtons` | The same, for buttons pressed while Shift is held (default: Rec → `metronome`, Loop → `record-mode`, Stop → `go-to-start`, Rewind → `previous-marker`, FastForward → `next-marker`, Back → `redo`, Browse → `close-fx`, Enter → `render-project`). Shift + a button not listed here sends its CC on the Shift channel |
+| `reaper.buttons` | Button name → REAPER command, or `null` to give the button back its CC. Commands: `play`, `stop`, `record`, `repeat`, `rewind`, `forward`, `metronome` (on/off), `record-mode` (normal / time-selection auto-punch), `go-to-start`, `previous-marker`, `next-marker`, `undo`, `redo`, `browse-fx`, `close-fx`, `panic` (all notes off), `save-project`, `render-project`, `screenset:1` … `screenset:10` (load that window set), `previous-track`, `next-track`, `previous-page`, `next-page`, `toggle-view`, `mute`, `solo` (the selected track), `action:<ID>` to run any REAPER action (right-click it in REAPER's Action List → *Copy selected action command ID*), or `midiaction:<ID>` for an action from the Action List's MIDI Editor section, which runs in the open MIDI editor (its IDs overlap the main section's, so use `midiaction:` for them). Defaults: Play, Stop, Rec, Loop, ◀◀, ▶▶ → transport; Navigate ▲ / ▼ → `action:1012` / `action:1011` (zoom in / out); Page ◀ / ▶ → `previous-page` / `next-page`; Instance → `toggle-view`; Back → `undo`; Browse → `browse-fx`; Navigate knob press → `panic`; Enter → `save-project`; Preset ▲ / ▼ → `screenset:1` / `screenset:2`; Scale → `action:40716`; Arp → `action:40403` |
+| `reaper.shiftButtons` | The same, for buttons pressed while Shift is held (default: Rec → `metronome`, Loop → `record-mode`, Stop → `go-to-start`, Rewind → `previous-marker`, FastForward → `next-marker`, Back → `redo`, Browse → `close-fx`, Enter → `render-project`, Scale → `midiaction:40481`, Arp → `action:40400`, NavUp → `action:40111`, NavDown → `action:40112`). Shift + a button not listed here sends its CC on the Shift channel |
 
 Relative modes suit endless knobs best, but your DAW has to be told which relative format to expect
 (for example in Ableton Live's MIDI map, set the control's mode to the matching "Relative" type).
@@ -322,6 +325,11 @@ python3 tools/fake_reaper.py --listen 18000 --send 19000 --seconds 8 &
 ```bash
 build/PrimoKKMK1Bridge --replay device/tests/reaper_sim/synthetic_reaper_test.log --config device/tests/reaper_sim/reaper_test_config.json
 ```
+
+`reaper_test_config.json` keeps the REAPER button assignments the recorded tests were made with, from before
+issues #11 and #12 changed the defaults, so they keep testing what they were written for. A test with its own
+`<name>_config.json` uses that instead: `reaper_defaults_test` checks the current defaults with
+`reaper_defaults_config.json`.
 
 `build/PrimoKKMK1Bridge --show-font` draws every character the displays can show.
 

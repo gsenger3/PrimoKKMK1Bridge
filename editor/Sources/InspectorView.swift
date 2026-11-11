@@ -62,7 +62,8 @@ struct IntField: View {
     }
 }
 
-/// A REAPER command for a button: none (the button sends its CC), a named command, a screenset or an action ID.
+/// A REAPER command for a button: none (the button sends its CC), a named command, a screenset, or a REAPER or
+/// MIDI Editor action by ID.
 struct CommandPicker: View {
     let title: String
     @Binding var command: String?
@@ -72,8 +73,10 @@ struct CommandPicker: View {
         Binding(
             get: {
                 guard let c = command else { return "" }
+                if commandsByName[c] != nil { return c }  // a named command, or an action listed by name
                 if c.hasPrefix("screenset:") { return "screenset" }
                 if c.hasPrefix("action:") { return "action" }
+                if c.hasPrefix("midiaction:") { return "midiaction" }
                 return c
             },
             set: { k in
@@ -81,6 +84,7 @@ struct CommandPicker: View {
                 case "": command = nil
                 case "screenset": command = "screenset:1"
                 case "action": command = "action:\(defaultActionID)"
+                case "midiaction": command = "midiaction:\(defaultMIDIActionID)"
                 default: command = k
                 }
             })
@@ -97,6 +101,7 @@ struct CommandPicker: View {
             Section("REAPER") {
                 Text("Load a screenset…").tag("screenset")
                 Text("Run a REAPER action by ID…").tag("action")
+                Text("Run a MIDI Editor action by ID…").tag("midiaction")
             }
         }
         if let c = command, c.hasPrefix("screenset:") {
@@ -105,7 +110,7 @@ struct CommandPicker: View {
                 Stepper("\(n)", value: Binding(get: { n }, set: { command = "screenset:\($0)" }), in: 1...10)
             }
         }
-        if let c = command, c.hasPrefix("action:") {
+        if let c = command, kind.wrappedValue == "action" {
             let id = Int(c.dropFirst(7)) ?? defaultActionID
             LabeledContent("Action ID") {
                 TextField("", value: Binding(get: { id }, set: { command = "action:\(max(1, $0))" }), format: .number.grouping(.never))
@@ -113,6 +118,16 @@ struct CommandPicker: View {
                     .frame(width: 80)
             }
             Text("In REAPER's Action List, right-click an action and choose Copy selected action command ID.")
+                .font(.caption).foregroundStyle(.secondary)
+        }
+        if let c = command, kind.wrappedValue == "midiaction" {
+            let id = Int(c.dropFirst(11)) ?? defaultMIDIActionID
+            LabeledContent("MIDI Editor action ID") {
+                TextField("", value: Binding(get: { id }, set: { command = "midiaction:\(max(1, $0))" }), format: .number.grouping(.never))
+                    .multilineTextAlignment(.trailing)
+                    .frame(width: 80)
+            }
+            Text("From the MIDI Editor section of REAPER's Action List. It acts on the open MIDI editor.")
                 .font(.caption).foregroundStyle(.secondary)
         }
     }
