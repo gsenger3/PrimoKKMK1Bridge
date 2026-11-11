@@ -55,22 +55,22 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            Section("MIDI port") {
+            Section("MIDI Configuration") {
                 TextField("Port name", text: $model.config.portName)
                 IntField(title: "Channel", value: $model.config.channel, range: 1...16)
-                Toggle("Shift layer", isOn: shiftOn)
+                Toggle("Shift Layer Enabled", isOn: shiftOn)
                 if model.config.shiftChannel != nil {
-                    IntField(title: "Shift layer channel", value: shiftChannel, range: 1...16)
+                    IntField(title: "Shift Layer Channel", value: shiftChannel, range: 1...16)
                 }
                 Text("The name DAWs see for the bridge's MIDI input and output. Renaming it means picking it again in your DAW. With the Shift layer on, buttons and knobs send on its channel while Shift is held.")
                     .font(.caption).foregroundStyle(.secondary)
             }
 
-            Section("Keys") {
-                Picker("Merge the keys into the port", selection: keysChoice) {
-                    Text("Automatic (the keyboard's Port 1)").tag("auto")
-                    Text("From a MIDI source by name").tag("name")
-                    Text("Don't merge").tag("none")
+            Section("MIDI Keys & Controls") {
+                Picker("Merge Keys and Controls", selection: keysChoice) {
+                    Text("Automatic (Port 1)").tag("auto")
+                    Text("From MIDI Source by Name").tag("name")
+                    Text("Disabled").tag("none")
                 }
                 if keysChoice.wrappedValue == "name" {
                     TextField("MIDI source name", text: keysName)
@@ -79,22 +79,22 @@ struct SettingsView: View {
                     .font(.caption).foregroundStyle(.secondary)
             }
 
-            Section("Lights and displays") {
-                Toggle("Drive the button lights", isOn: $model.config.lights)
+            Section("Lights and Displays") {
+                Toggle("Enabled", isOn: $model.config.lights)
                 if model.config.lights {
-                    IntField(title: "Lit brightness", value: $model.config.lightBrightness, range: 0...255)
-                    IntField(title: "Idle glow", value: $model.config.lightIdleBrightness, range: 0...255)
+                    IntField(title: "Active Brightness", value: $model.config.lightBrightness, range: 0...255)
+                    IntField(title: "Idle Brightness", value: $model.config.lightIdleBrightness, range: 0...255)
                 }
-                Toggle("Drive the displays", isOn: $model.config.displays)
+                Toggle("Enable Displays", isOn: $model.config.displays)
             }
 
-            Section("REAPER") {
-                Toggle("REAPER mode", isOn: $model.config.reaper.enabled)
+            Section("REAPER Mode") {
+                Toggle("Enabled", isOn: $model.config.reaper.enabled)
                 // Everything else about REAPER and the Komplete Kontrol view only shows while REAPER mode is on.
                 if model.config.reaper.enabled {
-                    TextField("REAPER's address", text: $model.config.reaper.host)
-                    IntField(title: "REAPER's local listen port", value: $model.config.reaper.sendPort, range: 1...65535)
-                    IntField(title: "REAPER's device port", value: $model.config.reaper.receivePort, range: 1...65535)
+                    TextField("Address", text: $model.config.reaper.host)
+                    IntField(title: "Local Listen Port", value: $model.config.reaper.sendPort, range: 1...65535)
+                    IntField(title: "Device Port", value: $model.config.reaper.receivePort, range: 1...65535)
                     Text("These match REAPER's Preferences ▸ Control/OSC/web ▸ OSC device: Local listen port (default 8000) and Device port (default 9000).")
                         .font(.caption).foregroundStyle(.secondary)
                 }
@@ -107,7 +107,7 @@ struct SettingsView: View {
             }
 
             Section {
-                Button("Reset every assignment to its default…") {
+                Button("Reset to Default Settings…") {
                     let a = NSAlert()
                     a.messageText = "Reset every assignment to its default?"
                     a.informativeText = "REAPER mode stays as it is. Nothing is written until you save."
@@ -123,15 +123,15 @@ struct SettingsView: View {
     }
 
     private var reaperViews: some View {
-        Section("REAPER views") {
-            Picker("Start in", selection: startView) {
+        Section("REAPER Views") {
+            Picker("Default View", selection: startView) {
                 Text("Mix view").tag("mix")
                 Text("Track view").tag("track")
                 Text("Komplete Kontrol view").tag("komplete-kontrol")
             }
-            Toggle("Follow the track selected in REAPER", isOn: $model.config.reaper.followSelectedTrack)
-            Toggle("Select the keyboard's track in REAPER (track view)", isOn: $model.config.reaper.mirrorSelection)
-            LabeledContent("Track name shows for") {
+            Toggle("Follow REAPER Track Selection", isOn: $model.config.reaper.followSelectedTrack)
+            Toggle("Select Active Keyboard Track in REAPER (Track View)", isOn: $model.config.reaper.mirrorSelection)
+            LabeledContent("Track Name Display Duration") {
                 HStack {
                     TextField("", value: $model.config.reaper.trackNameSeconds, format: .number.precision(.fractionLength(0...1)))
                         .multilineTextAlignment(.trailing)
@@ -140,15 +140,15 @@ struct SettingsView: View {
                     Text("seconds")
                 }
             }
-            TextField("REAPER resource folder", text: $model.config.reaper.resourcePath)
+            TextField("REAPER Resource Folder", text: $model.config.reaper.resourcePath)
             Text("The resource folder is where REAPER keeps reaper-screensets.ini, for the screenset names on the displays.")
                 .font(.caption).foregroundStyle(.secondary)
         }
     }
 
     private var lightGuideSettings: some View {
-        Section("Track colour on the keys") {
-            Toggle("Show the selected track's colour on the keys", isOn: $model.config.reaper.lightGuide)
+        Section("Reaper Lightguide") {
+            Toggle("Enable Lightguide", isOn: $model.config.reaper.lightGuide)
             if model.config.reaper.lightGuide {
                 LabeledContent("Brightness") {
                     HStack {
@@ -160,7 +160,7 @@ struct SettingsView: View {
                     }
                 }
             }
-            LabeledContent("REAPER script") {
+            LabeledContent("REAPER Integration") {
                 HStack(spacing: 8) {
                     Text(scriptStatusText).foregroundStyle(.secondary)
                     if scriptStatus.anyInstalled {
@@ -169,12 +169,12 @@ struct SettingsView: View {
                         }
                         Button("Uninstall…") { uninstallScript() }
                     } else {
-                        Button("Install in REAPER…") { installScript() }
+                        Button("Install…") { installScript() }
                             .disabled(!scriptStatus.resourceFolderFound)
                     }
                 }
             }
-            Text("REAPER doesn't send track colours over OSC, so a small script inside REAPER sends them. Install puts it in REAPER's Scripts folder (under Primo Studios) and has REAPER start it. Then enable Primo Komplete Kontrol MK1 as a MIDI output in REAPER's preferences, and restart REAPER. Uninstall removes the script and the line that starts it. Tracks without a colour leave the keys dark.")
+            Text("Enables the keyboard lightguide integration within Reaper. When enabled, the device lightguide will display the currently selected track color. Installation will install a Reaper script to the current user's Reaper Scripts folder. The lightguide will be active upon restart of Reaper. ")
                 .font(.caption).foregroundStyle(.secondary)
         }
         .onAppear { refreshScriptStatus() }
@@ -257,9 +257,9 @@ struct SettingsView: View {
     }
 
     private var kompleteKontrolView: some View {
-        Section("Komplete Kontrol view") {
-            IntField(title: "MIDI channel", value: $model.config.reaper.kompleteKontrol.channel, range: 1...16)
-            Picker("Knob values", selection: $model.config.reaper.kompleteKontrol.encoderMode) {
+        Section("Komplete Kontrol View") {
+            IntField(title: "MIDI Channel", value: $model.config.reaper.kompleteKontrol.channel, range: 1...16)
+            Picker("Knob Values", selection: $model.config.reaper.kompleteKontrol.encoderMode) {
                 ForEach(turnModes, id: \.self) { Text(turnModeTitle($0)).tag($0) }
             }
         }
