@@ -130,23 +130,35 @@ start REAPER selected track 1 "Kick"
 12:00:01.210 → REAPER /action 40716
 12:00:01.460 Arp down
 12:00:01.460 → REAPER /action 40403
-12:00:01.710 Shift down              CC108 ch1 = 127
-12:00:01.760 Shift + Scale down
-12:00:01.760 → REAPER /midiaction 40481
+12:00:01.710 NavLeft down
+12:00:01.710 → REAPER /action 40104
              display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
-12:00:01.860 Shift up                CC108 ch1 = 0
-12:00:02.060 Shift down              CC108 ch1 = 127
-12:00:02.110 Shift + Arp down
-12:00:02.110 → REAPER /action 40400
-12:00:02.210 Shift up                CC108 ch1 = 0
-12:00:02.410 Shift down              CC108 ch1 = 127
-12:00:02.460 Shift + NavUp down
-12:00:02.460 → REAPER /action 40111
-12:00:02.560 Shift up                CC108 ch1 = 0
-12:00:02.760 Shift down              CC108 ch1 = 127
-12:00:02.810 Shift + NavDown down
-12:00:02.810 → REAPER /action 40112
-12:00:02.910 Shift up                CC108 ch1 = 0
-replayed 310 HID reports from device/tests/reaper_sim/reaper_defaults_test.log
+12:00:01.960 NavRight down
+12:00:01.960 → REAPER /action 40105
+12:00:02.210 Shift down              CC108 ch1 = 127
+12:00:02.260 Shift + Scale down
+12:00:02.260 → REAPER /midiaction 40481
+12:00:02.360 Shift up                CC108 ch1 = 0
+12:00:02.560 Shift down              CC108 ch1 = 127
+12:00:02.610 Shift + Arp down
+12:00:02.610 → REAPER /action 40400
+12:00:02.710 Shift up                CC108 ch1 = 0
+12:00:02.910 Shift down              CC108 ch1 = 127
+12:00:02.960 Shift + NavUp down
+12:00:02.960 → REAPER /action 40111
+12:00:03.060 Shift up                CC108 ch1 = 0
+12:00:03.260 Shift down              CC108 ch1 = 127
+12:00:03.310 Shift + NavDown down
+12:00:03.310 → REAPER /action 40112
+12:00:03.410 Shift up                CC108 ch1 = 0
+12:00:03.610 Shift down              CC108 ch1 = 127
+12:00:03.660 Shift + NavLeft down
+12:00:03.660 → REAPER /action 40646
+12:00:03.760 Shift up                CC108 ch1 = 0
+12:00:03.960 Shift down              CC108 ch1 = 127
+12:00:04.010 Shift + NavRight down
+12:00:04.010 → REAPER /action 40647
+12:00:04.110 Shift up                CC108 ch1 = 0
+replayed 430 HID reports from device/tests/reaper_sim/reaper_defaults_test.log

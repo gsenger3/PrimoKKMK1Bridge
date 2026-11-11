@@ -88,7 +88,7 @@ In REAPER mode most buttons run REAPER commands over OSC. A Shift combination no
 | Instance | Next view | CC116, channel 2 |
 | Navigate ▲ / ▼ | Zoom in / out horizontally (Komplete Kontrol view: CC41 / 40) | Zoom in / out vertically |
 | Navigate knob turn | Scroll through tracks | CC30, channel 2 |
-| Navigate ◀ / ▶ | CC88 / 89, channel 1 (Komplete Kontrol view: CC42 / 43) | CC88 / 89, channel 2 |
+| Navigate ◀ / ▶ | Move the edit cursor left / right one pixel (Komplete Kontrol view: CC42 / 43) | Move the edit cursor to the previous / next grid division |
 | Preset ▲ / ▼ | Load screenset 1 / 2 (Komplete Kontrol view: CC37 / 36) | CC119 / 85, channel 2 |
 | Page ◀ / ▶ | Mix: previous / next 8 tracks. Track: previous / next knob page. Komplete Kontrol: CC42 / 43, like Navigate ◀ / ▶ | CC113 / 114, channel 2 |
 | Octave − / + | Transpose the keys, plus CC111 / 112, channel 1 | CC111 / 112, channel 2 |

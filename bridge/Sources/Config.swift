@@ -89,6 +89,7 @@ struct ReaperConfig: Codable {
     var buttons: [String: String?] = [
         "Play": "play", "Stop": "stop", "Rec": "record", "Loop": "repeat", "Rewind": "rewind", "FastForward": "forward",
         "NavUp": "action:1012", "NavDown": "action:1011",  // under the big knob: View: Zoom in / out horizontal
+        "NavLeft": "action:40104", "NavRight": "action:40105",  // View: Move cursor left / right one pixel
         "PageLeft": "previous-page", "PageRight": "next-page", "Instance": "toggle-view", "Back": "undo",
         "Browse": "browse-fx", "NavigateClick": "panic", "Enter": "save-project",
         "PresetUp": "screenset:1", "PresetDown": "screenset:2",
@@ -102,6 +103,7 @@ struct ReaperConfig: Codable {
         "Scale": "midiaction:40481",  // MIDI Editor: Options: MIDI inputs as step input mode
         "Arp": "action:40400",        // Automation: Set track automation mode to trim/read
         "NavUp": "action:40111", "NavDown": "action:40112",  // View: Zoom in / out vertical
+        "NavLeft": "action:40646", "NavRight": "action:40647",  // View: Move cursor left / right to grid division
     ]
 
     enum CodingKeys: String, CodingKey {
