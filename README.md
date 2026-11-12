@@ -63,7 +63,8 @@ also stops a bridge started this way.
   [Set up REAPER](bridge/README.md#set-up-reaper-once).
 - **Config file:** `~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json`. The bridge (or the editor) creates it with every default the first time, and saves go
   there. `--config FILE` runs the bridge with another file.
-- **REAPER mode:** a new config starts in plain MIDI mode. Turn REAPER mode on in the editor's Settings page.
+- **REAPER mode:** a new config starts in plain MIDI mode. Turn it on in the editor's Settings page, with
+  **Enabled** under **REAPER Mode**.
 - **Updates:** after pulling changes, run `editor/build.sh` again. It doesn't disturb a running bridge; turn the
   bridge off and on in the editor to run the new copy.
 

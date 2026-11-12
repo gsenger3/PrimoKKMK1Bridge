@@ -71,9 +71,11 @@ change it. It has four pages:
 - **MIDI:** the CC each control sends.
 - **REAPER:** the REAPER command each button runs, alone and with Shift, and the MIDI CC of any button that sends one in REAPER mode.
 - **Komplete Kontrol:** the Komplete Kontrol view's CCs, and its page and preset buttons.
-- **Settings:** the port name, channels, keys merge, lights, displays and REAPER connection.
+- **Settings:** MIDI Configuration (port name, channels), MIDI Keys & Controls (the keys merge), Lights and
+  Displays, REAPER Mode (on/off and the OSC connection), and, in REAPER mode, REAPER Views, Reaper Lightguide and
+  Komplete Kontrol View. [The editor](../doc/GUIDE.md#the-editor) in the user guide describes each one.
 
-REAPER mode is switched on and off on the Settings page. With it off, the editor shows the MIDI page; with it on, the REAPER and Komplete Kontrol pages instead.
+REAPER mode is switched on and off with **Enabled** under **REAPER Mode** on the Settings page. With it off, the editor shows the MIDI page; with it on, the REAPER and Komplete Kontrol pages instead.
 
 ```bash
 editor/build.sh
