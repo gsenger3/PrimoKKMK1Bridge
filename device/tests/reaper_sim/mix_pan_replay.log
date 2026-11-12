@@ -1,0 +1,354 @@
+start → REAPER /device/track/count 8
+start → REAPER /device/send/count 16
+start → REAPER /device/fx/count 16
+start → REAPER /device/fx/follows/device 1
+start → REAPER /device/fxparam/count 1
+start → REAPER /device/track/follows/last_touched 1
+start → REAPER /action 41743
+start REAPER connected (OSC on port 19000)
+             display |MIX     |        |        |        |        |        |        |        |        |
+             display |NO TRKS |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |-       |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |        |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |        |        |        |        |        |        |        |
+             display |1-1     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-      |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ |         |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |        |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |        |        |        |        |        |        |
+             display |1-2     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ |         |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |        |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |        |        |        |        |        |
+             display |1-3     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ |         |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |        |        |        |        |
+             display |1-4     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ |         |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
+             display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |        |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start REAPER selected track 1 "Kick"
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:00.810 Shift down              CC108 ch1 = 127
+12:00:00.920 → REAPER /track/3/pan/touch 1
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.030 → REAPER /track/3/pan 0.513333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |3%R     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.030 REAPER selected track 3 "Track 3"
+12:00:01.040 → REAPER /track/3/pan 0.526667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |5%R     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.050 → REAPER /track/3/pan 0.54
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |8%R     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.060 → REAPER /track/3/pan 0.553333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |11%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.070 → REAPER /track/3/pan 0.566667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |11%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |13%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.080 → REAPER /track/3/pan 0.58
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |16%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.090 → REAPER /track/3/pan 0.593333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |19%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.100 → REAPER /track/3/pan 0.606667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |21%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.110 → REAPER /track/3/pan 0.62
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |24%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.120 → REAPER /track/3/pan 0.633333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |27%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.330 → REAPER /track/3/pan 0.62
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |24%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.340 → REAPER /track/3/pan 0.606667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |21%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.350 → REAPER /track/3/pan 0.593333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |19%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.360 → REAPER /track/3/pan 0.58
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |16%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.370 → REAPER /track/3/pan 0.566667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |13%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    ## ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.380 → REAPER /track/3/pan 0.553333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |13%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |11%R    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.390 → REAPER /track/3/pan 0.54
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |8%R     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.400 → REAPER /track/3/pan 0.526667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |5%R     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.410 → REAPER /track/3/pan 0.513333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |3%R     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.420 → REAPER /track/3/pan 0.5
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.430 → REAPER /track/3/pan 0.486667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |3%L     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.440 → REAPER /track/3/pan 0.473333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |5%L     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.450 → REAPER /track/3/pan 0.46
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |8%L     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.460 → REAPER /track/3/pan 0.446667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |11%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[    #  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.470 → REAPER /track/3/pan 0.433333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |11%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[   ##  ]|     #   |     #   |     #   |     #   |     #   |
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |13%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[   ##  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.480 → REAPER /track/3/pan 0.42
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |16%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[   ##  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.490 → REAPER /track/3/pan 0.406667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |19%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[   ##  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.500 → REAPER /track/3/pan 0.393333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |21%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[   ##  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.510 → REAPER /track/3/pan 0.38
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |24%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[   ##  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.520 → REAPER /track/3/pan 0.366667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |[   ##  ]|     #   |     #   |     #   |     #   |     #   |
+12:00:01.730 → REAPER /track/3/pan/touch 0
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |    ##   |     #   |     #   |     #   |     #   |     #   |
+12:00:01.840 Shift up                CC108 ch1 = 0
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:02.150 → REAPER /track/1/volume/touch 1
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         |[######+]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:02.260 Shift down              CC108 ch1 = 127
+12:00:02.260 → REAPER /track/1/volume/touch 0
+12:00:02.260 → REAPER /track/1/pan/touch 1
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |[    #  ]|     #   |    ##   |     #   |     #   |     #   |     #   |     #   |
+12:00:02.370 → REAPER /track/1/pan 0.513333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |3%R     |CENTER  |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |[    #  ]|     #   |    ##   |     #   |     #   |     #   |     #   |     #   |
+12:00:02.370 REAPER selected track 1 "Kick"
+12:00:02.380 → REAPER /track/1/pan 0.526667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |5%R     |CENTER  |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |[    #  ]|     #   |    ##   |     #   |     #   |     #   |     #   |     #   |
+12:00:02.390 → REAPER /track/1/pan 0.54
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |8%R     |CENTER  |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |[    #  ]|     #   |    ##   |     #   |     #   |     #   |     #   |     #   |
+12:00:02.400 → REAPER /track/1/pan 0.553333
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |11%R    |CENTER  |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |[    #  ]|     #   |    ##   |     #   |     #   |     #   |     #   |     #   |
+12:00:02.410 → REAPER /track/1/pan 0.566667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |11%R    |CENTER  |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |[    ## ]|     #   |    ##   |     #   |     #   |     #   |     #   |     #   |
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |13%R    |CENTER  |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |[    ## ]|     #   |    ##   |     #   |     #   |     #   |     #   |     #   |
+12:00:02.620 Shift up                CC108 ch1 = 0
+12:00:02.620 → REAPER /track/1/pan/touch 0
+12:00:02.620 → REAPER /track/1/volume/touch 1
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         |[######+]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:02.730 → REAPER /track/1/volume 0.702667
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         |[######+]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |-0.33DB  |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         |[######+]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:02.740 → REAPER /track/1/volume 0.689333
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |-0.66DB  |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         |[######+]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:02.750 → REAPER /track/1/volume 0.676
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |-0.66DB  |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         |[###### ]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |-1.00DB  |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         |[###### ]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:02.760 → REAPER /track/1/volume 0.662667
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |-1.34DB  |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         |[###### ]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:02.770 → REAPER /track/1/volume 0.649333
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |-1.70DB  |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         |[###### ]| ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:02.980 → REAPER /track/1/volume/touch 0
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |-1.70DB  |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######  | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+12:00:03.290 Shift down              CC108 ch1 = 127
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |13%R    |CENTER  |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     ##  |     #   |    ##   |     #   |     #   |     #   |     #   |     #   |
+12:00:03.400 → REAPER /track/2/pan 0.566667
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |13%R    |CENTER  |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     ##  |     ##  |    ##   |     #   |     #   |     #   |     #   |     #   |
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |13%R    |13%R    |27%L    |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     ##  |     ##  |    ##   |     #   |     #   |     #   |     #   |     #   |
+             display |TRK 1   |SNARE   |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:03.400 REAPER selected track 2 "Snare"
+             display |TRK 2   |SNARE   |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:03.410 → REAPER /track/2/pan 0.633333
+12:00:03.420 → REAPER /track/2/pan 0.7
+12:00:03.430 → REAPER /track/2/pan 0.766667
+12:00:03.440 → REAPER /track/2/pan 0.833333
+12:00:03.450 → REAPER /track/2/pan 0.9
+12:00:03.460 → REAPER /track/2/pan 0.966667
+12:00:03.470 → REAPER /track/2/pan 1
+12:00:03.800 Shift up                CC108 ch1 = 0
+replayed 420 HID reports from device/tests/reaper_sim/mix_pan_test.log

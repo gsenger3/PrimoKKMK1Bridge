@@ -215,15 +215,27 @@ final class ReaperSession {
         }
     }
 
+    /// What Shift + turn changes, where that's a value of its own: in mix view, the track's pan (issue #16).
+    /// Elsewhere nil: track view's Shift + turn resets (Bridge.handleUI), and other knobs send their CC.
+    func shiftTarget(_ k: Int) -> KnobTarget? {
+        if case .bankVolume(let i)? = target(k) { return .bankPan(i) }
+        return nil
+    }
+
+    /// REAPER reports a centred pan as "C".
+    private func panValue(_ text: String) -> String { ["c", "center"].contains(text.lowercased()) ? "CENTER" : text }
+
     func info(_ t: KnobTarget) -> KnobInfo {
         switch t {
         case .bankVolume(let i):
             let s = bank[i]
             return KnobInfo(name: s.label, short: s.label, value: s.volumeText, bar: s.volume, isPan: false)
+        case .bankPan(let i):
+            let s = bank[i]
+            return KnobInfo(name: s.label, short: s.label, value: panValue(s.panText), bar: s.pan, isPan: true)
         case .volume: return KnobInfo(name: "Volume", short: "Volume", value: track.volumeText, bar: track.volume, isPan: false)
-        case .pan:  // REAPER reports a centred pan as "C"
-            let text = ["c", "center"].contains(track.panText.lowercased()) ? "CENTER" : track.panText
-            return KnobInfo(name: "Pan", short: "Pan", value: text, bar: track.pan, isPan: true)
+        case .pan:
+            return KnobInfo(name: "Pan", short: "Pan", value: panValue(track.panText), bar: track.pan, isPan: true)
         case .mute: return KnobInfo(name: "Mute", short: "Mute", value: track.mute ? "ON" : "off", bar: track.mute ? 1 : 0, isPan: false)
         case .solo: return KnobInfo(name: "Solo", short: "Solo", value: track.solo ? "ON" : "off", bar: track.solo ? 1 : 0, isPan: false)
         case .recArm:  // the monitoring state rides along: "ON MON", "off AUTO"
@@ -236,9 +248,9 @@ final class ReaperSession {
         }
     }
 
-    /// A knob turned by `d` raw units (positive = clockwise).
-    func turn(_ k: Int, raw d: Int) {
-        guard let t = target(k) else { return }
+    /// A knob turned by `d` raw units (positive = clockwise); with `shift`, what Shift + turn changes.
+    func turn(_ k: Int, raw d: Int, shift: Bool = false) {
+        guard let t = shift ? shiftTarget(k) : target(k) else { return }
         let delta = Double(d) / Double(cfg.knobFullRange)
         func moved(_ v: Double?) -> Double? {
             guard let v else { return nil }
@@ -250,6 +262,10 @@ final class ReaperSession {
             guard let n = moved(bank[i].volume) else { return }
             bank[i].volume = n
             setValue("/track/\(i + 1)/volume", n)
+        case .bankPan(let i):
+            guard let n = moved(bank[i].pan) else { return }
+            bank[i].pan = n
+            setValue("/track/\(i + 1)/pan", n)
         case .volume:
             guard let n = moved(track.volume) else { return }
             track.volume = n
@@ -315,44 +331,50 @@ final class ReaperSession {
         return true
     }
 
-    /// Shift + a volume knob (track view knob 1, or any knob in mix view): volume straight to 0 dB. Sent in dB,
-    /// since the 0-1 fader position of 0 dB depends on REAPER's fader settings.
+    /// Shift + the volume knob in track view: volume straight to 0 dB. Sent in dB, since the 0-1 fader position
+    /// of 0 dB depends on REAPER's fader settings. (In mix view, Shift + turn is the track's pan.)
     @discardableResult
     func resetVolume(_ k: Int) -> Bool {
-        let path: String
-        switch target(k) {
-        case .bankVolume(let i)?:
-            guard abs(bank[i].volumeDB ?? 1) > 0.01 else { return false }
-            bank[i].volumeDB = 0
-            path = "/track/\(i + 1)/volume"
-        case .volume?:
-            guard abs(track.volumeDB ?? 1) > 0.01 else { return false }
-            track.volumeDB = 0
-            path = "/track/volume"
-        default:
-            return false
-        }
+        guard target(k) == .volume, abs(track.volumeDB ?? 1) > 0.01 else { return false }
+        track.volumeDB = 0
+        let path = "/track/volume"
         lastSent[path] = nil  // take REAPER's new fader position
         send(path + "/db", [.float(0)])
         onEvent?(.values)
         return true
     }
 
-    /// Knob touch: tells REAPER the fader is being touched (for automation in touch mode).
-    func touch(_ k: Int, _ on: Bool) {
+    /// Where to tell REAPER a knob's value is touched, if it has a touch state.
+    private func touchPath(_ k: Int, shift: Bool) -> String? {
+        switch (shift ? shiftTarget(k) : nil) ?? target(k) {
+        case .bankVolume(let i)?: return "/track/\(i + 1)/volume/touch"
+        case .bankPan(let i)?: return "/track/\(i + 1)/pan/touch"
+        case .volume?: return "/track/volume/touch"
+        case .pan?: return "/track/pan/touch"
+        default: return nil
+        }
+    }
+
+    /// Knob touch: tells REAPER the fader (or, with Shift in mix view, the pan) is being touched, for automation
+    /// in touch mode.
+    func touch(_ k: Int, _ on: Bool, shift: Bool = false) {
         if on {
             toggleAccum[k] = 0
-            switch target(k) {
-            case .bankVolume(let i)?: touchAddress[k] = "/track/\(i + 1)/volume/touch"
-            case .volume?: touchAddress[k] = "/track/volume/touch"
-            case .pan?: touchAddress[k] = "/track/pan/touch"
-            default: touchAddress[k] = nil
-            }
+            touchAddress[k] = touchPath(k, shift: shift)
             if let a = touchAddress[k] { send(a, [.float(1)]) }
         } else if let a = touchAddress[k] {
             send(a, [.float(0)])  // released where it was touched, even if the view changed meanwhile
             touchAddress[k] = nil
         }
+    }
+
+    /// Shift pressed or released while a knob is touched: move the touch to what the knob now changes.
+    func retouch(_ k: Int, shift: Bool) {
+        let a = touchPath(k, shift: shift)
+        guard a != touchAddress[k] else { return }
+        if let old = touchAddress[k] { send(old, [.float(0)]) }
+        touchAddress[k] = a
+        if let a { send(a, [.float(1)]) }
     }
 
     private func setValue(_ address: String, _ v: Double) {

@@ -211,17 +211,19 @@ The full list of what each button does, alone and with Shift, is in [REAPER mode
 
 ### Mix view
 
-The default view. The 8 knobs are the volumes of 8 tracks.
+The default view. The 8 knobs are the volumes of 8 tracks, and with Shift held, their pans.
 
 | Control | Does |
 | --- | --- |
 | Knobs 1–8 | Volume of the 8 tracks on the knobs |
-| Shift + knob | Reset that track's volume to 0 dB |
-| Knob touch | Frames that knob's bar, and tells REAPER the fader is touched, for *Touch* automation |
+| Shift + knob | Pan of that track |
+| Knob touch | Frames that knob's bar, and tells REAPER the fader (with Shift held, the pan) is touched, for *Touch* automation |
 | Page ◀ / ▶ | Previous / next 8 tracks |
 
 The left display shows *MIX* and the tracks on the knobs, such as *9-16*. Each knob's display shows the track's name,
-its volume and a bar. Knobs past the last track stay blank, and the master track isn't on the knobs.
+its volume and a bar. While Shift is held, the left display shows *PAN*, and each knob's display shows the track's
+pan (*CENTER* at the centre) with a bar from the middle. Knobs past the last track stay blank, and the master track
+isn't on the knobs. To reset a volume to 0 dB, select the track and use Shift + knob 1 in [Track view](#track-view).
 
 ### Track view
 

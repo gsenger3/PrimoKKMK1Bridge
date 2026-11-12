@@ -198,6 +198,9 @@ final class Bridge {
             guard was != now else { continue }
             if def.bit == shiftBit {
                 if let cc = cfg.buttons[def.name] ?? nil { sendCC(cfg.channel, cc, now ? 127 : 0, "\(def.name) \(now ? "down" : "up")") }
+                if let r = reaper {  // knobs held through the change: touch what they change now (volume or pan)
+                    for k in 0..<8 where isSet(p, knobTouchFirstBit + k) && isSet(b, knobTouchFirstBit + k) { r.retouch(k, shift: now) }
+                }
             } else if now {
                 if let r = reaper, !shiftHeld, r.view == .kk, let cc = kkButtonCCs[def.bit] {
                     let ch = cfg.reaper.kompleteKontrol.channel
@@ -234,7 +237,7 @@ final class Bridge {
             for k in 0..<8 where isSet(p, knobTouchFirstBit + k) != isSet(b, knobTouchFirstBit + k) {
                 let now = isSet(b, knobTouchFirstBit + k)
                 if now { overlay = nil }  // touching a knob ends the track name display
-                r.touch(k, now)
+                r.touch(k, now, shift: shiftHeld)
             }
         } else {
             if cfg.knobTouchCCs.count == 8 {
@@ -269,12 +272,15 @@ final class Bridge {
             guard a != c else { continue }
             var d = c - a
             if d > 500 { d -= 1000 } else if d < -500 { d += 1000 }  // positions wrap at 0-999
-            if let r = reaper, shiftHeld {  // Shift + pan or volume knob: back to centre / 0 dB
+            if let r = reaper, shiftHeld {  // mix view: the track's pan; track view: back to centre / 0 dB, monitoring
                 switch r.target(k) {
+                case .bankVolume?:
+                    r.turn(k, raw: d, shift: true)
+                    continue
                 case .pan?:
                     if r.centerPan(), verbose { log("Shift + pan knob: pan centred") }
                     continue
-                case .volume?, .bankVolume?:
+                case .volume?:
                     if r.resetVolume(k), verbose { log("Shift + volume knob \(k + 1): 0 dB") }
                     continue
                 case .recArm?:

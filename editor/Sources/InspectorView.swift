@@ -314,9 +314,10 @@ struct InspectorView: View {
     @ViewBuilder private func reaperKnob(_ k: Int) -> some View {
         Section("What it controls") {
             LabeledContent("Mix view", value: "Volume of track \(k + 1) of the bank")
+            LabeledContent("Mix view + Shift", value: "Pan of track \(k + 1) of the bank")
             LabeledContent("Track view", value: "\(trackViewTargets[k]) (page 1)")
             LabeledContent("Komplete Kontrol view", value: "CC \(model.config.reaper.kompleteKontrol.encoderCCs[k])")
-            note("Track view pages 2 and on: sends 4–11, 12–16. Shift + turn: a volume goes to 0 dB, the pan to centre, record arm sets monitoring; other knobs send their MIDI CC on \(shiftText).")
+            note("Track view pages 2 and on: sends 4–11, 12–16. Track view, Shift + turn: the volume goes to 0 dB, the pan to centre, record arm sets monitoring; other knobs send their MIDI CC on \(shiftText).")
         }
         Section("All knobs in REAPER mode") {
             IntField(title: "Units for a full fader", value: $model.config.reaper.knobFullRange, range: 10...5000, step: 50)

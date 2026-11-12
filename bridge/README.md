@@ -112,8 +112,10 @@ light shows the view by brightness: off in Mix, half in Track, full in Komplete 
 
 **Mix view** (the default): the 8 knobs are the volumes of 8 tracks. **Page ◀ / ▶** (next to the knobs) scroll
 through the project's tracks 8 at a time. Each display shows a track's name, its volume and a bar; the left
-display shows *MIX* and which tracks are on the knobs (*9-16*). Knobs past the last track stay blank. Hold
-Shift and turn a knob to reset that track's volume to 0 dB.
+display shows *MIX* and which tracks are on the knobs (*9-16*). Knobs past the last track stay blank. **Hold
+Shift** and turn a knob to pan its track instead (`/track/N/pan`). While Shift is held, the left display shows
+*PAN*, and each display shows the track's pan (*CENTER* at the centre) with a pan bar. Touching a knob then tells
+REAPER the pan is touched rather than the fader, and pressing or releasing Shift mid-touch moves the touch across.
 
 **Track view:** the knobs control the selected track:
 
@@ -172,7 +174,7 @@ mode can be changed under `reaper.kompleteKontrol`.
 | Shift + Browse | Close the selected track's plugin windows |
 | Shift + Enter | Open REAPER's Render dialog (*File: Render project to disk...*); click *Render* there |
 | Shift + ◀◀ / ▶▶ | Go to the previous / next marker (the project start / end if there's none) |
-| Shift + anything else | The MIDI CC layer on channel 2, exactly as in plain mode, except the volume, pan and record-arm knobs: Shift + a volume knob resets it to 0 dB, Shift + the pan knob centres the pan, Shift + the record-arm knob switches record monitoring |
+| Shift + anything else | The MIDI CC layer on channel 2, exactly as in plain mode, except the knobs that do something of their own with Shift: in Mix view, Shift + a knob pans its track; in Track view, Shift + the volume knob resets it to 0 dB, Shift + the pan knob centres the pan, and Shift + the record-arm knob switches record monitoring |
 | Back | Undo (REAPER's *Edit: Undo*); Shift + Back: redo |
 | Browse | Opens the selected track's first plugin window; each press closes it and opens the next one (after the last, back to the first). The displays show which (*FX 2/3* and its name). Lit while a plugin window of the track is open |
 | Pressing the big Navigate knob | MIDI panic: REAPER's *Send all-notes-off and all-sounds-off to all MIDI outputs/plug-ins*; the displays show *PANIC* for a moment |

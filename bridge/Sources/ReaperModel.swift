@@ -133,6 +133,7 @@ enum ReaperEvent {  // trackData: a value of the selected track
 /// What a knob controls in the current view and page.
 enum KnobTarget: Equatable {
     case bankVolume(Int)  // mix view: volume of bank slot 0-7
+    case bankPan(Int)     // mix view, Shift + turn: pan of bank slot 0-7
     case volume, pan, mute, solo, recArm
     case send(Int)        // track view: send 0-15 of the selected track
 }

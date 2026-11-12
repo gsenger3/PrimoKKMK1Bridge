@@ -144,10 +144,15 @@ extension Bridge {
     func renderReaper(_ r: ReaperSession, _ touched: Set<Int>) {
         let targets = (0..<8).map { r.target($0) }
         let shiftHeld = prev.map { isSet($0, shiftBit) } ?? false
-        func info(_ t: KnobTarget) -> KnobInfo { shiftHeld && t == .recArm ? r.monitorInfo : r.info(t) }
+        // While Shift is held, a knob shows what Shift + turn changes: the pan in mix view, monitoring on record arm.
+        func info(_ k: Int, _ t: KnobTarget) -> KnobInfo {
+            guard shiftHeld else { return r.info(t) }
+            if t == .recArm { return r.monitorInfo }
+            return r.shiftTarget(k).map { r.info($0) } ?? r.info(t)
+        }
         for k in 0..<8 {
             guard let t = targets[k] else { displays.setBar(cell: k + 1, nil, framed: false); continue }
-            let i = info(t)
+            let i = info(k, t)
             let framed = touched.contains(k)
             if i.isPan { displays.setPanBar(cell: k + 1, i.bar, framed: framed) } else { displays.setBar(cell: k + 1, i.bar, framed: framed) }
         }
@@ -193,7 +198,7 @@ extension Bridge {
             return
         case .mix:
             let numbers = r.bank.filter(\.exists).map(\.number)
-            displays.write(row: 0, cell: 0, "MIX")
+            displays.write(row: 0, cell: 0, shiftHeld ? "PAN" : "MIX")
             displays.write(row: 1, cell: 0, numbers.isEmpty ? "NO TRKS" : "\(numbers.first!)-\(numbers.last!)")
         case .track:
             displays.write(row: 0, cell: 0, abbreviate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
@@ -201,7 +206,7 @@ extension Bridge {
         }
         for k in 0..<8 {
             guard let t = targets[k] else { continue }
-            let i = info(t)
+            let i = info(k, t)
             displays.write(row: 0, cell: k + 1, abbreviate(i.short, cellWidth))
             displays.write(row: 1, cell: k + 1, fitValue(i.value, cellWidth))
         }

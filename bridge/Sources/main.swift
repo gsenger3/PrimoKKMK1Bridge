@@ -33,8 +33,8 @@
 //  (Instance switches): the knobs are the selected track's volume, pan, mute, solo and sends, and the
 //  up/down buttons under the Navigate knob (or turning it) pick the track. Transport buttons drive REAPER's
 //  transport. With Shift held, buttons and knobs send MIDI CCs on the Shift channel as in plain mode, apart
-//  from the Shift shortcuts in reaper.shiftButtons and the volume/pan resets. Buttons with no REAPER command
-//  send their CCs.
+//  from the Shift shortcuts in reaper.shiftButtons, the tracks' pans in mix view, and the volume/pan resets in
+//  track view. Buttons with no REAPER command send their CCs.
 //
 //    bridge/build.sh   (stamps the version into build/Version.swift and compiles it in)
 //    build/PrimoKKMK1Bridge [--config FILE] [--verbose]
@@ -249,7 +249,8 @@ if cfg.keyboardSource != nil {
 if cfg.reaper.enabled {
     let r = cfg.reaper
     print("  REAPER: OSC to \(r.host):\(r.sendPort), listening on port \(r.receivePort); starts in \(r.view) view"
-          + " (Instance: mix -> track -> komplete-kontrol). Hold Shift for the MIDI CC layer.")
+          + " (Instance: mix -> track -> komplete-kontrol). Hold Shift for the MIDI CC layer, and in mix view to"
+          + " turn the tracks' pans.")
     bridge.startReaper()
 }
 
