@@ -54,8 +54,9 @@ bridge/build.sh
 build/PrimoKKMK1Bridge --verbose
 ```
 
-`--verbose` prints every message the bridge sends; Ctrl-C quits. Run one bridge at a time: the editor's switch
-also stops a bridge started this way.
+`--verbose` prints every message the bridge sends; the editor's **Verbose Logging** setting does the same for a
+bridge started any way. Ctrl-C quits. Run one bridge at a time: the editor's switch also stops a bridge started this
+way.
 
 ### After building
 

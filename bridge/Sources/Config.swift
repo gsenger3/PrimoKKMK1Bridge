@@ -194,11 +194,12 @@ struct Config: Codable {
     var displays = true
     var keyboardSource: String? = "auto"  // merged into the virtual port: "auto" (the keyboard's Port 1), a name, or null
     var reaper = ReaperConfig()
+    var verbose = false  // log every message the bridge sends, like --verbose (issue #7)
 
     enum CodingKeys: String, CodingKey {
         case portName, channel, shiftChannel, buttons, knobCCs, knobMode, knobStepsPerCC, knobTouchCCs
         case navigateTurnCC, navigateTurnMode, navigateTouchCC, lights, lightBrightness, lightIdleBrightness
-        case displays, reaper, keyboardSource
+        case displays, reaper, keyboardSource, verbose
     }
 
     init() {}
@@ -227,6 +228,7 @@ struct Config: Codable {
         displays = try c.decodeIfPresent(Bool.self, forKey: .displays) ?? displays
         if c.contains(.keyboardSource) { keyboardSource = try c.decodeIfPresent(String.self, forKey: .keyboardSource) }
         reaper = try c.decodeIfPresent(ReaperConfig.self, forKey: .reaper) ?? reaper
+        verbose = try c.decodeIfPresent(Bool.self, forKey: .verbose) ?? verbose
         if let user = try c.decodeIfPresent([String: Int?].self, forKey: .buttons) {
             for (name, cc) in user {
                 guard buttons[name] != nil else {

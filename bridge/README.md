@@ -24,7 +24,7 @@ bridge/build.sh
 build/PrimoKKMK1Bridge --verbose
 ```
 
-`--verbose` prints every message it sends. Leave it running while you work; Ctrl-C quits.
+`--verbose` prints every message it sends (so does `"verbose": true` in the config, the editor's **Verbose Logging**). Leave it running while you work; Ctrl-C quits.
 
 `bridge/build.sh` stamps the version first (see [Versions](../README.md#versions)), so building with a bare `swiftc`
 command no longer works. `build/PrimoKKMK1Bridge --version` prints the version, such as
@@ -73,7 +73,8 @@ change it. It has four pages:
 - **Komplete Kontrol:** the Komplete Kontrol view's CCs, and its page and preset buttons.
 - **Settings:** MIDI Configuration (port name, channels), MIDI Keys & Controls (the keys merge), Lights and
   Displays, REAPER Mode (on/off and the OSC connection), and, in REAPER mode, REAPER Views, Reaper Lightguide and
-  Komplete Kontrol View. [The editor](../doc/GUIDE.md#the-editor) in the user guide describes each one.
+  Komplete Kontrol View, and Logging (verbose logging). [The editor](../doc/GUIDE.md#the-editor) in the user guide describes
+  each one.
 
 REAPER mode is switched on and off with **Enabled** under **REAPER Mode** on the Settings page. With it off, the editor shows the MIDI page; with it on, the REAPER and Komplete Kontrol pages instead.
 
@@ -280,6 +281,7 @@ leave out keeps its default. A running bridge applies a saved change by itself.
 | `lightBrightness` | Brightness of a lit button, 0–255 (default 127; the HID descriptor declares 0–127, DrivenByMoss uses 255 for "bright") |
 | `lightIdleBrightness` | Glow of a mapped button that's off, 0–255 (default 6; 0 = dark) |
 | `displays` | `true` to drive the displays above the knobs |
+| `verbose` | `true` to log every message the bridge sends (MIDI CCs, button presses, OSC to REAPER, track and view changes), the same as `--verbose`. Default `false`. The editor's **Verbose Logging**; a running bridge restarts with it when the file is saved |
 | `keyboardSource` | Merge the keyboard's own MIDI (keys, strips, pedals) into the virtual port: `"auto"` (default: the keyboard's *Port 1*, found again after a replug), a MIDI source name, or `null` to keep the keys on the keyboard's port only |
 | `reaper.enabled` | `true` for REAPER mode |
 | `reaper.host`, `reaper.sendPort`, `reaper.receivePort` | Where REAPER is: its IP, its *Local listen port* (default 8000) and its *Device port* (default 9000) |

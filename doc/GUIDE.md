@@ -130,7 +130,8 @@ The pages, chosen in the toolbar, follow the mode you're in:
 | MIDI mode | **MIDI**: the CC each control sends · **Settings** |
 | REAPER mode | **REAPER**: the command each button runs, alone and with Shift · **Komplete Kontrol**: that view's CCs · **Settings** |
 
-**Settings** has these sections. The last three appear only while REAPER mode is on.
+**Settings** has these sections. REAPER Views, Reaper Lightguide and Komplete Kontrol View appear only while REAPER
+mode is on.
 
 | Section | What's in it |
 | --- | --- |
@@ -141,6 +142,7 @@ The pages, chosen in the toolbar, follow the mode you're in:
 | **REAPER Views** | **Default View**: the view the bridge starts in. **Follow REAPER Track Selection**: the keyboard follows the track you click in REAPER. **Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)**: in those views, the track you pick on the keyboard becomes REAPER's selected track. **Track Name Display Duration**: how long the displays show the track's name after you change track. **REAPER Resource Folder**: where the screenset names come from |
 | **Reaper Lightguide** | The selected track's colour on the keys, and the REAPER script it needs: see [Track colour on the keys](#track-colour-on-the-keys) |
 | **Komplete Kontrol View** | That view's **MIDI Channel** and **Knob Values** mode |
+| **Logging** | **Verbose Logging**: the bridge writes every message it sends to its log, for tracking down a problem. Turn it off again afterwards, as the log grows quickly. **Show Log** opens the log |
 
 **Reset to Default Settings…**, at the bottom, puts every setting and assignment back to its default, apart from
 REAPER mode. Nothing is written until you save.
@@ -427,6 +429,7 @@ Everything the editor changes lives in one file:
 | The knobs send nothing | The keyboard is back in its own MIDI mode. The bridge switches it back when you replug it or the Mac wakes; otherwise press a page arrow next to the knobs, and the bridge notices and switches it back. If the bridge isn't running, turn it on |
 | Every note plays twice | A track has both Primo Komplete Kontrol MK1 and the keyboard's own Port 1, or *All MIDI inputs*. Give it one of them |
 | The displays say *waiting for OSC from REAPER* | REAPER isn't running, or its OSC device doesn't match the ports under **REAPER Mode** on the editor's Settings page (8000 / 9000). See [Set up REAPER](#set-up-reaper-once) |
+| You want to see what the bridge is doing | Turn on **Verbose Logging** under **Logging** on the editor's Settings page, and save; the bridge restarts with it. **Show Log** (or Bridge ▸ Show Bridge Log) then lists every MIDI CC, button press and OSC message it sends. Turn it off when you're done |
 | The bridge switch turns itself off again | The bridge stopped right away. The editor shows the end of its log; Bridge ▸ Show Bridge Log has all of it. A common cause is another bridge already using UDP port 9000 |
 | Komplete Kontrol doesn't react | Its track needs Primo Komplete Kontrol MK1 as input, and must be record-armed or monitored |
 | macOS won't open the app | See step 3 of [Install](#install) |

@@ -91,7 +91,7 @@ if takeFlag("-h", "--help") { print(usage); exit(0) }
 if takeFlag("--version") { print("PrimoKKMK1Bridge \(appVersionString)"); exit(0) }
 let printDefault = takeFlag("--print-default-config")
 let fontTest = takeFlag("--show-font")
-let verbose = takeFlag("-v", "--verbose")
+let verboseFlag = takeFlag("-v", "--verbose")
 let logOSC = takeFlag("--log-osc")
 let configPath = takeValue("--config")
 let replayPath = takeValue("--replay")
@@ -123,6 +123,9 @@ if let path = configFile {
 }
 do { try cfg.validate() } catch { fail("config: \(error)") }
 for w in cfg.duplicateWarnings() { print("warning: \(w)") }
+// Verbose logging: --verbose, or "verbose": true in the config (the editor's Settings ▸ Logging). A config change
+// restarts the bridge in place, so turning it on or off there applies as soon as it's saved.
+let verbose = verboseFlag || cfg.verbose
 
 func ranges(_ v: [Int]) -> String {
     guard let f = v.first, let l = v.last else { return "off" }
@@ -237,6 +240,7 @@ if cfg.lights {
     print("  lights: off")
 }
 print("  displays: \(cfg.displays ? "on" : "off")")
+if verbose { print("  verbose logging: on" + (verboseFlag ? " (--verbose)" : " (verbose in the config)")) }
 if cfg.keyboardSource != nil {
     midi.onKeysChanged = { names in
         bridge.log(names.isEmpty ? "keys: no keyboard MIDI port found to merge yet"

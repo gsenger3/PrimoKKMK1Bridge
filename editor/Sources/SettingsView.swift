@@ -9,7 +9,7 @@
 //  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
 //
 //  The Settings page: the bridge-wide options that aren't tied to one control (MIDI port and channels, the
-//  keyboard merge, lights and displays, the REAPER connection and views).
+//  keyboard merge, lights and displays, the REAPER connection and views, and logging).
 
 import AppKit
 import SwiftUI
@@ -104,6 +104,15 @@ struct SettingsView: View {
                 reaperViews
                 lightGuideSettings
                 kompleteKontrolView
+            }
+
+            Section("Logging") {
+                Toggle("Verbose Logging", isOn: $model.config.verbose)
+                LabeledContent("Bridge Log") {
+                    Button("Show Log") { BridgeControl.showLog() }
+                }
+                Text("Verbose logging writes every message the bridge sends to the bridge log: MIDI CCs, button presses, OSC messages to REAPER, and track and view changes. Use it to track down a problem, then turn it off again, as the log grows quickly. The bridge picks up the change when you save.")
+                    .font(.caption).foregroundStyle(.secondary)
             }
 
             Section {
