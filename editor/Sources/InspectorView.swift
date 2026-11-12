@@ -333,9 +333,14 @@ struct InspectorView: View {
                 Text(navigateTurnTitle(nil, cc: model.config.navigateTurnCC)).tag(String?.none)
             }
             CCField(title: "CC", value: $model.config.navigateTurnCC, fallback: 30)
-            note(model.config.reaper.navigateTurn == nil
-                 ? "Turning sends this CC on channel \(model.config.channel), and on channel \(shiftChannel) with Shift held."
-                 : "With Shift held, turning sends this CC on channel \(shiftChannel) instead.")
+            switch model.config.reaper.navigateTurn {
+            case nil:
+                note("Turning sends this CC on channel \(model.config.channel), and on channel \(shiftChannel) with Shift held.")
+            case "tracks":
+                note("Picking a track from Mix view also switches to Track view. With Shift held, turning sends this CC on channel \(shiftChannel) instead.")
+            default:
+                note("With Shift held, turning sends this CC on channel \(shiftChannel) instead.")
+            }
         }
         Section("Press") {
             CommandPicker(title: "Command", command: command("NavigateClick", shift: false),

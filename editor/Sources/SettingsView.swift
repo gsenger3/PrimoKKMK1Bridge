@@ -130,7 +130,7 @@ struct SettingsView: View {
                 Text("Komplete Kontrol view").tag("komplete-kontrol")
             }
             Toggle("Follow REAPER Track Selection", isOn: $model.config.reaper.followSelectedTrack)
-            Toggle("Select Active Keyboard Track in REAPER (Track View)", isOn: $model.config.reaper.mirrorSelection)
+            Toggle("Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)", isOn: $model.config.reaper.mirrorSelection)
             LabeledContent("Track Name Display Duration") {
                 HStack {
                     TextField("", value: $model.config.reaper.trackNameSeconds, format: .number.precision(.fractionLength(0...1)))

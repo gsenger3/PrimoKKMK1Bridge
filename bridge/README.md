@@ -152,9 +152,10 @@ bridge doesn't follow KK's pages or presets. It keeps **one set of 8 knob values
 carries on from the value it last sent, whatever page, track or preset KK shows. A knob can still jump when its
 value doesn't match the parameter it now controls, after a page or preset change or a mouse edit.
 
-**Displays:** *KOMPLETE KONTROL* on the left, and **ENCODER 1**–**ENCODER 8** on the displays under the knobs, each with a bar of
-the value the knob last sent. Everything else keeps its job from the other
-views (transport, Shift shortcuts, Browse, Back, Enter …). For Komplete Kontrol to
+**Displays:** the selected track's name over *KONTROL* on the left, and **ENCODER 1**–**ENCODER 8** on the displays under the knobs, each with a bar of
+the value the knob last sent. Turning the Navigate knob picks the previous or next track without leaving the view,
+and the track picked becomes REAPER's selected track (`reaper.mirrorSelection`). Everything else keeps its job from
+the other views (transport, Shift shortcuts, Browse, Back, Enter …). For Komplete Kontrol to
 get these, the track with the Komplete Kontrol plugin needs **Primo Komplete Kontrol MK1** as its MIDI input (which also
 carries the keys) and must be record-armed or monitored; CCs, the knob channel and the relative/absolute
 mode can be changed under `reaper.kompleteKontrol`.
@@ -164,7 +165,7 @@ mode can be changed under `reaper.kompleteKontrol`.
 | Control | Does |
 |---|---|
 | Navigate ▲ / ▼ (under the big knob) | Zoom in / out horizontally (REAPER's *View: Zoom in / out horizontal*, actions 1012 / 1011); Shift + ▲ / ▼: zoom in / out vertically (*View: Zoom in / out vertical*, 40111 / 40112). In the Komplete Kontrol view ▲ / ▼ send their CCs instead |
-| Turning the Navigate knob | Scrolls through tracks. While you switch, the displays show only *TRK* and the track number (left) and its name across the others; the knobs' values appear 2 seconds after you stop (`reaper.trackNameSeconds`), or as soon as you touch a knob. In track view the track also becomes REAPER's selected track (only it) and is scrolled into view (`reaper.mirrorSelection`) |
+| Turning the Navigate knob | Scrolls through tracks. In mix view it first switches to track view, so the knobs show the track you pick; the Komplete Kontrol view stays as it is. While you switch, the displays show only *TRK* and the track number (left) and its name across the others; the knobs' values appear 2 seconds after you stop (`reaper.trackNameSeconds`), or as soon as you touch a knob. The track also becomes REAPER's selected track (only it) and is scrolled into view (`reaper.mirrorSelection`) |
 | Touch a knob | Frames its value bar while the display updates in place (the other displays stay as they are, so you can adjust several at once), and tells REAPER the fader is touched (for *Touch* automation) |
 | Play, Stop, Rec, Loop, ◀◀, ▶▶ | REAPER's transport; Play, Rec and Loop light up with REAPER's state |
 | Shift + Rec | Metronome on / off; while Shift is held, the Rec light shows whether it's on |
@@ -286,12 +287,12 @@ leave out keeps its default. A running bridge applies a saved change by itself.
 | `reaper.followSelectedTrack` | `true`: the selected track follows the track last clicked in REAPER |
 | `reaper.knobFullRange` | How far to turn a knob for a fader's full range, in raw knob units (default 600; lower = faster) |
 | `reaper.trackNameSeconds` | After a track change, how long only the track's number and name show before the knobs' values (default 2; 0 = only until REAPER has sent the new track's values). Touching a knob ends it early |
-| `reaper.mirrorSelection` | `true` (default): in track view, a track picked with the Navigate knob (or a button set to `next-track` / `previous-track`) becomes REAPER's only selected track and is scrolled into view. Clicking tracks in REAPER is never overridden |
+| `reaper.mirrorSelection` | `true` (default): in track view and the Komplete Kontrol view, a track picked with the Navigate knob (or a button set to `next-track` / `previous-track`) becomes REAPER's only selected track and is scrolled into view. Clicking tracks in REAPER is never overridden |
 | `reaper.resourcePath` | REAPER's resource folder, for the screenset names in `reaper-screensets.ini` (default `~/Library/Application Support/REAPER`) |
 | `reaper.kompleteKontrol` | The Komplete Kontrol view: `channel` (default 1), `encoderCCs` (8 CCs, default 21–28), `encoderMode` (same modes as `knobMode`, default `absolute`), and `buttons` (button name → CC; default Preset Up 37, Preset Down 36, Nav Up 41, Nav Down 40, Nav Left 42, Nav Right 43, Page Left 42, Page Right 43). The earlier `pageButtons`, `presetButtons` and `hostParameters` keys are ignored |
 | `reaper.lightGuide` | `true` (default): show the selected track's colour on the keys' light guide. REAPER's OSC has no track colours, so [reaper/PrimoKKMK1Bridge_TrackColor.lua](../reaper/PrimoKKMK1Bridge_TrackColor.lua), running in REAPER, sends them to the bridge's MIDI output as SysEx (`F0 7D 50 4B 01 rr gg bb F7`, or `F0 7D 50 4B 02 F7` for none). Setup: [Track colour on the keys](../doc/GUIDE.md#track-colour-on-the-keys) |
 | `reaper.lightGuideBrightness` | The light guide's brightness, 1–100 percent (default 50) |
-| `reaper.navigateTurn` | What turning the Navigate knob steps through: `tracks` (default), `pages`, or `null` for its CC |
+| `reaper.navigateTurn` | What turning the Navigate knob steps through: `tracks` (default; from mix view it also switches to track view), `pages`, or `null` for its CC |
 | `reaper.buttons` | Button name → REAPER command, or `null` to give the button back its CC. Commands: `play`, `stop`, `record`, `repeat`, `rewind`, `forward`, `metronome` (on/off), `record-mode` (normal / time-selection auto-punch), `go-to-start`, `previous-marker`, `next-marker`, `undo`, `redo`, `browse-fx`, `close-fx`, `panic` (all notes off), `save-project`, `render-project`, `screenset:1` … `screenset:10` (load that window set), `previous-track`, `next-track`, `previous-page`, `next-page`, `toggle-view`, `mute`, `solo` (the selected track), `action:<ID>` to run any REAPER action (right-click it in REAPER's Action List → *Copy selected action command ID*), or `midiaction:<ID>` for an action from the Action List's MIDI Editor section, which runs in the open MIDI editor (its IDs overlap the main section's, so use `midiaction:` for them). Defaults: Play, Stop, Rec, Loop, ◀◀, ▶▶ → transport; Navigate ▲ / ▼ → `action:1012` / `action:1011` (zoom in / out); Navigate ◀ / ▶ → `action:40104` / `action:40105` (cursor left / right one pixel); Page ◀ / ▶ → `previous-page` / `next-page`; Instance → `toggle-view`; Back → `undo`; Browse → `browse-fx`; Navigate knob press → `panic`; Enter → `save-project`; Preset ▲ / ▼ → `screenset:1` / `screenset:2`; Scale → `action:40716`; Arp → `action:40403` |
 | `reaper.shiftButtons` | The same, for buttons pressed while Shift is held (default: Rec → `metronome`, Loop → `record-mode`, Stop → `go-to-start`, Rewind → `previous-marker`, FastForward → `next-marker`, Back → `redo`, Browse → `close-fx`, Enter → `render-project`, Scale → `midiaction:40481`, Arp → `action:40400`, NavUp → `action:40111`, NavDown → `action:40112`, NavLeft → `action:40646`, NavRight → `action:40647`). Shift + a button not listed here sends its CC on the Shift channel |
 

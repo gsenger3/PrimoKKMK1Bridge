@@ -30,8 +30,8 @@
 //
 //  REAPER mode ("reaper": {"enabled": true}) talks to a REAPER OSC control surface. Mix view: the knobs are
 //  the volumes of 8 tracks at a time, and the page buttons scroll through the project's tracks. Track view
-//  (Instance switches): the knobs are the selected track's volume, pan, mute, solo and sends, and the
-//  up/down buttons under the Navigate knob (or turning it) pick the track. Transport buttons drive REAPER's
+//  (Instance switches): the knobs are the selected track's volume, pan, mute, solo and sends, and turning the
+//  Navigate knob picks the track (from mix view, it switches to track view). Transport buttons drive REAPER's
 //  transport. With Shift held, buttons and knobs send MIDI CCs on the Shift channel as in plain mode, apart
 //  from the Shift shortcuts in reaper.shiftButtons, the tracks' pans in mix view, and the volume/pan resets in
 //  track view. Buttons with no REAPER command send their CCs.

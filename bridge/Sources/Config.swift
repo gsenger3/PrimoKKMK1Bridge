@@ -83,7 +83,7 @@ struct ReaperConfig: Codable {
     var knobFullRange = 600
     var navigateTurn: String? = "tracks"
     var trackNameSeconds = 2.0  // after a track change, how long only its number and name show
-    var mirrorSelection = true  // track view: a track picked on the keyboard becomes REAPER's selected track
+    var mirrorSelection = true  // track and KK views: a track picked on the keyboard becomes REAPER's selected track
     var resourcePath = "~/Library/Application Support/REAPER"  // where REAPER keeps reaper-screensets.ini
     var lightGuide = true          // show the selected track's colour on the keys (sent by reaper/PrimoKKMK1Bridge_TrackColor.lua)
     var lightGuideBrightness = 50  // percent

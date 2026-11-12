@@ -187,7 +187,8 @@ extension Bridge {
             // Like Novation's Launchkey: Komplete Kontrol's parameter names and values aren't available, so each
             // display shows its knob's number, and a bar of the value the knob last sent (absolute values).
             let kk = cfg.reaper.kompleteKontrol
-            displays.write(row: 0, cell: 0, "KOMPLETE")
+            // The left display: the selected track (whose plugin the knobs are on), and KONTROL for the view.
+            displays.write(row: 0, cell: 0, abbreviate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
             displays.write(row: 1, cell: 0, "KONTROL")
             for k in 0..<8 {
                 displays.write(row: 0, cell: k + 1, "ENCODER")

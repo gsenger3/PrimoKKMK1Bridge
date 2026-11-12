@@ -119,27 +119,27 @@ start REAPER selected track 1 "Kick"
              display |         | ######+ |     #   |         |         |         | ####+   | ####+   | ####+   |
 12:00:00.690 Instance down
 12:00:00.690 REAPER komplete-kontrol view
-             display |KOMPLETE|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
              display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
              display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.770 Knob 1 turn (KK) +2     CC21 ch1 = 66
-             display |KOMPLETE|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
              display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
              display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.780 Knob 1 turn (KK) +2     CC21 ch1 = 68
 12:00:00.790 Knob 1 turn (KK) +2     CC21 ch1 = 70
 12:00:00.800 Knob 1 turn (KK) +2     CC21 ch1 = 72
 12:00:00.810 Knob 1 turn (KK) +2     CC21 ch1 = 74
-             display |KOMPLETE|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
              display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.820 Knob 1 turn (KK) +2     CC21 ch1 = 76
-             display |KOMPLETE|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
              display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.830 Knob 1 turn (KK) +2     CC21 ch1 = 78
 12:00:00.840 Knob 1 turn (KK) +2     CC21 ch1 = 80
-             display |KOMPLETE|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
              display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
              display |         | ######  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.850 Knob 1 turn (KK) +2     CC21 ch1 = 82
@@ -149,22 +149,25 @@ start REAPER selected track 1 "Kick"
 12:00:00.950 Knob 1 turn (KK) -2     CC21 ch1 = 82
 12:00:00.960 Knob 1 turn (KK) -2     CC21 ch1 = 80
 12:00:00.970 Knob 1 turn (KK) -2     CC21 ch1 = 78
-             display |KOMPLETE|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
              display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:00.980 Knob 1 turn (KK) -2     CC21 ch1 = 76
 12:00:00.990 Knob 1 turn (KK) -2     CC21 ch1 = 74
-             display |KOMPLETE|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
              display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:01.000 NavLeft down (KK)       CC42 ch1 = 127
 12:00:01.010 NavLeft up (KK)         CC42 ch1 = 0
 12:00:01.080 Knob 1 turn (KK) +2     CC21 ch1 = 76
-             display |KOMPLETE|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
              display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:01.090 Navigate turn +1
 12:00:01.090 → REAPER /device/track/+ 1
+12:00:01.090 → REAPER /action 40297
+12:00:01.090 → REAPER /track/select 1
+12:00:01.090 → REAPER /action 40913
              display |TRK 1   |SNARE   |        |        |        |        |        |        |        |
              display |        |        |        |        |        |        |        |        |        |
              display |         |         |         |         |         |         |         |         |         |
@@ -175,6 +178,9 @@ start REAPER selected track 1 "Kick"
 12:00:01.160 Knob 1 turn (KK) +2     CC21 ch1 = 78
 12:00:01.170 Navigate turn -1
 12:00:01.170 → REAPER /device/track/- 1
+12:00:01.170 → REAPER /action 40297
+12:00:01.170 → REAPER /track/select 1
+12:00:01.170 → REAPER /action 40913
              display |TRK 2   |KICK    |        |        |        |        |        |        |        |
              display |        |        |        |        |        |        |        |        |        |
              display |         |         |         |         |         |         |         |         |         |

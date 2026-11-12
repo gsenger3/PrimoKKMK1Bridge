@@ -288,7 +288,7 @@ final class EditorModel: ObservableObject {
             return ("TRACK \(i)", "VOLUME")
         case .kk:
             let kk = config.reaper.kompleteKontrol
-            if i == 0 { return ("KOMPLETE", "KONTROL") }
+            if i == 0 { return ("TRACK", "KONTROL") }  // the keyboard shows the selected track's name
             return ("ENCODER", "CC \(kk.encoderCCs[i - 1])")
         case .settings:
             return ("", "")

@@ -138,7 +138,7 @@ The pages, chosen in the toolbar, follow the mode you're in:
 | **MIDI Keys & Controls** | **Merge Keys and Controls**: whether the keys and strips also come through the bridge's port. **Automatic (Port 1)** takes them from the keyboard's own port, **From MIDI Source by Name** from the source you name, and **Disabled** leaves them on the keyboard's port only |
 | **Lights and Displays** | **Enabled** drives the button lights, at **Active Brightness** when lit and **Idle Brightness** otherwise. **Enable Displays** drives the nine displays |
 | **REAPER Mode** | **Enabled** turns REAPER mode on. **Address**, **Local Listen Port** and **Device Port** match REAPER's OSC device ([Set up REAPER](#set-up-reaper-once)) |
-| **REAPER Views** | **Default View**: the view the bridge starts in. **Follow REAPER Track Selection**: the keyboard follows the track you click in REAPER. **Select Active Keyboard Track in REAPER (Track View)**: in Track view, the track you pick on the keyboard becomes REAPER's selected track. **Track Name Display Duration**: how long the displays show the track's name after you change track. **REAPER Resource Folder**: where the screenset names come from |
+| **REAPER Views** | **Default View**: the view the bridge starts in. **Follow REAPER Track Selection**: the keyboard follows the track you click in REAPER. **Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)**: in those views, the track you pick on the keyboard becomes REAPER's selected track. **Track Name Display Duration**: how long the displays show the track's name after you change track. **REAPER Resource Folder**: where the screenset names come from |
 | **Reaper Lightguide** | The selected track's colour on the keys, and the REAPER script it needs: see [Track colour on the keys](#track-colour-on-the-keys) |
 | **Komplete Kontrol View** | That view's **MIDI Channel** and **Knob Values** mode |
 
@@ -201,7 +201,9 @@ Until REAPER answers, the displays read *waiting for OSC from REAPER*.
 
 The buttons do the same in all three views, apart from the Komplete Kontrol view's own CCs.
 - **Shift:** a combination without a command of its own sends that button's CC on channel 2, as in MIDI mode.
-- **Navigate knob:** turning it scrolls through tracks in every view.
+- **Navigate knob:** turning it picks the previous or next track. In Mix view it also switches to
+  [Track view](#track-view), so the knobs and displays show the track you pick. The Komplete Kontrol view stays as it
+  is, so you can move between instrument tracks and keep their plugins on the knobs.
 - **Changing track:** the displays show *TRK* with the track's number and name for 2 seconds (**Track Name Display
   Duration** in Settings), then the knob values.
   Touching a knob ends that early.
@@ -249,7 +251,8 @@ shows the monitoring (*ON MON*, *off AUTO*); while Shift is held it shows *MONIT
 
 The knobs and eight navigation buttons send fixed CCs for Komplete Kontrol's NKS MIDI template, like Novation's
 Launchkey keyboards do. They go out on Primo Komplete Kontrol MK1, channel 1. The other buttons keep their REAPER
-jobs.
+jobs. Turning the Navigate knob picks the previous or next track and keeps you in this view; the track you pick also
+becomes REAPER's only selected track, and REAPER scrolls to it.
 
 | Control | CC | Does in Komplete Kontrol |
 | --- | --- | --- |
@@ -260,8 +263,8 @@ jobs.
 | Page ◀ / ▶ (next to the knobs) | 42 / 43 | Previous / next NKS page, the same as Navigate ◀ / ▶ |
 
 Komplete Kontrol's parameter names and values aren't available to the bridge, so it works like the Launchkey:
-- **Displays:** *KOMPLETE KONTROL* on the left, and *ENCODER 1*–*ENCODER 8* under the knobs, each with a bar of
-  the value it last sent.
+- **Displays:** the selected track's name over *KONTROL* on the left, and *ENCODER 1*–*ENCODER 8* under the knobs,
+  each with a bar of the value it last sent.
 - **Knob values:** the bridge keeps **one set of 8 knob values**, starting at 64, for every page, track and preset.
 - **Jumps:** a knob can jump the first time you turn it after a page or preset change, when its value doesn't
   match the parameter it now controls.
@@ -365,7 +368,7 @@ With Shift held, every button and knob turn sends the same CC on channel 2.
 | Preset ▲ / ▼ | Load screenset 1 / 2 (its name shows on the displays) | CC119 / 85, channel 2 |
 | Navigate ▲ / ▼ | Zoom in / out horizontally (1012 / 1011) | Zoom in / out vertically (40111 / 40112) |
 | Navigate ◀ / ▶ | Move the edit cursor left / right one pixel (40104 / 40105) | Move the edit cursor to the previous / next grid division (40646 / 40647) |
-| Navigate knob turn | Scroll through tracks | CC30, channel 2 |
+| Navigate knob turn | Pick the previous / next track; from Mix view, also switch to Track view | CC30, channel 2 |
 | Navigate knob press | MIDI panic: all notes off, all sounds off | CC90, channel 2 |
 | Page ◀ / ▶ (next to the knobs) | Mix view: previous / next 8 tracks. Track view: previous / next page of sends | CC113 / 114, channel 2 |
 | Octave − / + | Transpose the keys, and CC111 / 112 on channel 1 | CC111 / 112, channel 2 |
@@ -395,7 +398,7 @@ The bridge drives the 21 button lights, the nine displays and the light guide. O
 | | MIDI mode | REAPER mode |
 | --- | --- | --- |
 | Button lights | A button with a CC glows dimly and lights fully while held; the DAW can light it ([MIDI mode](#midi-mode)) | Play, Rec and Loop follow REAPER's transport; Browse is lit while a plugin window of the track is open; Instance shows the view. While Shift is held, Rec shows the metronome and Loop shows auto-punch. Other buttons glow dimly and light fully while held |
-| Left display | *MIDI* and the channel (*CH 2* while Shift is held) | *MIX* and the tracks, the track and *TRK n*, or *KOMPLETE KONTROL* |
+| Left display | *MIDI* and the channel (*CH 2* while Shift is held) | *MIX* and the tracks, the track and *TRK n*, or the track and *KONTROL* |
 | Knob displays | Each knob's CC, its value and a bar | Each view's names, values and bars, as described above. Touching a knob frames its bar |
 | Light guide (above the keys) | Off | The selected track's colour, with the REAPER script ([Track colour on the keys](#track-colour-on-the-keys)) |
 | Short notices | — | *PANIC*, *SAVE*, *RENDER*, *SCREEN SET n* with the screenset's name, *FX 2/3* with the plugin's name, and the new record mode |

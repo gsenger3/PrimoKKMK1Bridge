@@ -104,9 +104,9 @@ final class ReaperSession {
             // Keep the current values: REAPER only sends the ones that differ on the new track.
             lastSent = [:]
             send(c == .nextTrack ? "/device/track/+" : "/device/track/-")
-            if view == .track && cfg.mirrorSelection {
-                // Make it REAPER's selected track too (only it), and scroll it into view. REAPER handles these in
-                // order, so /track/select applies to the track just moved to.
+            if view != .mix && cfg.mirrorSelection {
+                // Track and Komplete Kontrol views: make it REAPER's selected track too (only it), and scroll it into
+                // view. REAPER handles these in order, so /track/select applies to the track just moved to.
                 send("/action", [.int(unselectAllTracksAction)])
                 send("/track/select", [.float(1)])
                 send("/action", [.int(scrollToSelectedAction)])
@@ -122,12 +122,10 @@ final class ReaperSession {
             }
         case .toggleView:  // Instance: mix -> track -> Komplete Kontrol -> mix
             switch view {
-            case .mix: view = .track
-            case .track: view = .kk
-            case .kk: view = .mix
+            case .mix: show(.track)
+            case .track: show(.kk)
+            case .kk: show(.mix)
             }
-            sendPage = 0
-            onEvent?(.view)
         case .mute: send("/track/mute/toggle")
         case .metronome: send("/click")  // toggles
         case .goToStart: send("/action", [.int(goToStartAction)])
@@ -183,7 +181,20 @@ final class ReaperSession {
         onEvent?(.pluginShown(next))
     }
 
+    /// Switch to a view, at its first page.
+    private func show(_ v: ReaperView) {
+        guard v != view else { return }
+        view = v
+        sendPage = 0
+        onEvent?(.view)
+    }
+
+    /// The Navigate knob turned. Picking a track with it in mix view goes to track view (issue #17), so the knobs
+    /// and displays show the track picked. The view switches first, so the track is also made REAPER's selected
+    /// track (mirrorSelection). The Komplete Kontrol view stays put, so you can move between instrument tracks and
+    /// keep their plugins on the knobs; the track picked there is selected in REAPER too.
     func navigate(_ target: String, steps: Int) {
+        if target != "pages" && view == .mix { show(.track) }
         let up = steps > 0
         let cmd: ReaperCommand = target == "pages" ? (up ? .nextPage : .previousPage) : (up ? .nextTrack : .previousTrack)
         for _ in 0..<min(abs(steps), 8) { perform(cmd, down: true) }
