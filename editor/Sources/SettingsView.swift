@@ -9,7 +9,7 @@
 //  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
 //
 //  The Settings page: the bridge-wide options that aren't tied to one control (MIDI port and channels, the
-//  keyboard merge, lights and displays, the REAPER connection and views, and logging).
+//  keyboard merge, lights and displays, the REAPER connection and views, launching the bridge at login, and logging).
 
 import AppKit
 import SwiftUI
@@ -17,6 +17,7 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var model: EditorModel
     @State private var scriptStatus = ReaperScriptInstaller.Status()
+    @State private var loginStatus = LaunchAtLogin.Status()
 
     private var shiftOn: Binding<Bool> {
         Binding(get: { model.config.shiftChannel != nil }, set: { model.config.shiftChannel = $0 ? 2 : nil })
@@ -106,6 +107,8 @@ struct SettingsView: View {
                 kompleteKontrolView
             }
 
+            loginSettings
+
             Section("Logging") {
                 Toggle("Verbose Logging", isOn: $model.config.verbose)
                 LabeledContent("Bridge Log") {
@@ -129,6 +132,46 @@ struct SettingsView: View {
         .formStyle(.grouped)
         .frame(maxWidth: 720)
         .frame(maxWidth: .infinity)
+    }
+
+    /// The bridge inside this app: what Launch Bridge at Login starts.
+    private var thisBridge: URL? { Bundle.main.url(forAuxiliaryExecutable: "PrimoKKMK1Bridge") }
+
+    private var loginSettings: some View {
+        Section("Login") {
+            Toggle("Launch Bridge at Login", isOn: Binding(get: { loginStatus.enabled }, set: { setLaunchAtLogin($0) }))
+            if loginStatus.enabled, let program = loginStatus.program, program != thisBridge?.path {
+                LabeledContent("Starts") {
+                    HStack(spacing: 8) {
+                        Text(program).lineLimit(1).truncationMode(.middle).foregroundStyle(.secondary).help(program)
+                        Button("Use This App") { setLaunchAtLogin(true) }
+                    }
+                }
+            }
+            Text("Starts the bridge when you log in, without the editor, using the copy inside this app. If it quits unexpectedly, it's started again; turning it off with the bridge switch keeps it off until your next login. This applies right away, without saving.")
+                .font(.caption).foregroundStyle(.secondary)
+        }
+        .onAppear { loginStatus = LaunchAtLogin.status() }
+    }
+
+    private func setLaunchAtLogin(_ on: Bool) {
+        do {
+            if on {
+                try LaunchAtLogin.enable(bridge: LaunchAtLogin.bridgeForLogin(thisBridge))
+            } else if try LaunchAtLogin.disable() {
+                let a = NSAlert()
+                a.messageText = "The bridge won't start at your next login"
+                a.informativeText = "The bridge running now was started at this login, and keeps going until you turn it off with the bridge switch or log out."
+                a.runModal()
+            }
+        } catch {
+            let a = NSAlert()
+            a.alertStyle = .warning
+            a.messageText = on ? "Couldn't set the bridge to launch at login" : "Couldn't stop the bridge launching at login"
+            a.informativeText = "\(error)"
+            a.runModal()
+        }
+        loginStatus = LaunchAtLogin.status()
     }
 
     private var reaperViews: some View {

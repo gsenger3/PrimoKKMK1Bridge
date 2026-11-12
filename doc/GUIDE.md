@@ -41,8 +41,8 @@ It comes as two programs:
 
 1. Download `PrimoKKMK1Editor-<version>-macOS-arm64.zip` from the
    [releases page](https://github.com/gsenger3/PrimoKKMK1Bridge/releases) and unzip it.
-2. **Move PrimoKKMK1Editor.app to your Applications folder.** That's the recommended place: the instructions
-   below for starting the bridge at login use it. The bridge is inside the app, so there's nothing else to install.
+2. **Move PrimoKKMK1Editor.app to your Applications folder.** That's the recommended place: starting the bridge at
+   login uses the app where it is. The bridge is inside the app, so there's nothing else to install.
 3. The app is signed for local use only, not notarized by Apple, so macOS blocks it the first time. Either open
    it once and click **Open Anyway** in System Settings ▸ Privacy & Security, or run this in Terminal:
    ```bash
@@ -75,8 +75,28 @@ Good to know:
 
 ## Start the bridge at login
 
-A *LaunchAgent* starts the bridge when you log in, without the editor. These commands set one up for the app in
-the Applications folder. Paste them into Terminal; the first one is long:
+To have the bridge start when you log in, without the editor, turn on **Launch Bridge at Login** under **Login** on
+the editor's Settings page. It applies right away, without saving, and starts the copy of the bridge inside the app
+where the app is now, so move the app to your Applications folder first. It takes effect at your next login; to
+start the bridge now too, use the bridge switch.
+
+How it behaves:
+
+- **After a crash,** it's started again.
+- **With the editor's switch,** you can still turn it off. That's a normal quit, so it stays off until your next
+  login, and the switch can turn it back on.
+- **Its output** goes to `~/Library/Logs/PrimoKKMK1Bridge.log`, the same log the editor's **Show Log** opens.
+- **If you move the app,** the Settings page shows the copy it starts, with **Use This App** to switch to the one
+  you're running.
+- **Turning it off** stops it starting at your next login. A bridge it already started keeps going until you turn
+  it off with the switch or log out.
+
+Under the hood it's a *LaunchAgent*, `~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist`.
+
+<details>
+<summary>Setting it up by hand instead</summary>
+
+For the app in the Applications folder, paste these into Terminal; the first one is long:
 
 ```bash
 mkdir -p ~/Library/LaunchAgents ~/Library/Logs && cat > ~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist <<EOF
@@ -101,21 +121,13 @@ EOF
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist
 ```
 
-The bridge starts right away and at every login. A few things about how it behaves:
-
-- **After a crash,** launchd starts it again.
-- **With the editor's switch,** you can still turn it off. That's a normal quit, so it stays off until your next
-  login, and the switch can turn it back on.
-- **Its output** goes to `~/Library/Logs/PrimoKKMK1Bridge.log`, the same log the editor's Bridge ▸ Show Bridge Log
-  opens.
-
-To stop starting it at login:
+That also starts the bridge right away. To undo it:
 
 ```bash
 launchctl bootout gui/$(id -u)/com.primostudios.PrimoKKMK1Bridge; rm ~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist
 ```
 
-If you move the app somewhere else, change the path in the plist to match.
+</details>
 
 ## The editor
 
@@ -142,6 +154,7 @@ mode is on.
 | **REAPER Views** | **Default View**: the view the bridge starts in. **Follow REAPER Track Selection**: the keyboard follows the track you click in REAPER. **Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)**: in those views, the track you pick on the keyboard becomes REAPER's selected track. **Track Name Display Duration**: how long the displays show the track's name after you change track. **REAPER Resource Folder**: where the screenset names come from |
 | **Reaper Lightguide** | The selected track's colour on the keys, and the REAPER script it needs: see [Track colour on the keys](#track-colour-on-the-keys) |
 | **Komplete Kontrol View** | That view's **MIDI Channel** and **Knob Values** mode |
+| **Login** | **Launch Bridge at Login**: start the bridge when you log in, without the editor. It applies right away, without saving. See [Start the bridge at login](#start-the-bridge-at-login) |
 | **Logging** | **Verbose Logging**: the bridge writes every message it sends to its log, for tracking down a problem. Turn it off again afterwards, as the log grows quickly. **Show Log** opens the log |
 
 **Reset to Default Settings…**, at the bottom, puts every setting and assignment back to its default, apart from
