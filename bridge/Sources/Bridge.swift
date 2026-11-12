@@ -66,6 +66,9 @@ final class Bridge {
     var devicePID = 0                              // the connected model, for its key count
     var trackColor: (red: Int, green: Int, blue: Int)?  // the selected REAPER track's colour (0-127 each), from the script
     var lightGuideSent: [UInt8]?                   // the last light guide report, to skip repeats
+    var lightGuideAnimation: DispatchSourceTimer?  // the startup animation, while it runs
+    var scriptCheck: (at: Date, installed: Bool)?  // lightGuideScriptInstalled, read again after 2 seconds
+    var reaperError: String?                       // why the OSC link to REAPER can't start (tried again every 3 s)
 
     init(cfg: Config, midi: MIDIPorts, verbose: Bool) {
         self.cfg = cfg
@@ -143,7 +146,7 @@ final class Bridge {
             sendLights(force: true)
             renderDisplays()
             flushDisplays(force: true)
-            lightGuideAfterConnect()
+            lightGuideAfterConnect(animate: reason == "connect")
         }
     }
 

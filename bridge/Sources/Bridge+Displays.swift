@@ -118,7 +118,21 @@ extension Bridge {
     func renderDisplays() {
         displays.clear()
         let touched = Set((0..<8).filter { k in prev.map { isSet($0, knobTouchFirstBit + k) } ?? false })
-        if let r = reaper { renderReaper(r, touched) } else { renderMIDI(touched) }
+        if let r = reaper {
+            renderReaper(r, touched)
+        } else if cfg.reaper.enabled, reaperError != nil {
+            renderReaperError()
+        } else {
+            renderMIDI(touched)
+        }
+    }
+
+    /// REAPER mode without an OSC link (startReaper tries again every 3 seconds): say why.
+    func renderReaperError() {
+        displays.write(row: 0, cell: 0, "REAPER")
+        displays.write(row: 1, cell: 0, "ERROR")
+        displays.write(row: 0, cell: 1, reaperErrorShort, span: 8)
+        displays.write(row: 1, cell: 1, "trying again every 3 seconds", span: 8)
     }
 
     /// Touched knobs get a framed value bar; everything else stays where it is.

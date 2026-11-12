@@ -197,7 +197,8 @@ Track, full in Komplete Kontrol.
 5. **Optional:** to have the keys play whichever track you select, right-click a track's record-arm button and turn
    on **Automatic record-arm when track selected**.
 
-Until REAPER answers, the displays read *waiting for OSC from REAPER*.
+Until REAPER answers, the displays read *waiting for OSC from REAPER* (and with the
+[track colour script](#track-colour-on-the-keys) installed, the keys are purple).
 
 ### Buttons in every view
 
@@ -281,6 +282,15 @@ every key**. Its settings are in the **Reaper Lightguide** section of the editor
 - **Brightness:** 50% by default. The colour is corrected so a white track looks white rather than purple.
 - **No colour:** a track without a colour of its own leaves the keys dark, and so does having no track selected.
 - **Turning it off:** turn off **Enable Lightguide**.
+
+Once the script is installed (below), the light guide also shows how the bridge is doing:
+
+| The keys show | When |
+| --- | --- |
+| A rainbow running up from the lowest key | The bridge has just connected to the keyboard: started, restarted after a saved change, or the keyboard plugged in. It then fades into one of the below |
+| Purple | Waiting for REAPER: it isn't running yet, or its OSC device doesn't match (the displays say *waiting for OSC from REAPER*) |
+| The selected track's colour | REAPER is connected |
+| Red | The bridge can't open its OSC link to REAPER, usually because another program (such as a second bridge) already uses its port. The displays say why; the bridge tries again every 3 seconds |
 
 REAPER's OSC doesn't report track colours, so a small script inside REAPER sends them to the bridge as MIDI. Set
 it up once:
@@ -402,7 +412,7 @@ The bridge drives the 21 button lights, the nine displays and the light guide. O
 | Button lights | A button with a CC glows dimly and lights fully while held; the DAW can light it ([MIDI mode](#midi-mode)) | Play, Rec and Loop follow REAPER's transport; Browse is lit while a plugin window of the track is open; Instance shows the view. While Shift is held, Rec shows the metronome and Loop shows auto-punch. Other buttons glow dimly and light fully while held |
 | Left display | *MIDI* and the channel (*CH 2* while Shift is held) | *MIX* and the tracks, the track and *TRK n*, or the track and *KONTROL* |
 | Knob displays | Each knob's CC, its value and a bar | Each view's names, values and bars, as described above. Touching a knob frames its bar |
-| Light guide (above the keys) | Off | The selected track's colour, with the REAPER script ([Track colour on the keys](#track-colour-on-the-keys)) |
+| Light guide (above the keys) | Off | The selected track's colour, with the REAPER script; with the script installed, also a rainbow when the keyboard connects, purple while waiting for REAPER, and red if the OSC link can't open ([Track colour on the keys](#track-colour-on-the-keys)) |
 | Short notices | — | *PANIC*, *SAVE*, *RENDER*, *SCREEN SET n* with the screenset's name, *FX 2/3* with the plugin's name, and the new record mode |
 
 ## The config file
@@ -430,7 +440,8 @@ Everything the editor changes lives in one file:
 | Every note plays twice | A track has both Primo Komplete Kontrol MK1 and the keyboard's own Port 1, or *All MIDI inputs*. Give it one of them |
 | The displays say *waiting for OSC from REAPER* | REAPER isn't running, or its OSC device doesn't match the ports under **REAPER Mode** on the editor's Settings page (8000 / 9000). See [Set up REAPER](#set-up-reaper-once) |
 | You want to see what the bridge is doing | Turn on **Verbose Logging** under **Logging** on the editor's Settings page, and save; the bridge restarts with it. **Show Log** (or Bridge ▸ Show Bridge Log) then lists every MIDI CC, button press and OSC message it sends. Turn it off when you're done |
-| The bridge switch turns itself off again | The bridge stopped right away. The editor shows the end of its log; Bridge ▸ Show Bridge Log has all of it. A common cause is another bridge already using UDP port 9000 |
+| The displays say *OSC port 9000 is in use* (and the keys are red) | Another program, often a second bridge started in Terminal or at login, already listens on that port. Quit it; the bridge tries again every 3 seconds and connects by itself. Or change **Device Port** under **REAPER Mode**, and REAPER's device port to match |
+| The bridge switch turns itself off again | The bridge stopped right away. The editor shows the end of its log; Bridge ▸ Show Bridge Log has all of it |
 | Komplete Kontrol doesn't react | Its track needs Primo Komplete Kontrol MK1 as input, and must be record-armed or monitored |
 | macOS won't open the app | See step 3 of [Install](#install) |
 

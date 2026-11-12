@@ -144,7 +144,7 @@ if let path = replayPath {
     bridge.onDisplayFrame = { lines in for l in lines { print("             display |" + l + "|") } }
     func spin(_ seconds: Double) { _ = CFRunLoopRunInMode(CFRunLoopMode.defaultMode, seconds, false) }
     if cfg.reaper.enabled {
-        bridge.startReaper()
+        bridge.startReaper(failOnError: true)
         spin(0.5)
     }
     var count = 0

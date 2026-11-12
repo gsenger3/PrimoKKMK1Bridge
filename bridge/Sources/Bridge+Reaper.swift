@@ -14,8 +14,12 @@
 import Foundation
 
 extension Bridge {
-    func startReaper() {
-        guard cfg.reaper.enabled else { return }
+    /// Start the OSC session with REAPER. If it can't start (REAPER's host can't be found, or the listen port is
+    /// taken, say by another bridge), the bridge keeps running: the displays say why, the light guide turns red (with
+    /// the script installed), and it tries again every 3 seconds. A replay (`failOnError`) stops instead.
+    func startReaper(failOnError: Bool = false) {
+        guard cfg.reaper.enabled, reaper == nil else { return }
+        let hadError = reaperError != nil
         do {
             let s = try ReaperSession(cfg: cfg.reaper)
             s.onSend = { [weak self] address, args in
@@ -32,10 +36,28 @@ extension Bridge {
                 }
             }
             reaper = s
+            if reaperError != nil { log("REAPER: the OSC link is up now") }
+            reaperError = nil
             s.handshake()
         } catch {
-            fail("\(error)")
+            if failOnError { fail("\(error)") }
+            let message = "\(error)"
+            if message != reaperError { log("REAPER: \(message) Trying again every 3 seconds.") }
+            reaperError = message
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in self?.startReaper() }
         }
+        if hadError || reaperError != nil {  // into or out of the error: red keys and the reason on the displays
+            sendLightGuide()
+            scheduleDisplays()
+        }
+    }
+
+    /// For the displays: why the OSC link can't start, in a few words.
+    var reaperErrorShort: String {
+        let e = reaperError ?? ""
+        if e.contains("already in use") { return "OSC port \(cfg.reaper.receivePort) is in use" }
+        if e.contains("cannot resolve") { return "can't find host \(cfg.reaper.host)" }
+        return "can't open the OSC link"
     }
 
     /// A window set's name from REAPER's reaper-screensets.ini ([sset0] is window set 1), read on each use so
@@ -61,6 +83,7 @@ extension Bridge {
         switch e {
         case .connected:
             log("REAPER connected (OSC on port \(cfg.reaper.receivePort))")
+            sendLightGuide()  // purple (waiting) to the track colour
         case .track:
             if verbose && r.track.number != loggedTrack {
                 loggedTrack = r.track.number
