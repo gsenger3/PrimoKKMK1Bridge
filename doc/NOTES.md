@@ -1,5 +1,8 @@
 # Komplete Kontrol S61 MK1 — protocol notes
 
+What the keyboard sends and accepts over USB, as worked out here, and at the end what REAPER's OSC does and doesn't
+report, and what's been confirmed on hardware.
+
 Device: USB 17cc:1360, firmware 72, USB 2.0 high speed. Interfaces: 0 UAC2 audio control, 1 MIDI (Port 1, Port 2),
 2 vendor HID (usage page 0xFF01), 3 DFU runtime. All captures: stock MIDI mode, no NI software running.
 
@@ -100,3 +103,36 @@ Preset Up, Instance, Preset Down, Back, Nav Up, Enter, Nav Left, Nav Down, Nav R
   2026-11-08). A host that only resends changed rows must resend everything after such a press; PrimoKKMK1Bridge
   resends all three rows 50 ms after any button press or release, which fixed it.
 - Feature 0xd0–0xdf: 512-byte read window into a config/factory block (serials, calibration). Feature 0xf8: firmware version 72 + brightness settings.
+
+## REAPER over OSC (REAPER 7.61, Default.ReaperOSC patterns)
+
+- **Only changes are sent.** REAPER sends a value only when it differs from what it last sent to that address, so a
+  surface that starts after REAPER hears nothing about tracks, pans or sends that haven't moved. The bridge runs
+  *Control surface: Refresh all surfaces* (command ID 41743) on start-up to get the whole project; other control
+  surfaces refresh at the same moment. `tools/fake_reaper.py` behaves the same way.
+- **Unused slots are reported too.** Tracks past the last come as "Track 12" at -inf dB (volume/db -150) with 0%
+  width (pan2 0.5), and unused sends as "Send 3" at -inf dB. The bridge leaves those out; a real track named exactly
+  like that, at -inf dB and 0% width, would be left out too.
+- **Bank tracks** (`/track/@/…`) have volume, pan, their `/str` texts, and volume and pan touch
+  (`/track/@/volume/touch`, `/track/@/pan/touch`).
+- **Not reported:** the record mode (normal or time-selection auto-punch), so the bridge follows the last mode it set,
+  and track colours. For the light guide, `reaper/PrimoKKMK1Bridge_TrackColor.lua` runs inside REAPER and sends the
+  selected track's colour to the bridge's MIDI output as SysEx, every time it changes and every 2 seconds:
+  `F0 7D 50 4B 01 rr gg bb F7` (0–127 each; 7D is the non-commercial manufacturer ID), or `F0 7D 50 4B 02 F7` for no
+  colour. It sends the no-colour message when REAPER quits.
+- **MIDI Editor actions** have their own IDs, which overlap the main section's, so they go out as
+  `/midiaction <ID>` rather than `/action <ID>`.
+- `--log-osc` prints everything REAPER sends, apart from the clock and meters that stream during playback.
+
+## Confirmed on hardware
+
+- **2026-11-07, S61 MK1 (firmware 72), macOS 26:** all 24 buttons, the Shift layer, knobs 1–8 turn and touch, and
+  Navigate knob turn, touch and click. The last 1,000 messages the bridge logged matched, in order and value for value,
+  what a separate MIDI client received on the bridge's virtual port (`device/tests/bridge_live/`). The button lights
+  the same day: dim idle glow, and Play/Rec/Loop lit by feedback sent with `build/midisend`.
+- **2026-11-07/08, REAPER 7.61:** the displays; Mix view and Track view (volume, pan, mute, solo, sends, track
+  selection), after adding the start-up refresh; unused send and track slots hidden; the number-and-name display
+  while switching tracks. All first tested against `tools/fake_reaper.py` (`device/tests/reaper_sim/`).
+- **2026-11-11/12:** the light guide's track colours, white balance and brightness; Shift + knob panning in Mix view;
+  the Navigate knob's switch to Track view, and track selection in the Komplete Kontrol view; the light guide's
+  startup animation, purple while waiting and red on an OSC error.

@@ -200,6 +200,10 @@ Track, full in Komplete Kontrol.
 Until REAPER answers, the displays read *waiting for OSC from REAPER* (and with the
 [track colour script](#track-colour-on-the-keys) installed, the keys are purple).
 
+When the bridge starts, it runs REAPER's *Control surface: Refresh all surfaces* action to get the whole project,
+since REAPER otherwise only sends values that changed. Your other control surfaces (MCU, FaderPort, HUI) are
+refreshed at the same moment.
+
 ### Buttons in every view
 
 The buttons do the same in all three views, apart from the Komplete Kontrol view's own CCs.
@@ -213,6 +217,9 @@ The buttons do the same in all three views, apart from the Komplete Kontrol view
 - **Clicking a track in REAPER** selects it on the keyboard too.
 
 The full list of what each button does, alone and with Shift, is in [REAPER mode defaults](#reaper-mode-defaults).
+One of them needs a note: REAPER doesn't report the record mode over OSC, so Shift + Loop (normal ↔ time-selection
+auto-punch) follows the last mode set from the keyboard. If you change the mode in REAPER, one extra press brings
+them back in step.
 
 ### Mix view
 
@@ -426,11 +433,54 @@ Everything the editor changes lives in one file:
 - **Saved changes apply by themselves:** a running bridge checks the file every second and restarts with a new,
   valid version within a moment. In your DAW the MIDI port drops out briefly. A file it can't use is logged and
   ignored.
-- **Editing it by hand:** every key is optional; anything left out keeps its default.
-  [Configuration](../bridge/README.md#configuration) in the bridge's README lists every key.
+- **Editing it by hand:** every key is optional; anything left out keeps its default. [Config keys](#config-keys)
+  below lists every key.
 - **From Terminal:** `PrimoKKMK1Bridge --config FILE` runs the bridge with another file, and
   `PrimoKKMK1Bridge --print-default-config` prints every default. `PrimoKKMK1Bridge --version` shows the version,
   which is also in the editor's About box.
+
+### Config keys
+
+Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` prints them all with their defaults.
+
+| Key | Meaning |
+| --- | --- |
+| `portName` | Name of the virtual MIDI port |
+| `channel` | Base MIDI channel, 1–16 |
+| `shiftChannel` | Channel used while Shift is held, or `null` to make Shift a plain button |
+| `buttons` | Button name → CC number, or `null` to silence that button (Octave − / + still transpose the keys) |
+| `knobCCs` | 8 CCs for knobs 1–8 |
+| `knobMode` | `absolute` (0–127, starts at 64), `relative-binary-offset` (64 ± n), `relative-twos-complement` (1–63 up, 127–65 down), `relative-signed-bit` (1–63 up, 65–127 down) |
+| `knobStepsPerCC` | Knob resolution: raw position units (the knobs report 0–999, wrapping) per MIDI step. Default 4; higher is finer and slower |
+| `knobTouchCCs` | 8 CCs for knob touch, or `[]` to turn touch off |
+| `navigateTurnCC`, `navigateTurnMode` | Navigate knob turn, with the same modes as `knobMode` |
+| `navigateTouchCC` | Navigate knob touch, or `null` |
+| `lights` | `true` to drive the button lights, `false` to leave them alone |
+| `lightBrightness` | Brightness of a lit button, 0–255 (default 127) |
+| `lightIdleBrightness` | Glow of a mapped button that's off, 0–255 (default 6; 0 is dark) |
+| `displays` | `true` to drive the displays above the knobs |
+| `keyboardSource` | Merge the keyboard's own MIDI (keys, strips, pedals) into the bridge's port: `"auto"` (default: the keyboard's *Port 1*, found again after a replug), a MIDI source name, or `null` to keep the keys on the keyboard's port only |
+| `verbose` | `true` to log every message the bridge sends, like `--verbose` (default `false`) |
+| `reaper.enabled` | `true` for REAPER mode |
+| `reaper.host`, `reaper.sendPort`, `reaper.receivePort` | Where REAPER is: its IP, its *Local listen port* (default 8000) and its *Device port* (default 9000) |
+| `reaper.view` | The view at start: `mix` (default), `track` or `komplete-kontrol` |
+| `reaper.followSelectedTrack` | `true` (default): the keyboard follows the track you click in REAPER |
+| `reaper.mirrorSelection` | `true` (default): in Track view and the Komplete Kontrol view, a track picked on the keyboard becomes REAPER's only selected track and is scrolled into view |
+| `reaper.knobFullRange` | How far to turn a knob for a fader's full range, in raw knob units (default 600; lower is faster) |
+| `reaper.trackNameSeconds` | After a track change, how long only the track's number and name show (default 2; 0 is only until REAPER has sent the new track's values) |
+| `reaper.resourcePath` | REAPER's resource folder, for the screenset names and the track colour script (default `~/Library/Application Support/REAPER`) |
+| `reaper.navigateTurn` | What turning the Navigate knob steps through: `tracks` (default), `pages`, or `null` for its CC |
+| `reaper.lightGuide`, `reaper.lightGuideBrightness` | The track colour on the keys, on or off (default on), and its brightness, 1–100 percent (default 50). See [Track colour on the keys](#track-colour-on-the-keys) |
+| `reaper.kompleteKontrol` | The Komplete Kontrol view: `channel` (default 1), `encoderCCs` (default 21–28), `encoderMode` (same modes as `knobMode`, default `absolute`), and `buttons` (button name → CC) |
+| `reaper.buttons` | Button name → REAPER command, or `null` to give the button back its CC. Commands: `play`, `stop`, `record`, `repeat`, `rewind`, `forward`, `metronome`, `record-mode`, `go-to-start`, `previous-marker`, `next-marker`, `undo`, `redo`, `browse-fx`, `close-fx`, `panic`, `save-project`, `render-project`, `screenset:1` … `screenset:10`, `previous-track`, `next-track`, `previous-page`, `next-page`, `toggle-view`, `mute`, `solo`, `action:<ID>` for any REAPER action (in REAPER's Action List, right-click it ▸ *Copy selected action command ID*), or `midiaction:<ID>` for an action from the Action List's MIDI Editor section |
+| `reaper.shiftButtons` | The same, for buttons pressed while Shift is held. A button not listed sends its CC on the Shift channel |
+
+The defaults for `buttons`, `reaper.buttons` and `reaper.shiftButtons` are the tables in
+[Default assignments](#default-assignments).
+
+**Relative knob modes** suit endless knobs best, but your DAW has to be told which relative format to expect (in
+Ableton Live's MIDI map, for example, set the control's mode to the matching "Relative" type). `absolute` works
+with plain MIDI learn everywhere.
 
 ## Troubleshooting
 
