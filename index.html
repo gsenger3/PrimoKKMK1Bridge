@@ -1,897 +1,173 @@
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Use a Native Instruments Komplete Kontrol S-series MK1 keyboard on macOS without NI's software: as MIDI, or as a REAPER control surface.">
-      
-      
-      
+        
         <link rel="canonical" href="https://gsenger3.github.io/PrimoKKMK1Bridge/">
-      
-      
-      
-      
-        
-      
-      
-      <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
-    
-    
-      
+        <link rel="shortcut icon" href="img/favicon.ico">
         <title>PrimoKKMK1Bridge User Guide</title>
-      
-    
-    
-      <link rel="stylesheet" href="assets/stylesheets/main.57a0d79d.min.css">
-      
-        
-        <link rel="stylesheet" href="assets/stylesheets/palette.fb2fffe2.min.css">
-      
-      
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="stylesheets/guide.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <link rel="icon" type="image/png" sizes="64x64" href="img/appicon-64.png">
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    </head>
 
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="."><img class="site-icon" src="img/appicon-64.png" alt="" width="32" height="32">PrimoKKMK1Bridge User Guide</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    
-    
-      
-    
-    
-      
-    
-    
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
-    
-      
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
 
-    
-    
-  </head>
-  
-  
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#primokkmk1bridge-user-guide" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-    
-      
-
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="PrimoKKMK1Bridge User Guide" class="md-header__button md-logo" aria-label="PrimoKKMK1Bridge User Guide" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    <label class="md-header__button md-icon" for="__drawer">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
-    </label>
-    <div class="md-header__title" data-md-component="header-title">
-      <div class="md-header__ellipsis">
-        <div class="md-header__topic">
-          <span class="md-ellipsis">
-            PrimoKKMK1Bridge User Guide
-          </span>
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/gsenger3/PrimoKKMK1Bridge" class="nav-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="md-header__topic" data-md-component="header-topic">
-          <span class="md-ellipsis">
-            
-              PrimoKKMK1Bridge user guide
-            
-          </span>
-        </div>
-      </div>
-    </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
-      </label>
-    
-  
-</form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
-    
-    
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
         </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
-      
+
     
-    
-      <div class="md-header__source">
-        <a href="https://github.com/gsenger3/PrimoKKMK1Bridge" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
-  </div>
-  <div class="md-source__repository">
-    gsenger3/PrimoKKMK1Bridge
-  </div>
-</a>
-      </div>
-    
-  </nav>
-  
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-          
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
             
-              
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="." title="PrimoKKMK1Bridge User Guide" class="md-nav__button md-logo" aria-label="PrimoKKMK1Bridge User Guide" data-md-component="logo">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
-
-    </a>
-    PrimoKKMK1Bridge User Guide
-  </label>
-  
-    <div class="md-nav__source">
-      <a href="https://github.com/gsenger3/PrimoKKMK1Bridge" title="Go to repository" class="md-source" data-md-component="source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
-  </div>
-  <div class="md-source__repository">
-    gsenger3/PrimoKKMK1Bridge
-  </div>
-</a>
+            <li class="nav-item" data-bs-level="1"><a href="#primokkmk1bridge-user-guide" class="nav-link">PrimoKKMK1Bridge user guide</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#what-you-need" class="nav-link">What you need</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#install" class="nav-link">Install</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#getting-started" class="nav-link">Getting started</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#start-the-bridge-at-login" class="nav-link">Start the bridge at login</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#the-editor" class="nav-link">The editor</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#midi-mode" class="nav-link">MIDI mode</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#reaper-mode" class="nav-link">REAPER mode</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="3"><a href="#set-up-reaper-once" class="nav-link">Set up REAPER (once)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#buttons-in-every-view" class="nav-link">Buttons in every view</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#mix-view" class="nav-link">Mix view</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#track-view" class="nav-link">Track view</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#komplete-kontrol-view" class="nav-link">Komplete Kontrol view</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#track-colour-on-the-keys" class="nav-link">Track colour on the keys</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#default-assignments" class="nav-link">Default assignments</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="3"><a href="#midi-mode-defaults" class="nav-link">MIDI mode defaults</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#reaper-mode-defaults" class="nav-link">REAPER mode defaults</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#komplete-kontrol-view-defaults" class="nav-link">Komplete Kontrol view defaults</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lights-and-displays" class="nav-link">Lights and displays</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#the-config-file" class="nav-link">The config file</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="3"><a href="#config-keys" class="nav-link">Config keys</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#the-keyboard-without-the-bridge" class="nav-link">The keyboard without the bridge</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
     </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PrimoKKMK1Bridge user guide
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PrimoKKMK1Bridge user guide
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-you-need" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What you need
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Install
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getting started
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#start-the-bridge-at-login" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Start the bridge at login
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-editor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The editor
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#midi-mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MIDI mode
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reaper-mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        REAPER mode
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="REAPER mode">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-up-reaper-once" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Set up REAPER (once)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#buttons-in-every-view" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Buttons in every view
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mix-view" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mix view
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#track-view" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Track view
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#komplete-kontrol-view" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Komplete Kontrol view
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#track-colour-on-the-keys" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Track colour on the keys
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#default-assignments" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Default assignments
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Default assignments">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#midi-mode-defaults" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MIDI mode defaults
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reaper-mode-defaults" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        REAPER mode defaults
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#komplete-kontrol-view-defaults" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Komplete Kontrol view defaults
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lights-and-displays" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lights and displays
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-config-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The config file
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="The config file">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#config-keys" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Config keys
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-keyboard-without-the-bridge" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The keyboard without the bridge
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-you-need" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What you need
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Install
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getting started
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#start-the-bridge-at-login" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Start the bridge at login
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-editor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The editor
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#midi-mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MIDI mode
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reaper-mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        REAPER mode
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="REAPER mode">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-up-reaper-once" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Set up REAPER (once)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#buttons-in-every-view" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Buttons in every view
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mix-view" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mix view
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#track-view" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Track view
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#komplete-kontrol-view" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Komplete Kontrol view
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#track-colour-on-the-keys" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Track colour on the keys
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#default-assignments" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Default assignments
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Default assignments">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#midi-mode-defaults" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MIDI mode defaults
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reaper-mode-defaults" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        REAPER mode defaults
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#komplete-kontrol-view-defaults" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Komplete Kontrol view defaults
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lights-and-displays" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lights and displays
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-config-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The config file
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="The config file">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#config-keys" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Config keys
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-keyboard-without-the-bridge" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The keyboard without the bridge
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          
-            <div class="md-content" data-md-component="content">
-              
-              <article class="md-content__inner md-typeset">
-                
-                  
-  
-
-
-
+</div></div>
+                    <div class="col-md-9" role="main">
 
 <h1 id="primokkmk1bridge-user-guide">PrimoKKMK1Bridge user guide<a class="headerlink" href="#primokkmk1bridge-user-guide" title="Permanent link">&para;</a></h1>
 <p>PrimoKKMK1Bridge makes a Native Instruments <strong>Komplete Kontrol S-series MK1</strong> keyboard (S25, S49, S61, S88) fully
-usable on macOS without Native Instruments' software:
-- every button, knob and touch sends MIDI on a virtual port, <strong>Primo Komplete Kontrol MK1</strong>
-- the button lights and the nine displays are driven
-- an optional REAPER mode turns the keyboard into a REAPER control surface</p>
+usable on macOS without Native Instruments' software:</p>
+<ul>
+<li>every button, knob and touch sends MIDI on a virtual port, <strong>Primo Komplete Kontrol MK1</strong></li>
+<li>the button lights and the nine displays are driven</li>
+<li>an optional REAPER mode turns the keyboard into a REAPER control surface</li>
+</ul>
 <p>It comes as two programs:</p>
 <ul>
 <li><strong>The bridge</strong> (PrimoKKMK1Bridge) talks to the keyboard and does the work. It runs in the background.</li>
@@ -931,10 +207,9 @@ usable on macOS without Native Instruments' software:
    login uses the app where it is. The bridge is inside the app, so there's nothing else to install.</li>
 <li>The app is signed for local use only, not notarized by Apple, so macOS blocks it the first time. Either open
    it once and click <strong>Open Anyway</strong> in System Settings ▸ Privacy &amp; Security, or run this in Terminal:
-   <div class="highlight"><pre><span></span><code>xattr<span class="w"> </span>-dr<span class="w"> </span>com.apple.quarantine<span class="w"> </span>/Applications/PrimoKKMK1Editor.app
-</code></pre></div>
-   Use the <code>xattr</code> command if you'll <a href="#start-the-bridge-at-login">start the bridge at login</a>: it clears the bridge
-   inside the app too.</li>
+    <pre class="highlight"><code class="language-bash">xattr -dr com.apple.quarantine /Applications/PrimoKKMK1Editor.app</code></pre>
+    Use the <code>xattr</code> command if you'll <a href="#start-the-bridge-at-login">start the bridge at login</a>: it clears the bridge
+    inside the app too.</li>
 </ol>
 <p>To build it yourself instead, see <a href="https://github.com/gsenger3/PrimoKKMK1Bridge#build-and-run">Build and run</a>.</p>
 <h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
@@ -977,28 +252,25 @@ start the bridge now too, use the bridge switch.</p>
 <details>
 <summary>Setting it up by hand instead</summary>
 <p>For the app in the Applications folder, paste these into Terminal; the first one is long:</p>
-<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/Library/LaunchAgents<span class="w"> </span>~/Library/Logs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>&gt;<span class="w"> </span>~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
-<span class="s">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="s">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
-<span class="s">&lt;plist version="1.0"&gt;</span>
-<span class="s">&lt;dict&gt;</span>
-<span class="s">    &lt;key&gt;Label&lt;/key&gt;&lt;string&gt;com.primostudios.PrimoKKMK1Bridge&lt;/string&gt;</span>
-<span class="s">    &lt;key&gt;ProgramArguments&lt;/key&gt;</span>
-<span class="s">    &lt;array&gt;&lt;string&gt;/Applications/PrimoKKMK1Editor.app/Contents/MacOS/PrimoKKMK1Bridge&lt;/string&gt;&lt;/array&gt;</span>
-<span class="s">    &lt;key&gt;RunAtLoad&lt;/key&gt;&lt;true/&gt;</span>
-<span class="s">    &lt;key&gt;KeepAlive&lt;/key&gt;&lt;dict&gt;&lt;key&gt;SuccessfulExit&lt;/key&gt;&lt;false/&gt;&lt;/dict&gt;</span>
-<span class="s">    &lt;key&gt;ProcessType&lt;/key&gt;&lt;string&gt;Interactive&lt;/string&gt;</span>
-<span class="s">    &lt;key&gt;StandardOutPath&lt;/key&gt;&lt;string&gt;$HOME/Library/Logs/PrimoKKMK1Bridge.log&lt;/string&gt;</span>
-<span class="s">    &lt;key&gt;StandardErrorPath&lt;/key&gt;&lt;string&gt;$HOME/Library/Logs/PrimoKKMK1Bridge.log&lt;/string&gt;</span>
-<span class="s">&lt;/dict&gt;</span>
-<span class="s">&lt;/plist&gt;</span>
-<span class="s">EOF</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>launchctl<span class="w"> </span>bootstrap<span class="w"> </span>gui/<span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="w"> </span>~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist
-</code></pre></div>
+<pre class="highlight"><code class="language-bash">mkdir -p ~/Library/LaunchAgents ~/Library/Logs &amp;&amp; cat &gt; ~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist &lt;&lt;EOF
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+    &lt;key&gt;Label&lt;/key&gt;&lt;string&gt;com.primostudios.PrimoKKMK1Bridge&lt;/string&gt;
+    &lt;key&gt;ProgramArguments&lt;/key&gt;
+    &lt;array&gt;&lt;string&gt;/Applications/PrimoKKMK1Editor.app/Contents/MacOS/PrimoKKMK1Bridge&lt;/string&gt;&lt;/array&gt;
+    &lt;key&gt;RunAtLoad&lt;/key&gt;&lt;true/&gt;
+    &lt;key&gt;KeepAlive&lt;/key&gt;&lt;dict&gt;&lt;key&gt;SuccessfulExit&lt;/key&gt;&lt;false/&gt;&lt;/dict&gt;
+    &lt;key&gt;ProcessType&lt;/key&gt;&lt;string&gt;Interactive&lt;/string&gt;
+    &lt;key&gt;StandardOutPath&lt;/key&gt;&lt;string&gt;$HOME/Library/Logs/PrimoKKMK1Bridge.log&lt;/string&gt;
+    &lt;key&gt;StandardErrorPath&lt;/key&gt;&lt;string&gt;$HOME/Library/Logs/PrimoKKMK1Bridge.log&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+EOF</code></pre>
+<pre class="highlight"><code class="language-bash">launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist</code></pre>
 <p>That also starts the bridge right away. To undo it:</p>
-<div class="highlight"><pre><span></span><code>launchctl<span class="w"> </span>bootout<span class="w"> </span>gui/<span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>/com.primostudios.PrimoKKMK1Bridge<span class="p">;</span><span class="w"> </span>rm<span class="w"> </span>~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist
-</code></pre></div>
+<pre class="highlight"><code class="language-bash">launchctl bootout gui/$(id -u)/com.primostudios.PrimoKKMK1Bridge; rm ~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist</code></pre>
 </details>
 <h2 id="the-editor">The editor<a class="headerlink" href="#the-editor" title="Permanent link">&para;</a></h2>
 <p>The editor shows a drawing of the keyboard. <strong>Click a button, knob or strip</strong>, and the panel on the right shows
@@ -1073,25 +345,31 @@ mode is on.</p>
 </table>
 <p><strong>Reset to Default Settings…</strong>, at the bottom, puts every setting and assignment back to its default, apart from
 REAPER mode. Nothing is written until you save.</p>
-<p>Other things in the editor:
-- <strong>Saving:</strong> <strong>Save</strong> (⌘S) writes the config file, and a running bridge picks it up within a second or two.
-  <strong>Revert</strong> throws away unsaved edits. If a change can't work, the status bar says why and Save stays off.
-- <strong>The bridge switch</strong> shows whether the bridge is running, however it was started, and starts or stops it. The
-  same commands are in the <strong>Bridge</strong> menu, with <strong>Show Bridge Log</strong> and <strong>Show REAPER Track Colour Script</strong>.
-- <strong>File ▸ Open Config…</strong> edits another config file for the session. Normally you don't need it.
-- <strong>Help ▸ Primo KK MK1 Control Editor Help</strong> opens this guide.</p>
+<p>Other things in the editor:</p>
+<ul>
+<li><strong>Saving:</strong> <strong>Save</strong> (⌘S) writes the config file, and a running bridge picks it up within a second or two.
+  <strong>Revert</strong> throws away unsaved edits. If a change can't work, the status bar says why and Save stays off.</li>
+<li><strong>The bridge switch</strong> shows whether the bridge is running, however it was started, and starts or stops it. The
+  same commands are in the <strong>Bridge</strong> menu, with <strong>Show Bridge Log</strong> and <strong>Show REAPER Track Colour Script</strong>.</li>
+<li><strong>File ▸ Open Config…</strong> edits another config file for the session. Normally you don't need it.</li>
+<li><strong>Help ▸ Primo KK MK1 Control Editor Help</strong> opens this guide.</li>
+</ul>
 <h2 id="midi-mode">MIDI mode<a class="headerlink" href="#midi-mode" title="Permanent link">&para;</a></h2>
 <p>MIDI mode is the default. Every control sends a MIDI CC on <strong>Primo Komplete Kontrol MK1</strong>, channel 1, for MIDI
 learn in any DAW. Buttons send 127 when pressed and 0 when released; knobs send absolute values (0–127).</p>
 <p><strong>Shift layer.</strong> Holding Shift moves the buttons, knob turns and the Navigate knob turn to <strong>channel 2</strong>, so every
-control has a second assignment with the same CC numbers.
-- Shift itself sends CC108 on channel 1.
-- Knob touch and Navigate touch always use channel 1.
-- A release goes out on the channel of its press, even if you let go of Shift first.</p>
-<p><strong>Lights from the DAW.</strong> The bridge also has a MIDI <em>output</em> called Primo Komplete Kontrol MK1. A CC sent there:
-- lights its button (any value above 0) or dims it (0)
-- on channel 2, sets the light shown while Shift is held
-- for a knob, moves that knob's value, so it carries on from the DAW's value instead of jumping</p>
+control has a second assignment with the same CC numbers.</p>
+<ul>
+<li>Shift itself sends CC108 on channel 1.</li>
+<li>Knob touch and Navigate touch always use channel 1.</li>
+<li>A release goes out on the channel of its press, even if you let go of Shift first.</li>
+</ul>
+<p><strong>Lights from the DAW.</strong> The bridge also has a MIDI <em>output</em> called Primo Komplete Kontrol MK1. A CC sent there:</p>
+<ul>
+<li>lights its button (any value above 0) or dims it (0)</li>
+<li>on channel 2, sets the light shown while Shift is held</li>
+<li>for a knob, moves that knob's value, so it carries on from the DAW's value instead of jumping</li>
+</ul>
 <p>The keys, pitch strip (pitch bend) and mod strip (CC1) work as always, and Octave − / + transpose the keys on the
 keyboard as well as sending their CCs. The CC of every control is in <a href="#midi-mode-defaults">Default assignments</a>.</p>
 <h2 id="reaper-mode">REAPER mode<a class="headerlink" href="#reaper-mode" title="Permanent link">&para;</a></h2>
@@ -1103,11 +381,13 @@ Track, full in Komplete Kontrol.</p>
 <ol>
 <li><strong>Turn on REAPER mode:</strong> on the editor's Settings page, turn on <strong>Enabled</strong> under <strong>REAPER Mode</strong>, and save.</li>
 <li>In REAPER, go to <strong>Preferences ▸ Control/OSC/web ▸ Add</strong>, and choose Control surface mode <strong>OSC (Open Sound
-   Control)</strong>:</li>
+   Control)</strong>:<ul>
 <li>Device name: <code>PrimoKKMK1Bridge</code>, Pattern config: <strong>Default</strong></li>
 <li>Mode: <strong>Configure device IP + local port</strong></li>
 <li>Device port <code>9000</code>, Device IP <code>127.0.0.1</code>, Local listen port <code>8000</code>. These match <strong>Device Port</strong>,
-     <strong>Address</strong> and <strong>Local Listen Port</strong> under <strong>REAPER Mode</strong> on the editor's Settings page.</li>
+  <strong>Address</strong> and <strong>Local Listen Port</strong> under <strong>REAPER Mode</strong> on the editor's Settings page.</li>
+</ul>
+</li>
 <li><strong>Preferences ▸ MIDI Devices:</strong> enable <strong>Primo Komplete Kontrol MK1</strong> for input.</li>
 <li><strong>Komplete Kontrol track:</strong> set its MIDI input to <strong>Primo Komplete Kontrol MK1</strong>. It carries the keys, the strips
    and the Komplete Kontrol view's CCs. For tracks that should only get the keys, use the keyboard's own <em>Port 1</em>,
@@ -1123,15 +403,17 @@ the same Mac (the default address, <code>127.0.0.1</code>): with REAPER on anoth
 since REAPER otherwise only sends values that changed. Your other control surfaces (MCU, FaderPort, HUI) are
 refreshed at the same moment.</p>
 <h3 id="buttons-in-every-view">Buttons in every view<a class="headerlink" href="#buttons-in-every-view" title="Permanent link">&para;</a></h3>
-<p>The buttons do the same in all three views, apart from the Komplete Kontrol view's own CCs.
-- <strong>Shift:</strong> a combination without a command of its own sends that button's CC on channel 2, as in MIDI mode.
-- <strong>Navigate knob:</strong> turning it picks the previous or next track. In Mix view it also switches to
+<p>The buttons do the same in all three views, apart from the Komplete Kontrol view's own CCs.</p>
+<ul>
+<li><strong>Shift:</strong> a combination without a command of its own sends that button's CC on channel 2, as in MIDI mode.</li>
+<li><strong>Navigate knob:</strong> turning it picks the previous or next track. In Mix view it also switches to
   <a href="#track-view">Track view</a>, so the knobs and displays show the track you pick. The Komplete Kontrol view stays as it
-  is, so you can move between instrument tracks and keep their plugins on the knobs.
-- <strong>Changing track:</strong> the displays show <em>TRK</em> with the track's number and name for 2 seconds (<strong>Track Name Display
+  is, so you can move between instrument tracks and keep their plugins on the knobs.</li>
+<li><strong>Changing track:</strong> the displays show <em>TRK</em> with the track's number and name for 2 seconds (<strong>Track Name Display
   Duration</strong> in Settings), then the knob values.
-  Touching a knob ends that early.
-- <strong>Clicking a track in REAPER</strong> selects it on the keyboard too.</p>
+  Touching a knob ends that early.</li>
+<li><strong>Clicking a track in REAPER</strong> selects it on the keyboard too.</li>
+</ul>
 <p>The full list of what each button does, alone and with Shift, is in <a href="#reaper-mode-defaults">REAPER mode defaults</a>.
 One of them needs a note: REAPER doesn't report the record mode over OSC, so Shift + Loop (normal ↔ time-selection
 auto-punch) follows the last mode set from the keyboard. If you change the mode in REAPER, one extra press brings
@@ -1257,20 +539,24 @@ becomes REAPER's only selected track, and REAPER scrolls to it.</p>
 </tr>
 </tbody>
 </table>
-<p>Komplete Kontrol's parameter names and values aren't available to the bridge, so it works like the Launchkey:
-- <strong>Displays:</strong> the selected track's name over <em>KONTROL</em> on the left, and <em>ENCODER 1</em>–<em>ENCODER 8</em> under the knobs,
-  each with a bar of the value it last sent.
-- <strong>Knob values:</strong> the bridge keeps <strong>one set of 8 knob values</strong>, starting at 64, for every page, track and preset.
-- <strong>Jumps:</strong> a knob can jump the first time you turn it after a page or preset change, when its value doesn't
-  match the parameter it now controls.</p>
+<p>Komplete Kontrol's parameter names and values aren't available to the bridge, so it works like the Launchkey:</p>
+<ul>
+<li><strong>Displays:</strong> the selected track's name over <em>KONTROL</em> on the left, and <em>ENCODER 1</em>–<em>ENCODER 8</em> under the knobs,
+  each with a bar of the value it last sent.</li>
+<li><strong>Knob values:</strong> the bridge keeps <strong>one set of 8 knob values</strong>, starting at 64, for every page, track and preset.</li>
+<li><strong>Jumps:</strong> a knob can jump the first time you turn it after a page or preset change, when its value doesn't
+  match the parameter it now controls.</li>
+</ul>
 <p>For Komplete Kontrol to receive the CCs, its track needs <strong>Primo Komplete Kontrol MK1</strong> as input and must be
 record-armed or monitored.</p>
 <h3 id="track-colour-on-the-keys">Track colour on the keys<a class="headerlink" href="#track-colour-on-the-keys" title="Permanent link">&para;</a></h3>
 <p>In REAPER mode, the keyboard's light guide (the lights above the keys) shows the <strong>selected track's colour on
-every key</strong>. Its settings are in the <strong>Reaper Lightguide</strong> section of the editor's Settings page.
-- <strong>Brightness:</strong> 50% by default. The colour is corrected so a white track looks white rather than purple.
-- <strong>No colour:</strong> a track without a colour of its own leaves the keys dark, and so does having no track selected.
-- <strong>Turning it off:</strong> turn off <strong>Enable Lightguide</strong>.</p>
+every key</strong>. Its settings are in the <strong>Reaper Lightguide</strong> section of the editor's Settings page.</p>
+<ul>
+<li><strong>Brightness:</strong> 50% by default. The colour is corrected so a white track looks white rather than purple.</li>
+<li><strong>No colour:</strong> a track without a colour of its own leaves the keys dark, and so does having no track selected.</li>
+<li><strong>Turning it off:</strong> turn off <strong>Enable Lightguide</strong>.</li>
+</ul>
 <p>Once the script is installed (below), the light guide also shows how the bridge is doing:</p>
 <table>
 <thead>
@@ -1302,10 +588,12 @@ every key</strong>. Its settings are in the <strong>Reaper Lightguide</strong> s
 it up once:</p>
 <ol>
 <li><strong>Install the script.</strong> On the editor's Settings page, under <strong>Reaper Lightguide</strong>, click <strong>Install…</strong> in the
-   <strong>REAPER Integration</strong> row. It does two things:</li>
+   <strong>REAPER Integration</strong> row. It does two things:<ul>
 <li>copies <code>PrimoKKMK1Bridge_TrackColor.lua</code> into the <strong>Scripts/Primo Studios</strong> folder of REAPER's resource folder</li>
 <li>adds a line to <code>Scripts/__startup.lua</code>, which REAPER runs every time it starts. An existing <code>__startup.lua</code> is
-     backed up first and kept as it is; the line goes at the end.</li>
+  backed up first and kept as it is; the line goes at the end.</li>
+</ul>
+</li>
 </ol>
 <p>The row also shows whether the script is installed. Once it is, the button is <strong>Uninstall…</strong> instead (see
    below). After an update of the app, <strong>Update…</strong> appears next to it to replace an older script; <strong>Repair…</strong> puts
@@ -1315,11 +603,12 @@ it up once:</p>
    unless you route them to it.
 3. <strong>Restart REAPER.</strong> The keys take the selected track's colour, and follow as you select other tracks or change
    a colour.</p>
-<p>To install it by hand instead, reveal the script with <strong>Bridge ▸ Show REAPER Track Colour Script</strong>, then:
-- copy it into REAPER's Scripts folder (Options ▸ Show REAPER resource path in explorer/finder)
-- add this line to <code>Scripts/__startup.lua</code>, adjusting the path to where you put it:
-  <div class="highlight"><pre><span></span><code><span class="nb">dofile</span><span class="p">(</span><span class="nv">reaper</span><span class="p">.</span><span class="nf">GetResourcePath</span><span class="p">()</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">"/Scripts/PrimoKKMK1Bridge_TrackColor.lua"</span><span class="p">)</span>
-</code></pre></div></p>
+<p>To install it by hand instead, reveal the script with <strong>Bridge ▸ Show REAPER Track Colour Script</strong>, then:</p>
+<ul>
+<li>copy it into REAPER's Scripts folder (Options ▸ Show REAPER resource path in explorer/finder)</li>
+<li>add this line to <code>Scripts/__startup.lua</code>, adjusting the path to where you put it:
+    <pre class="highlight"><code class="language-lua">dofile(reaper.GetResourcePath() .. "/Scripts/PrimoKKMK1Bridge_TrackColor.lua")</code></pre></li>
+</ul>
 <p>The script sends the colour when the selection or a colour changes, and every 2 seconds, so a restarted bridge
 catches up. When REAPER quits, the keys go dark.</p>
 <p><strong>To remove it,</strong> click <strong>Uninstall…</strong> in the same place. It deletes the script, and the <strong>Primo Studios</strong> folder
@@ -1865,76 +1154,88 @@ with plain MIDI learn everywhere.</p>
 <td>Nothing</td>
 </tr>
 </tbody>
-</table>
-
-
-
-
-
-
-
-  
-  
-
-
-
-
-  
-
-
-
-                
-              </article>
+</table></div>
             </div>
-          
-          
-<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
-</button>
-        
-      </main>
-      
-        <footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-    <div class="md-copyright__highlight">
-      Not affiliated with Native Instruments; Komplete Kontrol is their trademark. MIT License.
+
+        <footer class="col-md-12">
+            <hr>
+                <p>Copyright &copy; 2026 Primo Studios / George Senger. MIT License.<br/> Not affiliated with Native Instruments; Komplete Kontrol is their trademark.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
 </div>
-      
-    </div>
-  </div>
-</footer>
-      
-    </div>
-    <div class="md-dialog" data-md-component="dialog">
-      <div class="md-dialog__inner md-typeset"></div>
-    </div>
-    
-    
-    
-      
-      
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.top", "toc.follow", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
-    
-    
-      <script src="assets/javascripts/bundle.a5f9d56c.min.js"></script>
-      
-    
-  </body>
+
+    </body>
 </html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-11-13 05:36:57.854214+00:00
+-->
