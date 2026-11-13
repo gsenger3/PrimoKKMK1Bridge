@@ -39,6 +39,7 @@ final class Bridge {
 
     let buttonByCC: [Int: Int]          // cc -> button bit, for DAW feedback
     var held = Set<Int>()               // button bits currently down
+    var shiftLatched = false            // with shiftLatch: Shift is on until it's pressed again
     var lightState: [Int: Int] = [:]    // channel * 32 + bit -> last value the DAW sent
     var lightsSent: [UInt8]?
     var lightFlushPending = false
@@ -188,11 +189,17 @@ final class Bridge {
         }
     }
 
+    /// Whether Shift is on for this report: with shiftLatch, latched by the last press; otherwise held down.
+    func shiftOn(_ report: [UInt8]?) -> Bool {
+        cfg.shiftLatch ? shiftLatched : report.map { isSet($0, shiftBit) } ?? false
+    }
+
     func handleUI(_ b: [UInt8]) {
         var p = prev ?? b
         if prev == nil { for i in 1...5 { p[i] = 0 } }  // first report: buttons start up, positions start where they are
         prev = b
-        let shiftHeld = isSet(b, shiftBit)
+        if cfg.shiftLatch, isSet(b, shiftBit), !isSet(p, shiftBit) { shiftLatched.toggle() }
+        let shiftHeld = shiftOn(b)
         let layer = (shiftHeld ? cfg.shiftChannel : nil) ?? cfg.channel
         let toReaper = reaper != nil && !shiftHeld  // without Shift the controls drive REAPER
 
@@ -200,9 +207,13 @@ final class Bridge {
             let was = isSet(p, def.bit), now = isSet(b, def.bit)
             guard was != now else { continue }
             if def.bit == shiftBit {
-                if let cc = cfg.buttons[def.name] ?? nil { sendCC(cfg.channel, cc, now ? 127 : 0, "\(def.name) \(now ? "down" : "up")") }
+                // Latching, only a press changes Shift, and its CC and the knobs' touch follow the latch.
+                if cfg.shiftLatch && !now { continue }
+                let on = cfg.shiftLatch ? shiftLatched : now
+                let what = cfg.shiftLatch ? (on ? "latched" : "unlatched") : (on ? "down" : "up")
+                if let cc = cfg.buttons[def.name] ?? nil { sendCC(cfg.channel, cc, on ? 127 : 0, "\(def.name) \(what)") }
                 if let r = reaper {  // knobs held through the change: touch what they change now (volume or pan)
-                    for k in 0..<8 where isSet(p, knobTouchFirstBit + k) && isSet(b, knobTouchFirstBit + k) { r.retouch(k, shift: now) }
+                    for k in 0..<8 where isSet(p, knobTouchFirstBit + k) && isSet(b, knobTouchFirstBit + k) { r.retouch(k, shift: on) }
                 }
             } else if now {
                 if let r = reaper, !shiftHeld, r.view == .kk, let cc = kkButtonCCs[def.bit] {

@@ -212,7 +212,9 @@ struct InspectorView: View {
         Section("MIDI") {
             CCField(title: "CC on channel \(model.config.channel)", value: midiCC(b), fallback: defaultCC(b))
             if b == "Shift" {
-                note("Holding Shift moves the other buttons, knob turns and the Navigate knob turn to \(shiftText). Shift itself always sends on channel \(model.config.channel).")
+                note(model.config.shiftLatch
+                     ? "Shift latches: each press turns it on or off, and while it's on the other buttons, knob turns and the Navigate knob turn go to \(shiftText). Shift itself sends 127 when it latches and 0 when it unlatches, on channel \(model.config.channel)."
+                     : "Holding Shift moves the other buttons, knob turns and the Navigate knob turn to \(shiftText). Shift itself always sends on channel \(model.config.channel).")
             } else {
                 note("Sends 127 when pressed and 0 when released. With Shift held: the same CC on \(shiftText).")
             }

@@ -1,0 +1,27 @@
+{
+  "_note": "Like reaper_test_config.json (the REAPER button assignments the older tests were made with), with Shift latching on (issue #21), for shift_latch_test.",
+  "reaper": {
+    "enabled": true,
+    "sendPort": 18000,
+    "receivePort": 19000,
+    "buttons": {
+      "NavUp": "next-track",
+      "NavDown": "previous-track",
+      "Scale": "screenset:1",
+      "Arp": "screenset:2",
+      "PresetUp": null,
+      "PresetDown": null,
+      "NavLeft": null,
+      "NavRight": null
+    },
+    "shiftButtons": {
+      "Scale": null,
+      "Arp": null,
+      "NavUp": null,
+      "NavDown": null,
+      "NavLeft": null,
+      "NavRight": null
+    }
+  },
+  "shiftLatch": true
+}

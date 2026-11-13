@@ -17,6 +17,10 @@ extension Bridge {
     // MARK: button lights
 
     func lightLevel(_ def: ButtonDef, shiftHeld: Bool) -> UInt8 {
+        // A latching Shift is fully lit while it's on, and glows like any other button while it's off.
+        if def.bit == shiftBit, cfg.shiftLatch {
+            return UInt8(shiftLatched ? cfg.lightBrightness : cfg.lightIdleBrightness)
+        }
         // The button lights are single-colour, so Instance shows the view by brightness: mix off, track
         // half-way, Komplete Kontrol full.
         if let r = reaper, !shiftHeld, reaperCommands[def.bit] == .toggleView {
@@ -51,7 +55,7 @@ extension Bridge {
 
     func sendLights(force: Bool = false, allOff: Bool = false) {
         guard cfg.lights, let dev = device else { return }
-        let shiftHeld = prev.map { isSet($0, shiftBit) } ?? false
+        let shiftHeld = shiftOn(prev)
         var report = [UInt8](repeating: 0, count: 1 + lightCount)
         report[0] = reportLights
         if !allOff {

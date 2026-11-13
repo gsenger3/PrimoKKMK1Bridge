@@ -63,7 +63,8 @@ struct SettingsView: View {
                 if model.config.shiftChannel != nil {
                     IntField(title: "Shift Layer Channel", value: shiftChannel, range: 1...16)
                 }
-                Text("The name DAWs see for the bridge's MIDI input and output. Renaming it means picking it again in your DAW. With the Shift layer on, buttons and knobs send on its channel while Shift is held.")
+                Toggle("Shift Latching Enabled", isOn: $model.config.shiftLatch)
+                Text("The name DAWs see for the bridge's MIDI input and output. Renaming it means picking it again in your DAW. With the Shift layer on, buttons and knobs send on its channel while Shift is held. With Shift latching on, a press of Shift turns it on until the next press, and its light is full while it's on.")
                     .font(.caption).foregroundStyle(.secondary)
             }
 

@@ -137,7 +137,7 @@ extension Bridge {
 
     /// Touched knobs get a framed value bar; everything else stays where it is.
     func renderMIDI(_ touched: Set<Int>) {
-        let shiftHeld = prev.map { isSet($0, shiftBit) } ?? false
+        let shiftHeld = shiftOn(prev)
         let ch = (shiftHeld ? cfg.shiftChannel : nil) ?? cfg.channel
         displays.write(row: 0, cell: 0, "MIDI")
         displays.write(row: 1, cell: 0, "CH \(ch)")
@@ -157,7 +157,7 @@ extension Bridge {
 
     func renderReaper(_ r: ReaperSession, _ touched: Set<Int>) {
         let targets = (0..<8).map { r.target($0) }
-        let shiftHeld = prev.map { isSet($0, shiftBit) } ?? false
+        let shiftHeld = shiftOn(prev)
         // While Shift is held, a knob shows what Shift + turn changes: the pan in mix view, monitoring on record arm.
         func info(_ k: Int, _ t: KnobTarget) -> KnobInfo {
             guard shiftHeld else { return r.info(t) }

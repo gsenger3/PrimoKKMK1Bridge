@@ -133,7 +133,7 @@ mode is on.
 
 | Section | What's in it |
 | --- | --- |
-| **MIDI Configuration** | The bridge's **Port name** and **Channel**, and the Shift layer: **Shift Layer Enabled** and **Shift Layer Channel** |
+| **MIDI Configuration** | The bridge's **Port name** and **Channel**, and the Shift layer: **Shift Layer Enabled**, **Shift Layer Channel**, and **Shift Latching Enabled** (see [MIDI mode](#midi-mode)) |
 | **MIDI Keys & Controls** | **Merge Keys and Controls**: whether the keys and strips also come through the bridge's port. **Automatic (Port 1)** takes them from the keyboard's own port, **From MIDI Source by Name** from the source you name, and **Disabled** leaves them on the keyboard's port only |
 | **Lights and Displays** | **Enabled** drives the button lights, at **Active Brightness** when lit and **Idle Brightness** otherwise. **Enable Displays** drives the nine displays |
 | **REAPER Mode** | **Enabled** turns REAPER mode on. **Address**, **Local Listen Port** and **Device Port** match REAPER's OSC device ([Set up REAPER](#set-up-reaper-once)) |
@@ -166,6 +166,9 @@ control has a second assignment with the same CC numbers.
 - Shift itself sends CC108 on channel 1.
 - Knob touch and Navigate touch always use channel 1.
 - A release goes out on the channel of its press, even if you let go of Shift first.
+- **Latching Shift:** with **Shift Latching Enabled** on the editor's Settings page, you don't hold Shift: a press
+  turns it on until the next press. Its light is full while it's on, and its CC sends 127 when it latches and 0 when
+  it unlatches. This works the same in REAPER mode, for the Shift commands there.
 
 **Lights from the DAW.** The bridge also has a MIDI *output* called Primo Komplete Kontrol MK1. A CC sent there:
 
@@ -456,6 +459,7 @@ Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` pr
 | `portName` | Name of the virtual MIDI port |
 | `channel` | Base MIDI channel, 1–16 |
 | `shiftChannel` | Channel used while Shift is held, or `null` to make Shift a plain button |
+| `shiftLatch` | `true`: each press of Shift turns it on or off, instead of holding it (default `false`) |
 | `buttons` | Button name → CC number, or `null` to silence that button (Octave − / + still transpose the keys) |
 | `knobCCs` | 8 CCs for knobs 1–8 |
 | `knobMode` | `absolute` (0–127, starts at 64), `relative-binary-offset` (64 ± n), `relative-twos-complement` (1–63 up, 127–65 down), `relative-signed-bit` (1–63 up, 65–127 down) |

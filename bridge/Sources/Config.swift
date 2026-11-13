@@ -180,6 +180,7 @@ struct Config: Codable {
     var portName = "Primo Komplete Kontrol MK1"
     var channel = 1
     var shiftChannel: Int? = 2
+    var shiftLatch = false  // each press of Shift turns it on or off, instead of holding it (issue #21)
     var buttons: [String: Int?] = Dictionary(uniqueKeysWithValues: buttonDefs.map { ($0.name, Optional($0.cc)) })
     var knobCCs = Array(14...21)
     var knobMode = TurnMode.absolute
@@ -197,7 +198,7 @@ struct Config: Codable {
     var verbose = false  // log every message the bridge sends, like --verbose (issue #7)
 
     enum CodingKeys: String, CodingKey {
-        case portName, channel, shiftChannel, buttons, knobCCs, knobMode, knobStepsPerCC, knobTouchCCs
+        case portName, channel, shiftChannel, shiftLatch, buttons, knobCCs, knobMode, knobStepsPerCC, knobTouchCCs
         case navigateTurnCC, navigateTurnMode, navigateTouchCC, lights, lightBrightness, lightIdleBrightness
         case displays, reaper, keyboardSource, verbose
     }
@@ -215,6 +216,7 @@ struct Config: Codable {
         portName = try c.decodeIfPresent(String.self, forKey: .portName) ?? portName
         channel = try c.decodeIfPresent(Int.self, forKey: .channel) ?? channel
         shiftChannel = try nullable(.shiftChannel, shiftChannel)
+        shiftLatch = try c.decodeIfPresent(Bool.self, forKey: .shiftLatch) ?? shiftLatch
         knobCCs = try c.decodeIfPresent([Int].self, forKey: .knobCCs) ?? knobCCs
         knobMode = try c.decodeIfPresent(TurnMode.self, forKey: .knobMode) ?? knobMode
         knobStepsPerCC = try c.decodeIfPresent(Int.self, forKey: .knobStepsPerCC) ?? knobStepsPerCC
