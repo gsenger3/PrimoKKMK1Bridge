@@ -1,0 +1,1940 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Use a Native Instruments Komplete Kontrol S-series MK1 keyboard on macOS without NI's software: as MIDI, or as a REAPER control surface.">
+      
+      
+      
+        <link rel="canonical" href="https://gsenger3.github.io/PrimoKKMK1Bridge/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>PrimoKKMK1Bridge User Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#primokkmk1bridge-user-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="PrimoKKMK1Bridge User Guide" class="md-header__button md-logo" aria-label="PrimoKKMK1Bridge User Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PrimoKKMK1Bridge User Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PrimoKKMK1Bridge user guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gsenger3/PrimoKKMK1Bridge" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    gsenger3/PrimoKKMK1Bridge
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="PrimoKKMK1Bridge User Guide" class="md-nav__button md-logo" aria-label="PrimoKKMK1Bridge User Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    PrimoKKMK1Bridge User Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gsenger3/PrimoKKMK1Bridge" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    gsenger3/PrimoKKMK1Bridge
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PrimoKKMK1Bridge user guide
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PrimoKKMK1Bridge user guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you need
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting started
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-bridge-at-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start the bridge at login
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The editor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#midi-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MIDI mode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reaper-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REAPER mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="REAPER mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-up-reaper-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set up REAPER (once)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buttons-in-every-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Buttons in every view
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mix-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mix view
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track view
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#komplete-kontrol-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Komplete Kontrol view
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-colour-on-the-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track colour on the keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-assignments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default assignments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Default assignments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#midi-mode-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MIDI mode defaults
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reaper-mode-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REAPER mode defaults
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#komplete-kontrol-view-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Komplete Kontrol view defaults
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lights-and-displays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lights and displays
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-config-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The config file
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The config file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-keyboard-without-the-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The keyboard without the bridge
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you need
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting started
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-the-bridge-at-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start the bridge at login
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The editor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#midi-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MIDI mode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reaper-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REAPER mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="REAPER mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-up-reaper-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set up REAPER (once)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buttons-in-every-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Buttons in every view
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mix-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mix view
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track view
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#komplete-kontrol-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Komplete Kontrol view
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#track-colour-on-the-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Track colour on the keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-assignments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default assignments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Default assignments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#midi-mode-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MIDI mode defaults
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reaper-mode-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REAPER mode defaults
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#komplete-kontrol-view-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Komplete Kontrol view defaults
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lights-and-displays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lights and displays
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-config-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The config file
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The config file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-keyboard-without-the-bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The keyboard without the bridge
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+
+
+
+
+<h1 id="primokkmk1bridge-user-guide">PrimoKKMK1Bridge user guide<a class="headerlink" href="#primokkmk1bridge-user-guide" title="Permanent link">&para;</a></h1>
+<p>PrimoKKMK1Bridge makes a Native Instruments <strong>Komplete Kontrol S-series MK1</strong> keyboard (S25, S49, S61, S88) fully
+usable on macOS without Native Instruments' software:
+- every button, knob and touch sends MIDI on a virtual port, <strong>Primo Komplete Kontrol MK1</strong>
+- the button lights and the nine displays are driven
+- an optional REAPER mode turns the keyboard into a REAPER control surface</p>
+<p>It comes as two programs:</p>
+<ul>
+<li><strong>The bridge</strong> (PrimoKKMK1Bridge) talks to the keyboard and does the work. It runs in the background.</li>
+<li><strong>The editor</strong> (Primo KK MK1 Control Editor) is a Mac app for changing what every control does. It starts and
+  stops the bridge.</li>
+</ul>
+<p><strong>Contents</strong></p>
+<ol>
+<li><a href="#what-you-need">What you need</a></li>
+<li><a href="#install">Install</a></li>
+<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#start-the-bridge-at-login">Start the bridge at login</a></li>
+<li><a href="#the-editor">The editor</a></li>
+<li><a href="#midi-mode">MIDI mode</a></li>
+<li><a href="#reaper-mode">REAPER mode</a>: <a href="#buttons-in-every-view">buttons</a>, <a href="#mix-view">Mix view</a>,
+   <a href="#track-view">Track view</a>, <a href="#komplete-kontrol-view">Komplete Kontrol view</a>,
+   <a href="#track-colour-on-the-keys">track colour on the keys</a></li>
+<li><a href="#default-assignments">Default assignments</a></li>
+<li><a href="#lights-and-displays">Lights and displays</a></li>
+<li><a href="#the-config-file">The config file</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#the-keyboard-without-the-bridge">The keyboard without the bridge</a></li>
+</ol>
+<h2 id="what-you-need">What you need<a class="headerlink" href="#what-you-need" title="Permanent link">&para;</a></h2>
+<ul>
+<li>A Komplete Kontrol S-series MK1 keyboard. Tested on an S61 MK1, firmware 72. The S25, S49 and S88 should work
+  but haven't been tried.</li>
+<li>A Mac with macOS 14 or later. The release download is for Apple Silicon. On an Intel Mac,
+  <a href="https://github.com/gsenger3/PrimoKKMK1Bridge#build-and-run">build it from source</a>.</li>
+<li>For REAPER mode: REAPER (tested with 7.61).</li>
+</ul>
+<h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Download <code>PrimoKKMK1Editor-&lt;version&gt;-macOS-arm64.zip</code> from the
+   <a href="https://github.com/gsenger3/PrimoKKMK1Bridge/releases">releases page</a> and unzip it.</li>
+<li><strong>Move PrimoKKMK1Editor.app to your Applications folder.</strong> That's the recommended place: starting the bridge at
+   login uses the app where it is. The bridge is inside the app, so there's nothing else to install.</li>
+<li>The app is signed for local use only, not notarized by Apple, so macOS blocks it the first time. Either open
+   it once and click <strong>Open Anyway</strong> in System Settings ▸ Privacy &amp; Security, or run this in Terminal:
+   <div class="highlight"><pre><span></span><code>xattr<span class="w"> </span>-dr<span class="w"> </span>com.apple.quarantine<span class="w"> </span>/Applications/PrimoKKMK1Editor.app
+</code></pre></div>
+   Use the <code>xattr</code> command if you'll <a href="#start-the-bridge-at-login">start the bridge at login</a>: it clears the bridge
+   inside the app too.</li>
+</ol>
+<p>To build it yourself instead, see <a href="https://github.com/gsenger3/PrimoKKMK1Bridge#build-and-run">Build and run</a>.</p>
+<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Plug in the keyboard and open <strong>Primo KK MK1 Control Editor</strong>.</li>
+<li>Turn on the <strong>bridge switch</strong> in the toolbar. The light next to it turns green, the keyboard's buttons light
+   up, and the displays wake up.</li>
+<li>In your DAW, use the MIDI input <strong>Primo Komplete Kontrol MK1</strong>. It carries the keys, the pitch and mod strips
+   and every control, so one input is all a track needs.</li>
+</ol>
+<p>Good to know:</p>
+<ul>
+<li><strong>Don't give a track both ports.</strong> The keyboard's own port, <em>KOMPLETE KONTROL S61 Port 1</em>, still sends the keys
+  too, so never give a track that and Primo Komplete Kontrol MK1, or <em>All MIDI inputs</em>: every note would arrive
+  twice.</li>
+<li><strong>The bridge keeps running when you quit the editor.</strong> Turn the switch off to stop it.</li>
+<li><strong>After the bridge stops,</strong> the keyboard stays in <em>native mode</em>, with silent knobs, until you unplug and replug
+  it or start the bridge again.</li>
+<li><strong>The config file</strong> is created the first time you run the editor or the bridge, with every default:
+  <code>~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json</code>. A new config starts in
+  <a href="#midi-mode">MIDI mode</a>. For REAPER, turn on <strong>Enabled</strong> under <strong>REAPER Mode</strong> on the editor's Settings page.</li>
+</ul>
+<h2 id="start-the-bridge-at-login">Start the bridge at login<a class="headerlink" href="#start-the-bridge-at-login" title="Permanent link">&para;</a></h2>
+<p>To have the bridge start when you log in, without the editor, turn on <strong>Launch Bridge at Login</strong> under <strong>Login</strong> on
+the editor's Settings page. It applies right away, without saving, and starts the copy of the bridge inside the app
+where the app is now, so move the app to your Applications folder first. It takes effect at your next login; to
+start the bridge now too, use the bridge switch.</p>
+<p>How it behaves:</p>
+<ul>
+<li><strong>After a crash,</strong> it's started again.</li>
+<li><strong>With the editor's switch,</strong> you can still turn it off. That's a normal quit, so it stays off until your next
+  login, and the switch can turn it back on.</li>
+<li><strong>Its output</strong> goes to <code>~/Library/Logs/PrimoKKMK1Bridge.log</code>, the same log the editor's <strong>Show Log</strong> opens.</li>
+<li><strong>If you move the app,</strong> the Settings page shows the copy it starts, with <strong>Use This App</strong> to switch to the one
+  you're running.</li>
+<li><strong>Turning it off</strong> stops it starting at your next login. A bridge it already started keeps going until you turn
+  it off with the switch or log out.</li>
+</ul>
+<p>Under the hood it's a <em>LaunchAgent</em>, <code>~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist</code>.</p>
+<details>
+<summary>Setting it up by hand instead</summary>
+<p>For the app in the Applications folder, paste these into Terminal; the first one is long:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/Library/LaunchAgents<span class="w"> </span>~/Library/Logs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>&gt;<span class="w"> </span>~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+<span class="s">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="s">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
+<span class="s">&lt;plist version="1.0"&gt;</span>
+<span class="s">&lt;dict&gt;</span>
+<span class="s">    &lt;key&gt;Label&lt;/key&gt;&lt;string&gt;com.primostudios.PrimoKKMK1Bridge&lt;/string&gt;</span>
+<span class="s">    &lt;key&gt;ProgramArguments&lt;/key&gt;</span>
+<span class="s">    &lt;array&gt;&lt;string&gt;/Applications/PrimoKKMK1Editor.app/Contents/MacOS/PrimoKKMK1Bridge&lt;/string&gt;&lt;/array&gt;</span>
+<span class="s">    &lt;key&gt;RunAtLoad&lt;/key&gt;&lt;true/&gt;</span>
+<span class="s">    &lt;key&gt;KeepAlive&lt;/key&gt;&lt;dict&gt;&lt;key&gt;SuccessfulExit&lt;/key&gt;&lt;false/&gt;&lt;/dict&gt;</span>
+<span class="s">    &lt;key&gt;ProcessType&lt;/key&gt;&lt;string&gt;Interactive&lt;/string&gt;</span>
+<span class="s">    &lt;key&gt;StandardOutPath&lt;/key&gt;&lt;string&gt;$HOME/Library/Logs/PrimoKKMK1Bridge.log&lt;/string&gt;</span>
+<span class="s">    &lt;key&gt;StandardErrorPath&lt;/key&gt;&lt;string&gt;$HOME/Library/Logs/PrimoKKMK1Bridge.log&lt;/string&gt;</span>
+<span class="s">&lt;/dict&gt;</span>
+<span class="s">&lt;/plist&gt;</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>launchctl<span class="w"> </span>bootstrap<span class="w"> </span>gui/<span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="w"> </span>~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist
+</code></pre></div>
+<p>That also starts the bridge right away. To undo it:</p>
+<div class="highlight"><pre><span></span><code>launchctl<span class="w"> </span>bootout<span class="w"> </span>gui/<span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span>/com.primostudios.PrimoKKMK1Bridge<span class="p">;</span><span class="w"> </span>rm<span class="w"> </span>~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist
+</code></pre></div>
+</details>
+<h2 id="the-editor">The editor<a class="headerlink" href="#the-editor" title="Permanent link">&para;</a></h2>
+<p>The editor shows a drawing of the keyboard. <strong>Click a button, knob or strip</strong>, and the panel on the right shows
+what it does and lets you change it. Each control on the drawing is labelled with its current assignment, and a
+second line starting with ⇧ shows what it does with Shift held.</p>
+<p>The pages, chosen in the toolbar, follow the mode you're in:</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Pages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MIDI mode</td>
+<td><strong>MIDI</strong>: the CC each control sends · <strong>Settings</strong></td>
+</tr>
+<tr>
+<td>REAPER mode</td>
+<td><strong>REAPER</strong>: the command each button runs, alone and with Shift · <strong>Komplete Kontrol</strong>: that view's CCs · <strong>Settings</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Settings</strong> has these sections. REAPER Views, Reaper Lightguide and Komplete Kontrol View appear only while REAPER
+mode is on.</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>What's in it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MIDI Configuration</strong></td>
+<td>The bridge's <strong>Port name</strong> and <strong>Channel</strong>, and the Shift layer: <strong>Shift Layer Enabled</strong> and <strong>Shift Layer Channel</strong></td>
+</tr>
+<tr>
+<td><strong>MIDI Keys &amp; Controls</strong></td>
+<td><strong>Merge Keys and Controls</strong>: whether the keys and strips also come through the bridge's port. <strong>Automatic (Port 1)</strong> takes them from the keyboard's own port, <strong>From MIDI Source by Name</strong> from the source you name, and <strong>Disabled</strong> leaves them on the keyboard's port only</td>
+</tr>
+<tr>
+<td><strong>Lights and Displays</strong></td>
+<td><strong>Enabled</strong> drives the button lights, at <strong>Active Brightness</strong> when lit and <strong>Idle Brightness</strong> otherwise. <strong>Enable Displays</strong> drives the nine displays</td>
+</tr>
+<tr>
+<td><strong>REAPER Mode</strong></td>
+<td><strong>Enabled</strong> turns REAPER mode on. <strong>Address</strong>, <strong>Local Listen Port</strong> and <strong>Device Port</strong> match REAPER's OSC device (<a href="#set-up-reaper-once">Set up REAPER</a>)</td>
+</tr>
+<tr>
+<td><strong>REAPER Views</strong></td>
+<td><strong>Default View</strong>: the view the bridge starts in. <strong>Follow REAPER Track Selection</strong>: the keyboard follows the track you click in REAPER. <strong>Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)</strong>: in those views, the track you pick on the keyboard becomes REAPER's selected track. <strong>Track Name Display Duration</strong>: how long the displays show the track's name after you change track. <strong>REAPER Resource Folder</strong>: where the screenset names come from</td>
+</tr>
+<tr>
+<td><strong>Reaper Lightguide</strong></td>
+<td>The selected track's colour on the keys, and the REAPER script it needs: see <a href="#track-colour-on-the-keys">Track colour on the keys</a></td>
+</tr>
+<tr>
+<td><strong>Komplete Kontrol View</strong></td>
+<td>That view's <strong>MIDI Channel</strong> and <strong>Knob Values</strong> mode</td>
+</tr>
+<tr>
+<td><strong>Login</strong></td>
+<td><strong>Launch Bridge at Login</strong>: start the bridge when you log in, without the editor. It applies right away, without saving. See <a href="#start-the-bridge-at-login">Start the bridge at login</a></td>
+</tr>
+<tr>
+<td><strong>Logging</strong></td>
+<td><strong>Verbose Logging</strong>: the bridge writes every message it sends to its log, for tracking down a problem. Turn it off again afterwards, as the log grows quickly. <strong>Show Log</strong> opens the log</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reset to Default Settings…</strong>, at the bottom, puts every setting and assignment back to its default, apart from
+REAPER mode. Nothing is written until you save.</p>
+<p>Other things in the editor:
+- <strong>Saving:</strong> <strong>Save</strong> (⌘S) writes the config file, and a running bridge picks it up within a second or two.
+  <strong>Revert</strong> throws away unsaved edits. If a change can't work, the status bar says why and Save stays off.
+- <strong>The bridge switch</strong> shows whether the bridge is running, however it was started, and starts or stops it. The
+  same commands are in the <strong>Bridge</strong> menu, with <strong>Show Bridge Log</strong> and <strong>Show REAPER Track Colour Script</strong>.
+- <strong>File ▸ Open Config…</strong> edits another config file for the session. Normally you don't need it.
+- <strong>Help ▸ Primo KK MK1 Control Editor Help</strong> opens this guide.</p>
+<h2 id="midi-mode">MIDI mode<a class="headerlink" href="#midi-mode" title="Permanent link">&para;</a></h2>
+<p>MIDI mode is the default. Every control sends a MIDI CC on <strong>Primo Komplete Kontrol MK1</strong>, channel 1, for MIDI
+learn in any DAW. Buttons send 127 when pressed and 0 when released; knobs send absolute values (0–127).</p>
+<p><strong>Shift layer.</strong> Holding Shift moves the buttons, knob turns and the Navigate knob turn to <strong>channel 2</strong>, so every
+control has a second assignment with the same CC numbers.
+- Shift itself sends CC108 on channel 1.
+- Knob touch and Navigate touch always use channel 1.
+- A release goes out on the channel of its press, even if you let go of Shift first.</p>
+<p><strong>Lights from the DAW.</strong> The bridge also has a MIDI <em>output</em> called Primo Komplete Kontrol MK1. A CC sent there:
+- lights its button (any value above 0) or dims it (0)
+- on channel 2, sets the light shown while Shift is held
+- for a knob, moves that knob's value, so it carries on from the DAW's value instead of jumping</p>
+<p>The keys, pitch strip (pitch bend) and mod strip (CC1) work as always, and Octave − / + transpose the keys on the
+keyboard as well as sending their CCs. The CC of every control is in <a href="#midi-mode-defaults">Default assignments</a>.</p>
+<h2 id="reaper-mode">REAPER mode<a class="headerlink" href="#reaper-mode" title="Permanent link">&para;</a></h2>
+<p>In REAPER mode the bridge talks to REAPER over OSC, REAPER's own control-surface protocol. The transport and
+editing buttons run REAPER commands, and the knobs work in three <strong>views</strong>. <strong>Instance</strong> steps through them:
+<strong>Mix → Track → Komplete Kontrol → Mix</strong>. The Instance light shows which view you're in: off in Mix, medium in
+Track, full in Komplete Kontrol.</p>
+<h3 id="set-up-reaper-once">Set up REAPER (once)<a class="headerlink" href="#set-up-reaper-once" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Turn on REAPER mode:</strong> on the editor's Settings page, turn on <strong>Enabled</strong> under <strong>REAPER Mode</strong>, and save.</li>
+<li>In REAPER, go to <strong>Preferences ▸ Control/OSC/web ▸ Add</strong>, and choose Control surface mode <strong>OSC (Open Sound
+   Control)</strong>:</li>
+<li>Device name: <code>PrimoKKMK1Bridge</code>, Pattern config: <strong>Default</strong></li>
+<li>Mode: <strong>Configure device IP + local port</strong></li>
+<li>Device port <code>9000</code>, Device IP <code>127.0.0.1</code>, Local listen port <code>8000</code>. These match <strong>Device Port</strong>,
+     <strong>Address</strong> and <strong>Local Listen Port</strong> under <strong>REAPER Mode</strong> on the editor's Settings page.</li>
+<li><strong>Preferences ▸ MIDI Devices:</strong> enable <strong>Primo Komplete Kontrol MK1</strong> for input.</li>
+<li><strong>Komplete Kontrol track:</strong> set its MIDI input to <strong>Primo Komplete Kontrol MK1</strong>. It carries the keys, the strips
+   and the Komplete Kontrol view's CCs. For tracks that should only get the keys, use the keyboard's own <em>Port 1</em>,
+   so the bridge's CCs aren't recorded into their items.</li>
+<li><strong>Optional:</strong> to have the keys play whichever track you select, right-click a track's record-arm button and turn
+   on <strong>Automatic record-arm when track selected</strong>.</li>
+</ol>
+<p>Until REAPER answers, the displays read <em>waiting for OSC from REAPER</em> (and with the
+<a href="#track-colour-on-the-keys">track colour script</a> installed, the keys are purple). The same happens within a second
+of REAPER quitting, and the bridge picks REAPER up again a few seconds after you reopen it. That needs REAPER on
+the same Mac (the default address, <code>127.0.0.1</code>): with REAPER on another computer, the bridge can't tell it quit.</p>
+<p>When the bridge starts, it runs REAPER's <em>Control surface: Refresh all surfaces</em> action to get the whole project,
+since REAPER otherwise only sends values that changed. Your other control surfaces (MCU, FaderPort, HUI) are
+refreshed at the same moment.</p>
+<h3 id="buttons-in-every-view">Buttons in every view<a class="headerlink" href="#buttons-in-every-view" title="Permanent link">&para;</a></h3>
+<p>The buttons do the same in all three views, apart from the Komplete Kontrol view's own CCs.
+- <strong>Shift:</strong> a combination without a command of its own sends that button's CC on channel 2, as in MIDI mode.
+- <strong>Navigate knob:</strong> turning it picks the previous or next track. In Mix view it also switches to
+  <a href="#track-view">Track view</a>, so the knobs and displays show the track you pick. The Komplete Kontrol view stays as it
+  is, so you can move between instrument tracks and keep their plugins on the knobs.
+- <strong>Changing track:</strong> the displays show <em>TRK</em> with the track's number and name for 2 seconds (<strong>Track Name Display
+  Duration</strong> in Settings), then the knob values.
+  Touching a knob ends that early.
+- <strong>Clicking a track in REAPER</strong> selects it on the keyboard too.</p>
+<p>The full list of what each button does, alone and with Shift, is in <a href="#reaper-mode-defaults">REAPER mode defaults</a>.
+One of them needs a note: REAPER doesn't report the record mode over OSC, so Shift + Loop (normal ↔ time-selection
+auto-punch) follows the last mode set from the keyboard. If you change the mode in REAPER, one extra press brings
+them back in step.</p>
+<h3 id="mix-view">Mix view<a class="headerlink" href="#mix-view" title="Permanent link">&para;</a></h3>
+<p>The default view. The 8 knobs are the volumes of 8 tracks, and with Shift held, their pans.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Knobs 1–8</td>
+<td>Volume of the 8 tracks on the knobs</td>
+</tr>
+<tr>
+<td>Shift + knob</td>
+<td>Pan of that track</td>
+</tr>
+<tr>
+<td>Knob touch</td>
+<td>Frames that knob's bar, and tells REAPER the fader (with Shift held, the pan) is touched, for <em>Touch</em> automation</td>
+</tr>
+<tr>
+<td>Page ◀ / ▶</td>
+<td>Previous / next 8 tracks</td>
+</tr>
+</tbody>
+</table>
+<p>The left display shows <em>MIX</em> and the tracks on the knobs, such as <em>9-16</em>. Each knob's display shows the track's name,
+its volume and a bar. While Shift is held, the left display shows <em>PAN</em>, and each knob's display shows the track's
+pan (<em>CENTER</em> at the centre) with a bar from the middle. Knobs past the last track stay blank, and the master track
+isn't on the knobs. To reset a volume to 0 dB, select the track and use Shift + knob 1 in <a href="#track-view">Track view</a>.</p>
+<h3 id="track-view">Track view<a class="headerlink" href="#track-view" title="Permanent link">&para;</a></h3>
+<p>The knobs control the selected track. A track you pick with the Navigate knob also becomes REAPER's only selected
+track, and REAPER scrolls to it.</p>
+<table>
+<thead>
+<tr>
+<th>Knob</th>
+<th>Page 1</th>
+<th>Shift + turn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Volume</td>
+<td>Reset to 0 dB</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Pan (the display reads <em>CENTER</em> at centre)</td>
+<td>Snap to centre</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Mute: turn right for on, left for off</td>
+<td>CC16, channel 2</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Solo: right on, left off</td>
+<td>CC17, channel 2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Record arm: right on, left off</td>
+<td>Record monitoring: right on, left off</td>
+</tr>
+<tr>
+<td>6–8</td>
+<td>Sends 1–3</td>
+<td>CC19–21, channel 2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Page ▶</strong> shows the next 8 sends (page 2: sends 4–11, page 3: sends 12–16), and <strong>Page ◀</strong> goes back. Only sends
+that are routed somewhere appear, in order, each with the track it feeds and its level.</p>
+<p>The left display shows the track's name and <em>TRK n</em>, or the page, such as <em>PAGE 2/2</em>. The record-arm display also
+shows the monitoring (<em>ON MON</em>, <em>off AUTO</em>); while Shift is held it shows <em>MONITOR</em>.</p>
+<h3 id="komplete-kontrol-view">Komplete Kontrol view<a class="headerlink" href="#komplete-kontrol-view" title="Permanent link">&para;</a></h3>
+<p>The knobs and eight navigation buttons send fixed CCs for Komplete Kontrol's NKS MIDI template, like Novation's
+Launchkey keyboards do. They go out on Primo Komplete Kontrol MK1, channel 1. The other buttons keep their REAPER
+jobs. Turning the Navigate knob picks the previous or next track and keeps you in this view; the track you pick also
+becomes REAPER's only selected track, and REAPER scrolls to it.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>CC</th>
+<th>Does in Komplete Kontrol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Knobs 1–8</td>
+<td>21–28</td>
+<td>The 8 parameters on the current NKS page</td>
+</tr>
+<tr>
+<td>Preset ▲ / ▼</td>
+<td>37 / 36</td>
+<td>Next / previous preset</td>
+</tr>
+<tr>
+<td>Navigate ▲ / ▼</td>
+<td>41 / 40</td>
+<td>As Komplete Kontrol's template assigns them</td>
+</tr>
+<tr>
+<td>Navigate ◀ / ▶</td>
+<td>42 / 43</td>
+<td>Previous / next NKS page</td>
+</tr>
+<tr>
+<td>Page ◀ / ▶ (next to the knobs)</td>
+<td>42 / 43</td>
+<td>Previous / next NKS page, the same as Navigate ◀ / ▶</td>
+</tr>
+</tbody>
+</table>
+<p>Komplete Kontrol's parameter names and values aren't available to the bridge, so it works like the Launchkey:
+- <strong>Displays:</strong> the selected track's name over <em>KONTROL</em> on the left, and <em>ENCODER 1</em>–<em>ENCODER 8</em> under the knobs,
+  each with a bar of the value it last sent.
+- <strong>Knob values:</strong> the bridge keeps <strong>one set of 8 knob values</strong>, starting at 64, for every page, track and preset.
+- <strong>Jumps:</strong> a knob can jump the first time you turn it after a page or preset change, when its value doesn't
+  match the parameter it now controls.</p>
+<p>For Komplete Kontrol to receive the CCs, its track needs <strong>Primo Komplete Kontrol MK1</strong> as input and must be
+record-armed or monitored.</p>
+<h3 id="track-colour-on-the-keys">Track colour on the keys<a class="headerlink" href="#track-colour-on-the-keys" title="Permanent link">&para;</a></h3>
+<p>In REAPER mode, the keyboard's light guide (the lights above the keys) shows the <strong>selected track's colour on
+every key</strong>. Its settings are in the <strong>Reaper Lightguide</strong> section of the editor's Settings page.
+- <strong>Brightness:</strong> 50% by default. The colour is corrected so a white track looks white rather than purple.
+- <strong>No colour:</strong> a track without a colour of its own leaves the keys dark, and so does having no track selected.
+- <strong>Turning it off:</strong> turn off <strong>Enable Lightguide</strong>.</p>
+<p>Once the script is installed (below), the light guide also shows how the bridge is doing:</p>
+<table>
+<thead>
+<tr>
+<th>The keys show</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A rainbow running up from the lowest key</td>
+<td>The bridge has just connected to the keyboard: started, restarted after a saved change, or the keyboard plugged in. It then fades into one of the below</td>
+</tr>
+<tr>
+<td>Purple</td>
+<td>Waiting for REAPER: it isn't running yet, or its OSC device doesn't match (the displays say <em>waiting for OSC from REAPER</em>)</td>
+</tr>
+<tr>
+<td>The selected track's colour</td>
+<td>REAPER is connected</td>
+</tr>
+<tr>
+<td>Red</td>
+<td>The bridge can't open its OSC link to REAPER, usually because another program (such as a second bridge) already uses its port. The displays say why; the bridge tries again every 3 seconds</td>
+</tr>
+</tbody>
+</table>
+<p>REAPER's OSC doesn't report track colours, so a small script inside REAPER sends them to the bridge as MIDI. Set
+it up once:</p>
+<ol>
+<li><strong>Install the script.</strong> On the editor's Settings page, under <strong>Reaper Lightguide</strong>, click <strong>Install…</strong> in the
+   <strong>REAPER Integration</strong> row. It does two things:</li>
+<li>copies <code>PrimoKKMK1Bridge_TrackColor.lua</code> into the <strong>Scripts/Primo Studios</strong> folder of REAPER's resource folder</li>
+<li>adds a line to <code>Scripts/__startup.lua</code>, which REAPER runs every time it starts. An existing <code>__startup.lua</code> is
+     backed up first and kept as it is; the line goes at the end.</li>
+</ol>
+<p>The row also shows whether the script is installed. Once it is, the button is <strong>Uninstall…</strong> instead (see
+   below). After an update of the app, <strong>Update…</strong> appears next to it to replace an older script; <strong>Repair…</strong> puts
+   back a part that's missing.
+2. <strong>Let REAPER send to the bridge.</strong> In <strong>Preferences ▸ Audio ▸ MIDI Outputs</strong> (<em>MIDI Devices</em> in older
+   versions), enable <strong>Primo Komplete Kontrol MK1</strong> as an output. Only the script uses it: tracks don't send there
+   unless you route them to it.
+3. <strong>Restart REAPER.</strong> The keys take the selected track's colour, and follow as you select other tracks or change
+   a colour.</p>
+<p>To install it by hand instead, reveal the script with <strong>Bridge ▸ Show REAPER Track Colour Script</strong>, then:
+- copy it into REAPER's Scripts folder (Options ▸ Show REAPER resource path in explorer/finder)
+- add this line to <code>Scripts/__startup.lua</code>, adjusting the path to where you put it:
+  <div class="highlight"><pre><span></span><code><span class="nb">dofile</span><span class="p">(</span><span class="nv">reaper</span><span class="p">.</span><span class="nf">GetResourcePath</span><span class="p">()</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">"/Scripts/PrimoKKMK1Bridge_TrackColor.lua"</span><span class="p">)</span>
+</code></pre></div></p>
+<p>The script sends the colour when the selection or a colour changes, and every 2 seconds, so a restarted bridge
+catches up. When REAPER quits, the keys go dark.</p>
+<p><strong>To remove it,</strong> click <strong>Uninstall…</strong> in the same place. It deletes the script, and the <strong>Primo Studios</strong> folder
+too if nothing else is in it, and takes the script's lines out of <code>Scripts/__startup.lua</code> (backing it up first). The
+rest of <code>__startup.lua</code> stays as it is, and so does the file itself, unless starting the script was all it did. A
+script that's already running stops when you restart REAPER. The MIDI output can then be turned off again in
+REAPER's preferences, if nothing else uses it.</p>
+<h2 id="default-assignments">Default assignments<a class="headerlink" href="#default-assignments" title="Permanent link">&para;</a></h2>
+<p>These are the defaults a new config starts with. Change any of them in the editor.</p>
+<p>In the pictures, the first line under each control is what it does, and a line starting with ⇧ is what it does
+with Shift held.</p>
+<h3 id="midi-mode-defaults">MIDI mode defaults<a class="headerlink" href="#midi-mode-defaults" title="Permanent link">&para;</a></h3>
+<p><img alt="The keyboard in MIDI mode, with each control's CC" src="img/keyboard-midi.png" /></p>
+<p>With Shift held, every button and knob turn sends the same CC on channel 2.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>CC</th>
+<th>Values</th>
+<th>With Shift held</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Play / Stop / Rec</td>
+<td>102 / 103 / 104</td>
+<td>127 press, 0 release</td>
+<td>Same CC, channel 2</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>105</td>
+<td>127 / 0</td>
+<td>Channel 2</td>
+</tr>
+<tr>
+<td>Rewind ◀◀ / Fast forward ▶▶</td>
+<td>106 / 107</td>
+<td>127 / 0</td>
+<td>Channel 2</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>108</td>
+<td>127 / 0</td>
+<td>Always channel 1</td>
+</tr>
+<tr>
+<td>Scale / Arp</td>
+<td>109 / 110</td>
+<td>127 / 0</td>
+<td>Channel 2</td>
+</tr>
+<tr>
+<td>Octave − / +</td>
+<td>111 / 112</td>
+<td>127 / 0, and the keys transpose</td>
+<td>Channel 2</td>
+</tr>
+<tr>
+<td>Page ◀ / ▶ (next to the knobs)</td>
+<td>113 / 114</td>
+<td>127 / 0</td>
+<td>Channel 2</td>
+</tr>
+<tr>
+<td>Browse / Instance</td>
+<td>115 / 116</td>
+<td>127 / 0</td>
+<td>Channel 2</td>
+</tr>
+<tr>
+<td>Back / Enter</td>
+<td>117 / 118</td>
+<td>127 / 0</td>
+<td>Channel 2</td>
+</tr>
+<tr>
+<td>Preset ▲ / ▼</td>
+<td>119 / 85</td>
+<td>127 / 0</td>
+<td>Channel 2</td>
+</tr>
+<tr>
+<td>Navigate ▲ / ▼ / ◀ / ▶</td>
+<td>86 / 87 / 88 / 89</td>
+<td>127 / 0</td>
+<td>Channel 2</td>
+</tr>
+<tr>
+<td>Navigate knob press</td>
+<td>90</td>
+<td>127 / 0</td>
+<td>Channel 2</td>
+</tr>
+<tr>
+<td>Navigate knob turn</td>
+<td>30</td>
+<td>Relative: 64 ± steps</td>
+<td>Channel 2</td>
+</tr>
+<tr>
+<td>Navigate knob touch</td>
+<td>31</td>
+<td>127 touched, 0 released</td>
+<td>Always channel 1</td>
+</tr>
+<tr>
+<td>Knobs 1–8 turn</td>
+<td>14–21</td>
+<td>Absolute 0–127, starting at 64</td>
+<td>Channel 2, with its own values</td>
+</tr>
+<tr>
+<td>Knobs 1–8 touch</td>
+<td>22–29</td>
+<td>127 touched, 0 released</td>
+<td>Always channel 1</td>
+</tr>
+<tr>
+<td>Keys / pitch strip / mod strip</td>
+<td>Notes / pitch bend / CC1</td>
+<td></td>
+<td>Unchanged</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reaper-mode-defaults">REAPER mode defaults<a class="headerlink" href="#reaper-mode-defaults" title="Permanent link">&para;</a></h3>
+<p><img alt="The keyboard in REAPER mode, with each button's command and its Shift command" src="img/keyboard-reaper.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Button</th>
+<th>Press</th>
+<th>Shift + press</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Play</td>
+<td>Play</td>
+<td>CC102, channel 2</td>
+</tr>
+<tr>
+<td>Stop</td>
+<td>Stop</td>
+<td>Go to the start of the project</td>
+</tr>
+<tr>
+<td>Rec</td>
+<td>Record</td>
+<td>Metronome on / off</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>Repeat on / off</td>
+<td>Record mode: normal ↔ time-selection auto-punch</td>
+</tr>
+<tr>
+<td>Rewind ◀◀</td>
+<td>Rewind</td>
+<td>Previous marker</td>
+</tr>
+<tr>
+<td>Fast forward ▶▶</td>
+<td>Fast forward</td>
+<td>Next marker</td>
+</tr>
+<tr>
+<td>Scale</td>
+<td>Show / hide the MIDI editor windows (action 40716)</td>
+<td>MIDI inputs as step input, on / off, in the open MIDI editor (MIDI Editor action 40481)</td>
+</tr>
+<tr>
+<td>Arp</td>
+<td>Track automation mode: write (40403)</td>
+<td>Track automation mode: trim/read (40400)</td>
+</tr>
+<tr>
+<td>Browse</td>
+<td>Open the selected track's plugin windows one by one</td>
+<td>Close the selected track's plugin windows</td>
+</tr>
+<tr>
+<td>Instance</td>
+<td>Next view: Mix → Track → Komplete Kontrol</td>
+<td>CC116, channel 2</td>
+</tr>
+<tr>
+<td>Back</td>
+<td>Undo</td>
+<td>Redo</td>
+</tr>
+<tr>
+<td>Enter</td>
+<td>Save the project</td>
+<td>Open the Render dialog</td>
+</tr>
+<tr>
+<td>Preset ▲ / ▼</td>
+<td>Load screenset 1 / 2 (its name shows on the displays)</td>
+<td>CC119 / 85, channel 2</td>
+</tr>
+<tr>
+<td>Navigate ▲ / ▼</td>
+<td>Zoom in / out horizontally (1012 / 1011)</td>
+<td>Zoom in / out vertically (40111 / 40112)</td>
+</tr>
+<tr>
+<td>Navigate ◀ / ▶</td>
+<td>Move the edit cursor left / right one pixel (40104 / 40105)</td>
+<td>Move the edit cursor to the previous / next grid division (40646 / 40647)</td>
+</tr>
+<tr>
+<td>Navigate knob turn</td>
+<td>Pick the previous / next track; from Mix view, also switch to Track view</td>
+<td>CC30, channel 2</td>
+</tr>
+<tr>
+<td>Navigate knob press</td>
+<td>MIDI panic: all notes off, all sounds off</td>
+<td>CC90, channel 2</td>
+</tr>
+<tr>
+<td>Page ◀ / ▶ (next to the knobs)</td>
+<td>Mix view: previous / next 8 tracks. Track view: previous / next page of sends</td>
+<td>CC113 / 114, channel 2</td>
+</tr>
+<tr>
+<td>Octave − / +</td>
+<td>Transpose the keys, and CC111 / 112 on channel 1</td>
+<td>CC111 / 112, channel 2</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>Holds the Shift layer, and sends CC108 on channel 1</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>The numbers in brackets are REAPER's action command IDs. Any button can run any REAPER action: in the editor,
+pick <strong>Run a REAPER action by ID…</strong>, or <strong>Run a MIDI Editor action by ID…</strong> for actions from the MIDI Editor
+section of REAPER's Action List.</p>
+<h3 id="komplete-kontrol-view-defaults">Komplete Kontrol view defaults<a class="headerlink" href="#komplete-kontrol-view-defaults" title="Permanent link">&para;</a></h3>
+<p><img alt="The keyboard in the Komplete Kontrol view, with each control's CC" src="img/keyboard-komplete-kontrol.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>CC (channel 1)</th>
+<th>With Shift held</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Knobs 1–8</td>
+<td>21–28, absolute</td>
+<td>CC14–21, channel 2</td>
+</tr>
+<tr>
+<td>Preset ▲ / ▼</td>
+<td>37 / 36</td>
+<td>CC119 / 85, channel 2</td>
+</tr>
+<tr>
+<td>Navigate ▲ / ▼</td>
+<td>41 / 40</td>
+<td>Zoom in / out vertically, as in the other views</td>
+</tr>
+<tr>
+<td>Navigate ◀ / ▶</td>
+<td>42 / 43</td>
+<td>Move the edit cursor to the previous / next grid division</td>
+</tr>
+<tr>
+<td>Page ◀ / ▶</td>
+<td>42 / 43</td>
+<td>CC113 / 114, channel 2</td>
+</tr>
+<tr>
+<td>Every other button</td>
+<td>Its REAPER job, as in the table above</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="lights-and-displays">Lights and displays<a class="headerlink" href="#lights-and-displays" title="Permanent link">&para;</a></h2>
+<p>The bridge drives the 21 button lights, the nine displays and the light guide. Octave − / + and the Navigate knob have no light.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>MIDI mode</th>
+<th>REAPER mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Button lights</td>
+<td>A button with a CC glows dimly and lights fully while held; the DAW can light it (<a href="#midi-mode">MIDI mode</a>)</td>
+<td>Play, Rec and Loop follow REAPER's transport; Browse is lit while a plugin window of the track is open; Instance shows the view. While Shift is held, Rec shows the metronome and Loop shows auto-punch. Other buttons glow dimly and light fully while held</td>
+</tr>
+<tr>
+<td>Left display</td>
+<td><em>MIDI</em> and the channel (<em>CH 2</em> while Shift is held)</td>
+<td><em>MIX</em> and the tracks, the track and <em>TRK n</em>, or the track and <em>KONTROL</em></td>
+</tr>
+<tr>
+<td>Knob displays</td>
+<td>Each knob's CC, its value and a bar</td>
+<td>Each view's names, values and bars, as described above. Touching a knob frames its bar</td>
+</tr>
+<tr>
+<td>Light guide (above the keys)</td>
+<td>Off</td>
+<td>The selected track's colour, with the REAPER script; with the script installed, also a rainbow when the keyboard connects, purple while waiting for REAPER, and red if the OSC link can't open (<a href="#track-colour-on-the-keys">Track colour on the keys</a>)</td>
+</tr>
+<tr>
+<td>Short notices</td>
+<td>—</td>
+<td><em>PANIC</em>, <em>SAVE</em>, <em>RENDER</em>, <em>SCREEN SET n</em> with the screenset's name, <em>FX 2/3</em> with the plugin's name, and the new record mode</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-config-file">The config file<a class="headerlink" href="#the-config-file" title="Permanent link">&para;</a></h2>
+<p>Everything the editor changes lives in one file:
+<code>~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json</code>.</p>
+<ul>
+<li><strong>When it's created:</strong> the editor or the bridge creates it with every default if it's missing. To start over,
+  delete it, or use <strong>Reset to Default Settings…</strong> on the editor's Settings page (it keeps REAPER mode as it is) and
+  save.</li>
+<li><strong>Saved changes apply by themselves:</strong> a running bridge checks the file every second and restarts with a new,
+  valid version within a moment. In your DAW the MIDI port drops out briefly. A file it can't use is logged and
+  ignored.</li>
+<li><strong>Editing it by hand:</strong> every key is optional; anything left out keeps its default. <a href="#config-keys">Config keys</a>
+  below lists every key.</li>
+<li><strong>From Terminal:</strong> <code>PrimoKKMK1Bridge --config FILE</code> runs the bridge with another file, and
+  <code>PrimoKKMK1Bridge --print-default-config</code> prints every default. <code>PrimoKKMK1Bridge --version</code> shows the version,
+  which is also in the editor's About box.</li>
+</ul>
+<h3 id="config-keys">Config keys<a class="headerlink" href="#config-keys" title="Permanent link">&para;</a></h3>
+<p>Everything the editor sets, by key. <code>PrimoKKMK1Bridge --print-default-config</code> prints them all with their defaults.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>portName</code></td>
+<td>Name of the virtual MIDI port</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td>Base MIDI channel, 1–16</td>
+</tr>
+<tr>
+<td><code>shiftChannel</code></td>
+<td>Channel used while Shift is held, or <code>null</code> to make Shift a plain button</td>
+</tr>
+<tr>
+<td><code>buttons</code></td>
+<td>Button name → CC number, or <code>null</code> to silence that button (Octave − / + still transpose the keys)</td>
+</tr>
+<tr>
+<td><code>knobCCs</code></td>
+<td>8 CCs for knobs 1–8</td>
+</tr>
+<tr>
+<td><code>knobMode</code></td>
+<td><code>absolute</code> (0–127, starts at 64), <code>relative-binary-offset</code> (64 ± n), <code>relative-twos-complement</code> (1–63 up, 127–65 down), <code>relative-signed-bit</code> (1–63 up, 65–127 down)</td>
+</tr>
+<tr>
+<td><code>knobStepsPerCC</code></td>
+<td>Knob resolution: raw position units (the knobs report 0–999, wrapping) per MIDI step. Default 4; higher is finer and slower</td>
+</tr>
+<tr>
+<td><code>knobTouchCCs</code></td>
+<td>8 CCs for knob touch, or <code>[]</code> to turn touch off</td>
+</tr>
+<tr>
+<td><code>navigateTurnCC</code>, <code>navigateTurnMode</code></td>
+<td>Navigate knob turn, with the same modes as <code>knobMode</code></td>
+</tr>
+<tr>
+<td><code>navigateTouchCC</code></td>
+<td>Navigate knob touch, or <code>null</code></td>
+</tr>
+<tr>
+<td><code>lights</code></td>
+<td><code>true</code> to drive the button lights, <code>false</code> to leave them alone</td>
+</tr>
+<tr>
+<td><code>lightBrightness</code></td>
+<td>Brightness of a lit button, 0–255 (default 127)</td>
+</tr>
+<tr>
+<td><code>lightIdleBrightness</code></td>
+<td>Glow of a mapped button that's off, 0–255 (default 6; 0 is dark)</td>
+</tr>
+<tr>
+<td><code>displays</code></td>
+<td><code>true</code> to drive the displays above the knobs</td>
+</tr>
+<tr>
+<td><code>keyboardSource</code></td>
+<td>Merge the keyboard's own MIDI (keys, strips, pedals) into the bridge's port: <code>"auto"</code> (default: the keyboard's <em>Port 1</em>, found again after a replug), a MIDI source name, or <code>null</code> to keep the keys on the keyboard's port only</td>
+</tr>
+<tr>
+<td><code>verbose</code></td>
+<td><code>true</code> to log every message the bridge sends, like <code>--verbose</code> (default <code>false</code>)</td>
+</tr>
+<tr>
+<td><code>reaper.enabled</code></td>
+<td><code>true</code> for REAPER mode</td>
+</tr>
+<tr>
+<td><code>reaper.host</code>, <code>reaper.sendPort</code>, <code>reaper.receivePort</code></td>
+<td>Where REAPER is: its IP, its <em>Local listen port</em> (default 8000) and its <em>Device port</em> (default 9000)</td>
+</tr>
+<tr>
+<td><code>reaper.view</code></td>
+<td>The view at start: <code>mix</code> (default), <code>track</code> or <code>komplete-kontrol</code></td>
+</tr>
+<tr>
+<td><code>reaper.followSelectedTrack</code></td>
+<td><code>true</code> (default): the keyboard follows the track you click in REAPER</td>
+</tr>
+<tr>
+<td><code>reaper.mirrorSelection</code></td>
+<td><code>true</code> (default): in Track view and the Komplete Kontrol view, a track picked on the keyboard becomes REAPER's only selected track and is scrolled into view</td>
+</tr>
+<tr>
+<td><code>reaper.knobFullRange</code></td>
+<td>How far to turn a knob for a fader's full range, in raw knob units (default 600; lower is faster)</td>
+</tr>
+<tr>
+<td><code>reaper.trackNameSeconds</code></td>
+<td>After a track change, how long only the track's number and name show (default 2; 0 is only until REAPER has sent the new track's values)</td>
+</tr>
+<tr>
+<td><code>reaper.resourcePath</code></td>
+<td>REAPER's resource folder, for the screenset names and the track colour script (default <code>~/Library/Application Support/REAPER</code>)</td>
+</tr>
+<tr>
+<td><code>reaper.navigateTurn</code></td>
+<td>What turning the Navigate knob steps through: <code>tracks</code> (default), <code>pages</code>, or <code>null</code> for its CC</td>
+</tr>
+<tr>
+<td><code>reaper.lightGuide</code>, <code>reaper.lightGuideBrightness</code></td>
+<td>The track colour on the keys, on or off (default on), and its brightness, 1–100 percent (default 50). See <a href="#track-colour-on-the-keys">Track colour on the keys</a></td>
+</tr>
+<tr>
+<td><code>reaper.kompleteKontrol</code></td>
+<td>The Komplete Kontrol view: <code>channel</code> (default 1), <code>encoderCCs</code> (default 21–28), <code>encoderMode</code> (same modes as <code>knobMode</code>, default <code>absolute</code>), and <code>buttons</code> (button name → CC)</td>
+</tr>
+<tr>
+<td><code>reaper.buttons</code></td>
+<td>Button name → REAPER command, or <code>null</code> to give the button back its CC. Commands: <code>play</code>, <code>stop</code>, <code>record</code>, <code>repeat</code>, <code>rewind</code>, <code>forward</code>, <code>metronome</code>, <code>record-mode</code>, <code>go-to-start</code>, <code>previous-marker</code>, <code>next-marker</code>, <code>undo</code>, <code>redo</code>, <code>browse-fx</code>, <code>close-fx</code>, <code>panic</code>, <code>save-project</code>, <code>render-project</code>, <code>screenset:1</code> … <code>screenset:10</code>, <code>previous-track</code>, <code>next-track</code>, <code>previous-page</code>, <code>next-page</code>, <code>toggle-view</code>, <code>mute</code>, <code>solo</code>, <code>action:&lt;ID&gt;</code> for any REAPER action (in REAPER's Action List, right-click it ▸ <em>Copy selected action command ID</em>), or <code>midiaction:&lt;ID&gt;</code> for an action from the Action List's MIDI Editor section</td>
+</tr>
+<tr>
+<td><code>reaper.shiftButtons</code></td>
+<td>The same, for buttons pressed while Shift is held. A button not listed sends its CC on the Shift channel</td>
+</tr>
+</tbody>
+</table>
+<p>The defaults for <code>buttons</code>, <code>reaper.buttons</code> and <code>reaper.shiftButtons</code> are the tables in
+<a href="#default-assignments">Default assignments</a>.</p>
+<p><strong>Relative knob modes</strong> suit endless knobs best, but your DAW has to be told which relative format to expect (in
+Ableton Live's MIDI map, for example, set the control's mode to the matching "Relative" type). <code>absolute</code> works
+with plain MIDI learn everywhere.</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The knobs send nothing</td>
+<td>The keyboard is back in its own MIDI mode. The bridge switches it back when you replug it or the Mac wakes; otherwise press a page arrow next to the knobs, and the bridge notices and switches it back. If the bridge isn't running, turn it on</td>
+</tr>
+<tr>
+<td>Every note plays twice</td>
+<td>A track has both Primo Komplete Kontrol MK1 and the keyboard's own Port 1, or <em>All MIDI inputs</em>. Give it one of them</td>
+</tr>
+<tr>
+<td>The displays say <em>waiting for OSC from REAPER</em></td>
+<td>REAPER isn't running (the bridge connects a few seconds after it starts), or its OSC device doesn't match the ports under <strong>REAPER Mode</strong> on the editor's Settings page (8000 / 9000). See <a href="#set-up-reaper-once">Set up REAPER</a></td>
+</tr>
+<tr>
+<td>You want to see what the bridge is doing</td>
+<td>Turn on <strong>Verbose Logging</strong> under <strong>Logging</strong> on the editor's Settings page, and save; the bridge restarts with it. <strong>Show Log</strong> (or Bridge ▸ Show Bridge Log) then lists every MIDI CC, button press and OSC message it sends. Turn it off when you're done</td>
+</tr>
+<tr>
+<td>The displays say <em>OSC port 9000 is in use</em> (and the keys are red)</td>
+<td>Another program, often a second bridge started in Terminal or at login, already listens on that port. Quit it; the bridge tries again every 3 seconds and connects by itself. Or change <strong>Device Port</strong> under <strong>REAPER Mode</strong>, and REAPER's device port to match</td>
+</tr>
+<tr>
+<td>The bridge switch turns itself off again</td>
+<td>The bridge stopped right away. The editor shows the end of its log; Bridge ▸ Show Bridge Log has all of it</td>
+</tr>
+<tr>
+<td>Komplete Kontrol doesn't react</td>
+<td>Its track needs Primo Komplete Kontrol MK1 as input, and must be record-armed or monitored</td>
+</tr>
+<tr>
+<td>macOS won't open the app</td>
+<td>See step 3 of <a href="#install">Install</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-keyboard-without-the-bridge">The keyboard without the bridge<a class="headerlink" href="#the-keyboard-without-the-bridge" title="Permanent link">&para;</a></h2>
+<p>When the bridge isn't running and the keyboard has been replugged, it's in its own MIDI mode, on its own port
+(<em>KOMPLETE KONTROL S61 Port 1</em>, channel 1). The displays stay blank.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Sends</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Keys, pitch strip, mod strip</td>
+<td>Notes, pitch bend, CC1</td>
+</tr>
+<tr>
+<td>Knobs 1–8</td>
+<td>CC14–21 (page 1, at power-on) or CC22–29 (page 2); either page arrow switches pages</td>
+</tr>
+<tr>
+<td>Octave − / +</td>
+<td>Transpose the keys</td>
+</tr>
+<tr>
+<td>Every other button, knob touch, the Navigate knob</td>
+<td>Nothing</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Not affiliated with Native Instruments; Komplete Kontrol is their trademark. MIT License.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.top", "toc.follow", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
