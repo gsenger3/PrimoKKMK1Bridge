@@ -178,14 +178,16 @@ usable on macOS without Native Instruments' software:</p>
 <ul>
 <li>A Komplete Kontrol S-series MK1 keyboard. Tested on an S61 MK1, firmware 72. The S25, S49 and S88 should work
   but haven't been tried.</li>
-<li>A Mac with macOS 14 or later. The release download is for Apple Silicon. On an Intel Mac,
+<li>A Mac with macOS 14 or later, Apple Silicon or Intel. Each release has a download for Apple Silicon, and from
+  version 1.1 a universal one that also runs on Intel Macs. On an Intel Mac with an earlier version,
   <a href="https://github.com/gsenger3/PrimoKKMK1Bridge#build-and-run">build it from source</a>.</li>
 <li>For REAPER mode: REAPER (tested with 7.61).</li>
 </ul>
 <h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Download <code>PrimoKKMK1Editor-&lt;version&gt;-macOS-arm64.zip</code> from the
-   <a href="https://github.com/gsenger3/PrimoKKMK1Bridge/releases">releases page</a> and unzip it.</li>
+<li>From the <a href="https://github.com/gsenger3/PrimoKKMK1Bridge/releases">releases page</a>, download
+   <code>PrimoKKMK1Editor-&lt;version&gt;-macOS-arm64.zip</code> for an Apple Silicon Mac, or
+   <code>PrimoKKMK1Editor-&lt;version&gt;-macOS-universal.zip</code> for an Intel Mac (it runs on either), and unzip it.</li>
 <li><strong>Move PrimoKKMK1Editor.app to your Applications folder.</strong> That's the recommended place: starting the bridge at
    login uses the app where it is. The bridge is inside the app, so there's nothing else to install.</li>
 <li>The app is signed for local use only, not notarized by Apple, so macOS blocks it the first time. Either open
@@ -1220,5 +1222,5 @@ with plain MIDI learn everywhere.</p>
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-11-13 05:42:42.798961+00:00
+Build Date UTC : 2026-11-13 06:18:33.459610+00:00
 -->
