@@ -1,0 +1,24 @@
+{#-
+    main.html
+    PrimoKKMK1Bridge
+
+    Created by George Senger on 11/13/2026.
+    Copyright © 2026 Primo Studios. All rights reserved.
+
+    Licensed under the MIT License. See LICENSE in the project root or
+    https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
+
+    MkDocs' built-in theme for the user guide website, with the editor's app icon in the header and as the page's
+    icon. tools/build_site.sh makes the icon files from editor/img/appicon.png (and img/favicon.ico, which the theme
+    links by itself).
+-#}
+{% extends "base.html" %}
+
+{%- block extrahead %}
+        <link rel="icon" type="image/png" sizes="64x64" href="{{ 'img/appicon-64.png'|url }}">
+        <link rel="apple-touch-icon" href="{{ 'img/apple-touch-icon.png'|url }}">
+{%- endblock %}
+
+{%- block site_name %}
+                <a class="navbar-brand" href="{{ nav.homepage.url|url }}"><img class="site-icon" src="{{ 'img/appicon-64.png'|url }}" alt="" width="32" height="32">{{ config.site_name }}</a>
+{%- endblock %}

@@ -31,7 +31,7 @@ MIDI port, and are merged into the bridge's port too. The protocol details are i
 | [bridge/Sources/](bridge/Sources/) | The bridge, one file per area: `main.swift` (command line, startup, restarts), `Bridge*.swift` (the keyboard's reports, lights, displays, REAPER mode, light guide), `MIDIPorts.swift`, `OSC.swift`, `Reaper*.swift`, `Config.swift` (every config key, its default and validation) |
 | [editor/Sources/](editor/Sources/) | The editor: the keyboard drawing, the inspector, the Settings page, the bridge switch, launching the bridge at login, and the REAPER script installer |
 | [reaper/](reaper/PrimoKKMK1Bridge_TrackColor.lua) | A script for REAPER that sends the selected track's colour to the bridge, for the light guide |
-| [doc/](doc/GUIDE.md) | The user guide (`GUIDE.md`) and its pictures, the keyboard's protocol notes (`NOTES.md`), and which HID bit each button sets (`BUTTON_MAP.md`) |
+| [doc/](doc/GUIDE.md) | The user guide (`GUIDE.md`) and its pictures, the user guide website's theme overrides and stylesheet (`site/`), the keyboard's protocol notes (`NOTES.md`), and which HID bit each button sets (`BUTTON_MAP.md`) |
 | [design/](design/nks.md) | The spec for the Komplete Kontrol view |
 | [tools/](tools/) | HID and MIDI monitors, the capture tool, `midisend`, a stand-in REAPER for testing, and the scripts that stamp the version and draw the guide's pictures |
 | [device/](device/) | Raw captures and recorded test runs |
@@ -91,7 +91,7 @@ Other options: `--config FILE` runs with another config file, `--print-default-c
 ### The user guide website
 
 [The user guide](https://gsenger3.github.io/PrimoKKMK1Bridge/) is also a website, made with
-[MkDocs](https://www.mkdocs.org) and the Material theme from `doc/GUIDE.md` (see `mkdocs.yml`), and served by GitHub
+[MkDocs](https://www.mkdocs.org) and its built-in theme from `doc/GUIDE.md` (see `mkdocs.yml` and `doc/site/`), and served by GitHub
 Pages from the `gh-pages` branch. After changing the guide, preview the site, then publish it:
 
 ```bash

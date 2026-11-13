@@ -18,13 +18,11 @@
 #  MkDocs is installed the first time, into a virtual environment in build/mkdocs-venv
 #  (versions in tools/site_requirements.txt). The page itself is made in build/site-docs: doc/GUIDE.md as index.md,
 #  with doc/img, its links out of doc/ pointing at the repository on GitHub, and its <details> block marked so its
-#  Markdown is rendered.
+#  Markdown is rendered; the site's stylesheet from doc/site/stylesheets; and the page and header icons, scaled from
+#  the editor's app icon (editor/img/appicon.png). The theme's own overrides are in doc/site/overrides.
 
 set -euo pipefail
 cd "${0:A:h}/.."
-# Material for MkDocs prints a banner on every build: it reaches end of life on May 5, 2027 (fixes until then), and
-# Zensical, from the same team, is its successor and reads mkdocs.yml (https://zensical.org). Noted here instead.
-export NO_MKDOCS_2_WARNING=1
 
 venv=build/mkdocs-venv
 wanted=$(grep -c . tools/site_requirements.txt)
@@ -40,6 +38,12 @@ docs=build/site-docs
 rm -rf $docs
 mkdir -p $docs
 cp -R doc/img $docs/img
+cp -R doc/site/stylesheets $docs/stylesheets
+# The editor's app icon: favicon.ico (which the theme links), 64 px for the header and the page icon, and 180 px for
+# iPhones and iPads.
+sips -z 32 32 -s format ico editor/img/appicon.png --out $docs/img/favicon.ico >/dev/null
+sips -z 64 64 editor/img/appicon.png --out $docs/img/appicon-64.png >/dev/null
+sips -z 180 180 editor/img/appicon.png --out $docs/img/apple-touch-icon.png >/dev/null
 python3 -I - doc/GUIDE.md $docs/index.md <<'EOF'
 import re, sys
 repo = "https://github.com/gsenger3/PrimoKKMK1Bridge"
@@ -49,15 +53,16 @@ text = re.sub(r"\]\(\.\./README\.md(#[^)]*)?\)", lambda m: f"]({repo}{m.group(1)
 text = re.sub(r"\]\(\.\./([^)]+)\)", lambda m: f"]({repo}/blob/main/{m.group(1)})", text)
 # Python-Markdown leaves the inside of an HTML block alone unless it's marked (GitHub renders it either way).
 text = text.replace("<details>", '<details markdown="1">')
-# One page: no navigation sidebar, just the guide's own contents on the right.
-front = "---\nhide:\n  - navigation\n---\n\n"
-open(sys.argv[2], "w", encoding="utf-8").write(front + text)
+open(sys.argv[2], "w", encoding="utf-8").write(text)
 EOF
 
 case ${1:-build} in
   build)  $venv/bin/mkdocs build --strict --quiet && echo "built build/site/index.html" ;;
   serve)  $venv/bin/mkdocs serve ;;
-  deploy) $venv/bin/mkdocs gh-deploy --strict --force \
-            --message "User guide from $(git rev-parse --short HEAD) (doc/GUIDE.md), built with MkDocs {version}" ;;
+  deploy) source="$(git rev-parse --short HEAD)"
+          [[ -n "$(git status --porcelain -- doc mkdocs.yml tools/build_site.sh tools/site_requirements.txt editor/img)" ]] \
+            && source="$source plus uncommitted changes"
+          $venv/bin/mkdocs gh-deploy --strict --force \
+            --message "User guide from $source (doc/GUIDE.md), built with MkDocs {version}" ;;
   *)      echo "usage: tools/build_site.sh [build|serve|deploy]"; exit 2 ;;
 esac

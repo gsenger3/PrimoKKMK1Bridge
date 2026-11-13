@@ -2,6 +2,7 @@
 
 PrimoKKMK1Bridge makes a Native Instruments **Komplete Kontrol S-series MK1** keyboard (S25, S49, S61, S88) fully
 usable on macOS without Native Instruments' software:
+
 - every button, knob and touch sends MIDI on a virtual port, **Primo Komplete Kontrol MK1**
 - the button lights and the nine displays are driven
 - an optional REAPER mode turns the keyboard into a REAPER control surface
@@ -45,11 +46,11 @@ It comes as two programs:
    login uses the app where it is. The bridge is inside the app, so there's nothing else to install.
 3. The app is signed for local use only, not notarized by Apple, so macOS blocks it the first time. Either open
    it once and click **Open Anyway** in System Settings ▸ Privacy & Security, or run this in Terminal:
-   ```bash
-   xattr -dr com.apple.quarantine /Applications/PrimoKKMK1Editor.app
-   ```
-   Use the `xattr` command if you'll [start the bridge at login](#start-the-bridge-at-login): it clears the bridge
-   inside the app too.
+    ```bash
+    xattr -dr com.apple.quarantine /Applications/PrimoKKMK1Editor.app
+    ```
+    Use the `xattr` command if you'll [start the bridge at login](#start-the-bridge-at-login): it clears the bridge
+    inside the app too.
 
 To build it yourself instead, see [Build and run](../README.md#build-and-run).
 
@@ -161,6 +162,7 @@ mode is on.
 REAPER mode. Nothing is written until you save.
 
 Other things in the editor:
+
 - **Saving:** **Save** (⌘S) writes the config file, and a running bridge picks it up within a second or two.
   **Revert** throws away unsaved edits. If a change can't work, the status bar says why and Save stays off.
 - **The bridge switch** shows whether the bridge is running, however it was started, and starts or stops it. The
@@ -175,11 +177,13 @@ learn in any DAW. Buttons send 127 when pressed and 0 when released; knobs send 
 
 **Shift layer.** Holding Shift moves the buttons, knob turns and the Navigate knob turn to **channel 2**, so every
 control has a second assignment with the same CC numbers.
+
 - Shift itself sends CC108 on channel 1.
 - Knob touch and Navigate touch always use channel 1.
 - A release goes out on the channel of its press, even if you let go of Shift first.
 
 **Lights from the DAW.** The bridge also has a MIDI *output* called Primo Komplete Kontrol MK1. A CC sent there:
+
 - lights its button (any value above 0) or dims it (0)
 - on channel 2, sets the light shown while Shift is held
 - for a knob, moves that knob's value, so it carries on from the DAW's value instead of jumping
@@ -199,10 +203,10 @@ Track, full in Komplete Kontrol.
 1. **Turn on REAPER mode:** on the editor's Settings page, turn on **Enabled** under **REAPER Mode**, and save.
 2. In REAPER, go to **Preferences ▸ Control/OSC/web ▸ Add**, and choose Control surface mode **OSC (Open Sound
    Control)**:
-   - Device name: `PrimoKKMK1Bridge`, Pattern config: **Default**
-   - Mode: **Configure device IP + local port**
-   - Device port `9000`, Device IP `127.0.0.1`, Local listen port `8000`. These match **Device Port**,
-     **Address** and **Local Listen Port** under **REAPER Mode** on the editor's Settings page.
+    - Device name: `PrimoKKMK1Bridge`, Pattern config: **Default**
+    - Mode: **Configure device IP + local port**
+    - Device port `9000`, Device IP `127.0.0.1`, Local listen port `8000`. These match **Device Port**,
+      **Address** and **Local Listen Port** under **REAPER Mode** on the editor's Settings page.
 3. **Preferences ▸ MIDI Devices:** enable **Primo Komplete Kontrol MK1** for input.
 4. **Komplete Kontrol track:** set its MIDI input to **Primo Komplete Kontrol MK1**. It carries the keys, the strips
    and the Komplete Kontrol view's CCs. For tracks that should only get the keys, use the keyboard's own *Port 1*,
@@ -222,6 +226,7 @@ refreshed at the same moment.
 ### Buttons in every view
 
 The buttons do the same in all three views, apart from the Komplete Kontrol view's own CCs.
+
 - **Shift:** a combination without a command of its own sends that button's CC on channel 2, as in MIDI mode.
 - **Navigate knob:** turning it picks the previous or next track. In Mix view it also switches to
   [Track view](#track-view), so the knobs and displays show the track you pick. The Komplete Kontrol view stays as it
@@ -288,6 +293,7 @@ becomes REAPER's only selected track, and REAPER scrolls to it.
 | Page ◀ / ▶ (next to the knobs) | 42 / 43 | Previous / next NKS page, the same as Navigate ◀ / ▶ |
 
 Komplete Kontrol's parameter names and values aren't available to the bridge, so it works like the Launchkey:
+
 - **Displays:** the selected track's name over *KONTROL* on the left, and *ENCODER 1*–*ENCODER 8* under the knobs,
   each with a bar of the value it last sent.
 - **Knob values:** the bridge keeps **one set of 8 knob values**, starting at 64, for every page, track and preset.
@@ -301,6 +307,7 @@ record-armed or monitored.
 
 In REAPER mode, the keyboard's light guide (the lights above the keys) shows the **selected track's colour on
 every key**. Its settings are in the **Reaper Lightguide** section of the editor's Settings page.
+
 - **Brightness:** 50% by default. The colour is corrected so a white track looks white rather than purple.
 - **No colour:** a track without a colour of its own leaves the keys dark, and so does having no track selected.
 - **Turning it off:** turn off **Enable Lightguide**.
@@ -319,9 +326,9 @@ it up once:
 
 1. **Install the script.** On the editor's Settings page, under **Reaper Lightguide**, click **Install…** in the
    **REAPER Integration** row. It does two things:
-   - copies `PrimoKKMK1Bridge_TrackColor.lua` into the **Scripts/Primo Studios** folder of REAPER's resource folder
-   - adds a line to `Scripts/__startup.lua`, which REAPER runs every time it starts. An existing `__startup.lua` is
-     backed up first and kept as it is; the line goes at the end.
+    - copies `PrimoKKMK1Bridge_TrackColor.lua` into the **Scripts/Primo Studios** folder of REAPER's resource folder
+    - adds a line to `Scripts/__startup.lua`, which REAPER runs every time it starts. An existing `__startup.lua` is
+      backed up first and kept as it is; the line goes at the end.
 
    The row also shows whether the script is installed. Once it is, the button is **Uninstall…** instead (see
    below). After an update of the app, **Update…** appears next to it to replace an older script; **Repair…** puts
@@ -333,11 +340,12 @@ it up once:
    a colour.
 
 To install it by hand instead, reveal the script with **Bridge ▸ Show REAPER Track Colour Script**, then:
+
 - copy it into REAPER's Scripts folder (Options ▸ Show REAPER resource path in explorer/finder)
 - add this line to `Scripts/__startup.lua`, adjusting the path to where you put it:
-  ```lua
-  dofile(reaper.GetResourcePath() .. "/Scripts/PrimoKKMK1Bridge_TrackColor.lua")
-  ```
+    ```lua
+    dofile(reaper.GetResourcePath() .. "/Scripts/PrimoKKMK1Bridge_TrackColor.lua")
+    ```
 
 The script sends the colour when the selection or a colour changes, and every 2 seconds, so a restarted bridge
 catches up. When REAPER quits, the keys go dark.

@@ -1,0 +1,52 @@
+/*
+    guide.css
+    PrimoKKMK1Bridge
+
+    Created by George Senger on 11/13/2026.
+    Copyright © 2026 Primo Studios. All rights reserved.
+
+    Licensed under the MIT License. See LICENSE in the project root or
+    https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
+
+    Overrides for MkDocs' built-in theme on the user guide website, after the Discography User Guide's: a piano black
+    header with white text and the app icon. The guide's table of contents stays in the theme's sidebar, on the left.
+*/
+
+/* Piano black header: a little gloss at the top, deep black below */
+div.navbar.bg-primary {
+    background: linear-gradient(to bottom, #2b2b2b 0%, #0d0d0d 45%, #000000 100%) !important;
+    border-bottom: 1px solid #000000;
+}
+
+div.navbar.bg-primary > div {
+    background: transparent !important;
+}
+
+/* White text in the header */
+div.navbar .navbar-brand,
+div.navbar .navbar-brand:hover,
+div.navbar .navbar-brand:focus,
+div.navbar .nav-link,
+div.navbar .nav-link:hover,
+div.navbar .nav-link:focus {
+    color: #ffffff !important;
+}
+
+div.navbar .nav-link.disabled {
+    color: rgba(255, 255, 255, 0.45) !important;
+}
+
+/* The table of contents stays in view as the page scrolls; a long one scrolls on its own */
+.bs-sidebar.affix {
+    max-height: calc(100vh - 3.5rem - 40px);
+    overflow-y: auto;
+}
+
+/* The app icon before the site name */
+.navbar-brand .site-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    vertical-align: middle;
+    border-radius: 7px;
+}
