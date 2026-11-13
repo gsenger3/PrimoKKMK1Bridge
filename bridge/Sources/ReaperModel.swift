@@ -125,7 +125,7 @@ enum ReaperView: CaseIterable {
     }
 }
 enum ReaperEvent {  // trackData: a value of the selected track
-    case connected, track, trackData, bank, values, transport, view, recordMode
+    case connected, disconnected, track, trackData, bank, values, transport, view, recordMode
     case pluginShown(Int), pluginsClosed, noPlugins  // Browse / Shift + Browse
     case panic, saved, render, screenset(Int)
 }

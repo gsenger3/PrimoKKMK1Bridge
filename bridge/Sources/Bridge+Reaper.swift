@@ -36,6 +36,7 @@ extension Bridge {
                 }
             }
             reaper = s
+            if !immediate { s.watch() }  // notice REAPER quitting; a replay stays as recorded
             if reaperError != nil { log("REAPER: the OSC link is up now") }
             reaperError = nil
             s.handshake()
@@ -84,6 +85,13 @@ extension Bridge {
         case .connected:
             log("REAPER connected (OSC on port \(cfg.reaper.receivePort))")
             sendLightGuide()  // purple (waiting) to the track colour
+        case .disconnected:
+            log("REAPER quit; waiting for it")
+            loggedTrack = ""
+            overlay = nil
+            message = nil
+            trackColor = nil      // the script's colour was for that session
+            sendLightGuide()      // purple again, with the script installed
         case .track:
             if verbose && r.track.number != loggedTrack {
                 loggedTrack = r.track.number

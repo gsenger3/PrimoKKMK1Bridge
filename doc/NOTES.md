@@ -122,6 +122,11 @@ Preset Up, Instance, Preset Down, Back, Nav Up, Enter, Nav Left, Nav Down, Nav R
   colour. It sends the no-colour message when REAPER quits.
 - **MIDI Editor actions** have their own IDs, which overlap the main section's, so they go out as
   `/midiaction <ID>` rather than `/action <ID>`.
+- **No goodbye.** REAPER sends nothing when it quits, and an idle REAPER sends nothing at all, so OSC alone can't
+  tell a quiet REAPER from a closed one. With REAPER on the same Mac, the bridge watches its process (program name
+  `REAPER`, this user's) once a second, and when the one it connected to is gone it forgets the project and waits
+  again. While waiting it repeats the handshake every 3 seconds, without logging it, so a reopened REAPER is picked up
+  at once.
 - `--log-osc` prints everything REAPER sends, apart from the clock and meters that stream during playback.
 
 ## Confirmed on hardware
@@ -136,3 +141,6 @@ Preset Up, Instance, Preset Down, Back, Nav Up, Enter, Nav Left, Nav Down, Nav R
 - **2026-11-11/12:** the light guide's track colours, white balance and brightness; Shift + knob panning in Mix view;
   the Navigate knob's switch to Track view, and track selection in the Komplete Kontrol view; the light guide's
   startup animation, purple while waiting and red on an OSC error.
+- **2026-11-12, REAPER 7.61:** the track colour script running in REAPER, with the keys following the selected
+  track's colour; REAPER quitting (back to waiting, keys purple, within a second) and reopening (connected again as
+  soon as it answered).

@@ -211,7 +211,9 @@ Track, full in Komplete Kontrol.
    on **Automatic record-arm when track selected**.
 
 Until REAPER answers, the displays read *waiting for OSC from REAPER* (and with the
-[track colour script](#track-colour-on-the-keys) installed, the keys are purple).
+[track colour script](#track-colour-on-the-keys) installed, the keys are purple). The same happens within a second
+of REAPER quitting, and the bridge picks REAPER up again a few seconds after you reopen it. That needs REAPER on
+the same Mac (the default address, `127.0.0.1`): with REAPER on another computer, the bridge can't tell it quit.
 
 When the bridge starts, it runs REAPER's *Control surface: Refresh all surfaces* action to get the whole project,
 since REAPER otherwise only sends values that changed. Your other control surfaces (MCU, FaderPort, HUI) are
@@ -501,7 +503,7 @@ with plain MIDI learn everywhere.
 | --- | --- |
 | The knobs send nothing | The keyboard is back in its own MIDI mode. The bridge switches it back when you replug it or the Mac wakes; otherwise press a page arrow next to the knobs, and the bridge notices and switches it back. If the bridge isn't running, turn it on |
 | Every note plays twice | A track has both Primo Komplete Kontrol MK1 and the keyboard's own Port 1, or *All MIDI inputs*. Give it one of them |
-| The displays say *waiting for OSC from REAPER* | REAPER isn't running, or its OSC device doesn't match the ports under **REAPER Mode** on the editor's Settings page (8000 / 9000). See [Set up REAPER](#set-up-reaper-once) |
+| The displays say *waiting for OSC from REAPER* | REAPER isn't running (the bridge connects a few seconds after it starts), or its OSC device doesn't match the ports under **REAPER Mode** on the editor's Settings page (8000 / 9000). See [Set up REAPER](#set-up-reaper-once) |
 | You want to see what the bridge is doing | Turn on **Verbose Logging** under **Logging** on the editor's Settings page, and save; the bridge restarts with it. **Show Log** (or Bridge ▸ Show Bridge Log) then lists every MIDI CC, button press and OSC message it sends. Turn it off when you're done |
 | The displays say *OSC port 9000 is in use* (and the keys are red) | Another program, often a second bridge started in Terminal or at login, already listens on that port. Quit it; the bridge tries again every 3 seconds and connects by itself. Or change **Device Port** under **REAPER Mode**, and REAPER's device port to match |
 | The bridge switch turns itself off again | The bridge stopped right away. The editor shows the end of its log; Bridge ▸ Show Bridge Log has all of it |

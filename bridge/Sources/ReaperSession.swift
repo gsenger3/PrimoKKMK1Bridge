@@ -11,6 +11,7 @@
 //  The REAPER control surface: OSC handshake, project state as REAPER reports it, and the commands and
 //  knob turns sent back.
 
+import Darwin
 import Foundation
 
 final class ReaperSession {
@@ -31,6 +32,8 @@ final class ReaperSession {
     private(set) var autoPunch = false
     private(set) var connected = false
     private var lastHandshake = Date.distantPast
+    private var reaperPID: pid_t?               // the REAPER process on this Mac that's connected (see watch())
+    private var watchTimer: DispatchSourceTimer?
     private var lastSent: [String: Date] = [:]           // address -> when a knob last set it
     private var toggleAccum = [Int](repeating: 0, count: 8)
     private var touchAddress = [String?](repeating: nil, count: 8)
@@ -51,26 +54,97 @@ final class ReaperSession {
     /// Track view page 1: volume, pan, mute, solo, record arm and sends 1-3; each later page: 8 more sends.
     var sendPages: Int { sendCount <= 3 ? 1 : 1 + (sendCount - 3 + 7) / 8 }
 
-    func send(_ address: String, _ args: [OSCArg] = [.float(1)]) {
+    /// Send to REAPER. `quietly` leaves it out of the verbose log (the handshake repeated while waiting).
+    func send(_ address: String, _ args: [OSCArg] = [.float(1)], quietly: Bool = false) {
         link.send(address, args)
-        onSend?(address, args)
+        if !quietly { onSend?(address, args) }
     }
 
     /// Ask REAPER for 8 tracks per page and all sends of the selected track, to follow the track last clicked,
     /// and to send everything again: REAPER only sends values that changed since it last sent them, so
     /// without this a bridge started after REAPER never hears about tracks, pans or sends that haven't moved.
-    func handshake() {
+    func handshake(quietly: Bool = false) {
         guard Date().timeIntervalSince(lastHandshake) > 2 else { return }
         lastHandshake = Date()
-        send("/device/track/count", [.int(Int32(bankSize))])
-        send("/device/send/count", [.int(Int32(sendSlots))])
-        send("/device/fx/count", [.int(Int32(fxSlots))])
-        send("/device/fx/follows/device")
+        send("/device/track/count", [.int(Int32(bankSize))], quietly: quietly)
+        send("/device/send/count", [.int(Int32(sendSlots))], quietly: quietly)
+        send("/device/fx/count", [.int(Int32(fxSlots))], quietly: quietly)
+        send("/device/fx/follows/device", quietly: quietly)
         // The bridge doesn't use plugin parameters (the Komplete Kontrol view shows none, like Novation's
         // Launchkey), so ask REAPER for as few as it allows: it otherwise sends them on every track change.
-        send("/device/fxparam/count", [.int(1)])
-        if cfg.followSelectedTrack { send("/device/track/follows/last_touched") }
-        send("/action", [.int(refreshSurfacesAction)])
+        send("/device/fxparam/count", [.int(1)], quietly: quietly)
+        if cfg.followSelectedTrack { send("/device/track/follows/last_touched", quietly: quietly) }
+        send("/action", [.int(refreshSurfacesAction)], quietly: quietly)
+    }
+
+    // MARK: REAPER quitting (issue #18)
+
+    /// Notice REAPER quitting, and find it again. OSC has no goodbye, and an idle REAPER sends nothing, so with REAPER
+    /// on this Mac the bridge watches its process once a second: when the REAPER it connected to is gone (quit or
+    /// crashed), the session forgets the project and waits again. While waiting, it repeats the handshake every
+    /// 3 seconds, so a REAPER started later answers at once. Not for replays, which stay as recorded.
+    func watch() {
+        guard watchTimer == nil else { return }
+        let t = DispatchSource.makeTimerSource(queue: .main)
+        t.schedule(deadline: .now() + 1, repeating: 1)
+        t.setEventHandler { [weak self] in self?.checkREAPER() }
+        t.resume()
+        watchTimer = t
+    }
+
+    /// REAPER is on this Mac, so its process can be watched.
+    var reaperIsLocal: Bool {
+        let h = cfg.host.lowercased()
+        return h == "localhost" || h.hasPrefix("127.") || h == "::1"
+    }
+
+    private func checkREAPER() {
+        guard connected else {
+            handshake(quietly: true)  // at most every 3 seconds (its own 2-second guard, on this 1-second timer)
+            return
+        }
+        guard reaperIsLocal else { return }
+        let running = Self.reaperPIDs()
+        if let pid = reaperPID {
+            if !running.contains(pid) { lost() }
+        } else {
+            reaperPID = running.first  // the REAPER that answered; none (an OSC stand-in) means nothing to watch
+        }
+    }
+
+    /// REAPER quit: forget its project, and wait for it again.
+    private func lost() {
+        connected = false
+        reaperPID = nil
+        lastHandshake = .distantPast
+        bank = [TrackStrip](repeating: TrackStrip(), count: bankSize)
+        track = TrackStrip()
+        sends = [SendStrip](repeating: SendStrip(), count: sendSlots)
+        sendPage = 0
+        playing = false; recording = false; repeating = false; metronome = false
+        fxNames = [String](repeating: "", count: fxSlots)
+        fxOpen = [Bool](repeating: false, count: fxSlots)
+        lastShown = nil
+        lastSent = [:]
+        onEvent?(.disconnected)
+    }
+
+    /// REAPER.app's program (a test can watch a stand-in instead).
+    static var processName = "REAPER"
+
+    /// This user's REAPER processes.
+    static func reaperPIDs() -> [pid_t] {
+        var pids = [pid_t](repeating: 0, count: 4096)
+        let n = pids.withUnsafeMutableBytes { proc_listallpids($0.baseAddress, Int32($0.count)) }
+        guard n > 0 else { return [] }
+        var path = [CChar](repeating: 0, count: 4 * Int(MAXPATHLEN))  // PROC_PIDPATHINFO_MAXSIZE
+        return pids.prefix(min(Int(n), pids.count)).filter { pid in
+            guard pid > 0, proc_pidpath(pid, &path, UInt32(path.count)) > 0,
+                  (String(cString: path) as NSString).lastPathComponent == processName else { return false }
+            var info = proc_bsdinfo()
+            let size = Int32(MemoryLayout<proc_bsdinfo>.size)
+            return proc_pidinfo(pid, PROC_PIDTBSDINFO, 0, &info, size) == size && info.pbi_uid == getuid()
+        }
     }
 
     func isActive(_ c: ReaperCommand) -> Bool {
