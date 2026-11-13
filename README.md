@@ -62,6 +62,10 @@ changes apply to a running bridge within a second or two.
 After pulling changes, run `editor/build.sh` again. A running bridge isn't disturbed: turn it off and on in the
 editor to run the new copy.
 
+The app is built for this Mac's processor. `editor/build.sh --arch universal` builds one that also runs on the other
+kind (Apple Silicon and Intel), at about twice the size; `--arch arm64` or `--arch x86_64` picks one. Whatever the
+architecture, the editor and the bridge need macOS 14 or later.
+
 ### The bridge on its own, in Terminal
 
 ```bash
@@ -104,6 +108,22 @@ tools/build_site.sh deploy
 
 The preview is at http://127.0.0.1:8000/PrimoKKMK1Bridge/. `deploy` builds the site and pushes it to `gh-pages`. The
 first run installs MkDocs into `build/mkdocs-venv`, at the versions in `tools/site_requirements.txt`.
+
+### Making a release
+
+```bash
+tools/make_release.sh
+```
+
+It builds the two downloads for a GitHub release from the committed code (HEAD), with one version stamp, in
+`build/release/`:
+
+- `PrimoKKMK1Editor-<version>-macOS-arm64.zip`: Apple Silicon only, the smaller download.
+- `PrimoKKMK1Editor-<version>-macOS-universal.zip`: Apple Silicon and Intel Macs.
+
+It then checks each zip's architectures, minimum macOS and signature, and prints its size and SHA-256 for the
+release notes. It doesn't publish anything. It stops if there are uncommitted changes, since they wouldn't be in the
+release (`--allow-dirty` builds HEAD anyway), and `--ref TAG` rebuilds an earlier release.
 
 ## Versions
 

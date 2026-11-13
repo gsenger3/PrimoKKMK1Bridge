@@ -17,14 +17,16 @@ It comes as two programs:
 
 - A Komplete Kontrol S-series MK1 keyboard. Tested on an S61 MK1, firmware 72. The S25, S49 and S88 should work
   but haven't been tried.
-- A Mac with macOS 14 or later. The release download is for Apple Silicon. On an Intel Mac,
+- A Mac with macOS 14 or later, Apple Silicon or Intel. Each release has a download for Apple Silicon, and from
+  version 1.1 a universal one that also runs on Intel Macs. On an Intel Mac with an earlier version,
   [build it from source](../README.md#build-and-run).
 - For REAPER mode: REAPER (tested with 7.61).
 
 ## Install
 
-1. Download `PrimoKKMK1Editor-<version>-macOS-arm64.zip` from the
-   [releases page](https://github.com/gsenger3/PrimoKKMK1Bridge/releases) and unzip it.
+1. From the [releases page](https://github.com/gsenger3/PrimoKKMK1Bridge/releases), download
+   `PrimoKKMK1Editor-<version>-macOS-arm64.zip` for an Apple Silicon Mac, or
+   `PrimoKKMK1Editor-<version>-macOS-universal.zip` for an Intel Mac (it runs on either), and unzip it.
 2. **Move PrimoKKMK1Editor.app to your Applications folder.** That's the recommended place: starting the bridge at
    login uses the app where it is. The bridge is inside the app, so there's nothing else to install.
 3. The app is signed for local use only, not notarized by Apple, so macOS blocks it the first time. Either open
