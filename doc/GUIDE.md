@@ -13,23 +13,6 @@ It comes as two programs:
 - **The editor** (Primo KK MK1 Control Editor) is a Mac app for changing what every control does. It starts and
   stops the bridge.
 
-**Contents**
-
-1. [What you need](#what-you-need)
-2. [Install](#install)
-3. [Getting started](#getting-started)
-4. [Start the bridge at login](#start-the-bridge-at-login)
-5. [The editor](#the-editor)
-6. [MIDI mode](#midi-mode)
-7. [REAPER mode](#reaper-mode): [buttons](#buttons-in-every-view), [Mix view](#mix-view),
-   [Track view](#track-view), [Komplete Kontrol view](#komplete-kontrol-view),
-   [track colour on the keys](#track-colour-on-the-keys)
-8. [Default assignments](#default-assignments)
-9. [Lights and displays](#lights-and-displays)
-10. [The config file](#the-config-file)
-11. [Troubleshooting](#troubleshooting)
-12. [The keyboard without the bridge](#the-keyboard-without-the-bridge)
-
 ## What you need
 
 - A Komplete Kontrol S-series MK1 keyboard. Tested on an S61 MK1, firmware 72. The S25, S49 and S88 should work
