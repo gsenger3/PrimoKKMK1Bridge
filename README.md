@@ -2,7 +2,8 @@
 
 Custom Native Instruments Komplete Kontrol S-series MK1 (S25/S49/S61/S88) MIDI controller driver for macOS; bringing complete configurability (every button, knob and touch), basic NKS support and Reaper DAW integration to the no longer supported MIDI controller. PrimoKKMK1Bridge replaces the need for the Native Instruments drivers (NIHardwareAgent, NIHostIntegrationAgent) and Controller Editor.
 
-It comes as two programs:
+The system consists of two programs:
+
 - **The bridge** (`PrimoKKMK1Bridge`) talks to the keyboard and runs in the background - replaces the proprietary Native Instruments drivers.
 - **The editor** (*PrimoKKMK1Editor*) is a Mac app for changing the assignments and settings of the keyboard, and for starting and stopping the bridge - replaces the Native Instruments Controller Editor.
 
@@ -14,7 +15,7 @@ source is [doc/GUIDE.md](doc/GUIDE.md).
 
 Tested on an S61 MK1 (firmware 72) with macOS 26 and REAPER 7.61.
 
-## How it works
+## How It Works
 
 On connect, the bridge sends the keyboard the same 3-byte HID "init" (`a0 00 00`) that NI's software and
 DrivenByMoss send. That switches it from MIDI mode to native mode, where every button, knob touch and knob turn
@@ -22,7 +23,7 @@ is reported over USB HID, and the computer drives the lights and displays. The b
 MIDI CCs, or in REAPER mode into OSC messages to REAPER. The keys and strips keep coming from the keyboard's own
 MIDI port, and are merged into the bridge's port too. The protocol details are in [doc/NOTES.md](doc/NOTES.md).
 
-## What's where
+## What's Where
 
 | Where | What |
 | --- | --- |
@@ -34,7 +35,7 @@ MIDI port, and are merged into the bridge's port too. The protocol details are i
 | [tools/](tools/) | HID and MIDI monitors, the capture tool, `midisend`, a stand-in REAPER for testing, and the scripts that stamp the version and draw the guide's pictures |
 | [device/](device/) | Raw captures and recorded test runs |
 
-## Build and run
+## Build and Run
 
 **You need:**
 - macOS 14 or later
@@ -42,7 +43,7 @@ MIDI port, and are merged into the bridge's port too. The protocol details are i
 
 Run the commands from the repository's top folder. Everything is built into `build/`, which git ignores.
 
-### The editor app, with the bridge inside it
+### The Editor App, With the Bridge Inside It
 
 ```bash
 editor/build.sh
@@ -60,11 +61,9 @@ changes apply to a running bridge within a second or two.
 After pulling changes, run `editor/build.sh` again. A running bridge isn't disturbed: turn it off and on in the
 editor to run the new copy.
 
-The app is built for this Mac's processor. `editor/build.sh --arch universal` builds one that also runs on the other
-kind (Apple Silicon and Intel), at about twice the size; `--arch arm64` or `--arch x86_64` picks one. Whatever the
-architecture, the editor and the bridge need macOS 14 or later.
+The app is built for compiling Mac's architecture. `editor/build.sh --arch universal` builds for the specified architecture (Apple Silicon and Intel), at about twice the size; `--arch arm64` or `--arch x86_64` picks one. Whatever the architecture, the editor and the bridge require macOS 14 or later.
 
-### The bridge on its own, in Terminal
+### The Bridge On Its Own, In Terminal
 
 ```bash
 bridge/build.sh
@@ -90,7 +89,7 @@ Other options: `--config FILE` runs with another config file, `--print-default-c
 - **The guide's pictures** are drawn from the editor's own drawing: run `tools/render_guide_images.sh` after
   changing a default or the drawing.
 
-### The user guide website
+### The User Guide
 
 [The user guide](https://gsenger3.github.io/PrimoKKMK1Bridge/) is also a website, made with
 [MkDocs](https://www.mkdocs.org) and its built-in theme from `doc/GUIDE.md` (see `mkdocs.yml` and `doc/site/`), and served by GitHub
@@ -107,7 +106,7 @@ tools/build_site.sh deploy
 The preview is at http://127.0.0.1:8000/PrimoKKMK1Bridge/. `deploy` builds the site and pushes it to `gh-pages`. The
 first run installs MkDocs into `build/mkdocs-venv`, at the versions in `tools/site_requirements.txt`.
 
-### Making a release
+### Building a Release
 
 ```bash
 tools/make_release.sh
@@ -133,7 +132,7 @@ Both apps carry a version of the form **Major.minor (Build ID)**, such as `1.1 (
 - **Where to see it:** the editor's **About PrimoKKMK1Bridge Editor**, `build/PrimoKKMK1Bridge --version`, and the
   first line the bridge prints when it starts.
 
-## Testing without the keyboard
+## Testing Without the Keyboard
 
 `--replay` runs a capture log (from `tools/kkmap`) through the bridge and prints what it would send, and the
 displays' contents as text. Without `--config`, a replay uses the defaults and doesn't touch your config file.

@@ -1,34 +1,27 @@
-# PrimoKKMK1Bridge user guide
+# PrimoKKMK1Bridge User Guide
 
-PrimoKKMK1Bridge makes a Native Instruments **Komplete Kontrol S-series MK1** keyboard (S25, S49, S61, S88) fully
-usable on macOS without Native Instruments' software:
+Custom Native Instruments Komplete Kontrol S-series MK1 (S25/S49/S61/S88) MIDI controller driver for macOS; bringing complete configurability (every button, knob and touch), basic NKS support and REAPER DAW integration to the no longer supported MIDI controller. PrimoKKMK1Bridge replaces the need for the Native Instruments drivers (NIHardwareAgent, NIHostIntegrationAgent) and Controller Editor.
 
-- every button, knob and touch sends MIDI on a virtual port, **Primo Komplete Kontrol MK1**
-- the button lights and the nine displays are driven
-- an optional REAPER mode turns the keyboard into a REAPER control surface
+The system consists of two programs:
 
-It comes as two programs:
+- **The bridge** (`PrimoKKMK1Bridge`) talks to the keyboard and runs in the background - replaces the proprietary Native Instruments drivers.
+- **The editor** (*PrimoKKMK1Editor*) is a Mac app for changing the assignments and settings of the keyboard, and for starting and stopping the bridge - replaces the Native Instruments Controller Editor.
 
-- **The bridge** (PrimoKKMK1Bridge) talks to the keyboard and does the work. It runs in the background.
-- **The editor** (Primo KK MK1 Control Editor) is a Mac app for changing what every control does. It starts and
-  stops the bridge.
+> *PrimoKKMK1Editor* contains an embedded `PrimoKKMK1Bridge` so there is no need to install anything else.
 
-## What you need
+## Supported Hardware
 
-- A Komplete Kontrol S-series MK1 keyboard. Tested on an S61 MK1, firmware 72. The S25, S49 and S88 should work
-  but haven't been tried.
-- A Mac with macOS 14 or later, Apple Silicon or Intel. Each release has a download for Apple Silicon, and from
-  version 1.1 a universal one that also runs on Intel Macs. On an Intel Mac with an earlier version,
-  [build it from source](../README.md#build-and-run).
-- For REAPER mode: REAPER (tested with 7.61).
+- Native Instruments Komplete Kontrol S-series MK1 keyboard (S25/S49/S61/S88). Tested on an S61 MK1, firmware 72. The S25, S49 and S88 should work
+  but haven't been tested.
+- Apple macOS 14 or later, Apple Silicon or Intel.
+- [Optional] Cockos REAPER to utilize REAPER mode. _Tested on REAPER 7.61_.
 
 ## Install
 
 1. From the [releases page](https://github.com/gsenger3/PrimoKKMK1Bridge/releases), download
    `PrimoKKMK1Editor-<version>-macOS-arm64.zip` for an Apple Silicon Mac, or
    `PrimoKKMK1Editor-<version>-macOS-universal.zip` for an Intel Mac (it runs on either), and unzip it.
-2. **Move PrimoKKMK1Editor.app to your Applications folder.** That's the recommended place: starting the bridge at
-   login uses the app where it is. The bridge is inside the app, so there's nothing else to install.
+2. **Copy PrimoKKMK1Editor.app to your Applications folder.**
 3. The app is signed for local use only, not notarized by Apple, so macOS blocks it the first time. Either open
    it once and click **Open Anyway** in System Settings ▸ Privacy & Security, or run this in Terminal:
     ```bash
@@ -39,7 +32,7 @@ It comes as two programs:
 
 To build it yourself instead, see [Build and run](../README.md#build-and-run).
 
-## Getting started
+## Getting Started
 
 1. Plug in the keyboard and open **Primo KK MK1 Control Editor**.
 2. Turn on the **bridge switch** in the toolbar. The light next to it turns green, the keyboard's buttons light
@@ -47,35 +40,28 @@ To build it yourself instead, see [Build and run](../README.md#build-and-run).
 3. In your DAW, use the MIDI input **Primo Komplete Kontrol MK1**. It carries the keys, the pitch and mod strips
    and every control, so one input is all a track needs.
 
-Good to know:
+Notes:
 
-- **Don't give a track both ports.** The keyboard's own port, *KOMPLETE KONTROL S61 Port 1*, still sends the keys
-  too, so never give a track that and Primo Komplete Kontrol MK1, or *All MIDI inputs*: every note would arrive
-  twice.
+- **Don't give a track both ports.** The keyboard's own port, *KOMPLETE KONTROL S Port 1*, still sends the keys
+  too, so never give a track that and `Primo Komplete Kontrol MK1`, or `All MIDI inputs` - every note would arrive twice.
 - **The bridge keeps running when you quit the editor.** Turn the switch off to stop it.
-- **After the bridge stops,** the keyboard stays in *native mode*, with silent knobs, until you unplug and replug
-  it or start the bridge again.
+- **After the bridge stops,** the keyboard stays in *native mode*, with silent knobs, until you unplug and replug it or start the bridge again.
 - **The config file** is created the first time you run the editor or the bridge, with every default:
   `~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json`. A new config starts in
   [MIDI mode](#midi-mode). For REAPER, turn on **Enabled** under **REAPER Mode** on the editor's Settings page.
 
-## Start the bridge at login
+
+## Start the Bridge at Login
 
 To have the bridge start when you log in, without the editor, turn on **Launch Bridge at Login** under **Login** on
-the editor's Settings page. It applies right away, without saving, and starts the copy of the bridge inside the app
-where the app is now, so move the app to your Applications folder first. It takes effect at your next login; to
-start the bridge now too, use the bridge switch.
+the editor's Settings page. The bridge will now start automatically the next time you login.
 
 How it behaves:
 
 - **After a crash,** it's started again.
-- **With the editor's switch,** you can still turn it off. That's a normal quit, so it stays off until your next
-  login, and the switch can turn it back on.
-- **Its output** goes to `~/Library/Logs/PrimoKKMK1Bridge.log`, the same log the editor's **Show Log** opens.
-- **If you move the app,** the Settings page shows the copy it starts, with **Use This App** to switch to the one
-  you're running.
-- **Turning it off** stops it starting at your next login. A bridge it already started keeps going until you turn
-  it off with the switch or log out.
+- **With the editor's switch,** you can still turn it off. That's a normal quit, so it stays off until your next login, and the switch can turn it back on.
+- **Log Output** goes to `~/Library/Logs/PrimoKKMK1Bridge.log`. Choose **Bridge | Show Log** from the editor's menu bar to view the log.
+- **Turning it off** stops it starting at your next login. An already running bridge stays active until you turn it off with the switch or log out.
 
 Under the hood it's a *LaunchAgent*, `~/Library/LaunchAgents/com.primostudios.PrimoKKMK1Bridge.plist`.
 
@@ -115,78 +101,73 @@ launchctl bootout gui/$(id -u)/com.primostudios.PrimoKKMK1Bridge; rm ~/Library/L
 
 </details>
 
-## The editor
+## The Editor
 
-The editor shows a drawing of the keyboard. **Click a button, knob or strip**, and the panel on the right shows
-what it does and lets you change it. Each control on the drawing is labelled with its current assignment, and a
-second line starting with ⇧ shows what it does with Shift held.
+The editor allows you to customize button and encoder mappings and configure the behavior of the bridge. The editor replaces the functionality of the **Native Instruments Controller Editor**. 
+
+Configure mappings on the keyboard in the main window. **Click a button, knob or strip**, and the inspector panel on the right shows the current assignments and enables you to update them. Each control on the keyboard is labelled with its current assignment, and a the control's Shift Layer (⇧) assignment
 
 The pages, chosen in the toolbar, follow the mode you're in:
 
 | Mode | Pages |
 | --- | --- |
-| MIDI mode | **MIDI**: the CC each control sends · **Settings** |
-| REAPER mode | **REAPER**: the command each button runs, alone and with Shift · **Komplete Kontrol**: that view's CCs · **Settings** |
+| MIDI | **MIDI** · **Settings** |
+| REAPER | **REAPER** · **Komplete Kontrol** · **Settings** |
+| Settings | Configure application behavior |
 
-**Settings** has these sections. REAPER Views, Reaper Lightguide and Komplete Kontrol View appear only while REAPER
-mode is on.
+### Settings
 
 | Section | What's in it |
 | --- | --- |
 | **MIDI Configuration** | The bridge's **Port name** and **Channel**, and the Shift layer: **Shift Layer Enabled**, **Shift Layer Channel**, and **Shift Latching Enabled** (see [MIDI mode](#midi-mode)) |
 | **MIDI Keys & Controls** | **Merge Keys and Controls**: whether the keys and strips also come through the bridge's port. **Automatic (Port 1)** takes them from the keyboard's own port, **From MIDI Source by Name** from the source you name, and **Disabled** leaves them on the keyboard's port only |
 | **Lights and Displays** | **Enabled** drives the button lights, at **Active Brightness** when lit and **Idle Brightness** otherwise. **Enable Displays** drives the nine displays |
-| **REAPER Mode** | **Enabled** turns REAPER mode on. **Address**, **Local Listen Port** and **Device Port** match REAPER's OSC device ([Set up REAPER](#set-up-reaper-once)) |
+| **REAPER Mode** | **Enabled** turns REAPER mode on. **Address**, **Local Listen Port** and **Device Port** match REAPER's OSC device ([Set up REAPER](#set-up-REAPER-once)) |
 | **REAPER Views** | **Default View**: the view the bridge starts in. **Follow REAPER Track Selection**: the keyboard follows the track you click in REAPER. **Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)**: in those views, the track you pick on the keyboard becomes REAPER's selected track. **Track Name Display Duration**: how long the displays show the track's name after you change track. **REAPER Resource Folder**: where the screenset names come from |
-| **Reaper Lightguide** | The selected track's colour on the keys, and the REAPER script it needs: see [Track colour on the keys](#track-colour-on-the-keys) |
+| **REAPER Lightguide** | The selected track's color illuminated on the Komplete Kontrol lightguide, and the REAPER integration script. See [REAPER Lightguide](#REAPER-lightguide) |
 | **Komplete Kontrol View** | That view's **MIDI Channel** and **Knob Values** mode |
-| **Login** | **Launch Bridge at Login**: start the bridge when you log in, without the editor. It applies right away, without saving. See [Start the bridge at login](#start-the-bridge-at-login) |
+| **Login** | **Launch Bridge at Login**: start the bridge when you log in, without the editor. It applies right away, without saving. See [Start the Bridge at Login](#start-the-bridge-at-login) |
 | **Logging** | **Verbose Logging**: the bridge writes every message it sends to its log, for tracking down a problem. Turn it off again afterwards, as the log grows quickly. **Show Log** opens the log |
 
-**Reset to Default Settings…**, at the bottom, puts every setting and assignment back to its default, apart from
-REAPER mode. Nothing is written until you save.
+**Reset to Default Settings…**, at the bottom, resets all settings and assignments back to default.
 
 Other things in the editor:
 
-- **Saving:** **Save** (⌘S) writes the config file, and a running bridge picks it up within a second or two.
-  **Revert** throws away unsaved edits. If a change can't work, the status bar says why and Save stays off.
-- **The bridge switch** shows whether the bridge is running, however it was started, and starts or stops it. The
-  same commands are in the **Bridge** menu, with **Show Bridge Log** and **Show REAPER Track Colour Script**.
-- **File ▸ Open Config…** edits another config file for the session. Normally you don't need it.
+- **Saving:** **Save** (⌘S) writes the config file, and will reload automatically if the bridge is currently running.
+- **Revert** discards unsaved edits. Changes are validated and `Save` is disabled if improper values are entered. The status bar will inform you if saving is prohibited.
+- **The bridge switch** Starts/Stops the bridge and displays the current running status.
+- **File ▸ Open Config…** Loads a different configuration file for the session.
 - **Help ▸ Primo KK MK1 Control Editor Help** opens this guide.
 
-## MIDI mode
+## MIDI Mode
 
-MIDI mode is the default. Every control sends a MIDI CC on **Primo Komplete Kontrol MK1**, channel 1, for MIDI
-learn in any DAW. Buttons send 127 when pressed and 0 when released; knobs send absolute values (0–127).
+MIDI mode is the default. Every control sends a MIDI CC on **Primo Komplete Kontrol MK1**, **Channel 1**, for MIDI learn in any DAW. Buttons send `127` when pressed and `0` when released; knobs send absolute values (`0–127`).
 
-**Shift layer.** Holding Shift moves the buttons, knob turns and the Navigate knob turn to **channel 2**, so every
+**Shift layer.** Holding Shift moves the buttons, knob turns and the Navigate knob turn to **Channel 2**, so every
 control has a second assignment with the same CC numbers.
 
-- Shift itself sends CC108 on channel 1.
-- Knob touch and Navigate touch always use channel 1.
+- Shift itself sends CC108 on Channel 1.
+- Knob touch and Navigate touch always use Channel 1.
 - A release goes out on the channel of its press, even if you let go of Shift first.
 - **Latching Shift:** with **Shift Latching Enabled** on the editor's Settings page, you don't hold Shift: a press
-  turns it on until the next press. Its light is full while it's on, and its CC sends 127 when it latches and 0 when
-  it unlatches. This works the same in REAPER mode, for the Shift commands there.
+  turns it on until the next press. Its light is fully illuminated while active, and its CC sends `127` when it latches and `0` when
+  it unlatches. This works the same across all modes.
 
 **Lights from the DAW.** The bridge also has a MIDI *output* called Primo Komplete Kontrol MK1. A CC sent there:
 
-- lights its button (any value above 0) or dims it (0)
-- on channel 2, sets the light shown while Shift is held
-- for a knob, moves that knob's value, so it carries on from the DAW's value instead of jumping
+- Lights its button (any value above `0`) or dims it (`0`),
+- On Channel 2, sets the light shown while Shift is held,
+- For encoders, moves that encoder's value, so it carries on from the DAW's value instead of jumping.
 
-The keys, pitch strip (pitch bend) and mod strip (CC1) work as always, and Octave − / + transpose the keys on the
-keyboard as well as sending their CCs. The CC of every control is in [Default assignments](#midi-mode-defaults).
+The keys, pitch strip (pitch bend) and mod strip (`CC1`) work as always, and Octave − / + transpose the keys on the
+keyboard as well as sending their CCs. The CC of every control is in [Default Assignments](#midi-mode-defaults).
 
-## REAPER mode
+## REAPER Mode
 
-In REAPER mode the bridge talks to REAPER over OSC, REAPER's own control-surface protocol. The transport and
-editing buttons run REAPER commands, and the knobs work in three **views**. **Instance** steps through them:
-**Mix → Track → Komplete Kontrol → Mix**. The Instance light shows which view you're in: off in Mix, medium in
-Track, full in Komplete Kontrol.
+In REAPER mode the bridge talks to REAPER over the Open Sound Control (OSC) protocol, REAPER's own control-surface protocol. The transport and
+editing buttons run REAPER commands, and the encoder bank supports three different views - **Mix → Track → Komplete Kontrol → Mix**. The **Instance** buttons steps through the three views, illuminating based on which view is active; `Off` in Mix, `Dim` in Track, and `Bright` in Komplete Kontrol.
 
-### Set up REAPER (once)
+### REAPER Configuration (_One Time_)
 
 1. **Turn on REAPER mode:** on the editor's Settings page, turn on **Enabled** under **REAPER Mode**, and save.
 2. In REAPER, go to **Preferences ▸ Control/OSC/web ▸ Add**, and choose Control surface mode **OSC (Open Sound
@@ -195,23 +176,14 @@ Track, full in Komplete Kontrol.
     - Mode: **Configure device IP + local port**
     - Device port `9000`, Device IP `127.0.0.1`, Local listen port `8000`. These match **Device Port**,
       **Address** and **Local Listen Port** under **REAPER Mode** on the editor's Settings page.
-3. **Preferences ▸ MIDI Devices:** enable **Primo Komplete Kontrol MK1** for input.
-4. **Komplete Kontrol track:** set its MIDI input to **Primo Komplete Kontrol MK1**. It carries the keys, the strips
-   and the Komplete Kontrol view's CCs. For tracks that should only get the keys, use the keyboard's own *Port 1*,
-   so the bridge's CCs aren't recorded into their items.
-5. **Optional:** to have the keys play whichever track you select, right-click a track's record-arm button and turn
-   on **Automatic record-arm when track selected**.
+3. **Preferences ▸ Audio ▸ MIDI Input:** enable **Primo Komplete Kontrol MK1** for input.
+4. **Preferences ▸ Audio ▸ MIDI Output:** enable **Primo Komplete Kontrol MK1** for output.
+5. **Komplete Kontrol track:** set its MIDI input to **Primo Komplete Kontrol MK1**. It carries the keys, the strips and the Komplete Kontrol view's CCs. For tracks that should only get the keys (not using Komplete Kontrol), use the keyboard's own *Port 1*, so the bridge's CCs aren't recorded into their items.
+6. **Optional:** to have the keys play whichever track you select, right-click a track's record-arm button and turn on **Automatic record-arm when track selected**.
 
-Until REAPER answers, the displays read *waiting for OSC from REAPER* (and with the
-[track colour script](#track-colour-on-the-keys) installed, the keys are purple). The same happens within a second
-of REAPER quitting, and the bridge picks REAPER up again a few seconds after you reopen it. That needs REAPER on
-the same Mac (the default address, `127.0.0.1`): with REAPER on another computer, the bridge can't tell it quit.
+The keyboard will display *Waiting for OSC from REAPER* when it is searching for a REAPER connection. If the REAPER Lightguide is enabled, the keys will illuminate purple. Once REAPER is launched and connects to the keyboard, the Keyboard will launch in **Mix View** and illuminate the lightguide accordingly if enabled.
 
-When the bridge starts, it runs REAPER's *Control surface: Refresh all surfaces* action to get the whole project,
-since REAPER otherwise only sends values that changed. Your other control surfaces (MCU, FaderPort, HUI) are
-refreshed at the same moment.
-
-### Buttons in every view
+### Global Buttons
 
 The buttons do the same in all three views, apart from the Komplete Kontrol view's own CCs.
 
@@ -224,12 +196,12 @@ The buttons do the same in all three views, apart from the Komplete Kontrol view
   Touching a knob ends that early.
 - **Clicking a track in REAPER** selects it on the keyboard too.
 
-The full list of what each button does, alone and with Shift, is in [REAPER mode defaults](#reaper-mode-defaults).
+The full list of what each button does, alone and with Shift, is in [REAPER mode defaults](#REAPER-mode-defaults).
 One of them needs a note: REAPER doesn't report the record mode over OSC, so Shift + Loop (normal ↔ time-selection
 auto-punch) follows the last mode set from the keyboard. If you change the mode in REAPER, one extra press brings
 them back in step.
 
-### Mix view
+### Mix View
 
 The default view. The 8 knobs are the volumes of 8 tracks, and with Shift held, their pans.
 
@@ -245,7 +217,7 @@ its volume and a bar. While Shift is held, the left display shows *PAN*, and eac
 pan (*CENTER* at the centre) with a bar from the middle. Knobs past the last track stay blank, and the master track
 isn't on the knobs. To reset a volume to 0 dB, select the track and use Shift + knob 1 in [Track view](#track-view).
 
-### Track view
+### Track View
 
 The knobs control the selected track. A track you pick with the Navigate knob also becomes REAPER's only selected
 track, and REAPER scrolls to it.
@@ -259,18 +231,13 @@ track, and REAPER scrolls to it.
 | 5 | Record arm: right on, left off | Record monitoring: right on, left off |
 | 6–8 | Sends 1–3 | CC19–21, channel 2 |
 
-**Page ▶** shows the next 8 sends (page 2: sends 4–11, page 3: sends 12–16), and **Page ◀** goes back. Only sends
-that are routed somewhere appear, in order, each with the track it feeds and its level.
+**Page ▶** shows the next 8 sends (page 2: sends 4–11, page 3: sends 12–16), and **Page ◀** goes back. Only sends that are routed somewhere appear, in order, each with the track it feeds and its level.
 
-The left display shows the track's name and *TRK n*, or the page, such as *PAGE 2/2*. The record-arm display also
-shows the monitoring (*ON MON*, *off AUTO*); while Shift is held it shows *MONITOR*.
+The left display shows the track's name and *TRK n*, or the page, such as *PAGE 2/2*. The record-arm display also shows the monitoring (*ON MON*, *off AUTO*); while Shift is held it shows *MONITOR*.
 
-### Komplete Kontrol view
+### Komplete Kontrol View
 
-The knobs and eight navigation buttons send fixed CCs for Komplete Kontrol's NKS MIDI template, like Novation's
-Launchkey keyboards do. They go out on Primo Komplete Kontrol MK1, channel 1. The other buttons keep their REAPER
-jobs. Turning the Navigate knob picks the previous or next track and keeps you in this view; the track you pick also
-becomes REAPER's only selected track, and REAPER scrolls to it.
+The knobs and eight navigation buttons send fixed CCs for Komplete Kontrol's NKS MIDI template, similar to Novation's Launchkey keyboards. CCs are transmitted on `Primo Komplete Kontrol MK1`, Channel 1. The other buttons passthru their REAPER assignments. Turning the Navigate knob picks the previous or next track and keeps you in this view; the track you pick also becomes REAPER's only selected track, and REAPER scrolls to it.
 
 | Control | CC | Does in Komplete Kontrol |
 | --- | --- | --- |
@@ -282,76 +249,62 @@ becomes REAPER's only selected track, and REAPER scrolls to it.
 
 Komplete Kontrol's parameter names and values aren't available to the bridge, so it works like the Launchkey:
 
-- **Displays:** the selected track's name over *KONTROL* on the left, and *ENCODER 1*–*ENCODER 8* under the knobs,
-  each with a bar of the value it last sent.
+- **Displays:** the selected track's name over *KONTROL* on the left, and *ENCODER 1*–*ENCODER 8* under the knobs, each with a bar of the value it last sent.
 - **Knob values:** the bridge keeps **one set of 8 knob values**, starting at 64, for every page, track and preset.
-- **Jumps:** a knob can jump the first time you turn it after a page or preset change, when its value doesn't
-  match the parameter it now controls.
+- **Jumps:** a knob can jump the first time you turn it after a page or preset change, when its value doesn't match the parameter it now controls.
 
-For Komplete Kontrol to receive the CCs, its track needs **Primo Komplete Kontrol MK1** as input and must be
-record-armed or monitored.
+For Komplete Kontrol to receive the CCs, its track needs **Primo Komplete Kontrol MK1** set as input and must be record-armed or monitored.
 
-### Track colour on the keys
+### REAPER Lightguide
 
-In REAPER mode, the keyboard's light guide (the lights above the keys) shows the **selected track's colour on
-every key**. Its settings are in the **Reaper Lightguide** section of the editor's Settings page.
+In REAPER mode, the keyboard's light guide (the lights above the keys) shows the **selected track's color on every key**. Its settings are in the **REAPER Lightguide** section of the editor's Settings page.
 
-- **Brightness:** 50% by default. The colour is corrected so a white track looks white rather than purple.
-- **No colour:** a track without a colour of its own leaves the keys dark, and so does having no track selected.
+- **Brightness:** 50% by default. The color is corrected so a white track looks white rather than purple.
+- **No color:** a track without a color of its own leaves the keys dark, and so does having no track selected.
 - **Turning it off:** turn off **Enable Lightguide**.
 
 Once the script is installed (below), the light guide also shows how the bridge is doing:
 
 | The keys show | When |
 | --- | --- |
-| A rainbow running up from the lowest key | The bridge has just connected to the keyboard: started, restarted after a saved change, or the keyboard plugged in. It then fades into one of the below |
-| Purple | Waiting for REAPER: it isn't running yet, or its OSC device doesn't match (the displays say *waiting for OSC from REAPER*) |
-| The selected track's colour | REAPER is connected |
-| Red | The bridge can't open its OSC link to REAPER, usually because another program (such as a second bridge) already uses its port. The displays say why; the bridge tries again every 3 seconds |
+| A rainbow running up from the lowest key | The bridge has just connected to the keyboard: started, restarted after a saved change, or the keyboard plugged in. It then fades into one of the states below. |
+| Purple | Waiting for REAPER: REAPER isn't running yet, or its OSC device isn't found (the displays say *waiting for OSC from REAPER*). |
+| The selected track's color | REAPER is connected and a track is selected. |
+| Red | The bridge can't open its OSC link to REAPER, usually because another program (such as a second bridge) already uses its port. The displays say why; the bridge tries again every 3 seconds. |
 
-REAPER's OSC doesn't report track colours, so a small script inside REAPER sends them to the bridge as MIDI. Set
+REAPER's OSC doesn't report track colors, so a small script inside REAPER sends them to the bridge as MIDI. Set
 it up once:
 
-1. **Install the script.** On the editor's Settings page, under **Reaper Lightguide**, click **Install…** in the
+1. **Install the script.** On the editor's Settings page, under **REAPER Lightguide**, click **Install…** in the
    **REAPER Integration** row. It does two things:
-    - copies `PrimoKKMK1Bridge_TrackColor.lua` into the **Scripts/Primo Studios** folder of REAPER's resource folder
-    - adds a line to `Scripts/__startup.lua`, which REAPER runs every time it starts. An existing `__startup.lua` is
-      backed up first and kept as it is; the line goes at the end.
+    - copies `PrimoKKMK1Bridge_TrackColor.lua` into the **Scripts/Primo Studios** folder of REAPER's resource folder,
+    - adds a line to `Scripts/__startup.lua`, which REAPER runs every time it starts. An existing `__startup.lua` is backed up first and kept as it is; the line goes at the end.
 
    The row also shows whether the script is installed. Once it is, the button is **Uninstall…** instead (see
    below). After an update of the app, **Update…** appears next to it to replace an older script; **Repair…** puts
    back a part that's missing.
-2. **Let REAPER send to the bridge.** In **Preferences ▸ Audio ▸ MIDI Outputs** (*MIDI Devices* in older
-   versions), enable **Primo Komplete Kontrol MK1** as an output. Only the script uses it: tracks don't send there
-   unless you route them to it.
-3. **Restart REAPER.** The keys take the selected track's colour, and follow as you select other tracks or change
-   a colour.
+1. **Restart REAPER.** The keys take the selected track's color, and follow as you select other tracks or change a color.
 
-To install it by hand instead, reveal the script with **Bridge ▸ Show REAPER Track Colour Script**, then:
+To install it by hand instead, reveal the script with **Bridge ▸ Show REAPER Track color Script**, then:
 
 - copy it into REAPER's Scripts folder (Options ▸ Show REAPER resource path in explorer/finder)
 - add this line to `Scripts/__startup.lua`, adjusting the path to where you put it:
+
     ```lua
-    dofile(reaper.GetResourcePath() .. "/Scripts/PrimoKKMK1Bridge_TrackColor.lua")
+    dofile(REAPER.GetResourcePath() .. "/Scripts/PrimoKKMK1Bridge_TrackColor.lua")
     ```
 
-The script sends the colour when the selection or a colour changes, and every 2 seconds, so a restarted bridge
-catches up. When REAPER quits, the keys go dark.
+The script sends the color when the selection or a color changes, and every 2 seconds, so a restarted bridge catches up. When REAPER quits, the keys go dark.
 
-**To remove it,** click **Uninstall…** in the same place. It deletes the script, and the **Primo Studios** folder
-too if nothing else is in it, and takes the script's lines out of `Scripts/__startup.lua` (backing it up first). The
-rest of `__startup.lua` stays as it is, and so does the file itself, unless starting the script was all it did. A
-script that's already running stops when you restart REAPER. The MIDI output can then be turned off again in
-REAPER's preferences, if nothing else uses it.
+**To remove it,** click **Uninstall…**. It deletes the script, and the **Primo Studios** folder if it's empty, then removes the script references from `Scripts/__startup.lua` (backing it up first). The rest of `__startup.lua` stays as it is, and so does the file itself, unless starting the script was all it did. A script that's already running stops when you restart REAPER. The MIDI output can be turned off in REAPER's preferences, if nothing else uses it.
 
-## Default assignments
+## Default Assignments
 
 These are the defaults a new config starts with. Change any of them in the editor.
 
-In the pictures, the first line under each control is what it does, and a line starting with ⇧ is what it does
-with Shift held.
+In the graphic, the first line under each control is the default action, and a line starting with ⇧ is the Shift Layer action.
 
-### MIDI mode defaults
+### MIDI Mode Defaults
 
 ![The keyboard in MIDI mode, with each control's CC](img/keyboard-midi.png)
 
@@ -377,9 +330,9 @@ With Shift held, every button and knob turn sends the same CC on channel 2.
 | Knobs 1–8 touch | 22–29 | 127 touched, 0 released | Always channel 1 |
 | Keys / pitch strip / mod strip | Notes / pitch bend / CC1 | | Unchanged |
 
-### REAPER mode defaults
+### REAPER Mode Defaults
 
-![The keyboard in REAPER mode, with each button's command and its Shift command](img/keyboard-reaper.png)
+![The keyboard in REAPER mode, with each button's command and its Shift command](img/keyboard-REAPER.png)
 
 | Button | Press | Shift + press |
 | --- | --- | --- |
@@ -408,49 +361,42 @@ The numbers in brackets are REAPER's action command IDs. Any button can run any 
 pick **Run a REAPER action by ID…**, or **Run a MIDI Editor action by ID…** for actions from the MIDI Editor
 section of REAPER's Action List.
 
-### Komplete Kontrol view defaults
+### Komplete Kontrol View Defaults
 
 ![The keyboard in the Komplete Kontrol view, with each control's CC](img/keyboard-komplete-kontrol.png)
 
 | Control | CC (channel 1) | With Shift held |
 | --- | --- | --- |
-| Knobs 1–8 | 21–28, absolute | CC14–21, channel 2 |
-| Preset ▲ / ▼ | 37 / 36 | CC119 / 85, channel 2 |
-| Navigate ▲ / ▼ | 41 / 40 | Zoom in / out vertically, as in the other views |
-| Navigate ◀ / ▶ | 42 / 43 | Move the edit cursor to the previous / next grid division |
-| Page ◀ / ▶ | 42 / 43 | CC113 / 114, channel 2 |
-| Every other button | Its REAPER job, as in the table above | |
+| Knobs 1–8 | Komplete Kontrol plugin parameter values (21–28, absolute) | CC14–21, channel 2 |
+| Preset ▲ / ▼ | Previous/Next Plugin Preset (37 / 36) | CC119 / 85, channel 2 |
+| Navigate ▲ / ▼ | Previous/Next Plugin (41 / 40) | Zoom in / out vertically, as in the other views |
+| Navigate ◀ / ▶ | Previous/Next Komplete Kontrol Parameter Page (42 / 43) | Move the edit cursor to the previous / next grid division |
+| Page ◀ / ▶ | Previous/Next Komplete Kontrol Parameter Page (42 / 43) | CC113 / 114, channel 2 |
+| Every other button | Passthru existing REAPER actions, see previous table | |
 
-## Lights and displays
+## Lights and Displays
 
 The bridge drives the 21 button lights, the nine displays and the light guide. Octave − / + and the Navigate knob have no light.
 
 | | MIDI mode | REAPER mode |
 | --- | --- | --- |
-| Button lights | A button with a CC glows dimly and lights fully while held; the DAW can light it ([MIDI mode](#midi-mode)) | Play, Rec and Loop follow REAPER's transport; Browse is lit while a plugin window of the track is open; Instance shows the view. While Shift is held, Rec shows the metronome and Loop shows auto-punch. Other buttons glow dimly and light fully while held |
-| Left display | *MIDI* and the channel (*CH 2* while Shift is held) | *MIX* and the tracks, the track and *TRK n*, or the track and *KONTROL* |
-| Knob displays | Each knob's CC, its value and a bar | Each view's names, values and bars, as described above. Touching a knob frames its bar |
-| Light guide (above the keys) | Off | The selected track's colour, with the REAPER script; with the script installed, also a rainbow when the keyboard connects, purple while waiting for REAPER, and red if the OSC link can't open ([Track colour on the keys](#track-colour-on-the-keys)) |
-| Short notices | — | *PANIC*, *SAVE*, *RENDER*, *SCREEN SET n* with the screenset's name, *FX 2/3* with the plugin's name, and the new record mode |
+| Button lights | A button with a CC glows dimly and lights fully while held; the DAW can light it ([MIDI mode](#midi-mode)) | Play, Rec and Loop follow REAPER's transport; Browse is lit while a plugin window of the track is open; Instance shows the view. While Shift is held, Rec shows the metronome and Loop shows auto-punch. Other buttons glow dimly and light fully while held. |
+| Left display | *MIDI* and the channel (*CH 2* while Shift is held) | *MIX* and the tracks, the track and *TRK n*, or the track and *KONTROL*. |
+| Knob displays | Each knob's CC, its value and a bar | Each view's names, values and bars, as described above. Touching a knob frames its bar. |
+| Light guide (above the keys) | Off | [REAPER Lightguide](#REAPER-lightguide) |
+| Short notices | — | *PANIC*, *SAVE*, *RENDER*, *SCREEN SET n* with the screenset's name, *FX 2/3* with the plugin's name, and the record mode. |
 
-## The config file
+## The Config File
 
 Everything the editor changes lives in one file:
 `~/Library/Application Support/PrimoStudios/PrimoKKMK1Bridge/PrimoKKMK1Bridge.json`.
 
-- **When it's created:** the editor or the bridge creates it with every default if it's missing. To start over,
-  delete it, or use **Reset to Default Settings…** on the editor's Settings page (it keeps REAPER mode as it is) and
-  save.
-- **Saved changes apply by themselves:** a running bridge checks the file every second and restarts with a new,
-  valid version within a moment. In your DAW the MIDI port drops out briefly. A file it can't use is logged and
-  ignored.
-- **Editing it by hand:** every key is optional; anything left out keeps its default. [Config keys](#config-keys)
-  below lists every key.
-- **From Terminal:** `PrimoKKMK1Bridge --config FILE` runs the bridge with another file, and
-  `PrimoKKMK1Bridge --print-default-config` prints every default. `PrimoKKMK1Bridge --version` shows the version,
-  which is also in the editor's About box.
+- **When it's created:** the editor or the bridge creates it with every default if it's missing. To start over, delete it, or use **Reset to Default Settings…** on the editor's Settings page and save.
+- **Saved changes apply by themselves:** a running bridge checks the file every second and restarts with a new, valid version within a moment. In your DAW the MIDI port drops out briefly. A file it can't use is logged and ignored.
+- **Editing it by hand:** every key is optional; anything left out keeps its default. [Config keys](#config-keys) below lists every key.
+- **From Terminal:** `PrimoKKMK1Bridge --config FILE` runs the bridge with another file, and `PrimoKKMK1Bridge --print-default-config` prints every default. `PrimoKKMK1Bridge --version` shows the version, which is also in the editor's About box.
 
-### Config keys
+### Config Keys
 
 Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` prints them all with their defaults.
 
@@ -473,21 +419,21 @@ Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` pr
 | `displays` | `true` to drive the displays above the knobs |
 | `keyboardSource` | Merge the keyboard's own MIDI (keys, strips, pedals) into the bridge's port: `"auto"` (default: the keyboard's *Port 1*, found again after a replug), a MIDI source name, or `null` to keep the keys on the keyboard's port only |
 | `verbose` | `true` to log every message the bridge sends, like `--verbose` (default `false`) |
-| `reaper.enabled` | `true` for REAPER mode |
-| `reaper.host`, `reaper.sendPort`, `reaper.receivePort` | Where REAPER is: its IP, its *Local listen port* (default 8000) and its *Device port* (default 9000) |
-| `reaper.view` | The view at start: `mix` (default), `track` or `komplete-kontrol` |
-| `reaper.followSelectedTrack` | `true` (default): the keyboard follows the track you click in REAPER |
-| `reaper.mirrorSelection` | `true` (default): in Track view and the Komplete Kontrol view, a track picked on the keyboard becomes REAPER's only selected track and is scrolled into view |
-| `reaper.knobFullRange` | How far to turn a knob for a fader's full range, in raw knob units (default 600; lower is faster) |
-| `reaper.trackNameSeconds` | After a track change, how long only the track's number and name show (default 2; 0 is only until REAPER has sent the new track's values) |
-| `reaper.resourcePath` | REAPER's resource folder, for the screenset names and the track colour script (default `~/Library/Application Support/REAPER`) |
-| `reaper.navigateTurn` | What turning the Navigate knob steps through: `tracks` (default), `pages`, or `null` for its CC |
-| `reaper.lightGuide`, `reaper.lightGuideBrightness` | The track colour on the keys, on or off (default on), and its brightness, 1–100 percent (default 50). See [Track colour on the keys](#track-colour-on-the-keys) |
-| `reaper.kompleteKontrol` | The Komplete Kontrol view: `channel` (default 1), `encoderCCs` (default 21–28), `encoderMode` (same modes as `knobMode`, default `absolute`), and `buttons` (button name → CC) |
-| `reaper.buttons` | Button name → REAPER command, or `null` to give the button back its CC. Commands: `play`, `stop`, `record`, `repeat`, `rewind`, `forward`, `metronome`, `record-mode`, `go-to-start`, `previous-marker`, `next-marker`, `undo`, `redo`, `browse-fx`, `close-fx`, `panic`, `save-project`, `render-project`, `screenset:1` … `screenset:10`, `previous-track`, `next-track`, `previous-page`, `next-page`, `toggle-view`, `mute`, `solo`, `action:<ID>` for any REAPER action (in REAPER's Action List, right-click it ▸ *Copy selected action command ID*), or `midiaction:<ID>` for an action from the Action List's MIDI Editor section |
-| `reaper.shiftButtons` | The same, for buttons pressed while Shift is held. A button not listed sends its CC on the Shift channel |
+| `REAPER.enabled` | `true` for REAPER mode |
+| `REAPER.host`, `REAPER.sendPort`, `REAPER.receivePort` | Where REAPER is: its IP, its *Local listen port* (default 8000) and its *Device port* (default 9000) |
+| `REAPER.view` | The view at start: `mix` (default), `track` or `komplete-kontrol` |
+| `REAPER.followSelectedTrack` | `true` (default): the keyboard follows the track you click in REAPER |
+| `REAPER.mirrorSelection` | `true` (default): in Track view and the Komplete Kontrol view, a track picked on the keyboard becomes REAPER's only selected track and is scrolled into view |
+| `REAPER.knobFullRange` | How far to turn a knob for a fader's full range, in raw knob units (default 600; lower is faster) |
+| `REAPER.trackNameSeconds` | After a track change, how long only the track's number and name show (default 2; 0 is only until REAPER has sent the new track's values) |
+| `REAPER.resourcePath` | REAPER's resource folder, for the screenset names and the track color script (default `~/Library/Application Support/REAPER`) |
+| `REAPER.navigateTurn` | What turning the Navigate knob steps through: `tracks` (default), `pages`, or `null` for its CC |
+| `REAPER.lightGuide`, `REAPER.lightGuideBrightness` | The track color on the keys, on or off (default on), and its brightness, 1–100 percent (default 50). See [REAPER Lightguide](#REAPER-lightguide) |
+| `REAPER.kompleteKontrol` | The Komplete Kontrol view: `channel` (default 1), `encoderCCs` (default 21–28), `encoderMode` (same modes as `knobMode`, default `absolute`), and `buttons` (button name → CC) |
+| `REAPER.buttons` | Button name → REAPER command, or `null` to give the button back its CC. Commands: `play`, `stop`, `record`, `repeat`, `rewind`, `forward`, `metronome`, `record-mode`, `go-to-start`, `previous-marker`, `next-marker`, `undo`, `redo`, `browse-fx`, `close-fx`, `panic`, `save-project`, `render-project`, `screenset:1` … `screenset:10`, `previous-track`, `next-track`, `previous-page`, `next-page`, `toggle-view`, `mute`, `solo`, `action:<ID>` for any REAPER action (in REAPER's Action List, right-click it ▸ *Copy selected action command ID*), or `midiaction:<ID>` for an action from the Action List's MIDI Editor section |
+| `REAPER.shiftButtons` | The same, for buttons pressed while Shift is held. A button not listed sends its CC on the Shift channel |
 
-The defaults for `buttons`, `reaper.buttons` and `reaper.shiftButtons` are the tables in
+The defaults for `buttons`, `REAPER.buttons` and `REAPER.shiftButtons` are the tables in
 [Default assignments](#default-assignments).
 
 **Relative knob modes** suit endless knobs best, but your DAW has to be told which relative format to expect (in
@@ -498,19 +444,18 @@ with plain MIDI learn everywhere.
 
 | Problem | What to do |
 | --- | --- |
-| The knobs send nothing | The keyboard is back in its own MIDI mode. The bridge switches it back when you replug it or the Mac wakes; otherwise press a page arrow next to the knobs, and the bridge notices and switches it back. If the bridge isn't running, turn it on |
-| Every note plays twice | A track has both Primo Komplete Kontrol MK1 and the keyboard's own Port 1, or *All MIDI inputs*. Give it one of them |
-| The displays say *waiting for OSC from REAPER* | REAPER isn't running (the bridge connects a few seconds after it starts), or its OSC device doesn't match the ports under **REAPER Mode** on the editor's Settings page (8000 / 9000). See [Set up REAPER](#set-up-reaper-once) |
-| You want to see what the bridge is doing | Turn on **Verbose Logging** under **Logging** on the editor's Settings page, and save; the bridge restarts with it. **Show Log** (or Bridge ▸ Show Bridge Log) then lists every MIDI CC, button press and OSC message it sends. Turn it off when you're done |
-| The displays say *OSC port 9000 is in use* (and the keys are red) | Another program, often a second bridge started in Terminal or at login, already listens on that port. Quit it; the bridge tries again every 3 seconds and connects by itself. Or change **Device Port** under **REAPER Mode**, and REAPER's device port to match |
-| The bridge switch turns itself off again | The bridge stopped right away. The editor shows the end of its log; Bridge ▸ Show Bridge Log has all of it |
-| Komplete Kontrol doesn't react | Its track needs Primo Komplete Kontrol MK1 as input, and must be record-armed or monitored |
-| macOS won't open the app | See step 3 of [Install](#install) |
+| The knobs send nothing | The keyboard is back in its own MIDI mode. The bridge switches it back when you replug it or the Mac wakes; otherwise press a page arrow next to the knobs, and the bridge notices and switches it back. If the bridge isn't running, turn it on. |
+| Every note plays twice | A track has both Primo Komplete Kontrol MK1 and the keyboard's own Port 1, or *All MIDI inputs*. Give it one of them. |
+| The displays say *waiting for OSC from REAPER* | REAPER isn't running (the bridge connects a few seconds after it starts), or its OSC device doesn't match the ports under **REAPER Mode** on the editor's Settings page (8000 / 9000). See [Set up REAPER](#set-up-REAPER-once) |
+| You want to see what the bridge is doing | Turn on **Verbose Logging** under **Logging** on the editor's Settings page, and save; the bridge restarts with it. **Show Log** (or Bridge ▸ Show Bridge Log) then lists every MIDI CC, button press and OSC message it sends. Turn it off when you're done. |
+| The displays say *OSC port 9000 is in use* (and the keys are red) | Another program, often a second bridge started in Terminal or at login, already listens on that port. Quit it; the bridge tries again every 3 seconds and connects by itself. Or change **Device Port** under **REAPER Mode**, and REAPER's device port to match. |
+| The bridge switch turns itself off again | The bridge stopped right away. The editor shows the end of its log; Bridge ▸ Show Bridge Log has all of it. |
+| Komplete Kontrol doesn't react | Its track needs Primo Komplete Kontrol MK1 as input, and must be record-armed or monitored. |
+| macOS won't open the app | See step 3 of [Install](#install). |
 
-## The keyboard without the bridge
+## The Keyboard Without the Bridge
 
-When the bridge isn't running and the keyboard has been replugged, it's in its own MIDI mode, on its own port
-(*KOMPLETE KONTROL S61 Port 1*, channel 1). The displays stay blank.
+When the bridge isn't running and the keyboard has been replugged, it's in its default MIDI mode, on its own port (*KOMPLETE KONTROL Sxx Port 1*, channel 1). The displays stay blank.
 
 | Control | Sends |
 | --- | --- |
@@ -518,3 +463,5 @@ When the bridge isn't running and the keyboard has been replugged, it's in its o
 | Knobs 1–8 | CC14–21 (page 1, at power-on) or CC22–29 (page 2); either page arrow switches pages |
 | Octave − / + | Transpose the keys |
 | Every other button, knob touch, the Navigate knob | Nothing |
+
+In default MIDI mode, you must use the Native Instruments Controller Editor to perform any configuration of the device. 
