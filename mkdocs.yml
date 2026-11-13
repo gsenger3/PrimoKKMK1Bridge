@@ -1,0 +1,56 @@
+# The user guide as a website, published to GitHub Pages from the gh-pages branch:
+# https://gsenger3.github.io/PrimoKKMK1Bridge/
+# Build, preview or publish it with tools/build_site.sh, which makes the page from doc/GUIDE.md first.
+
+site_name: PrimoKKMK1Bridge User Guide
+site_url: https://gsenger3.github.io/PrimoKKMK1Bridge/
+site_description: >-
+  Use a Native Instruments Komplete Kontrol S-series MK1 keyboard on macOS without NI's software: as MIDI, or as a
+  REAPER control surface.
+repo_url: https://github.com/gsenger3/PrimoKKMK1Bridge
+repo_name: gsenger3/PrimoKKMK1Bridge
+edit_uri: ""  # the page is generated; edit doc/GUIDE.md instead
+copyright: Not affiliated with Native Instruments; Komplete Kontrol is their trademark. MIT License.
+
+docs_dir: build/site-docs  # made by tools/build_site.sh from doc/GUIDE.md and doc/img
+site_dir: build/site
+
+theme:
+  name: material
+  font: false  # the system font, so the page loads nothing from Google
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Light mode
+  features:
+    - navigation.top
+    - toc.follow
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+validation:
+  links:
+    not_found: warn
+    anchors: warn

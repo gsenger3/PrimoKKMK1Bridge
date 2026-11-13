@@ -9,7 +9,7 @@
 //  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
 //
 //  The editor app's entry point: its window, the File menu (Open, Save, Save As, Revert), the Bridge menu
-//  (Start, Stop, Show Log), the Help menu (the user guide on GitHub), and the prompt to save changes before quitting.
+//  (Start, Stop, Show Log), the Help menu (the user guide website), and the prompt to save changes before quitting.
 
 import AppKit
 import SwiftUI
@@ -28,8 +28,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
-/// The user guide, doc/GUIDE.md, on GitHub.
-let userGuideURL = URL(string: "https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/doc/GUIDE.md")!
+/// The user guide website, made from doc/GUIDE.md (tools/build_site.sh) and served by GitHub Pages.
+let userGuideURL = URL(string: "https://gsenger3.github.io/PrimoKKMK1Bridge/")!
 
 @main
 struct PrimoKKMK1EditorApp: App {

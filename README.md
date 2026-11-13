@@ -10,8 +10,9 @@ It comes as two programs:
 - **The editor** (*PrimoKKMK1Bridge Editor*) is a Mac app for changing the assignments and settings on a drawing of
   the keyboard, and for starting and stopping the bridge. A copy of the bridge is built into it.
 
-**Using it:** the [user guide](doc/GUIDE.md) covers installing, setup, starting at login, every mode and view,
-every default assignment, and the config file. The editor's Help menu opens it.
+**Using it:** the [user guide](https://gsenger3.github.io/PrimoKKMK1Bridge/) covers installing, setup, starting at
+login, every mode and view, every default assignment, and the config file. The editor's Help menu opens it. Its
+source is [doc/GUIDE.md](doc/GUIDE.md).
 
 Tested on an S61 MK1 (firmware 72) with macOS 26 and REAPER 7.61.
 
@@ -86,6 +87,23 @@ Other options: `--config FILE` runs with another config file, `--print-default-c
   [Set up REAPER](doc/GUIDE.md#set-up-reaper-once).
 - **The guide's pictures** are drawn from the editor's own drawing: run `tools/render_guide_images.sh` after
   changing a default or the drawing.
+
+### The user guide website
+
+[The user guide](https://gsenger3.github.io/PrimoKKMK1Bridge/) is also a website, made with
+[MkDocs](https://www.mkdocs.org) and the Material theme from `doc/GUIDE.md` (see `mkdocs.yml`), and served by GitHub
+Pages from the `gh-pages` branch. After changing the guide, preview the site, then publish it:
+
+```bash
+tools/build_site.sh serve
+```
+
+```bash
+tools/build_site.sh deploy
+```
+
+The preview is at http://127.0.0.1:8000/PrimoKKMK1Bridge/. `deploy` builds the site and pushes it to `gh-pages`. The
+first run installs MkDocs into `build/mkdocs-venv`, at the versions in `tools/site_requirements.txt`.
 
 ## Versions
 
