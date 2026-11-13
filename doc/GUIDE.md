@@ -383,14 +383,14 @@ With Shift held, every button and knob turn sends the same CC on channel 2.
 
 | Button | Press | Shift + press |
 | --- | --- | --- |
-| Play | Play | CC102, channel 2 |
+| Play | Play | MIDI inputs as step input, on / off, in the open MIDI editor (MIDI Editor action 40481) |
 | Stop | Stop | Go to the start of the project |
 | Rec | Record | Metronome on / off |
 | Loop | Repeat on / off | Record mode: normal ↔ time-selection auto-punch |
 | Rewind ◀◀ | Rewind | Previous marker |
 | Fast forward ▶▶ | Fast forward | Next marker |
-| Scale | Show / hide the MIDI editor windows (action 40716) | MIDI inputs as step input, on / off, in the open MIDI editor (MIDI Editor action 40481) |
-| Arp | Track automation mode: write (40403) | Track automation mode: trim/read (40400) |
+| Scale | Track automation mode: trim/read (40400) | Track automation mode: read (40401) |
+| Arp | Track automation mode: write (40403) | Track automation mode: touch (40402) |
 | Browse | Open the selected track's plugin windows one by one | Close the selected track's plugin windows |
 | Instance | Next view: Mix → Track → Komplete Kontrol | CC116, channel 2 |
 | Back | Undo | Redo |

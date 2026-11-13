@@ -127,7 +127,7 @@ start REAPER selected track 1 "Kick"
 12:00:00.960 NavDown down
 12:00:00.960 → REAPER /action 1011
 12:00:01.210 Scale down
-12:00:01.210 → REAPER /action 40716
+12:00:01.210 → REAPER /action 40400
 12:00:01.460 Arp down
 12:00:01.460 → REAPER /action 40403
 12:00:01.710 NavLeft down
@@ -142,7 +142,7 @@ start REAPER selected track 1 "Kick"
              display |1-8     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
              display |         |     #   |     #   |     #   |     #   |     #   |     #   |     #   |     #   |
 12:00:02.260 Shift + Scale down
-12:00:02.260 → REAPER /midiaction 40481
+12:00:02.260 → REAPER /action 40401
 12:00:02.360 Shift up                CC108 ch1 = 0
              display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
@@ -152,7 +152,7 @@ start REAPER selected track 1 "Kick"
              display |1-8     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
              display |         |     #   |     #   |     #   |     #   |     #   |     #   |     #   |     #   |
 12:00:02.610 Shift + Arp down
-12:00:02.610 → REAPER /action 40400
+12:00:02.610 → REAPER /action 40402
 12:00:02.710 Shift up                CC108 ch1 = 0
              display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
@@ -197,4 +197,14 @@ start REAPER selected track 1 "Kick"
              display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
-replayed 430 HID reports from device/tests/reaper_sim/reaper_defaults_test.log
+12:00:04.310 Shift down              CC108 ch1 = 127
+             display |PAN     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
+             display |         |     #   |     #   |     #   |     #   |     #   |     #   |     #   |     #   |
+12:00:04.410 Shift + Play down
+12:00:04.410 → REAPER /midiaction 40481
+12:00:04.540 Shift up                CC108 ch1 = 0
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
+             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
+replayed 483 HID reports from device/tests/reaper_sim/reaper_defaults_test.log

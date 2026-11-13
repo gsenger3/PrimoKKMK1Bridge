@@ -95,15 +95,16 @@ struct ReaperConfig: Codable {
         "PageLeft": "previous-page", "PageRight": "next-page", "Instance": "toggle-view", "Back": "undo",
         "Browse": "browse-fx", "NavigateClick": "panic", "Enter": "save-project",
         "PresetUp": "screenset:1", "PresetDown": "screenset:2",
-        "Scale": "action:40716",  // View: toggle show MIDI editor windows
+        "Scale": "action:40400",  // Automation: Set track automation mode to trim/read
         "Arp": "action:40403",    // Automation: Set track automation mode to write
     ]
     /// Commands for buttons pressed while Shift is held; other Shift + button presses send their CC on the Shift channel.
     var shiftButtons: [String: String?] = [
         "Rec": "metronome", "Stop": "go-to-start", "Rewind": "previous-marker", "FastForward": "next-marker",
         "Loop": "record-mode", "Back": "redo", "Browse": "close-fx", "Enter": "render-project",
-        "Scale": "midiaction:40481",  // MIDI Editor: Options: MIDI inputs as step input mode
-        "Arp": "action:40400",        // Automation: Set track automation mode to trim/read
+        "Scale": "action:40401",  // Automation: Set track automation mode to read
+        "Arp": "action:40402",    // Automation: Set track automation mode to touch
+        "Play": "midiaction:40481",  // MIDI Editor: Options: MIDI inputs as step input mode
         "NavUp": "action:40111", "NavDown": "action:40112",  // View: Zoom in / out vertical
         "NavLeft": "action:40646", "NavRight": "action:40647",  // View: Move cursor left / right to grid division
     ]

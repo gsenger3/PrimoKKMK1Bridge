@@ -163,6 +163,8 @@ let commandSections: [CommandSection] = [
         CommandInfo(name: "action:40647", title: "View: Move cursor right to grid division", short: "Grid ▶"),
         CommandInfo(name: "action:40403", title: "Automation: track mode write", short: "Auto write"),
         CommandInfo(name: "action:40400", title: "Automation: track mode trim/read", short: "Auto trim"),
+        CommandInfo(name: "action:40401", title: "Automation: track mode read", short: "Auto read"),
+        CommandInfo(name: "action:40402", title: "Automation: track mode touch", short: "Auto touch"),
         CommandInfo(name: "action:40716", title: "View: Show / hide MIDI editor windows", short: "MIDI editor"),
         CommandInfo(name: "midiaction:40481", title: "MIDI Editor: MIDI inputs as step input", short: "Step input"),
     ]),

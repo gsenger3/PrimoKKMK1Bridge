@@ -20,7 +20,8 @@
       "NavUp": null,
       "NavDown": null,
       "NavLeft": null,
-      "NavRight": null
+      "NavRight": null,
+      "Play": null
     }
   },
   "shiftLatch": true
