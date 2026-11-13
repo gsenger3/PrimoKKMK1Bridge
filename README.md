@@ -1,14 +1,12 @@
 # PrimoKKMK1Bridge
 
-Makes a Native Instruments Komplete Kontrol S-series MK1 keyboard (S25/S49/S61/S88) fully usable on macOS
-without NI's software. Every button, knob and touch becomes MIDI on a virtual port, **Primo Komplete Kontrol
-MK1**, and the button lights, the nine displays and the light guide are driven too. An optional REAPER mode turns
-the keyboard into a control surface over OSC, with Mix, Track and Komplete Kontrol views.
+Custom Native Instruments Komplete Kontrol S-series MK1 (S25/S49/S61/S88) MIDI controller driver for macOS bringing complete configurability (every button, knob and touch), basic NKS support and Reaper DAW integration to the no longer supported MIDI controller. PrimoKKMK1Bridge replaces the need for the Native Instruments drivers (NIHardwareAgent, NIHostIntegrationAgent) and Controller Editor.
 
 It comes as two programs:
-- **The bridge** (`PrimoKKMK1Bridge`) talks to the keyboard and runs in the background.
-- **The editor** (*PrimoKKMK1Bridge Editor*) is a Mac app for changing the assignments and settings on a drawing of
-  the keyboard, and for starting and stopping the bridge. A copy of the bridge is built into it.
+- **The bridge** (`PrimoKKMK1Bridge`) talks to the keyboard and runs in the background - replaces the proprietary Native Instruments drivers.
+- **The editor** (*PrimoKKMK1Editor*) is a Mac app for changing the assignments and settings of the keyboard, and for starting and stopping the bridge - replaces the Native Instruments Controller Editor.
+
+> *PrimoKKMK1Editor* contains an embedded `PrimoKKMK1Bridge` so there is no need to install anything else.
 
 **Using it:** the [user guide](https://gsenger3.github.io/PrimoKKMK1Bridge/) covers installing, setup, starting at
 login, every mode and view, every default assignment, and the config file. The editor's Help menu opens it. Its
