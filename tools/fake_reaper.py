@@ -114,6 +114,7 @@ class Reaper:
                         "fx": [[f, 0.0] for f in FX.get(i, [])]} for i, n in enumerate(NAMES)]  # [name, window open]
         self.bank_start, self.device, self.track_count, self.send_count, self.fx_count = 0, 0, 8, 4, 8
         self.device_fx, self.param_count = 0, 8
+        self.inst_count, self.inst_bank = 16, 1  # the instrument parameters reported (Default.ReaperOSC: 16)
         self.params = {}  # (track, fx) -> host parameters [name, value, text]
         self.playing = self.recording = self.repeating = self.click = False
         self.follow_last_touched = False
@@ -172,7 +173,25 @@ class Reaper:
             name, is_open = fx[n - 1] if n <= len(fx) else ("", 0.0)
             out += [message(f"/fx/{n}/name", name), message(f"/fx/{n}/number/str", str(n) if name else ""),
                     message(f"/fx/{n}/openui", is_open)]
-        return out + self.param_state()
+        return out + self.param_state() + self.inst_state()
+
+    def inst_fx(self):
+        """The selected track's instrument: its first FX that is one (REAPER's /fxinst), or None."""
+        fx = self.tracks[self.device]["fx"]
+        return next((f for f, (name, _) in enumerate(fx) if name.startswith(("Komplete Kontrol", "VSTi:"))), None)
+
+    def inst_state(self):
+        """/fxinst/name and /fxinstparam/N/... for the run of instrument parameters asked for (count, bank)."""
+        f = self.inst_fx()
+        if f is None:
+            return [message("/fxinst/name", "")]
+        ps, out = self.fx_params(self.device, f), [message("/fxinst/name", self.tracks[self.device]["fx"][f][0])]
+        for n in range(1, self.inst_count + 1):
+            i = (self.inst_bank - 1) * self.inst_count + n
+            name, v, text = ps[i - 1] if i <= len(ps) else ("", 0.0, "")
+            out += [message(f"/fxinstparam/{n}/name", name), message(f"/fxinstparam/{n}/value", v),
+                    message(f"/fxinstparam/{n}/value/str", text)]
+        return out
 
     def fx_params(self, t, f):
         fx = self.tracks[t]["fx"]
@@ -231,6 +250,18 @@ class Reaper:
         elif address == "/device/fx/count":
             self.fx_count = args[0]
             self.send(self.device_state())
+        elif address == "/device/fxinstparam/count":
+            self.inst_count, self.inst_bank = args[0], 1
+            self.send(self.inst_state())
+        elif address == "/device/fxinstparam/bank/select":
+            self.inst_bank = args[0]
+            self.send(self.inst_state())
+        elif p[0] == "fxinstparam" and p[2:] == ["value"] and self.inst_fx() is not None:
+            ps = self.fx_params(self.device, self.inst_fx())
+            i = (self.inst_bank - 1) * self.inst_count + int(p[1])
+            if i <= len(ps):
+                ps[i - 1][1], ps[i - 1][2] = args[0], kk_text(ps[i - 1][0], args[0])
+                self.send([message(address, args[0]), message(address + "/str", ps[i - 1][2])])
         elif p[0] == "fx" and len(p) == 3 and p[2] == "openui":
             fx = self.tracks[self.device]["fx"]
             if int(p[1]) <= len(fx):

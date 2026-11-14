@@ -21,12 +21,13 @@ extension Bridge {
         guard cfg.reaper.enabled, reaper == nil else { return }
         let hadError = reaperError != nil
         do {
-            let s = try ReaperSession(cfg: cfg.reaper)
+            let s = try ReaperSession(cfg: cfg.reaper, nks: currentNKSLayout)
             s.onSend = { [weak self] address, args in
                 guard let self, self.verbose else { return }
                 self.log("→ REAPER \(address) " + args.map(\.description).joined(separator: " "))
             }
             s.onEvent = { [weak self] in self?.reaperEvent($0) }
+            s.midiPortsMade = started
             if logOSC {
                 // Everything REAPER sends, except the clock and meters that stream during playback.
                 let noisy = ["/time", "/beat", "/samples", "/frames", "/vu", "/lastmarker", "/lastregion"]
@@ -122,6 +123,19 @@ extension Bridge {
             showMessage("SCREEN", "set \(n)", extra: screensetName(n) ?? "", seconds: 1.5)
         case .noPlugins:
             showMessage("FX", "no plugins on this track")
+        case .midiDevicesReset:
+            log("REAPER was running before the bridge started: asked it to reset its MIDI devices, so it opens the bridge's new MIDI ports")
+        case .learn:
+            toggleLearning()
+        case .learnStopped(let why):
+            learningStopped(why)
+        case .learnRefused(let why):
+            if verbose { log("learn: not taken: \(why)") }
+            showMessage("LEARN", why, seconds: 1.5)
+        case .learnAssigned(let what):
+            if verbose { log("learn: \(what)") }
+        case .learnChanged:
+            message = nil  // a notice (why a control wasn't taken) gives way to the change
         case .recordMode:
             if verbose { log("REAPER record mode: \(r.autoPunch ? "time selection auto-punch" : "normal")") }
             showMessage("REC MODE", r.autoPunch ? "Auto punch" : "Normal", r.autoPunch ? "time sel." : "")

@@ -201,8 +201,29 @@ extension Bridge {
             // Like Novation's Launchkey: Komplete Kontrol's parameter names and values aren't available, so each
             // display shows its knob's number, and a bar of the value the knob last sent (absolute values).
             let kk = cfg.reaper.kompleteKontrol
+            if let l = r.learning {  // learn mode: each knob's parameter so far, and a frame round the next to fill
+                displays.write(row: 0, cell: 0, "LEARN")
+                displays.write(row: 1, cell: 0, fitValue("PAGE \(l.page + 1)/\(l.pages.count)", cellWidth))
+                for k in 0..<8 {
+                    displays.write(row: 0, cell: k + 1, l.pages[l.page][k].map { abbreviate($0.name, cellWidth) } ?? "-")
+                    if l.slot == k { displays.write(row: 1, cell: k + 1, "> NEXT") }
+                    displays.setBar(cell: k + 1, nil, framed: l.slot == k)
+                }
+                if l.slot == nil { displays.write(row: 1, cell: 8, "PAGE >") }  // after the last slot: Page ▶ goes on
+                return
+            }
             // The left display: the selected track (whose plugin the knobs are on), and KONTROL for the view.
             displays.write(row: 0, cell: 0, abbreviate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
+            if r.nksActive, let pages = r.nks?.pages.count {  // NKS pages: their names, REAPER's values
+                displays.write(row: 1, cell: 0, fitValue("PAGE \(r.nksPage + 1)/\(pages)", cellWidth))
+                for k in 0..<8 {
+                    guard let i = r.nksInfo(k) else { displays.setBar(cell: k + 1, nil, framed: false); continue }
+                    displays.write(row: 0, cell: k + 1, abbreviate(i.short, cellWidth))
+                    displays.write(row: 1, cell: k + 1, fitValue(i.value, cellWidth))
+                    displays.setBar(cell: k + 1, i.bar, framed: touched.contains(k))
+                }
+                return
+            }
             displays.write(row: 1, cell: 0, "KONTROL")
             for k in 0..<8 {
                 displays.write(row: 0, cell: k + 1, "ENCODER")

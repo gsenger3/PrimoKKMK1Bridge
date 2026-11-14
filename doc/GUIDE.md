@@ -125,7 +125,7 @@ The pages, chosen in the toolbar, follow the mode you're in:
 | **REAPER Mode** | **Enabled** turns REAPER mode on. **Address**, **Local Listen Port** and **Device Port** match REAPER's OSC device ([Set up REAPER](#set-up-REAPER-once)) |
 | **REAPER Views** | **Default View**: the view the bridge starts in. **Follow REAPER Track Selection**: the keyboard follows the track you click in REAPER. **Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)**: in those views, the track you pick on the keyboard becomes REAPER's selected track. **Track Name Display Duration**: how long the displays show the track's name after you change track. **REAPER Resource Folder**: where the screenset names come from |
 | **REAPER Lightguide** | The selected track's color illuminated on the Komplete Kontrol lightguide, and the REAPER integration script. See [REAPER Lightguide](#REAPER-lightguide) |
-| **Komplete Kontrol View** | That view's **MIDI Channel** and **Knob Values** mode |
+| **Komplete Kontrol View** | That view's **MIDI Channel** and **Knob Values** mode, and **NKS Integration Enabled**, with the REAPER integration script's controls. See [NKS Pages](#nks-pages) |
 | **Login** | **Launch Bridge at Login**: start the bridge when you log in, without the editor. It applies right away, without saving. See [Start the Bridge at Login](#start-the-bridge-at-login) |
 | **Logging** | **Verbose Logging**: the bridge writes every message it sends to its log, for tracking down a problem. Turn it off again afterwards, as the log grows quickly. **Show Log** opens the log |
 
@@ -247,13 +247,45 @@ The knobs and eight navigation buttons send fixed CCs for Komplete Kontrol's NKS
 | Navigate ◀ / ▶ | 42 / 43 | Previous / next NKS page |
 | Page ◀ / ▶ (next to the knobs) | 42 / 43 | Previous / next NKS page, the same as Navigate ◀ / ▶ |
 
-Komplete Kontrol's parameter names and values aren't available to the bridge, so it works like the Launchkey:
+Without NKS integration (the default), the bridge doesn't know Komplete Kontrol's parameter names and values, so it works like the Launchkey:
 
 - **Displays:** the selected track's name over *KONTROL* on the left, and *ENCODER 1*–*ENCODER 8* under the knobs, each with a bar of the value it last sent.
 - **Knob values:** the bridge keeps **one set of 8 knob values**, starting at 64, for every page, track and preset.
 - **Jumps:** a knob can jump the first time you turn it after a page or preset change, when its value doesn't match the parameter it now controls.
 
 For Komplete Kontrol to receive the CCs, its track needs **Primo Komplete Kontrol MK1** set as input and must be record-armed or monitored.
+
+### NKS Pages
+
+With **NKS Integration Enabled** (Settings ▸ **Komplete Kontrol View**), the Komplete Kontrol view shows the instrument's NKS pages: each knob's parameter name and value, and the page on the left, such as *PAGE 2/7*. The knobs set those parameters through REAPER instead of sending CCs, so they don't jump.
+
+It needs the REAPER integration script (see [REAPER Lightguide](#REAPER-lightguide); the same section of Settings has its **Install…** button). The script tells the bridge which instrument Komplete Kontrol hosts on the selected track.
+
+Where the pages come from:
+
+- **Pages you taught the bridge** ([below](#learn-nks-pages)). They come first, so you can also fix an instrument's pages.
+- **Instruments with NKS presets (.nksf),** such as most third-party NKS instruments: the pages of one of its presets in Komplete Kontrol's library. The first time, this can take a few seconds while the library's disk wakes up.
+- **Anything else,** such as Kontakt instruments and Native Instruments' own synths (Massive, FM8, Absynth, Battery, Reaktor): the knobs send CCs, as without NKS integration, until you teach the bridge the pages.
+
+Page ◀ / ▶ and Navigate ◀ / ▶ page through Komplete Kontrol and the displays together. Komplete Kontrol doesn't report pages you click in its window, so after doing that, page on the keyboard to bring the two back in step.
+
+#### Learn NKS Pages
+
+1. Select the instrument's track, switch to the Komplete Kontrol view, and open Komplete Kontrol's window in REAPER.
+2. Press **Shift + Instance**. The left display shows *LEARN* and the page, and knob 1 is framed and shows *> NEXT*.
+3. With the mouse, move the control you want on knob 1 in Komplete Kontrol's window: in its row of 8 knobs, or on the instrument's own panel. Its name appears over knob 1, and knob 2 is next. Move the next control, and so on.
+4. **Page ◀ / ▶** move the selection back or on one knob, to skip a knob or go back and redo one. Touching a knob selects it too. To empty a knob, hold Shift and turn it.
+5. After knob 8, the display under it shows *PAGE >*: **Page ▶** goes on to knob 1 of the next page, adding a page after the last. **Page ◀** on knob 1 goes back to the previous page's knob 8.
+6. Press **Shift + Instance** again to save. The displays then show the new pages.
+
+- **Stopping without saving:** changing the track, the view or the instrument ends learn mode without saving.
+- **Empty pages** at the end are left out. If every page is empty, the instrument's learned pages are forgotten.
+- **Only the selected track's Komplete Kontrol** counts. Komplete Kontrol's own parameters (Scale, Arp) can't be learned.
+- **Moving the same control again** counts only after you select a knob, so a pause in the middle of a move doesn't fill the next knob too.
+- **The arrows don't page Komplete Kontrol's window** in learn mode (Navigate ◀ / ▶ move the selection too). To see another of its pages, click it in the window.
+- **The names** are the parameters' names as REAPER reports them, which can differ from Komplete Kontrol's labels.
+- **Each instrument has its own pages.** The bridge tells instruments apart by their parameter names, so each Kontakt instrument gets its own.
+- **Learned pages are kept** in `NKSPages.json`, next to the config file.
 
 ### REAPER Lightguide
 
@@ -294,7 +326,9 @@ To install it by hand instead, reveal the script with **Bridge ▸ Show REAPER T
     dofile(REAPER.GetResourcePath() .. "/Scripts/PrimoKKMK1Bridge_TrackColor.lua")
     ```
 
-The script sends the color when the selection or a color changes, and every 2 seconds, so a restarted bridge catches up. When REAPER quits, the keys go dark.
+The script sends the color when the selection or a color changes, and every 2 seconds. When REAPER quits, the keys go dark. The same script tells the bridge which instrument Komplete Kontrol hosts, for [NKS pages](#nks-pages).
+
+REAPER opens its MIDI devices when it starts, and doesn't notice when the bridge's MIDI port goes away and comes back, as it does each time the bridge starts or restarts after a saved change. So when the bridge starts while REAPER is already running, it asks REAPER to reset its MIDI devices, as REAPER's **Reset all MIDI devices** action does. Your other MIDI devices are reset for a moment too.
 
 **To remove it,** click **Uninstall…**. It deletes the script, and the **Primo Studios** folder if it's empty, then removes the script references from `Scripts/__startup.lua` (backing it up first). The rest of `__startup.lua` stays as it is, and so does the file itself, unless starting the script was all it did. A script that's already running stops when you restart REAPER. The MIDI output can be turned off in REAPER's preferences, if nothing else uses it.
 
@@ -345,7 +379,7 @@ With Shift held, every button and knob turn sends the same CC on channel 2.
 | Scale | Track automation mode: trim/read (40400) | Track automation mode: read (40401) |
 | Arp | Track automation mode: write (40403) | Track automation mode: touch (40402) |
 | Browse | Open the selected track's plugin windows one by one | Close the selected track's plugin windows |
-| Instance | Next view: Mix → Track → Komplete Kontrol | CC116, channel 2 |
+| Instance | Next view: Mix → Track → Komplete Kontrol | Learn NKS pages, in the Komplete Kontrol view with NKS integration (see [Learn NKS Pages](#learn-nks-pages)) |
 | Back | Undo | Redo |
 | Enter | Save the project | Open the Render dialog |
 | Preset ▲ / ▼ | Load screenset 1 / 2 (its name shows on the displays) | CC119 / 85, channel 2 |
@@ -380,7 +414,7 @@ The bridge drives the 21 button lights, the nine displays and the light guide. O
 
 | | MIDI mode | REAPER mode |
 | --- | --- | --- |
-| Button lights | A button with a CC glows dimly and lights fully while held; the DAW can light it ([MIDI mode](#midi-mode)) | Play, Rec and Loop follow REAPER's transport; Browse is lit while a plugin window of the track is open; Instance shows the view. While Shift is held, Rec shows the metronome and Loop shows auto-punch. Other buttons glow dimly and light fully while held. |
+| Button lights | A button with a CC glows dimly and lights fully while held; the DAW can light it ([MIDI mode](#midi-mode)) | Play, Rec and Loop follow REAPER's transport; Browse is lit while a plugin window of the track is open; Instance shows the view. While Shift is held, Rec shows the metronome, Loop shows auto-punch, and Instance is lit in NKS learn mode. Other buttons glow dimly and light fully while held. |
 | Left display | *MIDI* and the channel (*CH 2* while Shift is held) | *MIX* and the tracks, the track and *TRK n*, or the track and *KONTROL*. |
 | Knob displays | Each knob's CC, its value and a bar | Each view's names, values and bars, as described above. Touching a knob frames its bar. |
 | Light guide (above the keys) | Off | [REAPER Lightguide](#REAPER-lightguide) |
@@ -429,7 +463,7 @@ Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` pr
 | `REAPER.resourcePath` | REAPER's resource folder, for the screenset names and the track color script (default `~/Library/Application Support/REAPER`) |
 | `REAPER.navigateTurn` | What turning the Navigate knob steps through: `tracks` (default), `pages`, or `null` for its CC |
 | `REAPER.lightGuide`, `REAPER.lightGuideBrightness` | The track color on the keys, on or off (default on), and its brightness, 1–100 percent (default 50). See [REAPER Lightguide](#REAPER-lightguide) |
-| `REAPER.kompleteKontrol` | The Komplete Kontrol view: `channel` (default 1), `encoderCCs` (default 21–28), `encoderMode` (same modes as `knobMode`, default `absolute`), and `buttons` (button name → CC) |
+| `REAPER.kompleteKontrol` | The Komplete Kontrol view: `channel` (default 1), `encoderCCs` (default 21–28), `encoderMode` (same modes as `knobMode`, default `absolute`), `buttons` (button name → CC), `nksIntegration` (default off; see [NKS Pages](#nks-pages)), `nksPagesFile` (the learned pages; default `NKSPages.json` next to the config file), and `nksFile` (for testing: an NKS preset whose pages are used whatever Komplete Kontrol hosts) |
 | `REAPER.buttons` | Button name → REAPER command, or `null` to give the button back its CC. Commands: `play`, `stop`, `record`, `repeat`, `rewind`, `forward`, `metronome`, `record-mode`, `go-to-start`, `previous-marker`, `next-marker`, `undo`, `redo`, `browse-fx`, `close-fx`, `panic`, `save-project`, `render-project`, `screenset:1` … `screenset:10`, `previous-track`, `next-track`, `previous-page`, `next-page`, `toggle-view`, `mute`, `solo`, `action:<ID>` for any REAPER action (in REAPER's Action List, right-click it ▸ *Copy selected action command ID*), or `midiaction:<ID>` for an action from the Action List's MIDI Editor section |
 | `REAPER.shiftButtons` | The same, for buttons pressed while Shift is held. A button not listed sends its CC on the Shift channel |
 
@@ -451,6 +485,7 @@ with plain MIDI learn everywhere.
 | The displays say *OSC port 9000 is in use* (and the keys are red) | Another program, often a second bridge started in Terminal or at login, already listens on that port. Quit it; the bridge tries again every 3 seconds and connects by itself. Or change **Device Port** under **REAPER Mode**, and REAPER's device port to match. |
 | The bridge switch turns itself off again | The bridge stopped right away. The editor shows the end of its log; Bridge ▸ Show Bridge Log has all of it. |
 | Komplete Kontrol doesn't react | Its track needs Primo Komplete Kontrol MK1 as input, and must be record-armed or monitored. |
+| The keys don't show the track's color, or the Komplete Kontrol view shows no NKS pages | Check that the script is installed (**REAPER Lightguide** on the editor's Settings page), and that REAPER's MIDI output **Primo Komplete Kontrol MK1** is enabled. Then run REAPER's **Reset all MIDI devices** action (Actions ▸ Show action list), or restart REAPER. The bridge does the reset by itself when it starts while REAPER is running. |
 | macOS won't open the app | See step 3 of [Install](#install). |
 
 ## The Keyboard Without the Bridge

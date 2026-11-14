@@ -33,6 +33,9 @@ final class ReaperSession {
     private(set) var connected = false
     private var lastHandshake = Date.distantPast
     private var reaperPID: pid_t?               // the REAPER process on this Mac that's connected (see watch())
+    /// When the bridge made its MIDI ports, this run (they're new each time it starts or restarts in place).
+    var midiPortsMade: Date?
+    private static var midiDevicesReset = false  // asked REAPER to reopen its MIDI devices: once per run
     private var watchTimer: DispatchSourceTimer?
     private var lastSent: [String: Date] = [:]           // address -> when a knob last set it
     private var toggleAccum = [Int](repeating: 0, count: 8)
@@ -41,8 +44,25 @@ final class ReaperSession {
     var onSend: ((String, [OSCArg]) -> Void)?
     var onReceive: ((String, [OSCArg]) -> Void)?
 
-    init(cfg: ReaperConfig) throws {
+    // Komplete Kontrol view with NKS knob pages (NKS integration; the bridge says which, see Bridge+NKS.swift).
+    private(set) var nks: NKSLayout?
+    private(set) var instrumentName = ""  // the selected track's instrument plugin (/fxinst/name)
+    private(set) var nksPage = 0
+    /// The run of instrument parameters REAPER reports (/device/fxinstparam count and bank), as last asked for.
+    private var instWindow: (count: Int, bank: Int)?
+    /// What REAPER last sent for each position of that run (/fxinstparam/N/...).
+    private var instParams: [Int: (name: String, value: Double?, text: String)] = [:]
+
+    // Learn mode (NKSLearn.swift): the pages being taught, and REAPER's last-touched parameter, plugin and track.
+    // REAPER sends each of those only when it changes, so the last of each is kept.
+    private(set) var learning: NKSLearning?
+    private var touchedParam = "", touchedFX = "", touchedTrack = ""
+    private var lastTouchMessage = Date.distantPast
+    private var touchPending = false, pendingNewControl = false
+
+    init(cfg: ReaperConfig, nks: NKSLayout? = nil) throws {
         self.cfg = cfg
+        self.nks = nks
         view = ReaperView.allCases.first { $0.configName == cfg.view } ?? .mix
         link = try OSCLink(host: cfg.host, sendPort: cfg.sendPort, receivePort: cfg.receivePort)
         link.onMessage = { [weak self] in self?.receive($0, $1) }
@@ -74,6 +94,7 @@ final class ReaperSession {
         // Launchkey), so ask REAPER for as few as it allows: it otherwise sends them on every track change.
         send("/device/fxparam/count", [.int(1)], quietly: quietly)
         if cfg.followSelectedTrack { send("/device/track/follows/last_touched", quietly: quietly) }
+        instWindow = nil  // asked for again when the refresh sends /fxinst/name
         send("/action", [.int(refreshSurfacesAction)], quietly: quietly)
     }
 
@@ -109,7 +130,27 @@ final class ReaperSession {
             if !running.contains(pid) { lost() }
         } else {
             reaperPID = running.first  // the REAPER that answered; none (an OSC stand-in) means nothing to watch
+            if let pid = reaperPID { reopenMIDIIfStale(pid) }
         }
+    }
+
+    /// REAPER opens its MIDI devices when it starts, or when they're reset, and doesn't notice a device that goes away
+    /// and comes back. A REAPER started before the bridge made its MIDI ports therefore still sends to the old ports
+    /// (or has none): the REAPER script's messages (track colour, instrument) would go nowhere. So once per run, ask
+    /// such a REAPER to reset its MIDI devices, which reopens all of them (seen with REAPER 7.61, 2026-11-13).
+    private func reopenMIDIIfStale(_ pid: pid_t) {
+        guard !Self.midiDevicesReset, let made = midiPortsMade, let started = Self.startTime(pid), started < made else { return }
+        Self.midiDevicesReset = true
+        send("/action", [.int(resetMIDIDevicesAction)])
+        onEvent?(.midiDevicesReset)
+    }
+
+    /// When a process started.
+    static func startTime(_ pid: pid_t) -> Date? {
+        var info = proc_bsdinfo()
+        let size = Int32(MemoryLayout<proc_bsdinfo>.size)
+        guard proc_pidinfo(pid, PROC_PIDTBSDINFO, 0, &info, size) == size else { return nil }
+        return Date(timeIntervalSince1970: Double(info.pbi_start_tvsec) + Double(info.pbi_start_tvusec) / 1_000_000)
     }
 
     /// REAPER quit: forget its project, and wait for it again.
@@ -126,6 +167,12 @@ final class ReaperSession {
         fxOpen = [Bool](repeating: false, count: fxSlots)
         lastShown = nil
         lastSent = [:]
+        instrumentName = ""
+        nksPage = 0
+        instWindow = nil
+        instParams = [:]
+        learning = nil
+        touchedParam = ""; touchedFX = ""; touchedTrack = ""
         onEvent?(.disconnected)
     }
 
@@ -158,6 +205,7 @@ final class ReaperSession {
         case .toggleView: return view == .track
         case .mute: return track.mute
         case .solo: return track.solo
+        case .learnNKSPages: return learning != nil
         default: return false
         }
     }
@@ -233,6 +281,7 @@ final class ReaperSession {
         // MIDI Editor actions have their own command IDs, which overlap the main section's (40481 there saves
         // window set #08), so they go out as /midiaction, which REAPER runs in the open MIDI editor.
         case .midiAction(let id): send("/midiaction", [.int(Int32(id))])
+        case .learnNKSPages: onEvent?(.learn)  // the bridge knows the instrument and keeps the pages
         case .rewind, .forward: break
         }
     }
@@ -258,9 +307,164 @@ final class ReaperSession {
     /// Switch to a view, at its first page.
     private func show(_ v: ReaperView) {
         guard v != view else { return }
+        stopLearning(because: "the view changed")
         view = v
         sendPage = 0
+        updateInstrumentWindow()
         onEvent?(.view)
+    }
+
+    // MARK: Komplete Kontrol view with NKS knob pages
+
+    /// Another instrument (or none): its NKS pages, from the first.
+    func setNKS(_ layout: NKSLayout?) {
+        nks = layout
+        nksPage = 0
+        updateInstrumentWindow()
+        if view == .kk { onEvent?(.values) }
+    }
+
+    /// The selected track's instrument is Komplete Kontrol.
+    var instrumentIsKK: Bool { instrumentName.hasPrefix("Komplete Kontrol") }
+
+    /// The Komplete Kontrol view shows the NKS pages: there's a layout, and the selected track's instrument is KK.
+    var nksActive: Bool { nks != nil && view == .kk && instrumentIsKK }
+
+    private func nksSlot(_ k: Int) -> NKSSlot? {
+        guard nksActive, let pages = nks?.pages, pages.indices.contains(nksPage) else { return nil }
+        return pages[nksPage][k]
+    }
+
+    /// Where REAPER's parameter `number` (1-based) is in the reported run, if it's in it.
+    private func instPosition(_ number: Int) -> Int? {
+        guard let w = instWindow else { return nil }
+        let pos = number - (w.bank - 1) * w.count
+        return (1...w.count).contains(pos) ? pos : nil
+    }
+
+    /// REAPER reports the instrument's parameters as a run of `count`, the `bank`th such run. Ask for the shortest
+    /// run that holds every parameter on the current page (Twoism's page 1, numbers 115-133, is count 19, bank 7).
+    private func updateInstrumentWindow() {
+        guard nksActive, let pages = nks?.pages, pages.indices.contains(nksPage) else { return }
+        let numbers = pages[nksPage].compactMap { $0.map { kkInstrumentParamBase + $0.id } }
+        guard let lo = numbers.min(), let hi = numbers.max() else { return }
+        var count = hi - lo + 1
+        while (hi + count - 1) / count * count - count + 1 > lo { count += 1 }  // the run holding hi must start at or before lo
+        let bank = (hi + count - 1) / count
+        guard instWindow?.count != count || instWindow?.bank != bank else { return }
+        instWindow = (count, bank)
+        send("/device/fxinstparam/count", [.int(Int32(count))])
+        send("/device/fxinstparam/bank/select", [.int(Int32(bank))])
+    }
+
+    /// The Komplete Kontrol view's page arrows: KK's NKS MIDI template pages back on CC 42 and on with CC 43, so the
+    /// layout's page follows (it stops at the first and last page, as KK does).
+    func kkButtonSent(cc: Int) {
+        guard nksActive, let count = nks?.pages.count, cc == 42 || cc == 43 else { return }
+        let p = max(0, min(count - 1, nksPage + (cc == 43 ? 1 : -1)))
+        guard p != nksPage else { return }
+        nksPage = p
+        updateInstrumentWindow()
+        onEvent?(.values)
+    }
+
+    /// What a knob's display shows in the Komplete Kontrol view with NKS pages; nil for an empty slot. The value and
+    /// its text are REAPER's, once it has reported that parameter (its name starts with its number). An autoname
+    /// slot is labelled as KK labels it: with the parameter's name as REAPER reports it ("101 Osc1 Coarse").
+    func nksInfo(_ k: Int) -> KnobInfo? {
+        guard let slot = nksSlot(k) else { return nil }
+        let number = kkInstrumentParamBase + slot.id, prefix = "\(number - 1) "
+        let p = instPosition(number).flatMap { instParams[$0] }.flatMap { $0.name.hasPrefix(prefix) ? $0 : nil }
+        let name = slot.autoname ? p.map { String($0.name.dropFirst(prefix.count)) } ?? slot.name : slot.name
+        return KnobInfo(name: name, short: name, value: p?.text ?? "", bar: p?.value, isPan: false)
+    }
+
+    /// A knob turned by `d` raw units in the Komplete Kontrol view with NKS pages: set its KK parameter.
+    func turnNKS(_ k: Int, raw d: Int) {
+        guard let slot = nksSlot(k), let pos = instPosition(kkInstrumentParamBase + slot.id),
+              let v = instParams[pos]?.value else { return }
+        let n = max(0, min(1, v + Double(d) / Double(cfg.knobFullRange)))
+        guard n != v else { return }
+        instParams[pos]?.value = n
+        setValue("/fxinstparam/\(pos)/value", n)
+        onEvent?(.values)
+    }
+
+    // MARK: Learn mode (NKSLearn.swift)
+
+    /// Teach the instrument's pages, starting from `layout` (the pages in use), at page 1, knob 1.
+    func startLearning(from layout: NKSLayout?) {
+        learning = NKSLearning(from: layout)
+        onEvent?(.values)
+    }
+
+    /// Leave learn mode; what was taught, if it was on.
+    func stopLearning() -> NKSLearning? {
+        defer { learning = nil; onEvent?(.values) }
+        return learning
+    }
+
+    /// Leave learn mode without saving, for the bridge to say why.
+    private func stopLearning(because why: String) {
+        guard learning != nil else { return }
+        learning = nil
+        onEvent?(.learnStopped(why))
+    }
+
+    /// Learn mode: Page ◀ / ▶ move the selection back or on a slot, across pages (NKSLearning.move).
+    func learnMove(forward: Bool) {
+        learning?.move(forward: forward)
+        onEvent?(.learnChanged)
+    }
+
+    /// Learn mode: a knob turned picks its slot for the next control moved in KK's window; with Shift, empties it.
+    func learnTurned(_ k: Int, shift: Bool) {
+        if shift { learning?.clear(k) } else { learning?.pick(k) }
+        onEvent?(.learnChanged)
+    }
+
+    /// A last-touched message. In learn mode, the start of a touch (another parameter, plugin or track, or the first
+    /// message after a pause) puts the parameter on the selected slot, once REAPER's other messages about it have
+    /// arrived: a touch's value comes before its name.
+    private func lastTouched(newControl: Bool) {
+        let now = Date()
+        let starts = newControl || now.timeIntervalSince(lastTouchMessage) > 0.5
+        lastTouchMessage = now
+        guard learning != nil, starts else { return }
+        pendingNewControl = pendingNewControl || newControl
+        guard !touchPending else { return }
+        touchPending = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+            guard let self else { return }
+            let newControl = self.pendingNewControl
+            self.touchPending = false
+            self.pendingNewControl = false
+            self.learnTouched(newControl: newControl)
+        }
+    }
+
+    /// A control moved in learn mode: REAPER's last-touched parameter ("107 Balance": instrument parameter ID 6) goes
+    /// on the selected slot, if it's the selected track's Komplete Kontrol's. The same parameter moved again counts
+    /// only after a slot was picked (otherwise it's a pause in the same move).
+    private func learnTouched(newControl: Bool) {
+        guard var l = learning, newControl || l.picked else { return }
+        guard touchedTrack == track.number else { onEvent?(.learnRefused("that was another track's plugin")); return }
+        guard touchedFX.hasPrefix("Komplete Kontrol") else {
+            onEvent?(.learnRefused("move a control in Komplete Kontrol's window"))
+            return
+        }
+        let parts = touchedParam.split(separator: " ", maxSplits: 1)
+        guard parts.count == 2, let n = Int(parts[0]), n > 100 else {  // NIKB00, and KK's own 1-100 (Scale, Arp, ...)
+            onEvent?(.learnRefused("\(touchedParam) is Komplete Kontrol's own"))
+            return
+        }
+        guard let k = l.slot else { onEvent?(.learnRefused("touch a knob first")); return }
+        let slot = NKSSlot(name: String(parts[1]), id: n - 101, autoname: true)
+        let page = l.page
+        _ = l.assign(slot)
+        learning = l
+        onEvent?(.learnAssigned("page \(page + 1), knob \(k + 1): \(slot.name) (\(slot.id))"))
+        onEvent?(.learnChanged)
     }
 
     /// The Navigate knob turned. Picking a track with it in mix view goes to track view (issue #17), so the knobs
@@ -443,6 +647,10 @@ final class ReaperSession {
     /// Knob touch: tells REAPER the fader (or, with Shift in mix view, the pan) is being touched, for automation
     /// in touch mode.
     func touch(_ k: Int, _ on: Bool, shift: Bool = false) {
+        if on, learning != nil {  // learn mode: the knob's slot gets the next control moved in KK's window
+            learning?.pick(k)
+            onEvent?(.learnChanged)
+        }
         if on {
             toggleAccum[k] = 0
             touchAddress[k] = touchPath(k, shift: shift)
@@ -493,6 +701,9 @@ final class ReaperSession {
         return true
     }
 
+    /// A message as if REAPER had sent it (replays' OSC lines).
+    func received(_ address: String, _ args: [OSCArg]) { receive(address, args) }
+
     private func receive(_ address: String, _ args: [OSCArg]) {
         onReceive?(address, args)
         if !connected {
@@ -533,12 +744,27 @@ final class ReaperSession {
                 track = s
                 if changed && view == .track { sendPage = 0 }
                 if changed { lastShown = nil }
+                if changed && nksPage != 0 { nksPage = 0; updateInstrumentWindow() }
+                if changed { stopLearning(because: "the track changed") }
                 onEvent?(changed ? .track : .trackData)
             }
         case "play" where p.count == 1: playing = (args.first?.number ?? 0) > 0.5; onEvent?(.transport)
         case "record" where p.count == 1: recording = (args.first?.number ?? 0) > 0.5; onEvent?(.transport)
         case "repeat" where p.count == 1: repeating = (args.first?.number ?? 0) > 0.5; onEvent?(.transport)
         case "click" where p.count == 1: metronome = (args.first?.number ?? 0) > 0.5; onEvent?(.transport)
+        case "fx" where p.count >= 3 && p[1] == "last_touched":  // the plugin last touched, and its track
+            switch p.dropFirst(2).joined(separator: "/") {
+            case "name": touchedFX = args.first?.text ?? ""
+            case "track/number/str": touchedTrack = args.first?.text ?? ""
+            default: return
+            }
+            lastTouched(newControl: true)
+        case "fxparam" where p.count >= 3 && p[1] == "last_touched":  // the parameter last touched
+            switch p.dropFirst(2).joined(separator: "/") {
+            case "name": touchedParam = args.first?.text ?? ""; lastTouched(newControl: true)
+            case "value": lastTouched(newControl: false)
+            default: return
+            }
         case "fx" where p.count == 3:  // /fx/N/name, /fx/N/openui: the selected track's plugins
             guard let n = Int(p[1]), (1...fxSlots).contains(n) else { return }
             switch p[2] {
@@ -547,6 +773,22 @@ final class ReaperSession {
             default: return
             }
             onEvent?(.values)
+        case "fxinst" where p.count == 2 && p[1] == "name":  // the selected track's instrument plugin
+            instrumentName = args.first?.text ?? ""
+            if !instrumentIsKK { stopLearning(because: "Komplete Kontrol isn't on this track") }
+            updateInstrumentWindow()
+            if nks != nil && view == .kk { onEvent?(.values) }
+        case "fxinstparam" where p.count >= 3:  // a parameter of the instrument run asked for (updateInstrumentWindow)
+            guard let pos = Int(p[1]) else { return }
+            var ip = instParams[pos] ?? (name: "", value: nil, text: "")
+            switch p.dropFirst(2).joined(separator: "/") {
+            case "name": ip.name = args.first?.text ?? ""
+            case "value": guard let v = args.first?.number, !recentlySent(address) else { return }; ip.value = v
+            case "value/str": ip.text = args.first?.text ?? ""
+            default: return
+            }
+            instParams[pos] = ip
+            if nksActive { onEvent?(.values) }
         case "action" where p.count == 2 && (args.first?.number ?? 0) > 0.5:  // action state, if REAPER reports it
             if p[1] == String(recordAutoPunchAction) { autoPunch = true; onEvent?(.transport) }
             if p[1] == String(recordNormalAction) { autoPunch = false; onEvent?(.transport) }

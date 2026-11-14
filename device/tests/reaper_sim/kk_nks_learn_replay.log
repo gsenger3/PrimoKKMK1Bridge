@@ -1,0 +1,122 @@
+start → REAPER /device/track/count 8
+start → REAPER /device/send/count 16
+start → REAPER /device/fx/count 16
+start → REAPER /device/fx/follows/device 1
+start → REAPER /device/fxparam/count 1
+start → REAPER /device/track/follows/last_touched 1
+start → REAPER /action 41743
+start REAPER connected (OSC on port 19000)
+             display |NO TRACK|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+             display |        |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start REAPER selected track 1 "Kick"
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:01.000 Komplete Kontrol instrument: VST3:5653544E694B386B6F6E74616B742038/1A2B3C4D
+12:00:01.110 Shift down              CC108 ch1 = 127
+12:00:01.220 Shift + Instance down
+12:00:01.220 Komplete Kontrol: learning NKS pages for VST3:5653544E694B386B6F6E74616B742038/1A2B3C4D
+             display |LEARN   |-       |-       |-       |-       |-       |-       |-       |-       |
+             display |PAGE 1/1|> NEXT  |        |        |        |        |        |        |        |
+             display |         |[       ]|         |         |         |         |         |         |         |
+12:00:01.540 Shift up                CC108 ch1 = 0
+12:00:01.850 learn: page 1, knob 1: Glide (5)
+             display |LEARN   |GLIDE   |-       |-       |-       |-       |-       |-       |-       |
+             display |PAGE 1/1|        |> NEXT  |        |        |        |        |        |        |
+             display |         |         |[       ]|         |         |         |         |         |         |
+12:00:02.050 learn: page 1, knob 2: Volume (0)
+             display |LEARN   |GLIDE   |VOLUME  |-       |-       |-       |-       |-       |-       |
+             display |PAGE 1/1|        |        |> NEXT  |        |        |        |        |        |
+             display |         |         |         |[       ]|         |         |         |         |         |
+12:00:02.110 PageRight down (learn: next slot)
+             display |LEARN   |GLIDE   |VOLUME  |-       |-       |-       |-       |-       |-       |
+             display |PAGE 1/1|        |        |        |> NEXT  |        |        |        |        |
+             display |         |         |         |         |[       ]|         |         |         |         |
+12:00:02.550 learn: page 1, knob 4: Cutoff (8)
+             display |LEARN   |GLIDE   |VOLUME  |-       |CUTOFF  |-       |-       |-       |-       |
+             display |PAGE 1/1|        |        |        |        |> NEXT  |        |        |        |
+             display |         |         |         |         |         |[       ]|         |         |         |
+12:00:02.610 PageLeft down (learn: previous slot)
+             display |LEARN   |GLIDE   |VOLUME  |-       |CUTOFF  |-       |-       |-       |-       |
+             display |PAGE 1/1|        |        |        |> NEXT  |        |        |        |        |
+             display |         |         |         |         |[       ]|         |         |         |         |
+12:00:02.930 PageLeft down (learn: previous slot)
+             display |LEARN   |GLIDE   |VOLUME  |-       |CUTOFF  |-       |-       |-       |-       |
+             display |PAGE 1/1|        |        |> NEXT  |        |        |        |        |        |
+             display |         |         |         |[       ]|         |         |         |         |         |
+12:00:03.350 learn: page 1, knob 3: Reso (9)
+             display |LEARN   |GLIDE   |VOLUME  |RESO    |CUTOFF  |-       |-       |-       |-       |
+             display |PAGE 1/1|        |        |        |> NEXT  |        |        |        |        |
+             display |         |         |         |         |[       ]|         |         |         |         |
+             display |LEARN   |GLIDE   |VOLUME  |RESO    |CUTOFF  |-       |-       |-       |-       |
+             display |PAGE 1/1|        |        |        |        |        |> NEXT  |        |        |
+             display |         |         |         |         |         |         |[       ]|         |         |
+12:00:03.950 learn: page 1, knob 6: Reso (9)
+             display |LEARN   |GLIDE   |VOLUME  |RESO    |CUTOFF  |-       |RESO    |-       |-       |
+             display |PAGE 1/1|        |        |        |        |        |        |> NEXT  |        |
+             display |         |         |         |         |         |         |         |[       ]|         |
+12:00:04.650 learn: not taken: 5 - is Komplete Kontrol's own
+             display |LEARN   |5 - IS  |KOMPLETE|KONTROL'|S OWN   |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:04.750 learn: not taken: that was another track's plugin
+             display |LEARN   |THAT WAS|ANOTHER |TRACK'S |PLUGIN  |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |LEARN   |GLIDE   |VOLUME  |RESO    |CUTOFF  |-       |RESO    |-       |-       |
+             display |PAGE 1/1|        |        |        |        |        |        |        |> NEXT  |
+             display |         |         |         |         |         |         |         |         |[       ]|
+12:00:05.050 learn: page 1, knob 8: Tune (1)
+             display |LEARN   |GLIDE   |VOLUME  |RESO    |CUTOFF  |-       |RESO    |-       |TUNE    |
+             display |PAGE 1/1|        |        |        |        |        |        |        |PAGE >  |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:05.110 Shift down              CC108 ch1 = 127
+             display |LEARN   |GLIDE   |-       |RESO    |CUTOFF  |-       |RESO    |-       |TUNE    |
+             display |PAGE 1/1|        |        |        |        |        |        |        |PAGE >  |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:05.350 Shift up                CC108 ch1 = 0
+12:00:05.510 PageRight down (learn: next slot)
+             display |LEARN   |-       |-       |-       |-       |-       |-       |-       |-       |
+             display |PAGE 2/2|> NEXT  |        |        |        |        |        |        |        |
+             display |         |[       ]|         |         |         |         |         |         |         |
+12:00:05.950 learn: page 2, knob 1: Reverb (19)
+             display |LEARN   |REVERB  |-       |-       |-       |-       |-       |-       |-       |
+             display |PAGE 2/2|        |> NEXT  |        |        |        |        |        |        |
+             display |         |         |[       ]|         |         |         |         |         |         |
+12:00:06.010 PageLeft down (learn: previous slot)
+             display |LEARN   |REVERB  |-       |-       |-       |-       |-       |-       |-       |
+             display |PAGE 2/2|> NEXT  |        |        |        |        |        |        |        |
+             display |         |[       ]|         |         |         |         |         |         |         |
+12:00:06.330 PageLeft down (learn: previous slot)
+             display |LEARN   |GLIDE   |-       |RESO    |CUTOFF  |-       |RESO    |-       |TUNE    |
+             display |PAGE 1/2|        |        |        |        |        |        |        |> NEXT  |
+             display |         |         |         |         |         |         |         |         |[       ]|
+12:00:06.710 PageRight down (learn: next slot)
+             display |LEARN   |REVERB  |-       |-       |-       |-       |-       |-       |-       |
+             display |PAGE 2/2|> NEXT  |        |        |        |        |        |        |        |
+             display |         |[       ]|         |         |         |         |         |         |         |
+12:00:07.110 Shift down              CC108 ch1 = 127
+12:00:07.220 Shift + Instance down
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:07.220 Komplete Kontrol: learned NKS pages for VST3:5653544E694B386B6F6E74616B742038/1A2B3C4D: page 1: Glide (5), -, Reso (9), Cutoff (8), -, Reso (9), -, Tune (1); page 2: Reverb (19), -, -, -, -, -, -, -
+             display |LEARN   |SAVED 2 |PAGES   |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:07.220 → REAPER /device/fxinstparam/count 14
+12:00:07.220 → REAPER /device/fxinstparam/bank/select 8
+12:00:07.540 Shift up                CC108 ch1 = 0
+12:00:08.010 → REAPER /fxinstparam/9/value 0.513333
+12:00:08.020 → REAPER /fxinstparam/9/value 0.526667
+12:00:08.030 → REAPER /fxinstparam/9/value 0.54
+12:00:08.040 → REAPER /fxinstparam/9/value 0.553333
+12:00:08.050 → REAPER /fxinstparam/9/value 0.566667
+             display |KICK    |GLIDE   |        |RESO    |CUTOFF  |        |RESO    |        |TUNE    |
+             display |PAGE 1/2|57MS    |        |50%     |50HZ    |        |50%     |        |50HZ    |
+             display |         | #####   |         | ####+   | ####+   |         | ####+   |         | ####+   |
+replayed 905 HID reports from device/tests/reaper_sim/kk_nks_learn_test.log

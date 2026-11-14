@@ -1,0 +1,13 @@
+{
+  "_note": "Learned NKS pages (issue #32), from kk_nks_learned_pages.json, for the instrument whose fingerprint the replayed SysEx reports.",
+  "reaper": {
+    "enabled": true,
+    "sendPort": 18000,
+    "receivePort": 19000,
+    "view": "komplete-kontrol",
+    "kompleteKontrol": {
+      "nksIntegration": true,
+      "nksPagesFile": "device/tests/reaper_sim/kk_nks_learned_pages.json"
+    }
+  }
+}

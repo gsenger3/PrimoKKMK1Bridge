@@ -20,6 +20,7 @@ enum ReaperCommand: Equatable {
     case previousTrack, nextTrack, previousPage, nextPage, toggleView, mute, solo, metronome
     case goToStart, previousMarker, nextMarker, recordMode, undo, redo, browseFX, closeFX, panic
     case saveProject, renderProject
+    case learnNKSPages  // Komplete Kontrol view: teach the instrument's NKS pages (Bridge+NKS.swift)
     case screenset(Int)  // REAPER window set 1-10
     case action(Int)      // a main-section REAPER action, by command ID
     case midiAction(Int)  // a MIDI Editor action, by its own command ID (it acts on the open MIDI editor)
@@ -33,7 +34,7 @@ enum ReaperCommand: Equatable {
         ("go-to-start", .goToStart), ("previous-marker", .previousMarker), ("next-marker", .nextMarker),
         ("record-mode", .recordMode), ("undo", .undo), ("redo", .redo),
         ("browse-fx", .browseFX), ("close-fx", .closeFX), ("panic", .panic),
-        ("save-project", .saveProject), ("render-project", .renderProject),
+        ("save-project", .saveProject), ("render-project", .renderProject), ("learn-nks-pages", .learnNKSPages),
     ]
     static var validNames: String {
         named.map(\.0).joined(separator: ", ")
@@ -90,6 +91,7 @@ let panicAction: Int32 = 40345  // "Send all-notes-off and all-sounds-off to all
 let saveProjectAction: Int32 = 40026    // "File: Save project"
 let renderProjectAction: Int32 = 40015  // "File: Render project to disk..." (opens the Render dialog)
 let windowSet1Action: Int32 = 40454     // "Screenset: Load window set #01"; #02-#10 follow in order
+let resetMIDIDevicesAction: Int32 = 41175  // "Reset all MIDI devices" (its ID read from REAPER 7.61's action list)
 
 struct TrackStrip {
     var name = "", number = ""
@@ -128,6 +130,12 @@ enum ReaperEvent {  // trackData: a value of the selected track
     case connected, disconnected, track, trackData, bank, values, transport, view, recordMode
     case pluginShown(Int), pluginsClosed, noPlugins  // Browse / Shift + Browse
     case panic, saved, render, screenset(Int)
+    case midiDevicesReset        // REAPER was asked to reopen its MIDI devices, to find the bridge's new ports
+    case learn                   // learn-nks-pages pressed: the bridge starts or finishes learn mode
+    case learnStopped(String)    // learn mode ended without saving, and why
+    case learnRefused(String)    // a control moved in learn mode wasn't taken, and why
+    case learnAssigned(String)   // a control moved in learn mode went on a knob (for the log)
+    case learnChanged            // learn mode's pages or selection changed: show them at once
 }
 
 /// What a knob controls in the current view and page.

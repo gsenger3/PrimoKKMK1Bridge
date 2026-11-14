@@ -1,0 +1,12 @@
+{
+  "_note": "NKS learn mode (issue #33): Shift + Instance, then the OSC lines move KK parameters with the mouse. The pages are logged, not saved (no nksPagesFile). fake_reaper runs longer for it: kk_nks_learn_fake_args.txt.",
+  "reaper": {
+    "enabled": true,
+    "sendPort": 18000,
+    "receivePort": 19000,
+    "view": "komplete-kontrol",
+    "kompleteKontrol": {
+      "nksIntegration": true
+    }
+  }
+}

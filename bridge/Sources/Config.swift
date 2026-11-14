@@ -35,9 +35,18 @@ struct KKViewConfig: Codable {
         "PresetUp": 37, "PresetDown": 36, "NavUp": 41, "NavDown": 40, "NavLeft": 42, "NavRight": 43,
         "PageLeft": 42, "PageRight": 43,  // the arrows next to the knobs page KK's NKS pages too, like Navigate ◀ / ▶
     ]
+    /// NKS integration: for an instrument with NKS presets (.nksf), or whose pages were learned (learn-nks-pages), the
+    /// knobs set the parameters on Komplete Kontrol's NKS pages through REAPER, and the displays show their names and
+    /// values. The REAPER script reports which instrument KK hosts. Off: the knobs send encoderCCs for KK's MIDI template.
+    var nksIntegration = false
+    /// With NKS integration, an NKS preset file (.nksf) whose pages to use whatever KK hosts (for tests).
+    var nksFile: String?
+    /// The learned pages file. Unset: NKSPages.json next to the config file (a replay uses none unless it's set, and
+    /// never writes it).
+    var nksPagesFile: String?
 
     enum CodingKeys: String, CodingKey {
-        case channel, encoderCCs, encoderMode, buttons
+        case channel, encoderCCs, encoderMode, buttons, nksIntegration, nksFile, nksPagesFile
     }
 
     init() {}
@@ -48,6 +57,9 @@ struct KKViewConfig: Codable {
         channel = try c.decodeIfPresent(Int.self, forKey: .channel) ?? channel
         encoderCCs = try c.decodeIfPresent([Int].self, forKey: .encoderCCs) ?? encoderCCs
         encoderMode = try c.decodeIfPresent(TurnMode.self, forKey: .encoderMode) ?? encoderMode
+        nksIntegration = try c.decodeIfPresent(Bool.self, forKey: .nksIntegration) ?? nksIntegration
+        nksFile = try c.decodeIfPresent(String.self, forKey: .nksFile)
+        nksPagesFile = try c.decodeIfPresent(String.self, forKey: .nksPagesFile)
         if let user = try c.decodeIfPresent([String: Int?].self, forKey: .buttons) {
             for (name, cc) in user {
                 guard name != "Shift", buttonDefs.contains(where: { $0.name == name }) else {
@@ -102,6 +114,7 @@ struct ReaperConfig: Codable {
     var shiftButtons: [String: String?] = [
         "Rec": "metronome", "Stop": "go-to-start", "Rewind": "previous-marker", "FastForward": "next-marker",
         "Loop": "record-mode", "Back": "redo", "Browse": "close-fx", "Enter": "render-project",
+        "Instance": "learn-nks-pages",  // Komplete Kontrol view with NKS integration
         "Scale": "action:40401",  // Automation: Set track automation mode to read
         "Arp": "action:40402",    // Automation: Set track automation mode to touch
         "Play": "midiaction:40481",  // MIDI Editor: Options: MIDI inputs as step input mode

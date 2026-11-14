@@ -1,0 +1,105 @@
+start → REAPER /device/track/count 8
+start → REAPER /device/send/count 16
+start → REAPER /device/fx/count 16
+start → REAPER /device/fx/follows/device 1
+start → REAPER /device/fxparam/count 1
+start → REAPER /device/track/follows/last_touched 1
+start → REAPER /action 41743
+start REAPER connected (OSC on port 19000)
+             display |NO TRACK|ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+             display |        |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+start REAPER selected track 1 "Kick"
+             display |TRK 1   |KICK    |        |        |        |        |        |        |        |
+             display |        |        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+12:00:01.000 Komplete Kontrol: learned NKS pages for 1 instruments in kk_nks_learned_pages.json
+12:00:01.000 Komplete Kontrol instrument: VST3:5653544E694B386B6F6E74616B742038/1A2B3C4D
+12:00:01.000 → REAPER /device/fxinstparam/count 7
+12:00:01.000 → REAPER /device/fxinstparam/bank/select 16
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|50MS    |        |50HZ    |        |        |50%     |        |50%     |
+             display |         | ####+   |         | ####+   |         |         | ####+   |         | ####+   |
+12:00:01.510 → REAPER /fxinstparam/2/value 0.513333
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|51MS    |        |50HZ    |        |        |50%     |        |50%     |
+             display |         | ####+   |         | ####+   |         |         | ####+   |         | ####+   |
+12:00:01.520 → REAPER /fxinstparam/2/value 0.526667
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|51MS    |        |50HZ    |        |        |50%     |        |50%     |
+             display |         | #####   |         | ####+   |         |         | ####+   |         | ####+   |
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|53MS    |        |50HZ    |        |        |50%     |        |50%     |
+             display |         | #####   |         | ####+   |         |         | ####+   |         | ####+   |
+12:00:01.530 → REAPER /fxinstparam/2/value 0.54
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|54MS    |        |50HZ    |        |        |50%     |        |50%     |
+             display |         | #####   |         | ####+   |         |         | ####+   |         | ####+   |
+12:00:01.540 → REAPER /fxinstparam/2/value 0.553333
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|55MS    |        |50HZ    |        |        |50%     |        |50%     |
+             display |         | #####   |         | ####+   |         |         | ####+   |         | ####+   |
+12:00:01.550 → REAPER /fxinstparam/2/value 0.566667
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|57MS    |        |50HZ    |        |        |50%     |        |50%     |
+             display |         | #####   |         | ####+   |         |         | ####+   |         | ####+   |
+12:00:01.860 PageRight down (KK)     CC43 ch1 = 127
+12:00:01.860 → REAPER /device/fxinstparam/count 1
+12:00:01.860 → REAPER /device/fxinstparam/bank/select 121
+             display |KICK    |REVERB  |        |        |        |        |        |        |        |
+             display |PAGE 2/2|        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |KICK    |REVERB  |        |        |        |        |        |        |        |
+             display |PAGE 2/2|        |        |        |        |        |        |        |        |
+             display |         | ####+   |         |         |         |         |         |         |         |
+             display |KICK    |REVERB  |        |        |        |        |        |        |        |
+             display |PAGE 2/2|50%     |        |        |        |        |        |        |        |
+             display |         | ####+   |         |         |         |         |         |         |         |
+12:00:01.970 PageRight up (KK)       CC43 ch1 = 0
+12:00:02.170 Komplete Kontrol instrument: VST3:5653544E694B386B6F6E74616B742038/99999999
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.670 Komplete Kontrol instrument: VST3:5653544E694B386B6F6E74616B742038/1A2B3C4D
+12:00:02.670 → REAPER /device/fxinstparam/count 7
+12:00:02.670 → REAPER /device/fxinstparam/bank/select 16
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|57MS    |        |50HZ    |        |        |50%     |        |50%     |
+             display |         | #####   |         | ####+   |         |         | ####+   |         | ####+   |
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|        |        |50HZ    |        |        |50%     |        |50%     |
+             display |         |         |         | ####+   |         |         | ####+   |         | ####+   |
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|        |        |        |        |        |50%     |        |50%     |
+             display |         |         |         |         |         |         | ####+   |         | ####+   |
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|        |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|OFF     |        |        |        |        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|OFF     |        |        |        |        |        |        |        |
+             display |         | #####   |         |         |         |         |         |         |         |
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|57MS    |        |        |        |        |        |        |        |
+             display |         | #####   |         |         |         |         |         |         |         |
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|57MS    |        |        |        |        |        |        |        |
+             display |         | #####   |         | ####+   |         |         |         |         |         |
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|57MS    |        |50HZ    |        |        |        |        |        |
+             display |         | #####   |         | ####+   |         |         |         |         |         |
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|57MS    |        |50HZ    |        |        |        |        |        |
+             display |         | #####   |         | ####+   |         |         | ####+   |         | ####+   |
+             display |KICK    |GLIDE   |        |CUTOFF  |        |        |RESO    |        |RESO    |
+             display |PAGE 1/2|57MS    |        |50HZ    |        |        |50%     |        |50%     |
+             display |         | #####   |         | ####+   |         |         | ####+   |         | ####+   |
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+replayed 367 HID reports from device/tests/reaper_sim/kk_nks_learned_test.log

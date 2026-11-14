@@ -13,6 +13,8 @@
 //  the bridge's MIDI destination as SysEx:
 //    F0 7D 50 4B 01 rr gg bb F7   the selected track's colour, 0-127 each (7D: the non-commercial manufacturer ID)
 //    F0 7D 50 4B 02 F7            the selected track has no colour (or there's none selected): keys off
+//  The same script reports the instrument Komplete Kontrol hosts (03 / 04) and the fingerprint of its parameter names
+//  (05), for NKS integration (Bridge+NKS.swift).
 //
 //  When that script is installed (REAPER's Scripts/__startup.lua starts it), the light guide also shows the bridge's
 //  own state (issue #15): a rainbow runs up the keys when the keyboard connects, the keys are purple while the bridge
@@ -40,6 +42,9 @@ extension Bridge {
         switch m[4] {
         case 0x01 where m.count >= 9: trackColor = (Int(m[5] & 0x7F), Int(m[6] & 0x7F), Int(m[7] & 0x7F))
         case 0x02: trackColor = nil
+        case 0x03 where m.count > 6: kkInstrumentReported(String(decoding: m[5..<m.count - 1], as: UTF8.self)); return
+        case 0x04: kkInstrumentReported(nil); return
+        case 0x05 where m.count > 6: kkFingerprintReported(String(decoding: m[5..<m.count - 1], as: UTF8.self)); return
         default: return
         }
         sendLightGuide()

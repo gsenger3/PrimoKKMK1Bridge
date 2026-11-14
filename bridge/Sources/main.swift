@@ -137,6 +137,9 @@ func ranges(_ v: [Int]) -> String {
 if let path = replayPath {
     guard let text = try? String(contentsOfFile: path, encoding: .utf8) else { fail("cannot read \(path)") }
     let bridge = Bridge(cfg: cfg, midi: MIDIPorts(name: cfg.portName, dryRun: true), verbose: true)
+    bridge.learnedPagesURL = cfg.reaper.kompleteKontrol.nksPagesFile.map { URL(fileURLWithPath: ($0 as NSString).expandingTildeInPath) }
+    bridge.learnedPagesWritable = false
+    bridge.nksLookupEnabled = false
     var stamp = "start"
     bridge.clock = { stamp }
     bridge.immediate = true
@@ -150,6 +153,21 @@ if let path = replayPath {
     var count = 0
     for line in text.split(separator: "\n") {
         let f = line.split(separator: " ")
+        if f.count > 2, f[1] == "SYSEX" {  // what the REAPER script sends the MIDI destination (track colour, instrument)
+            stamp = String(f[0])
+            bridge.sysEx(f[2...].compactMap { UInt8($0, radix: 16) })
+            if bridge.reaper != nil { spin(0.01) }
+            continue
+        }
+        if f.count > 2, f[1] == "OSC", let r = bridge.reaper {  // as if REAPER sent it: `/address "text" 0.5 ...`
+            stamp = String(f[0])
+            let rest = line.split(separator: " ", maxSplits: 3).dropFirst(3).first.map(String.init) ?? ""
+            let args = rest.matches(of: #/"([^"]*)"|(\S+)/#).map { m in
+                m.output.1.map { OSCArg.string(String($0)) } ?? .float(Float(m.output.2 ?? "") ?? 0)
+            }
+            r.received(String(f[2]), args)  // no spin: REAPER sends a touch's messages together
+            continue
+        }
         guard f.count > 3, f[1] == "HID", f[2].hasPrefix("0x"), let id = UInt8(f[2].dropFirst(2), radix: 16) else { continue }
         stamp = String(f[0])
         bridge.handleReport(id, f[3...].compactMap { UInt8($0, radix: 16) })
@@ -167,6 +185,9 @@ if let path = replayPath {
 let midi = MIDIPorts(name: cfg.portName, dryRun: false, keysSource: cfg.keyboardSource)
 let bridge = Bridge(cfg: cfg, midi: midi, verbose: verbose)
 bridge.logOSC = logOSC
+// Learned NKS pages: reaper.kompleteKontrol.nksPagesFile, else NKSPages.json next to the config file.
+bridge.learnedPagesURL = cfg.reaper.kompleteKontrol.nksPagesFile.map { URL(fileURLWithPath: ($0 as NSString).expandingTildeInPath) }
+    ?? URL(fileURLWithPath: configFile ?? Config.defaultURL.path).deletingLastPathComponent().appendingPathComponent("NKSPages.json")
 midi.onControlChange = { bridge.feedback(channel: $0, cc: $1, value: $2) }
 midi.onSysEx = { bridge.sysEx($0) }
 let ctx = Unmanaged.passUnretained(bridge).toOpaque()

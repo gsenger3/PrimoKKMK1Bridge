@@ -57,12 +57,25 @@ final class Bridge {
     var onDisplayFrame: (([String]) -> Void)?
 
     var reaper: ReaperSession?
+    lazy var nksLayout: NKSLayout? = loadNKSLayout()  // NKS pages from reaper.kompleteKontrol.nksFile, if set
+    var kkInstrument: String?                        // the plugin KK hosts on the selected track, from the REAPER script
+    let nksLookup = NKSLookup()                      // finds a plugin's NKS pages, off the main queue
+    var nksLookupEnabled = true                      // false in replays: they don't read this Mac's KK database
+    var nksProducts: [String: (name: String, layout: NKSLayout)?] = [:]  // plugin ID -> its NKS pages, once looked up
+    var kkFingerprint: String?                       // the fingerprint of its parameter names, from the script
+    var learnedPages: LearnedPages?                  // NKSPages.json, as last read (NKSLearn.swift)
+    var learnedPagesURL: URL?                        // where it is (none: no learned pages)
+    var learnedPagesWritable = true                  // false in replays
+    var learnedPagesModified: Date?                  // the file's date when it was read
+    var learnedPagesBroken = false                   // it couldn't be read: not written until it can
+    var learningKey: String?                         // in learn mode: the instrument being taught
     var logOSC = false                        // --log-osc: print what REAPER sends
     let reaperCommands: [Int: ReaperCommand]       // button bit -> REAPER command (REAPER mode, without Shift)
     let reaperShiftCommands: [Int: ReaperCommand]  // button bit -> REAPER command while Shift is held
     let kkButtonCCs: [Int: Int]                    // button bit -> CC in the Komplete Kontrol view
     var pressCC: [Int: Int] = [:]                  // button bit -> CC its press sent, when not its usual one
     var reaperHeld: [Int: ReaperCommand] = [:]     // buttons whose press went to REAPER, and the command it ran
+    var learnHeld = Set<Int>()                     // buttons whose press moved the NKS learn selection (no CC)
 
     var devicePID = 0                              // the connected model, for its key count
     var trackColor: (red: Int, green: Int, blue: Int)?  // the selected REAPER track's colour (0-127 each), from the script
@@ -70,6 +83,7 @@ final class Bridge {
     var lightGuideAnimation: DispatchSourceTimer?  // the startup animation, while it runs
     var scriptCheck: (at: Date, installed: Bool)?  // lightGuideScriptInstalled, read again after 2 seconds
     var reaperError: String?                       // why the OSC link to REAPER can't start (tried again every 3 s)
+    let started = Date()                           // this run's start, just after the MIDI ports were made
 
     init(cfg: Config, midi: MIDIPorts, verbose: Bool) {
         self.cfg = cfg
@@ -111,6 +125,7 @@ final class Bridge {
         pressChannel = [:]
         pressCC = [:]
         reaperHeld = [:]
+        learnHeld = []
         held = []
         lightsSent = nil
         displaySent = [nil, nil, nil]
@@ -216,11 +231,17 @@ final class Bridge {
                     for k in 0..<8 where isSet(p, knobTouchFirstBit + k) && isSet(b, knobTouchFirstBit + k) { r.retouch(k, shift: on) }
                 }
             } else if now {
-                if let r = reaper, !shiftHeld, r.view == .kk, let cc = kkButtonCCs[def.bit] {
+                if let r = reaper, !shiftHeld, r.view == .kk, let cc = kkButtonCCs[def.bit], r.learning != nil,
+                   cc == 42 || cc == 43 {  // NKS learn mode: the page arrows move the selection, and don't page KK
+                    learnHeld.insert(def.bit)
+                    if verbose { log("\(def.name) down (learn: \(cc == 43 ? "next" : "previous") slot)") }
+                    r.learnMove(forward: cc == 43)
+                } else if let r = reaper, !shiftHeld, r.view == .kk, let cc = kkButtonCCs[def.bit] {
                     let ch = cfg.reaper.kompleteKontrol.channel
                     pressChannel[def.bit] = ch
                     pressCC[def.bit] = cc
                     sendCC(ch, cc, 127, "\(def.name) down (KK)")
+                    r.kkButtonSent(cc: cc)
                 } else if let r = reaper, let command = (shiftHeld ? reaperShiftCommands : reaperCommands)[def.bit] {
                     reaperHeld[def.bit] = command
                     if verbose { log("\(shiftHeld ? "Shift + " : "")\(def.name) down") }
@@ -230,6 +251,8 @@ final class Bridge {
                     pressChannel[def.bit] = layer
                     sendCC(layer, cc, 127, "\(def.name) down")
                 }
+            } else if learnHeld.remove(def.bit) != nil {
+                continue  // its press only moved the learn selection
             } else if let command = reaperHeld.removeValue(forKey: def.bit) {
                 reaper?.perform(command, down: false)
             } else if let cc = pressCC.removeValue(forKey: def.bit) {
@@ -286,6 +309,10 @@ final class Bridge {
             guard a != c else { continue }
             var d = c - a
             if d > 500 { d -= 1000 } else if d < -500 { d += 1000 }  // positions wrap at 0-999
+            if let r = reaper, r.learning != nil {  // NKS learn mode: pick the knob's slot, or with Shift, empty it
+                r.learnTurned(k, shift: shiftHeld)
+                continue
+            }
             if let r = reaper, shiftHeld {  // mix view: the track's pan; track view: back to centre / 0 dB, monitoring
                 switch r.target(k) {
                 case .bankVolume?:
@@ -308,6 +335,10 @@ final class Bridge {
             // values (absValues) for all pages, tracks and presets: KK's page count and parameter values aren't
             // available to it, so it doesn't follow pages.
             if toReaper, let r = reaper, r.view == .kk {
+                if r.nksActive {  // NKS pages: the knob sets its KK parameter through REAPER
+                    r.turnNKS(k, raw: d)
+                    continue
+                }
                 let kk = cfg.reaper.kompleteKontrol
                 knobAccum[k] += d
                 let steps = knobAccum[k] / cfg.knobStepsPerCC

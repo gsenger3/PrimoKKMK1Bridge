@@ -1,0 +1,7 @@
+{
+  "_note": "NKS integration: the Komplete Kontrol view with NKS knob pages, pinned to kk_nks_pages.nksf (synthetic, written for fake_reaper's KK instrument).",
+  "reaper": {
+    "enabled": true, "sendPort": 18000, "receivePort": 19000, "view": "komplete-kontrol",
+    "kompleteKontrol": { "nksIntegration": true, "nksFile": "device/tests/reaper_sim/kk_nks_pages.nksf" }
+  }
+}

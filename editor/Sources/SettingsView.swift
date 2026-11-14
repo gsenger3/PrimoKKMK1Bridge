@@ -213,25 +213,28 @@ struct SettingsView: View {
                     }
                 }
             }
-            LabeledContent("REAPER Integration") {
-                HStack(spacing: 8) {
-                    Text(scriptStatusText).foregroundStyle(.secondary)
-                    if scriptStatus.anyInstalled {
-                        if !scriptStatus.installed {
-                            Button(scriptStatus.scriptInstalled && !scriptStatus.scriptUpToDate ? "Update…" : "Repair…") { installScript() }
-                        }
-                        Button("Uninstall…") { uninstallScript() }
-                    } else {
-                        Button("Install…") { installScript() }
-                            .disabled(!scriptStatus.resourceFolderFound)
-                    }
-                }
-            }
+            LabeledContent("REAPER Integration") { scriptControls }
             Text("Enables the keyboard lightguide integration within Reaper. When enabled, the device lightguide will display the currently selected track color. Installation will install a Reaper script to the current user's Reaper Scripts folder. The lightguide will be active upon restart of Reaper. ")
                 .font(.caption).foregroundStyle(.secondary)
         }
         .onAppear { refreshScriptStatus() }
         .onChange(of: model.config.reaper.resourcePath) { _, _ in refreshScriptStatus() }
+    }
+
+    /// The REAPER script's status, and Install / Update / Uninstall. The lightguide and NKS integration both use it.
+    private var scriptControls: some View {
+        HStack(spacing: 8) {
+            Text(scriptStatusText).foregroundStyle(.secondary)
+            if scriptStatus.anyInstalled {
+                if !scriptStatus.installed {
+                    Button(scriptStatus.scriptInstalled && !scriptStatus.scriptUpToDate ? "Update…" : "Repair…") { installScript() }
+                }
+                Button("Uninstall…") { uninstallScript() }
+            } else {
+                Button("Install…") { installScript() }
+                    .disabled(!scriptStatus.resourceFolderFound)
+            }
+        }
     }
 
     private func refreshScriptStatus() {
@@ -251,7 +254,7 @@ struct SettingsView: View {
     private func installScript() {
         let resource = ReaperScriptInstaller.resourceURL(model.config.reaper.resourcePath)
         let confirm = NSAlert()
-        confirm.messageText = "Install the track colour script in REAPER?"
+        confirm.messageText = "Install the PrimoKKMK1Bridge script in REAPER?"
         confirm.informativeText = """
             This copies PrimoKKMK1Bridge_TrackColor.lua to Scripts/\(ReaperScriptInstaller.folderName) in \(resource.path), \
             and adds a line to Scripts/__startup.lua so REAPER starts it (an existing __startup.lua is backed up first).
@@ -262,7 +265,7 @@ struct SettingsView: View {
         let result = NSAlert()
         do {
             let done = try ReaperScriptInstaller.install(resourcePath: model.config.reaper.resourcePath)
-            result.messageText = "Installed the track colour script"
+            result.messageText = "Installed the PrimoKKMK1Bridge script"
             result.informativeText = done.joined(separator: "\n") + """
 
 
@@ -282,7 +285,7 @@ struct SettingsView: View {
     private func uninstallScript() {
         let resource = ReaperScriptInstaller.resourceURL(model.config.reaper.resourcePath)
         let confirm = NSAlert()
-        confirm.messageText = "Uninstall the track colour script from REAPER?"
+        confirm.messageText = "Uninstall the PrimoKKMK1Bridge script from REAPER?"
         confirm.informativeText = """
             This removes PrimoKKMK1Bridge_TrackColor.lua from Scripts/\(ReaperScriptInstaller.folderName) in \(resource.path), \
             and the line that starts it from Scripts/__startup.lua (which is backed up first). Your other scripts stay.
@@ -293,7 +296,7 @@ struct SettingsView: View {
         let result = NSAlert()
         do {
             let done = try ReaperScriptInstaller.uninstall(resourcePath: model.config.reaper.resourcePath)
-            result.messageText = "Uninstalled the track colour script"
+            result.messageText = "Uninstalled the PrimoKKMK1Bridge script"
             result.informativeText = done.joined(separator: "\n") + """
 
 
@@ -315,6 +318,12 @@ struct SettingsView: View {
             Picker("Knob Values", selection: $model.config.reaper.kompleteKontrol.encoderMode) {
                 ForEach(turnModes, id: \.self) { Text(turnModeTitle($0)).tag($0) }
             }
+            Toggle("NKS Integration Enabled", isOn: $model.config.reaper.kompleteKontrol.nksIntegration)
+            if model.config.reaper.kompleteKontrol.nksIntegration {
+                LabeledContent("REAPER Integration") { scriptControls }
+            }
+            Text("With NKS integration, for instruments with NKS presets (.nksf), the knobs control the parameters on Komplete Kontrol's NKS pages, and the displays show their names and values. The REAPER script (the lightguide's) tells the bridge which instrument Komplete Kontrol hosts. For other instruments, such as Kontakt's, press Shift + Instance in the Komplete Kontrol view to teach the bridge their pages; until then, and with NKS integration off, the knobs send the CCs above.")
+                .font(.caption).foregroundStyle(.secondary)
         }
     }
 }

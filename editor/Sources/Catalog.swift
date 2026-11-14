@@ -136,6 +136,7 @@ let commandSections: [CommandSection] = [
         CommandInfo(name: "next-page", title: "Next bank / knob page", short: "Page ▶"),
         CommandInfo(name: "previous-page", title: "Previous bank / knob page", short: "◀ Page"),
         CommandInfo(name: "toggle-view", title: "Next view (Mix → Track → Komplete Kontrol)", short: "View"),
+        CommandInfo(name: "learn-nks-pages", title: "Learn NKS pages (Komplete Kontrol view)", short: "Learn NKS"),
         CommandInfo(name: "mute", title: "Mute the selected track", short: "Mute"),
         CommandInfo(name: "solo", title: "Solo the selected track", short: "Solo"),
     ]),
