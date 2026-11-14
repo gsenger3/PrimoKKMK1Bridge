@@ -54,9 +54,15 @@ extension Bridge {
     }
 
     /// The REAPER script reported the fingerprint of the hosted instrument's parameter names: it tells Kontakt's
-    /// instruments (one plugin ID) apart, so each has its own learned pages.
+    /// instruments (one plugin ID) apart, so each has its own learned pages. The script repeats it every 2 seconds;
+    /// a repeat checks whether the learned pages file changed (the editor renames and deletes entries).
     func kkFingerprintReported(_ fp: String) {
-        guard fp != kkFingerprint else { return }
+        guard fp != kkFingerprint else {
+            if cfg.reaper.kompleteKontrol.nksIntegration, reaper?.learning == nil, readLearnedPages() {
+                reaper?.setNKS(currentNKSLayout)
+            }
+            return
+        }
         kkFingerprint = fp
         guard cfg.reaper.kompleteKontrol.nksIntegration else { return }
         if verbose, let key = kkInstrumentKey { log("Komplete Kontrol instrument: \(key)") }
@@ -81,13 +87,14 @@ extension Bridge {
 
     // MARK: learned pages
 
-    /// Read the learned pages file if it changed since it was last read (it's edited by hand, or by the editor).
-    /// A file that can't be read is logged once, and isn't written over until it reads again.
-    func readLearnedPages() {
-        guard let url = learnedPagesURL else { return }
+    /// Read the learned pages file if it changed since it was last read (it's edited by hand, or by the editor);
+    /// true if it was read again. A file that can't be read is logged once, and isn't written over until it reads again.
+    @discardableResult
+    func readLearnedPages() -> Bool {
+        guard let url = learnedPagesURL else { return false }
         let modified = (try? FileManager.default.attributesOfItem(atPath: url.path))?[.modificationDate] as? Date
-        guard learnedPages == nil && !learnedPagesBroken || modified != learnedPagesModified else { return }
-        learnedPagesModified = modified
+        guard learnedPages == nil && !learnedPagesBroken || modified != learnedPagesModified else { return false }
+        defer { learnedPagesModified = modified }
         do {
             let pages = try LearnedPages(contentsOf: url)
             learnedPages = pages
@@ -98,6 +105,7 @@ extension Bridge {
             learnedPagesBroken = true
             log("Komplete Kontrol: can't read learned NKS pages from \(url.path): \(error)")
         }
+        return true
     }
 
     // MARK: learn mode

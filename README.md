@@ -27,8 +27,8 @@ MIDI port, and are merged into the bridge's port too. The protocol details are i
 
 | Where | What |
 | --- | --- |
-| [bridge/Sources/](bridge/Sources/) | The bridge, one file per area: `main.swift` (command line, startup, restarts), `Bridge*.swift` (the keyboard's reports, lights, displays, REAPER mode, light guide, NKS pages), `NKS*.swift` (reading and learning Komplete Kontrol's NKS pages), `MIDIPorts.swift`, `OSC.swift`, `Reaper*.swift`, `Config.swift` (every config key, its default and validation) |
-| [editor/Sources/](editor/Sources/) | The editor: the keyboard drawing, the inspector, the Settings page, the bridge switch, launching the bridge at login, and the REAPER script installer |
+| [bridge/Sources/](bridge/Sources/) | The bridge, one file per area: `main.swift` (command line, startup, restarts), `Bridge*.swift` (the keyboard's reports, lights, displays, REAPER mode, light guide, NKS pages), `NKS*.swift` (reading and learning Komplete Kontrol's NKS pages), `LearnedPages.swift` (the learned pages file, shared with the editor), `MIDIPorts.swift`, `OSC.swift`, `Reaper*.swift`, `Config.swift` (every config key, its default and validation) |
+| [editor/Sources/](editor/Sources/) | The editor: the keyboard drawing, the inspector, the Settings page and its list of learned NKS pages, the bridge switch, launching the bridge at login, and the REAPER script installer |
 | [reaper/](reaper/PrimoKKMK1Bridge_TrackColor.lua) | A script for REAPER that sends the bridge the selected track's colour, for the light guide, and which instrument Komplete Kontrol hosts, for NKS pages |
 | [doc/](doc/GUIDE.md) | The user guide (`GUIDE.md`) and its pictures, the user guide website's theme overrides and stylesheet (`site/`), the keyboard's protocol notes (`NOTES.md`), and which HID bit each button sets (`BUTTON_MAP.md`) |
 | [design/](design/nks.md) | The spec for the Komplete Kontrol view |

@@ -68,7 +68,8 @@ compile() {
 # keeps running from the old file untouched while it's replaced.
 compile build/PrimoKKMK1Editor.tmp -swift-version 5 -parse-as-library \
     editor/Sources/*.swift \
-    bridge/Sources/Hardware.swift bridge/Sources/Config.swift bridge/Sources/ReaperModel.swift build/Version.swift
+    bridge/Sources/Hardware.swift bridge/Sources/Config.swift bridge/Sources/ReaperModel.swift \
+    bridge/Sources/LearnedPages.swift build/Version.swift
 compile build/PrimoKKMK1Bridge.tmp bridge/Sources/*.swift build/Version.swift
 codesign --force --sign - build/PrimoKKMK1Bridge.tmp 2>/dev/null
 mv build/PrimoKKMK1Editor.tmp $app/Contents/MacOS/PrimoKKMK1Editor

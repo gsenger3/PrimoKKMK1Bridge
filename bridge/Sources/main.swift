@@ -186,8 +186,8 @@ let midi = MIDIPorts(name: cfg.portName, dryRun: false, keysSource: cfg.keyboard
 let bridge = Bridge(cfg: cfg, midi: midi, verbose: verbose)
 bridge.logOSC = logOSC
 // Learned NKS pages: reaper.kompleteKontrol.nksPagesFile, else NKSPages.json next to the config file.
-bridge.learnedPagesURL = cfg.reaper.kompleteKontrol.nksPagesFile.map { URL(fileURLWithPath: ($0 as NSString).expandingTildeInPath) }
-    ?? URL(fileURLWithPath: configFile ?? Config.defaultURL.path).deletingLastPathComponent().appendingPathComponent("NKSPages.json")
+bridge.learnedPagesURL = LearnedPages.url(configFile: URL(fileURLWithPath: configFile ?? Config.defaultURL.path),
+                                           setting: cfg.reaper.kompleteKontrol.nksPagesFile)
 midi.onControlChange = { bridge.feedback(channel: $0, cc: $1, value: $2) }
 midi.onSysEx = { bridge.sysEx($0) }
 let ctx = Unmanaged.passUnretained(bridge).toOpaque()

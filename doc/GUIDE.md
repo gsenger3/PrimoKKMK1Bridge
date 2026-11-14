@@ -125,7 +125,7 @@ The pages, chosen in the toolbar, follow the mode you're in:
 | **REAPER Mode** | **Enabled** turns REAPER mode on. **Address**, **Local Listen Port** and **Device Port** match REAPER's OSC device ([Set up REAPER](#set-up-REAPER-once)) |
 | **REAPER Views** | **Default View**: the view the bridge starts in. **Follow REAPER Track Selection**: the keyboard follows the track you click in REAPER. **Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)**: in those views, the track you pick on the keyboard becomes REAPER's selected track. **Track Name Display Duration**: how long the displays show the track's name after you change track. **REAPER Resource Folder**: where the screenset names come from |
 | **REAPER Lightguide** | The selected track's color illuminated on the Komplete Kontrol lightguide, and the REAPER integration script. See [REAPER Lightguide](#REAPER-lightguide) |
-| **Komplete Kontrol View** | That view's **MIDI Channel** and **Knob Values** mode, and **NKS Integration Enabled**, with the REAPER integration script's controls. See [NKS Pages](#nks-pages) |
+| **Komplete Kontrol View** | That view's **MIDI Channel** and **Knob Values** mode, and **NKS Integration Enabled**, with the REAPER integration script's controls and the **Learned Pages** list. See [NKS Pages](#nks-pages) |
 | **Login** | **Launch Bridge at Login**: start the bridge when you log in, without the editor. It applies right away, without saving. See [Start the Bridge at Login](#start-the-bridge-at-login) |
 | **Logging** | **Verbose Logging**: the bridge writes every message it sends to its log, for tracking down a problem. Turn it off again afterwards, as the log grows quickly. **Show Log** opens the log |
 
@@ -286,6 +286,10 @@ Page ◀ / ▶ and Navigate ◀ / ▶ page through Komplete Kontrol and the disp
 - **The names** are the parameters' names as REAPER reports them, which can differ from Komplete Kontrol's labels.
 - **Each instrument has its own pages.** The bridge tells instruments apart by their parameter names, so each Kontakt instrument gets its own.
 - **Learned pages are kept** in `NKSPages.json`, next to the config file.
+
+To rename or delete an instrument's learned pages, use the **Learned Pages** list on the editor's Settings page, under **Komplete Kontrol View** (with NKS integration on). It starts closed, showing how many instruments there are; click it to open the list. Each row shows the name (the track's name when you taught it), the plugin, the number of pages and the date. Renaming and deleting apply at once, without saving, and the bridge picks up the change within a couple of seconds. After a delete, the instrument goes back to its NKS presets' pages, or to CCs.
+
+`NKSPages.json` can also be edited by hand. Under `instruments`, each instrument's key is its plugin ID and the fingerprint of its parameter names, as the REAPER script reports them (`VST3:<ID>/<fingerprint>`). Each entry has a `label`, the `learned` date, and `pages`: lists of 8 knobs, each `{"id": 6, "name": "Balance"}` or `null` for an empty knob. The `id` is the number in REAPER's name for the parameter minus 101 (`107 Balance` is 6). The `name` is only for reading the file, since the displays show REAPER's current name.
 
 ### REAPER Lightguide
 

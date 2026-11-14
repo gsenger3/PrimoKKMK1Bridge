@@ -11,8 +11,8 @@
 //  Learned NKS pages (issues #30-#33): for instruments whose pages the bridge can't read, such as Kontakt instruments
 //  and NI's own synths, you teach them. In learn mode (Shift + Instance in the Komplete Kontrol view) you touch a knob,
 //  then move a control in Komplete Kontrol's window, and REAPER's last-touched parameter ("107 Balance") goes on that
-//  knob. The pages are kept in NKSPages.json, next to the config, under the instrument's key: the plugin ID and the
-//  fingerprint of its parameter names, both from the REAPER script (SysEx 03 and 05).
+//  knob. The pages are kept in NKSPages.json (LearnedPages.swift), next to the config, under the instrument's key: the
+//  plugin ID and the fingerprint of its parameter names, both from the REAPER script (SysEx 03 and 05).
 
 import Foundation
 
@@ -20,34 +20,7 @@ extension NKSLayout {
     init(pages: [[NKSSlot?]]) { self.pages = pages }
 }
 
-/// NKSPages.json: learned pages by instrument key ("<plugin ID>/<fingerprint>"). A slot's `id` is the instrument
-/// parameter ID, as in NICA (REAPER's parameter number - 102); `name` is REAPER's name for it when it was learned.
-struct LearnedPages: Codable {
-    struct Slot: Codable { var id: Int; var name: String }
-    struct Instrument: Codable {
-        var label: String    // the track's name when the pages were learned
-        var learned: String  // when, ISO 8601
-        var pages: [[Slot?]]
-    }
-
-    var version = 1
-    var instruments: [String: Instrument] = [:]
-
-    init() {}
-
-    /// The file's pages; none if there's no file yet.
-    init(contentsOf url: URL) throws {
-        guard FileManager.default.fileExists(atPath: url.path) else { return }
-        self = try JSONDecoder().decode(LearnedPages.self, from: Data(contentsOf: url))
-    }
-
-    func save(to url: URL) throws {
-        let e = JSONEncoder()
-        e.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
-        try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try e.encode(self).write(to: url, options: .atomic)
-    }
-
+extension LearnedPages {  // the file's format and place: LearnedPages.swift
     /// An instrument's pages as the Komplete Kontrol view uses them. The displays show REAPER's current names
     /// (autoname), as KK labels such slots.
     func layout(_ key: String) -> NKSLayout? {

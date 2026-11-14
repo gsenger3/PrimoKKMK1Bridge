@@ -321,8 +321,11 @@ struct SettingsView: View {
             Toggle("NKS Integration Enabled", isOn: $model.config.reaper.kompleteKontrol.nksIntegration)
             if model.config.reaper.kompleteKontrol.nksIntegration {
                 LabeledContent("REAPER Integration") { scriptControls }
+                LearnedPagesRows(url: model.fileURL.map {
+                    LearnedPages.url(configFile: $0, setting: model.config.reaper.kompleteKontrol.nksPagesFile)
+                })
             }
-            Text("With NKS integration, for instruments with NKS presets (.nksf), the knobs control the parameters on Komplete Kontrol's NKS pages, and the displays show their names and values. The REAPER script (the lightguide's) tells the bridge which instrument Komplete Kontrol hosts. For other instruments, such as Kontakt's, press Shift + Instance in the Komplete Kontrol view to teach the bridge their pages; until then, and with NKS integration off, the knobs send the CCs above.")
+            Text("With NKS integration, for instruments with NKS presets (.nksf), the knobs control the parameters on Komplete Kontrol's NKS pages, and the displays show their names and values. The REAPER script (the lightguide's) tells the bridge which instrument Komplete Kontrol hosts. For other instruments, such as Kontakt's, press Shift + Instance in the Komplete Kontrol view to teach the bridge their pages; until then, and with NKS integration off, the knobs send the CCs above. Learned pages aren't part of these settings: renaming or deleting them applies at once.")
                 .font(.caption).foregroundStyle(.secondary)
         }
     }
