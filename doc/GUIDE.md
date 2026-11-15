@@ -141,14 +141,33 @@ Other things in the editor:
 
 ## MIDI Mode
 
-MIDI mode is the default. Every control sends a MIDI CC on **Primo Komplete Kontrol MK1**, **Channel 1**, for MIDI learn in any DAW, except the knobs, which have **Channel 3** to themselves. Buttons send `127` when pressed and `0` when released; knobs send absolute values (`0–127`).
+MIDI mode is the default. All controls send a MIDI CC on **Primo Komplete Kontrol MK1**. Buttons send CCs on **Channel 1**, and the endless encoders send on **Channel 3** - all CCs and channels are configurable in the editor application. Buttons send `127` when pressed and `0` when released; knobs send absolute values (`0–127`).
 
-**Knob pages.** **Knob Pages** on the editor's Settings page (1 to 5, default 1) gives the knobs more pages, each with its own CCs; **Page ◀ / ▶** go through them, stopping at the first and last, and send their CCs only with Shift held. The left display shows the page (*MIDI 2/3*), and each page keeps its own values. By default the pages' CCs are the same as the [MIDI view's](#midi-view): page 1 is CC14–21, page 2 CC22–29, page 3 CC102–109, page 4 CC110–117, page 5 CC30, 31, 80–83, 90, 118, all on the knobs' channel, where nothing else meets them. The limit of 5 is how many CCs MIDI leaves undefined or general-purpose. To give a knob another CC on a page, select it on the editor's MIDI page and change that page's CC; the editor warns if a CC is used twice. Change the knobs' channel on the MIDI page, but keep it apart from Channel 1 and the Shift layer's.
+The keys, pitch strip (pitch bend) and mod strip (`CC1`) work as always, and Octave − / + transpose the keys on the keyboard as well as sending their CCs. The CC of every control is defined in [Default Assignments](#midi-mode-defaults).
 
-**Knob names.** To show a name on a knob's display instead of its CC, select the knob on the editor's MIDI page and type a name for each page, next to that page's CC, up to 8 characters (the display shows them in capitals; a `.` or `,` lights the dot of the character before it). An empty name shows the CC again. While Shift is held, the displays show the Shift layer's CCs, not the names.
+### Knob Pages
 
-**Shift layer.** Holding Shift moves the buttons, knob turns and the Navigate knob turn to **Channel 2**, so every
-control has a second assignment with the same CC numbers.
+**PrimoKKMK1Bridge** supports up to 5 pages of knob assignments. Each knob is assigned a unique CC, which can be configured in the editor application. **Page ◀ / ▶** scrolls through the pages/banks of encoders, stopping at the first and last page. The left display shows the current page and total pages (*MIDI 2/3*).
+
+By default the pages' CCs are the same as the [MIDI view's](#midi-view):
+
+| Page | Knobs 1–8 |
+| --- | --- |
+| 1 | CC14–21 |
+| 2 | CC22–29 |
+| 3 | CC102–109 |
+| 4 | CC110–117 |
+| 5 | CC30, 31, 80–83, 90, 118 |
+
+Up to 5 pages of encoder banks can be defined, which is limited by the number of free undefined or general-purpose MIDI CCs. MIDI CC #s are customizable on the editors MIDI tab and the editor warns if a CC is used twice.
+
+### Knob Names
+
+To show a name on a knob's display instead of its CC, select the knob on the editor's MIDI page and type a name for each page, next to that page's CC, up to 8 characters. An empty name shows the CC again. While Shift is held, the displays show the Shift layer's CCs, not the names.
+
+### Shift Layer
+
+Holding Shift moves the buttons, knob turns and the Big Knob turn to **Channel 2**, so every control has a second assignment with the same CC numbers.
 
 - Shift itself sends CC108 on Channel 1.
 - Knob turns with Shift send page 1's CCs (14–21) on Channel 2, whatever the page: pages 3–5's CCs on Channel 2 are the Shift layer's button CCs.
@@ -158,21 +177,14 @@ control has a second assignment with the same CC numbers.
   turns it on until the next press. Its light is fully illuminated while active, and its CC sends `127` when it latches and `0` when
   it unlatches. This works the same across all modes.
 
-**Lights from the DAW.** The bridge also has a MIDI *output* called Primo Komplete Kontrol MK1. A CC sent there:
+### Komplete Kontrol View
 
-- Lights its button (any value above `0`) or dims it (`0`),
-- On Channel 2, sets the light shown while Shift is held,
-- For a knob's CC on the knobs' channel (Channel 3; or page 1's on Channel 2, for the Shift layer), moves that knob's value, so it carries on from the DAW's value instead of jumping.
-
-The keys, pitch strip (pitch bend) and mod strip (`CC1`) work as always, and Octave − / + transpose the keys on the
-keyboard as well as sending their CCs. The CC of every control is in [Default Assignments](#midi-mode-defaults).
-
-**Komplete Kontrol view.** With **Komplete Kontrol View Enabled** on the editor's Settings page (off by default), **Instance** switches between the MIDI controls and the [Komplete Kontrol view](#komplete-kontrol-view), and no longer sends its CC. Instance is dim with the MIDI controls and bright in the Komplete Kontrol view.
+With **Komplete Kontrol View Enabled** on the editor's Settings page (off by default), **Instance** switches between the MIDI controls and the [Komplete Kontrol view](#komplete-kontrol-view), and no longer sends its CC. Instance is dim with the MIDI controls and bright in the Komplete Kontrol view.
 
 - In that view, the knobs and the buttons given a Komplete Kontrol CC send the CCs of Komplete Kontrol's NKS template, set on the editor's **Komplete Kontrol** page. The other buttons, and the Navigate knob, keep their MIDI CCs.
 - Knob touch sends no CCs there, since they would land on the template's knob CCs.
-- Holding Shift gives the MIDI Shift layer, as with the MIDI controls.
-- Parameter names and values ([NKS pages](#nks-pages)) need REAPER mode; here the view only sends CCs.
+- Holding Shift enables the MIDI Shift layer, as with the MIDI controls.
+- NKS Parameter names and values are not supported in MIDI mode.
 
 ## REAPER Mode
 
@@ -327,7 +339,7 @@ The MIDI view works like the Komplete Kontrol view, but its knobs and buttons se
 
 - **Knob CCs and names:** as in MIDI mode, select a knob on the MIDI page to change its CC on each page, or to type a name (up to 8 characters) that the display shows instead of the CC.
 - **Buttons:** by default Preset ▲ / ▼ and Navigate ▲ ▼ ◀ ▶ send their MIDI-mode CCs; set any other button's CC, or turn one off, on the MIDI page. The other buttons keep their REAPER jobs.
-- **The Navigate knob** picks tracks, as in the Komplete Kontrol view.
+- **The Navigate knob** selects tracks, as in the Komplete Kontrol view.
 - **Holding Shift** (or latching it) gives the Shift commands and the MIDI Shift layer, as in the other REAPER views. The displays then show the Shift layer's CCs and values, with *SHIFT* on the left.
 
 ### REAPER Lightguide
@@ -501,7 +513,7 @@ Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` pr
 | `buttons` | Button name → CC number, or `null` to silence that button (Octave − / + still transpose the keys) |
 | `knobChannel` | The knobs' channel (default 3) |
 | `knobPages` | Knob pages, 1–5 (default 1). With more than one, Page ◀ / ▶ go through them |
-| `knobCCs` | The knobs' CCs, page by page: up to 5 lists of 8 (default: the table in [MIDI Mode](#midi-mode)). Earlier configs' single list of 8 is page 1 |
+| `knobCCs` | The knobs' CCs, page by page: up to 5 banks of 8 (see the table in [MIDI Mode](#midi-mode) for defaults). |
 | `knobLabels` | Knob names, page by page: up to 8 names per page, one per knob, each up to 8 characters; `""` (or a missing one) shows the CC. For example `[["Cutoff", "Reso"], ["Attack"]]` |
 | `knobMode` | `absolute` (0–127, starts at 64), `relative-binary-offset` (64 ± n), `relative-twos-complement` (1–63 up, 127–65 down), `relative-signed-bit` (1–63 up, 65–127 down) |
 | `knobStepsPerCC` | Knob resolution: raw position units (the knobs report 0–999, wrapping) per MIDI step. Default 4; higher is finer and slower |
