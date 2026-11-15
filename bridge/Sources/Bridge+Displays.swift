@@ -155,24 +155,15 @@ extension Bridge {
         let ch = shiftLayer ? cfg.shiftChannel! : cfg.knobChannel
         displays.write(row: 0, cell: 0, !shiftLayer && cfg.knobPages > 1 ? "MIDI \(knobPage + 1)/\(cfg.knobPages)" : "MIDI")
         displays.write(row: 1, cell: 0, "CH \(ch)")
-        for k in 0..<8 {
-            let cc = shiftLayer ? knobPageCCs[0][k] : knobCCs[k]
-            displays.write(row: 0, cell: k + 1, "CC \(cc)")
-            if cfg.knobMode == .absolute {
-                let v = absValues[ch * 128 + cc] ?? 64
-                displays.write(row: 1, cell: k + 1, "\(v)")
-                displays.setBar(cell: k + 1, Double(v) / 127, framed: touched.contains(k))
-            } else {
-                displays.write(row: 1, cell: k + 1, "REL")
-                displays.setBar(cell: k + 1, nil, framed: touched.contains(k))
-            }
-        }
+        writeCCKnobs(channel: ch, ccs: shiftLayer ? pageKnobCCs(cfg.knobCCs, page: 0) : knobCCs, mode: cfg.knobMode,
+                     names: shiftLayer ? [] : cfg.knobLabels, page: knobPage, touched)
     }
 
-    /// Each knob's CC, and the value it last sent (absolute) or REL, as MIDI mode shows them.
-    private func writeCCKnobs(channel: Int, ccs: [Int], mode: TurnMode, _ touched: Set<Int>) {
+    /// Each knob's name (knobLabels, for `page`) or else its CC, and the value it last sent (absolute) or REL.
+    private func writeCCKnobs(channel: Int, ccs: [Int], mode: TurnMode, names: [[String]] = [], page: Int = 0,
+                              _ touched: Set<Int>) {
         for k in 0..<8 {
-            displays.write(row: 0, cell: k + 1, "CC \(ccs[k])")
+            displays.write(row: 0, cell: k + 1, knobLabel(names, page: page, knob: k) ?? "CC \(ccs[k])")
             if mode == .absolute {
                 let v = absValues[channel * 128 + ccs[k]] ?? 64
                 displays.write(row: 1, cell: k + 1, "\(v)")
@@ -188,7 +179,7 @@ extension Bridge {
     /// layer, so that's what the displays show, with SHIFT on the left.
     private func renderShiftLayerKnobs(_ touched: Set<Int>) {
         displays.write(row: 1, cell: 0, "SHIFT")
-        writeCCKnobs(channel: cfg.shiftChannel ?? cfg.knobChannel, ccs: knobPageCCs[0], mode: cfg.knobMode, touched)
+        writeCCKnobs(channel: cfg.shiftChannel ?? cfg.knobChannel, ccs: pageKnobCCs(cfg.knobCCs, page: 0), mode: cfg.knobMode, touched)
     }
 
     func renderReaper(_ r: ReaperSession, _ touched: Set<Int>) {
@@ -274,7 +265,7 @@ extension Bridge {
             displays.write(row: 0, cell: 0, abbreviate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
             if shiftHeld { renderShiftLayerKnobs(touched); return }
             displays.write(row: 1, cell: 0, m.pages > 1 ? "MIDI \(midiViewPage + 1)/\(m.pages)" : "MIDI")
-            writeCCKnobs(channel: m.channel, ccs: midiViewKnobCCs, mode: m.knobMode, touched)
+            writeCCKnobs(channel: m.channel, ccs: midiViewKnobCCs, mode: m.knobMode, names: m.knobLabels, page: midiViewPage, touched)
             return
         case .mix:
             let numbers = r.bank.filter(\.exists).map(\.number)

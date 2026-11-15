@@ -133,10 +133,10 @@ final class Bridge {
     }
 
     /// MIDI mode's knob CCs on its current page.
-    var knobCCs: [Int] { knobPageCCs[min(knobPage, knobPageCCs.count - 1)] }
+    var knobCCs: [Int] { pageKnobCCs(cfg.knobCCs, page: knobPage) }
 
     /// The MIDI view's knob CCs on its current page.
-    var midiViewKnobCCs: [Int] { knobPageCCs[min(midiViewPage, knobPageCCs.count - 1)] }
+    var midiViewKnobCCs: [Int] { pageKnobCCs(cfg.reaper.midiView.knobCCs, page: midiViewPage) }
 
     /// Raw knob movement in whole CC steps (knobStepsPerCC raw units each); the rest waits for the next turn.
     func knobSteps(_ k: Int, _ d: Int) -> Int {
@@ -429,10 +429,10 @@ final class Bridge {
                 turn(channel: kk.channel, cc: kk.encoderCCs[k], steps: steps, mode: kk.encoderMode, what: "Knob \(k + 1) turn (KK)")
                 continue
             }
-            // The knobs' channel and page; the Shift layer is always page 1's CCs on the Shift channel, as pages 3-5's
-            // CCs there are the Shift layer's button CCs.
+            // The knobs' channel and page; the Shift layer is always page 1's CCs on the Shift channel, as the default
+            // pages 3-5's CCs there are the Shift layer's button CCs.
             if shiftHeld, let sc = cfg.shiftChannel {
-                turn(channel: sc, cc: knobPageCCs[0][k], steps: steps, mode: cfg.knobMode, what: "Knob \(k + 1) turn")
+                turn(channel: sc, cc: pageKnobCCs(cfg.knobCCs, page: 0)[k], steps: steps, mode: cfg.knobMode, what: "Knob \(k + 1) turn")
             } else {
                 turn(channel: cfg.knobChannel, cc: knobCCs[k], steps: steps, mode: cfg.knobMode, what: "Knob \(k + 1) turn")
             }

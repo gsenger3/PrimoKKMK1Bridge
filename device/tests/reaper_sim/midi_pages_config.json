@@ -1,4 +1,46 @@
 {
-  "_note": "MIDI mode's knob pages: 3 pages on the knobs' channel (3); Page buttons page; Shift keeps page 1's CCs on channel 2.",
-  "knobPages": 3
+  "_note": "MIDI mode's knob pages: 3 pages on the knobs' channel (3); Page buttons page; Shift keeps page 1's CCs on channel 2. Knob names (issue #44) on pages 1 and 2; page 3 knob 1 has its own CC (9).",
+  "knobPages": 3,
+  "knobLabels": [
+    [
+      "Cutoff"
+    ],
+    [
+      "Reso",
+      "",
+      "Attack"
+    ]
+  ],
+  "knobCCs": [
+    [
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    [
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    [
+      9,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109
+    ]
+  ]
 }

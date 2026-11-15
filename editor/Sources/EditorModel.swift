@@ -242,6 +242,36 @@ final class EditorModel: ObservableObject {
         config.reaper.midiView.buttons.updateValue(cc, forKey: button)
     }
 
+    /// A knob's CC on a page: MIDI mode's, or the MIDI view's on the MIDI page in REAPER mode.
+    func knobCC(page: Int, knob: Int) -> Int {
+        pageKnobCCs(editsMIDIView ? config.reaper.midiView.knobCCs : config.knobCCs, page: page)[knob]
+    }
+
+    /// Set it; a page that wasn't set yet starts from its default CCs.
+    func setKnobCC(page: Int, knob: Int, _ cc: Int) {
+        var ccs = editsMIDIView ? config.reaper.midiView.knobCCs : config.knobCCs
+        while ccs.count <= page { ccs.append(pageKnobCCs([], page: ccs.count)) }
+        if ccs[page].count != 8 { ccs[page] = pageKnobCCs([], page: page) }
+        ccs[page][knob] = cc
+        if editsMIDIView { config.reaper.midiView.knobCCs = ccs } else { config.knobCCs = ccs }
+    }
+
+    /// A knob's name on a page (issue #44): MIDI mode's, or the MIDI view's on the MIDI page in REAPER mode.
+    func knobName(page: Int, knob: Int) -> String {
+        knobLabel(editsMIDIView ? config.reaper.midiView.knobLabels : config.knobLabels, page: page, knob: knob) ?? ""
+    }
+
+    /// Set it, at most displayChars long. Empty pages and names at the end are left out of the config.
+    func setKnobName(page: Int, knob: Int, _ name: String) {
+        var labels = editsMIDIView ? config.reaper.midiView.knobLabels : config.knobLabels
+        while labels.count <= page { labels.append([]) }
+        while labels[page].count <= knob { labels[page].append("") }
+        labels[page][knob] = String(name.prefix(displayChars))
+        for p in labels.indices { while labels[p].last?.isEmpty == true { labels[p].removeLast() } }
+        while labels.last?.isEmpty == true { labels.removeLast() }
+        if editsMIDIView { config.reaper.midiView.knobLabels = labels } else { config.knobLabels = labels }
+    }
+
     func kkCC(_ button: String) -> Int? { config.kompleteKontrol.buttons[button] ?? nil }
 
     func setKKCC(_ button: String, _ cc: Int?) {
@@ -306,12 +336,13 @@ final class EditorModel: ObservableObject {
         case .midi where editsMIDIView:  // the MIDI view: the track over MIDI, and each knob's CC
             let m = config.reaper.midiView
             if i == 0 { return ("TRACK", m.pages > 1 ? "MIDI 1/\(m.pages)" : "MIDI") }
-            return ("CC \(knobPageCCs[0][i - 1])", m.knobMode == .absolute ? "ABS" : "REL")
+            return (knobLabel(m.knobLabels, page: 0, knob: i - 1)?.uppercased() ?? "CC \(pageKnobCCs(m.knobCCs, page: 0)[i - 1])",
+                    m.knobMode == .absolute ? "ABS" : "REL")
         case .midi:
             if i == 0 { return (config.knobPages > 1 ? "MIDI 1/\(config.knobPages)" : "MIDI", "CH \(config.knobChannel)") }
             let k = i - 1
             let second = knobTouchOn ? "TOUCH \(config.knobTouchCCs[k])" : (config.knobMode == .absolute ? "ABS" : "REL")
-            return ("CC \(knobPageCCs[0][k])", second)
+            return (knobLabel(config.knobLabels, page: 0, knob: k)?.uppercased() ?? "CC \(pageKnobCCs(config.knobCCs, page: 0)[k])", second)
         case .reaper:
             if i == 0 { return ("MIX", "1-8") }
             return ("TRACK \(i)", "VOLUME")

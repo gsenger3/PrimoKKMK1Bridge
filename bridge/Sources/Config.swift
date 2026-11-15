@@ -97,6 +97,45 @@ struct KKViewConfig: Codable {
 let knobPageCCs: [[Int]] = [Array(14...21), Array(22...29), Array(102...109), Array(110...117),
                             [30, 31, 80, 81, 82, 83, 90, 118]]
 
+/// The knobs' CCs on `page`: the config's own (knobCCs, set knob by knob), or else knobPageCCs'.
+func pageKnobCCs(_ custom: [[Int]], page: Int) -> [Int] {
+    custom.indices.contains(page) && custom[page].count == 8 ? custom[page] : knobPageCCs[min(page, knobPageCCs.count - 1)]
+}
+
+/// The knobs' CCs fit: a page each at most for knobPageCCs, 8 CCs per page, each 0-127.
+func validateKnobCCs(_ ccs: [[Int]], _ key: String) throws {
+    guard ccs.count <= knobPageCCs.count else {
+        throw ConfigError(description: "\(key) has \(ccs.count) pages; there are at most \(knobPageCCs.count)")
+    }
+    for (p, page) in ccs.enumerated() where page.count != 8 || !page.allSatisfy({ (0...127).contains($0) }) {
+        throw ConfigError(description: "\(key), page \(p + 1): needs 8 CCs, each 0-127")
+    }
+}
+
+/// The keyboard's displays: 8 characters each (16-segment, shown in capitals).
+let displayChars = 8
+
+/// Knob names (issue #44): for each knob page, up to 8 names, one per knob, shown on its display instead of its CC.
+/// An empty name, or one that isn't there, shows the CC.
+func knobLabel(_ labels: [[String]], page: Int, knob: Int) -> String? {
+    guard labels.indices.contains(page), labels[page].indices.contains(knob) else { return nil }
+    let name = labels[page][knob].trimmingCharacters(in: .whitespaces)
+    return name.isEmpty ? nil : name
+}
+
+/// The names fit: at most a page each for knobPageCCs, 8 per page, each at most displayChars long.
+func validateKnobLabels(_ labels: [[String]], _ key: String) throws {
+    guard labels.count <= knobPageCCs.count else {
+        throw ConfigError(description: "\(key) has \(labels.count) pages; there are at most \(knobPageCCs.count)")
+    }
+    for (p, page) in labels.enumerated() {
+        guard page.count <= 8 else { throw ConfigError(description: "\(key), page \(p + 1): at most 8 names, one per knob") }
+        for (k, name) in page.enumerated() where name.count > displayChars {
+            throw ConfigError(description: "\(key), page \(p + 1), knob \(k + 1): \"\(name)\" is longer than \(displayChars) characters")
+        }
+    }
+}
+
 /// REAPER mode's MIDI view (issue #5): like the Komplete Kontrol view, but the knobs and the buttons given a CC here
 /// send generic MIDI CCs, for anything that learns CCs. The other buttons keep their REAPER commands. Off by default;
 /// Instance reaches it in place of the Komplete Kontrol view (Shift + Play swaps the two). The knobs have `pages`
@@ -107,11 +146,13 @@ struct MIDIViewConfig: Codable {
     var channel = 3
     var pages = 1  // 1 to knobPageCCs.count
     var knobMode = TurnMode.absolute
+    var knobCCs = knobPageCCs        // the knobs' CCs, page by page (pageKnobCCs)
+    var knobLabels: [[String]] = []  // the knobs' names, page by page (knobLabel)
     var buttons: [String: Int?] = [  // Page ◀ / ▶ page the knobs instead
         "PresetUp": 119, "PresetDown": 85, "NavUp": 86, "NavDown": 87, "NavLeft": 88, "NavRight": 89,
     ]
 
-    enum CodingKeys: String, CodingKey { case enabled, channel, pages, knobMode, buttons }
+    enum CodingKeys: String, CodingKey { case enabled, channel, pages, knobMode, knobCCs, knobLabels, buttons }
 
     init() {}
 
@@ -122,6 +163,8 @@ struct MIDIViewConfig: Codable {
         channel = try c.decodeIfPresent(Int.self, forKey: .channel) ?? channel
         pages = try c.decodeIfPresent(Int.self, forKey: .pages) ?? pages
         knobMode = try c.decodeIfPresent(TurnMode.self, forKey: .knobMode) ?? knobMode
+        knobCCs = try c.decodeIfPresent([[Int]].self, forKey: .knobCCs) ?? knobCCs
+        knobLabels = try c.decodeIfPresent([[String]].self, forKey: .knobLabels) ?? knobLabels
         if let user = try c.decodeIfPresent([String: Int?].self, forKey: .buttons) {
             for (name, cc) in user where name != "PageLeft" && name != "PageRight" {  // those page the knobs
                 guard name != "Shift", buttonDefs.contains(where: { $0.name == name }) else {
@@ -137,6 +180,8 @@ struct MIDIViewConfig: Codable {
         guard (1...knobPageCCs.count).contains(pages) else {
             throw ConfigError(description: "reaper.midiView.pages must be 1-\(knobPageCCs.count), got \(pages)")
         }
+        try validateKnobCCs(knobCCs, "reaper.midiView.knobCCs")
+        try validateKnobLabels(knobLabels, "reaper.midiView.knobLabels")
         for (name, cc) in buttons {
             if let cc, !(0...127).contains(cc) {
                 throw ConfigError(description: "reaper.midiView.buttons.\(name) must be 0-127, got \(cc)")
@@ -285,6 +330,8 @@ struct Config: Codable {
     var buttons: [String: Int?] = Dictionary(uniqueKeysWithValues: buttonDefs.map { ($0.name, Optional($0.cc)) })
     var knobChannel = 3  // the knobs' channel: the CCs of their page (knobPageCCs), apart from everything on channel
     var knobPages = 1    // knob pages, 1 to knobPageCCs.count: with more than one, Page ◀ / ▶ go through them
+    var knobCCs = knobPageCCs        // the knobs' CCs, page by page (pageKnobCCs)
+    var knobLabels: [[String]] = []  // the knobs' names, page by page (knobLabel)
     var knobMode = TurnMode.absolute
     var knobStepsPerCC = 4
     var knobTouchCCs = Array(22...29)
@@ -302,7 +349,8 @@ struct Config: Codable {
     var verbose = false  // log every message the bridge sends, like --verbose (issue #7)
 
     enum CodingKeys: String, CodingKey {
-        case portName, channel, shiftChannel, shiftLatch, buttons, knobChannel, knobPages, knobMode, knobStepsPerCC, knobTouchCCs
+        case portName, channel, shiftChannel, shiftLatch, buttons, knobChannel, knobPages, knobCCs, knobLabels, knobMode
+        case knobStepsPerCC, knobTouchCCs
         case navigateTurnCC, navigateTurnMode, navigateTouchCC, lights, lightBrightness, lightIdleBrightness
         case displays, reaper, keyboardSource, verbose, kompleteKontrolView, kompleteKontrol
     }
@@ -321,9 +369,15 @@ struct Config: Codable {
         channel = try c.decodeIfPresent(Int.self, forKey: .channel) ?? channel
         shiftChannel = try nullable(.shiftChannel, shiftChannel)
         shiftLatch = try c.decodeIfPresent(Bool.self, forKey: .shiftLatch) ?? shiftLatch
-        // (Earlier configs' knobCCs, the knobs' CCs on channel 1, is left alone: the knob pages' CCs replace it.)
         knobChannel = try c.decodeIfPresent(Int.self, forKey: .knobChannel) ?? knobChannel
         knobPages = try c.decodeIfPresent(Int.self, forKey: .knobPages) ?? knobPages
+        // knobCCs: page by page; in configs from before knob pages, one list of 8, which is page 1.
+        if let pages = try? c.decodeIfPresent([[Int]].self, forKey: .knobCCs) {
+            knobCCs = pages
+        } else if let page1 = try c.decodeIfPresent([Int].self, forKey: .knobCCs) {
+            knobCCs[0] = page1
+        }
+        knobLabels = try c.decodeIfPresent([[String]].self, forKey: .knobLabels) ?? knobLabels
         knobMode = try c.decodeIfPresent(TurnMode.self, forKey: .knobMode) ?? knobMode
         knobStepsPerCC = try c.decodeIfPresent(Int.self, forKey: .knobStepsPerCC) ?? knobStepsPerCC
         knobTouchCCs = try c.decodeIfPresent([Int].self, forKey: .knobTouchCCs) ?? knobTouchCCs
@@ -363,6 +417,8 @@ struct Config: Codable {
         try c.encode(buttons, forKey: .buttons)
         try c.encode(knobChannel, forKey: .knobChannel)
         try c.encode(knobPages, forKey: .knobPages)
+        try c.encode(knobCCs, forKey: .knobCCs)
+        try c.encode(knobLabels, forKey: .knobLabels)
         try c.encode(knobMode, forKey: .knobMode)
         try c.encode(knobStepsPerCC, forKey: .knobStepsPerCC)
         try c.encode(knobTouchCCs, forKey: .knobTouchCCs)
@@ -393,6 +449,8 @@ struct Config: Codable {
         guard (1...knobPageCCs.count).contains(knobPages) else {
             throw ConfigError(description: "knobPages must be 1-\(knobPageCCs.count), got \(knobPages)")
         }
+        try validateKnobCCs(knobCCs, "knobCCs")
+        try validateKnobLabels(knobLabels, "knobLabels")
         guard knobTouchCCs.isEmpty || knobTouchCCs.count == 8 else {
             throw ConfigError(description: "knobTouchCCs needs 8 entries, or [] to turn knob touch off")
         }
@@ -415,8 +473,28 @@ struct Config: Codable {
             if let other = seen[v] { warnings.append("CC\(v) is used by both \(other) and \(what)") } else { seen[v] = what }
         }
         for d in buttonDefs { add(buttons[d.name] ?? nil, d.name) }
-        if knobChannel == channel {  // the knobs' pages share channel 1 with the buttons and knob touch
-            for p in 0..<knobPages { for (i, v) in knobPageCCs[p].enumerated() { add(v, "knob \(i + 1) (page \(p + 1))") } }
+        // The knob pages' CCs share the knobs' channel: none twice, and none of the buttons' or knob touch's when
+        // that's their channel too.
+        var onKnobChannel: [Int: String] = [:]
+        for p in 0..<knobPages {
+            for (i, v) in pageKnobCCs(knobCCs, page: p).enumerated() {
+                let what = "knob \(i + 1) on page \(p + 1)"
+                if knobChannel == channel {
+                    add(v, what)
+                } else if let other = onKnobChannel[v] {
+                    warnings.append("CC\(v) is used by both \(other) and \(what)")
+                } else {
+                    onKnobChannel[v] = what
+                }
+            }
+        }
+        // The Shift layer: page 1's knob CCs and the buttons' CCs on the Shift channel.
+        if shiftChannel != nil && knobChannel != channel {
+            for (i, v) in pageKnobCCs(knobCCs, page: 0).enumerated() {
+                if let b = buttonDefs.first(where: { buttons[$0.name] == v }) {
+                    warnings.append("Shift layer: CC\(v) is used by both knob \(i + 1) and \(b.name)")
+                }
+            }
         }
         for (i, v) in knobTouchCCs.enumerated() { add(v, "knob \(i + 1) touch") }
         add(navigateTurnCC, "Navigate turn")

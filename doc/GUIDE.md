@@ -143,7 +143,9 @@ Other things in the editor:
 
 MIDI mode is the default. Every control sends a MIDI CC on **Primo Komplete Kontrol MK1**, **Channel 1**, for MIDI learn in any DAW, except the knobs, which have **Channel 3** to themselves. Buttons send `127` when pressed and `0` when released; knobs send absolute values (`0–127`).
 
-**Knob pages.** **Knob Pages** on the editor's Settings page (1 to 5, default 1) gives the knobs more pages, each with its own CCs; **Page ◀ / ▶** go through them, stopping at the first and last, and send their CCs only with Shift held. The left display shows the page (*MIDI 2/3*), and each page keeps its own values. The pages' CCs are the same as the [MIDI view's](#midi-view): page 1 is CC14–21, page 2 CC22–29, page 3 CC102–109, page 4 CC110–117, page 5 CC30, 31, 80–83, 90, 118, all on the knobs' channel, where nothing else meets them. The limit of 5 is how many CCs MIDI leaves undefined or general-purpose. Change the knobs' channel on the MIDI page, but keep it apart from Channel 1 and the Shift layer's.
+**Knob pages.** **Knob Pages** on the editor's Settings page (1 to 5, default 1) gives the knobs more pages, each with its own CCs; **Page ◀ / ▶** go through them, stopping at the first and last, and send their CCs only with Shift held. The left display shows the page (*MIDI 2/3*), and each page keeps its own values. By default the pages' CCs are the same as the [MIDI view's](#midi-view): page 1 is CC14–21, page 2 CC22–29, page 3 CC102–109, page 4 CC110–117, page 5 CC30, 31, 80–83, 90, 118, all on the knobs' channel, where nothing else meets them. The limit of 5 is how many CCs MIDI leaves undefined or general-purpose. To give a knob another CC on a page, select it on the editor's MIDI page and change that page's CC; the editor warns if a CC is used twice. Change the knobs' channel on the MIDI page, but keep it apart from Channel 1 and the Shift layer's.
+
+**Knob names.** To show a name on a knob's display instead of its CC, select the knob on the editor's MIDI page and type a name for each page, next to that page's CC, up to 8 characters (the display shows them in capitals; a `.` or `,` lights the dot of the character before it). An empty name shows the CC again. While Shift is held, the displays show the Shift layer's CCs, not the names.
 
 **Shift layer.** Holding Shift moves the buttons, knob turns and the Navigate knob turn to **Channel 2**, so every
 control has a second assignment with the same CC numbers.
@@ -313,7 +315,7 @@ The MIDI view works like the Komplete Kontrol view, but its knobs and buttons se
 
 - **Channel 3.** The MIDI view has a channel of its own, so its CCs never meet the Komplete Kontrol view's, Shift's or the Octave buttons' (all on channel 1) or the Shift layer's (channel 2). Change it on the MIDI page, but keep it apart from those.
 - **Knob pages.** **MIDI View Knob Pages** (Settings ▸ REAPER Views) sets how many pages of knobs there are, 1 to 5; **Page ◀ / ▶** go through them, stopping at the first and last. Each display shows its knob's CC and the value it last sent, with the selected track's name and the page (*MIDI 2/3*) on the left. Each page keeps its own values.
-- **Which CCs.** The knobs only use CCs that MIDI leaves undefined or general-purpose, so nothing a synth already responds to (modulation, volume, pan, expression, sustain…). There are 40 of those beside the buttons' CCs, which is where the limit of 5 pages comes from:
+- **Which CCs.** By default the knobs only use CCs that MIDI leaves undefined or general-purpose, so nothing a synth already responds to (modulation, volume, pan, expression, sustain…). There are 40 of those beside the buttons' CCs, which is where the limit of 5 pages comes from:
 
   | Page | Knobs 1–8 |
   | --- | --- |
@@ -323,6 +325,7 @@ The MIDI view works like the Komplete Kontrol view, but its knobs and buttons se
   | 4 | CC110–117 |
   | 5 | CC30, 31, 80–83, 90, 118 |
 
+- **Knob CCs and names:** as in MIDI mode, select a knob on the MIDI page to change its CC on each page, or to type a name (up to 8 characters) that the display shows instead of the CC.
 - **Buttons:** by default Preset ▲ / ▼ and Navigate ▲ ▼ ◀ ▶ send their MIDI-mode CCs; set any other button's CC, or turn one off, on the MIDI page. The other buttons keep their REAPER jobs.
 - **The Navigate knob** picks tracks, as in the Komplete Kontrol view.
 - **Holding Shift** (or latching it) gives the Shift commands and the MIDI Shift layer, as in the other REAPER views. The displays then show the Shift layer's CCs and values, with *SHIFT* on the left.
@@ -496,8 +499,10 @@ Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` pr
 | `shiftChannel` | Channel used while Shift is held, or `null` to make Shift a plain button |
 | `shiftLatch` | `true`: each press of Shift turns it on or off, instead of holding it (default `false`) |
 | `buttons` | Button name → CC number, or `null` to silence that button (Octave − / + still transpose the keys) |
-| `knobChannel` | The knobs' channel (default 3); their CCs come from their page (see [MIDI Mode](#midi-mode)). Earlier configs' `knobCCs` is ignored |
+| `knobChannel` | The knobs' channel (default 3) |
 | `knobPages` | Knob pages, 1–5 (default 1). With more than one, Page ◀ / ▶ go through them |
+| `knobCCs` | The knobs' CCs, page by page: up to 5 lists of 8 (default: the table in [MIDI Mode](#midi-mode)). Earlier configs' single list of 8 is page 1 |
+| `knobLabels` | Knob names, page by page: up to 8 names per page, one per knob, each up to 8 characters; `""` (or a missing one) shows the CC. For example `[["Cutoff", "Reso"], ["Attack"]]` |
 | `knobMode` | `absolute` (0–127, starts at 64), `relative-binary-offset` (64 ± n), `relative-twos-complement` (1–63 up, 127–65 down), `relative-signed-bit` (1–63 up, 65–127 down) |
 | `knobStepsPerCC` | Knob resolution: raw position units (the knobs report 0–999, wrapping) per MIDI step. Default 4; higher is finer and slower |
 | `knobTouchCCs` | 8 CCs for knob touch, or `[]` to turn touch off |
@@ -515,7 +520,7 @@ Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` pr
 | `REAPER.host`, `REAPER.sendPort`, `REAPER.receivePort` | Where REAPER is: its IP, its *Local listen port* (default 8000) and its *Device port* (default 9000) |
 | `REAPER.view` | The view at start: `mix` (default), `track`, `komplete-kontrol` or `midi` (a view that's turned off starts in `mix`) |
 | `REAPER.kompleteKontrolView` | The Komplete Kontrol view in REAPER mode, on or off (default on) |
-| `REAPER.midiView` | The [MIDI view](#midi-view): `enabled` (default off), `channel` (default 3), `pages` (knob pages, 1–5, default 1), `knobMode` (same modes as `knobMode`, default `absolute`), and `buttons` (button name → CC, or `null` to keep its REAPER command; Page ◀ / ▶ can't have one) |
+| `REAPER.midiView` | The [MIDI view](#midi-view): `enabled` (default off), `channel` (default 3), `pages` (knob pages, 1–5, default 1), `knobCCs` and `knobLabels` (the knobs' CCs and names, as for MIDI mode's), `knobMode` (same modes as `knobMode`, default `absolute`), and `buttons` (button name → CC, or `null` to keep its REAPER command; Page ◀ / ▶ can't have one) |
 | `REAPER.followSelectedTrack` | `true` (default): the keyboard follows the track you click in REAPER |
 | `REAPER.mirrorSelection` | `true` (default): in Track view and the Komplete Kontrol view, a track picked on the keyboard becomes REAPER's only selected track and is scrolled into view |
 | `REAPER.knobFullRange` | How far to turn a knob for a fader's full range, in raw knob units (default 600; lower is faster) |

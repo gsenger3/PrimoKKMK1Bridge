@@ -16,7 +16,7 @@ import Foundation
 
 let displayPayload = 248  // bytes after the report ID
 let displayCells = 9      // nine displays of 8 characters: one left of knob 1, then one above each knob
-let cellWidth = 8
+let cellWidth = displayChars  // (Config.swift, which the editor shares)
 let rowWidth = displayCells * cellWidth
 
 /// 16-segment glyphs. Low byte: the outer ring clockwise from the top-left (a1 a2 b c d2 d1 e f); high

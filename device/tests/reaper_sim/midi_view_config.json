@@ -1,12 +1,42 @@
 {
-  "_note": "REAPER mode's MIDI view (issue #5): Instance, Shift + Play in and out of the third view, 3 knob pages, CCs and REAPER commands.",
+  "_note": "REAPER mode's MIDI view (issue #5): Instance, Shift + Play in and out of the third view, 3 knob pages with knob names (issue #44) and page 2 knob 1's own CC (3), CCs and REAPER commands.",
   "reaper": {
     "enabled": true,
     "sendPort": 18000,
     "receivePort": 19000,
     "midiView": {
       "enabled": true,
-      "pages": 3
+      "pages": 3,
+      "knobLabels": [
+        [
+          "Glide"
+        ],
+        [
+          "Reverb"
+        ]
+      ],
+      "knobCCs": [
+        [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ],
+        [
+          3,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29
+        ]
+      ]
     }
   }
 }

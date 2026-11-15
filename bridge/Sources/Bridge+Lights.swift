@@ -85,8 +85,8 @@ extension Bridge {
     func feedback(channel: Int, cc: Int, value: Int) {
         // A knob's CC (any of its pages on the knobs' channel, or the Shift layer's): the knob carries on from there.
         if cfg.knobMode == .absolute,
-           channel == cfg.knobChannel && knobPageCCs.prefix(cfg.knobPages).contains(where: { $0.contains(cc) })
-            || channel == cfg.shiftChannel && knobPageCCs[0].contains(cc) {
+           channel == cfg.knobChannel && (0..<cfg.knobPages).contains(where: { pageKnobCCs(cfg.knobCCs, page: $0).contains(cc) })
+            || channel == cfg.shiftChannel && pageKnobCCs(cfg.knobCCs, page: 0).contains(cc) {
             absValues[channel * 128 + cc] = value
             scheduleDisplays()
         }

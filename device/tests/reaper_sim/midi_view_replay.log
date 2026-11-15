@@ -129,51 +129,51 @@ start REAPER selected track 1 "Kick"
 12:00:01.760 Shift + Play down
 12:00:01.760 REAPER midi view
 12:00:02.080 Shift up                CC108 ch1 = 0
-             display |KICK    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |KICK    |GLIDE   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
              display |MIDI 1/3|64      |64      |64      |64      |64      |64      |64      |64      |
              display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:02.290 Knob 1 turn (MIDI) +2   CC14 ch3 = 66
-             display |KICK    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |KICK    |GLIDE   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
              display |MIDI 1/3|66      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:02.300 Knob 1 turn (MIDI) +2   CC14 ch3 = 68
-             display |KICK    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |KICK    |GLIDE   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
              display |MIDI 1/3|68      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:02.310 Knob 1 turn (MIDI) +2   CC14 ch3 = 70
-             display |KICK    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |KICK    |GLIDE   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
              display |MIDI 1/3|70      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:02.320 Knob 1 turn (MIDI) +2   CC14 ch3 = 72
-             display |KICK    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |KICK    |GLIDE   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
              display |MIDI 1/3|72      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:02.330 Knob 1 turn (MIDI) +2   CC14 ch3 = 74
-             display |KICK    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |KICK    |GLIDE   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
              display |MIDI 1/3|74      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:02.540 PageRight down (MIDI view page 2/3)
-             display |KICK    |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |KICK    |REVERB  |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
              display |MIDI 2/3|64      |64      |64      |64      |64      |64      |64      |64      |
              display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
-12:00:02.860 Knob 1 turn (MIDI) +2   CC22 ch3 = 66
-             display |KICK    |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+12:00:02.860 Knob 1 turn (MIDI) +2   CC3 ch3 = 66
+             display |KICK    |REVERB  |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
              display |MIDI 2/3|66      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
-12:00:02.870 Knob 1 turn (MIDI) +2   CC22 ch3 = 68
-             display |KICK    |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+12:00:02.870 Knob 1 turn (MIDI) +2   CC3 ch3 = 68
+             display |KICK    |REVERB  |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
              display |MIDI 2/3|68      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
-12:00:02.880 Knob 1 turn (MIDI) +2   CC22 ch3 = 70
-             display |KICK    |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+12:00:02.880 Knob 1 turn (MIDI) +2   CC3 ch3 = 70
+             display |KICK    |REVERB  |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
              display |MIDI 2/3|70      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
-12:00:02.890 Knob 1 turn (MIDI) +2   CC22 ch3 = 72
-             display |KICK    |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+12:00:02.890 Knob 1 turn (MIDI) +2   CC3 ch3 = 72
+             display |KICK    |REVERB  |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
              display |MIDI 2/3|72      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
-12:00:02.900 Knob 1 turn (MIDI) +2   CC22 ch3 = 74
-             display |KICK    |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+12:00:02.900 Knob 1 turn (MIDI) +2   CC3 ch3 = 74
+             display |KICK    |REVERB  |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
              display |MIDI 2/3|74      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:03.110 PageRight down (MIDI view page 3/3)
@@ -202,7 +202,7 @@ start REAPER selected track 1 "Kick"
              display |MIDI 3/3|74      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:04.000 PageLeft down (MIDI view page 2/3)
-             display |KICK    |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |KICK    |REVERB  |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
              display |MIDI 2/3|74      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:04.320 NavRight down (MIDI)    CC89 ch3 = 127
@@ -234,7 +234,7 @@ start REAPER selected track 1 "Kick"
              display |SHIFT   |74      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:05.220 Shift up                CC108 ch1 = 0
-             display |KICK    |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |KICK    |REVERB  |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
              display |MIDI 2/3|74      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:05.430 Shift down              CC108 ch1 = 127
@@ -282,7 +282,7 @@ start REAPER selected track 1 "Kick"
              display |         | ######+ |     #   |         |         |         | ####+   | ####+   | ####+   |
 12:00:08.600 Instance down
 12:00:08.600 REAPER midi view
-             display |KICK    |CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |KICK    |REVERB  |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
              display |MIDI 2/3|74      |64      |64      |64      |64      |64      |64      |64      |
              display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:08.920 Instance down

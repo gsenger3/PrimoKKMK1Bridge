@@ -73,7 +73,7 @@ struct SettingsView: View {
                 }
                 Toggle("Shift Latching Enabled", isOn: $model.config.shiftLatch)
                 IntField(title: "Knob Pages", value: $model.config.knobPages, range: 1...knobPageCCs.count)
-                Text("The name DAWs see for the bridge's MIDI input and output. Renaming it means picking it again in your DAW. With the Shift layer on, buttons and knobs send on its channel while Shift is held. With Shift latching on, a press of Shift turns it on until the next press, and its light is full while it's on. The knobs send on a channel of their own (\(model.config.knobChannel)); with more than one knob page, Page ◀ / ▶ go through them (up to \(knobPageCCs.count), as there are only so many CCs nothing else uses).")
+                Text("The name DAWs see for the bridge's MIDI input and output. Renaming it means picking it again in your DAW. With the Shift layer on, buttons and knobs send on its channel while Shift is held. With Shift latching on, a press of Shift turns it on until the next press, and its light is full while it's on. The knobs send on a channel of their own (\(model.config.knobChannel)); with more than one knob page, Page ◀ / ▶ go through them (up to \(knobPageCCs.count)). Set each knob's CC and name per page on the MIDI page.")
                     .font(.caption).foregroundStyle(.secondary)
             }
 
@@ -209,7 +209,7 @@ struct SettingsView: View {
                 }
             }
             TextField("REAPER Resource Folder", text: $model.config.reaper.resourcePath)
-            Text("Instance goes Mix → Track → the Komplete Kontrol view or the MIDI view, whichever is on; with both on, Shift + Play swaps which. The MIDI view's knobs and chosen buttons send plain MIDI CCs on channel \(model.config.reaper.midiView.channel) (set them on the MIDI page); its other buttons keep their REAPER jobs, and Page ◀ / ▶ go through its knob pages (up to \(knobPageCCs.count), as there are only so many CCs nothing else uses). The resource folder is where REAPER keeps reaper-screensets.ini, for the screenset names on the displays.")
+            Text("Instance goes Mix → Track → the Komplete Kontrol view or the MIDI view, whichever is on; with both on, Shift + Play swaps which. The MIDI view's knobs and chosen buttons send plain MIDI CCs on channel \(model.config.reaper.midiView.channel) (set them on the MIDI page); its other buttons keep their REAPER jobs, and Page ◀ / ▶ go through its knob pages (up to \(knobPageCCs.count); set each knob's CC and name per page on the MIDI page). The resource folder is where REAPER keeps reaper-screensets.ini, for the screenset names on the displays.")
                 .font(.caption).foregroundStyle(.secondary)
         }
     }

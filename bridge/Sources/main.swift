@@ -251,7 +251,7 @@ for sig in [SIGINT, SIGTERM] {
 
 print("PrimoKKMK1Bridge \(appVersionString): Komplete Kontrol MK1 → virtual MIDI port \"\(cfg.portName)\"")
 print("  buttons on ch\(cfg.channel)" + (cfg.shiftChannel.map { " (ch\($0) while Shift is \(cfg.shiftLatch ? "latched" : "held"))" } ?? "")
-      + ", knobs \(ranges(knobPageCCs[0])) on ch\(cfg.knobChannel) \(cfg.knobMode.rawValue)"
+      + ", knobs \(ranges(pageKnobCCs(cfg.knobCCs, page: 0))) on ch\(cfg.knobChannel) \(cfg.knobMode.rawValue)"
       + (cfg.knobPages > 1 ? " (\(cfg.knobPages) pages, Page ◀ / ▶)" : "") + ", knob touch \(ranges(cfg.knobTouchCCs))")
 print("  Navigate turn \(cfg.navigateTurnCC.map { "CC\($0) \(cfg.navigateTurnMode.rawValue)" } ?? "off")"
       + ", Navigate touch \(cfg.navigateTouchCC.map { "CC\($0)" } ?? "off")")

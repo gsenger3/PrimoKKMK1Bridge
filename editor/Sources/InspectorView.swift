@@ -205,6 +205,24 @@ struct InspectorView: View {
         Binding(get: { model.kkCC(b) }, set: { model.setKKCC(b, $0) })
     }
 
+    /// A knob's name on a page (MIDI mode's or the MIDI view's, as the page edits).
+    private func knobName(_ p: Int, _ k: Int) -> Binding<String> {
+        Binding(get: { model.knobName(page: p, knob: k) }, set: { model.setKnobName(page: p, knob: k, $0) })
+    }
+
+    /// For each knob page: the knob's CC there, and its name (the CC shows on the display while it's empty).
+    @ViewBuilder private func knobRows(_ k: Int, pages: Int, channel: Int) -> some View {
+        ForEach(0..<pages, id: \.self) { p in
+            IntField(title: pages > 1 ? "Page \(p + 1): CC on channel \(channel)" : "CC on channel \(channel)",
+                     value: Binding(get: { model.knobCC(page: p, knob: k) }, set: { model.setKnobCC(page: p, knob: k, $0) }),
+                     range: 0...127)
+            LabeledContent(pages > 1 ? "Page \(p + 1): name" : "Name") {
+                TextField("", text: knobName(p, k), prompt: Text("CC \(model.knobCC(page: p, knob: k))"))
+                    .labelsHidden().multilineTextAlignment(.trailing)
+            }
+        }
+    }
+
     private func midiViewCC(_ b: String) -> Binding<Int?> {
         Binding(get: { model.midiViewCC(b) }, set: { model.setMidiViewCC(b, $0) })
     }
@@ -249,14 +267,11 @@ struct InspectorView: View {
 
     @ViewBuilder private func midiKnob(_ k: Int) -> some View {
         Section("Knob \(k + 1)") {
-            ForEach(0..<model.config.knobPages, id: \.self) { p in
-                LabeledContent(model.config.knobPages > 1 ? "Turn, page \(p + 1)" : "Turn",
-                               value: "CC \(knobPageCCs[p][k]) on channel \(model.config.knobChannel)")
-            }
+            knobRows(k, pages: model.config.knobPages, channel: model.config.knobChannel)
             if model.knobTouchOn {
                 IntField(title: "Touch CC (channel \(model.config.channel))", value: $model.config.knobTouchCCs[k], range: 0...127)
             }
-            note("Each knob page has its own CCs, chosen so they don't clash with anything else the bridge or the keyboard sends; set how many pages in Settings. With Shift held, the turn goes out as CC \(knobPageCCs[0][k]) on \(shiftText), with its own value.")
+            note("A name (up to \(displayChars) characters, shown in capitals) replaces the CC on the knob's display. Each knob page has its own CCs; the defaults are ones nothing else the bridge or the keyboard sends uses. Set how many pages in Settings. With Shift held, the turn goes out as page 1's CC on \(shiftText), with its own value.")
         }
         Section("All eight knobs") {
             IntField(title: "Knobs' channel", value: $model.config.knobChannel, range: 1...16)
@@ -353,7 +368,7 @@ struct InspectorView: View {
                 LabeledContent("Komplete Kontrol view", value: "CC \(model.config.kompleteKontrol.encoderCCs[k])")
             }
             if model.config.reaper.midiView.enabled {
-                LabeledContent("MIDI view", value: "CC \(knobPageCCs[0][k])"
+                LabeledContent("MIDI view", value: "CC \(pageKnobCCs(model.config.reaper.midiView.knobCCs, page: 0)[k])"
                                + (model.config.reaper.midiView.pages > 1 ? " (page 1; Page ◀ / ▶ for the others)" : ""))
             }
             note("Track view pages 2 and on: sends 4–11, 12–16. Track view, Shift + turn: the volume goes to 0 dB, the pan to centre, record arm sets monitoring; other knobs send their MIDI CC on \(shiftText).")
@@ -467,10 +482,8 @@ struct InspectorView: View {
 
     @ViewBuilder private func midiViewKnob(_ k: Int) -> some View {
         Section("Knob \(k + 1)") {
-            ForEach(0..<model.config.reaper.midiView.pages, id: \.self) { p in
-                LabeledContent("Page \(p + 1)", value: "CC \(knobPageCCs[p][k])")
-            }
-            note("Each page has its own CCs, chosen so they don't clash with anything else the bridge or the keyboard sends. Its display on the keyboard shows the CC and the value it last sent.")
+            knobRows(k, pages: model.config.reaper.midiView.pages, channel: model.config.reaper.midiView.channel)
+            note("A name (up to \(displayChars) characters, shown in capitals) replaces the CC on the knob's display, above the value it last sent. Each page has its own CCs; the defaults are ones nothing else the bridge or the keyboard sends uses.")
         }
         Section("All knobs in this view") {
             IntField(title: "MIDI channel", value: $model.config.reaper.midiView.channel, range: 1...16)
