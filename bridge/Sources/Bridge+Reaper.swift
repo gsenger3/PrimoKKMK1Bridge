@@ -125,6 +125,10 @@ extension Bridge {
             showMessage("FX", "no plugins on this track")
         case .midiDevicesReset:
             log("REAPER was running before the bridge started: asked it to reset its MIDI devices, so it opens the bridge's new MIDI ports")
+        case .thirdView:
+            showMessage("VIEW", "Instance goes to the \(r.third == .midi ? "MIDI" : "Komplete Kontrol") view now", seconds: 1.5)
+        case .thirdViewNeedsBoth:
+            showMessage("VIEW", "Shift + Play swaps the Komplete Kontrol and MIDI views:", "turn both on in Settings", seconds: 2)
         case .learn:
             toggleLearning()
         case .learnStopped(let why):

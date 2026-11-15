@@ -57,7 +57,7 @@ final class Bridge {
     var onDisplayFrame: (([String]) -> Void)?
 
     var reaper: ReaperSession?
-    lazy var nksLayout: NKSLayout? = loadNKSLayout()  // NKS pages from reaper.kompleteKontrol.nksFile, if set
+    lazy var nksLayout: NKSLayout? = loadNKSLayout()  // NKS pages from kompleteKontrol.nksFile, if set
     var kkInstrument: String?                        // the plugin KK hosts on the selected track, from the REAPER script
     let nksLookup = NKSLookup()                      // finds a plugin's NKS pages, off the main queue
     var nksLookupEnabled = true                      // false in replays: they don't read this Mac's KK database
@@ -72,10 +72,17 @@ final class Bridge {
     var logOSC = false                        // --log-osc: print what REAPER sends
     let reaperCommands: [Int: ReaperCommand]       // button bit -> REAPER command (REAPER mode, without Shift)
     let reaperShiftCommands: [Int: ReaperCommand]  // button bit -> REAPER command while Shift is held
-    let kkButtonCCs: [Int: Int]                    // button bit -> CC in the Komplete Kontrol view
+    let kkButtonCCs: [Int: Int]                    // button bit -> CC in the Komplete Kontrol view (either mode)
+    let midiViewCCs: [Int: Int]                    // button bit -> CC in REAPER mode's MIDI view
     var pressCC: [Int: Int] = [:]                  // button bit -> CC its press sent, when not its usual one
+    var pressView: [Int: String] = [:]             // button bit -> the view whose CC that was ("KK"), for the log
     var reaperHeld: [Int: ReaperCommand] = [:]     // buttons whose press went to REAPER, and the command it ran
-    var learnHeld = Set<Int>()                     // buttons whose press moved the NKS learn selection (no CC)
+    var quietHeld = Set<Int>()                     // buttons whose press sent nothing: it moved the NKS learn
+                                                   // selection, or switched MIDI mode's view, so its release is quiet
+    var midiModeKKView = false                     // MIDI mode: the Komplete Kontrol view shows (Instance switches)
+    var midiViewPage = 0                           // REAPER mode's MIDI view: the knob page (Page ◀ / ▶), from 0
+    var knobPage = 0                               // MIDI mode: the knob page (knobPages, Page ◀ / ▶), from 0
+    var touchCCSent = Set<Int>()                   // MIDI mode: knobs whose touch CC went out (none in the KK view)
 
     var devicePID = 0                              // the connected model, for its key count
     var trackColor: (red: Int, green: Int, blue: Int)?  // the selected REAPER track's colour (0-127 each), from the script
@@ -100,11 +107,43 @@ final class Bridge {
         }
         reaperCommands = commands(cfg.reaper.buttons)
         reaperShiftCommands = commands(cfg.reaper.shiftButtons)
-        var kkCCs: [Int: Int] = [:]
-        if cfg.reaper.enabled {
-            for d in buttonDefs { if let cc = cfg.reaper.kompleteKontrol.buttons[d.name] ?? nil { kkCCs[d.bit] = cc } }
+        var kkCCs: [Int: Int] = [:], midiCCs: [Int: Int] = [:]
+        for d in buttonDefs { if let cc = cfg.kompleteKontrol.buttons[d.name] ?? nil { kkCCs[d.bit] = cc } }
+        if cfg.reaper.enabled && cfg.reaper.midiView.enabled {
+            for d in buttonDefs { if let cc = cfg.reaper.midiView.buttons[d.name] ?? nil { midiCCs[d.bit] = cc } }
         }
         kkButtonCCs = kkCCs
+        midiViewCCs = midiCCs
+    }
+
+    /// MIDI mode's Komplete Kontrol view shows (kompleteKontrolView, switched to with Instance).
+    var inMIDIModeKKView: Bool { !cfg.reaper.enabled && cfg.kompleteKontrolView && midiModeKKView }
+
+    /// The CC a button sends in the view showing, if that view gives it one: the Komplete Kontrol view's (in either
+    /// mode) or REAPER mode's MIDI view's, with the view's name for the log. Without Shift only: Shift keeps its layer.
+    func viewButtonCC(_ bit: Int) -> (channel: Int, cc: Int, view: String)? {
+        if let r = reaper {
+            switch r.view {
+            case .kk: return kkButtonCCs[bit].map { (cfg.kompleteKontrol.channel, $0, "KK") }
+            case .midi: return midiViewCCs[bit].map { (cfg.reaper.midiView.channel, $0, "MIDI") }
+            case .mix, .track: return nil
+            }
+        }
+        return inMIDIModeKKView ? kkButtonCCs[bit].map { (cfg.kompleteKontrol.channel, $0, "KK") } : nil
+    }
+
+    /// MIDI mode's knob CCs on its current page.
+    var knobCCs: [Int] { knobPageCCs[min(knobPage, knobPageCCs.count - 1)] }
+
+    /// The MIDI view's knob CCs on its current page.
+    var midiViewKnobCCs: [Int] { knobPageCCs[min(midiViewPage, knobPageCCs.count - 1)] }
+
+    /// Raw knob movement in whole CC steps (knobStepsPerCC raw units each); the rest waits for the next turn.
+    func knobSteps(_ k: Int, _ d: Int) -> Int {
+        knobAccum[k] += d
+        let steps = knobAccum[k] / cfg.knobStepsPerCC
+        knobAccum[k] -= steps * cfg.knobStepsPerCC
+        return steps
     }
 
     func log(_ s: String) { print("\(clock()) \(s)") }
@@ -124,8 +163,10 @@ final class Bridge {
         prev = nil
         pressChannel = [:]
         pressCC = [:]
+        pressView = [:]
         reaperHeld = [:]
-        learnHeld = []
+        quietHeld = []
+        touchCCSent = []
         held = []
         lightsSent = nil
         displaySent = [nil, nil, nil]
@@ -233,30 +274,47 @@ final class Bridge {
             } else if now {
                 if let r = reaper, !shiftHeld, r.view == .kk, let cc = kkButtonCCs[def.bit], r.learning != nil,
                    cc == 42 || cc == 43 {  // NKS learn mode: the page arrows move the selection, and don't page KK
-                    learnHeld.insert(def.bit)
+                    quietHeld.insert(def.bit)
                     if verbose { log("\(def.name) down (learn: \(cc == 43 ? "next" : "previous") slot)") }
                     r.learnMove(forward: cc == 43)
-                } else if let r = reaper, !shiftHeld, r.view == .kk, let cc = kkButtonCCs[def.bit] {
-                    let ch = cfg.reaper.kompleteKontrol.channel
-                    pressChannel[def.bit] = ch
-                    pressCC[def.bit] = cc
-                    sendCC(ch, cc, 127, "\(def.name) down (KK)")
-                    r.kkButtonSent(cc: cc)
+                } else if !cfg.reaper.enabled, cfg.kompleteKontrolView, !shiftHeld, def.name == "Instance" {
+                    // MIDI mode with the Komplete Kontrol view: Instance switches between it and the MIDI controls
+                    quietHeld.insert(def.bit)
+                    midiModeKKView.toggle()
+                    if verbose { log("Instance: \(midiModeKKView ? "the Komplete Kontrol view" : "the MIDI controls")") }
+                } else if let r = reaper, !shiftHeld, r.view == .midi, def.name == "PageLeft" || def.name == "PageRight" {
+                    // the MIDI view: Page ◀ / ▶ go through its knob pages (stopping at the first and last)
+                    quietHeld.insert(def.bit)
+                    let pages = cfg.reaper.midiView.pages
+                    midiViewPage = max(0, min(pages - 1, midiViewPage + (def.name == "PageRight" ? 1 : -1)))
+                    if verbose { log("\(def.name) down (MIDI view page \(midiViewPage + 1)/\(pages))") }
+                } else if !shiftHeld, let v = viewButtonCC(def.bit) {  // the CC the view gives it
+                    pressChannel[def.bit] = v.channel
+                    pressCC[def.bit] = v.cc
+                    pressView[def.bit] = v.view
+                    sendCC(v.channel, v.cc, 127, "\(def.name) down (\(v.view))")
+                    if let r = reaper, r.view == .kk { r.kkButtonSent(cc: v.cc) }
                 } else if let r = reaper, let command = (shiftHeld ? reaperShiftCommands : reaperCommands)[def.bit] {
                     reaperHeld[def.bit] = command
                     if verbose { log("\(shiftHeld ? "Shift + " : "")\(def.name) down") }
                     if command == .previousPage || command == .nextPage { overlay = nil }  // show the new page at once
                     r.perform(command, down: true)
+                } else if !cfg.reaper.enabled, !shiftHeld, cfg.knobPages > 1, def.name == "PageLeft" || def.name == "PageRight" {
+                    // MIDI mode with knob pages: Page ◀ / ▶ go through them (stopping at the first and last)
+                    quietHeld.insert(def.bit)
+                    knobPage = max(0, min(cfg.knobPages - 1, knobPage + (def.name == "PageRight" ? 1 : -1)))
+                    if verbose { log("\(def.name) down (knob page \(knobPage + 1)/\(cfg.knobPages))") }
                 } else if let cc = cfg.buttons[def.name] ?? nil {
                     pressChannel[def.bit] = layer
                     sendCC(layer, cc, 127, "\(def.name) down")
                 }
-            } else if learnHeld.remove(def.bit) != nil {
-                continue  // its press only moved the learn selection
+            } else if quietHeld.remove(def.bit) != nil {
+                continue  // its press sent nothing
             } else if let command = reaperHeld.removeValue(forKey: def.bit) {
                 reaper?.perform(command, down: false)
             } else if let cc = pressCC.removeValue(forKey: def.bit) {
-                sendCC(pressChannel.removeValue(forKey: def.bit) ?? cfg.channel, cc, 0, "\(def.name) up (KK)")
+                sendCC(pressChannel.removeValue(forKey: def.bit) ?? cfg.channel, cc, 0,
+                       "\(def.name) up (\(pressView.removeValue(forKey: def.bit) ?? "KK"))")
             } else if let cc = cfg.buttons[def.name] ?? nil {
                 sendCC(pressChannel.removeValue(forKey: def.bit) ?? cfg.channel, cc, 0, "\(def.name) up")
             }
@@ -281,7 +339,15 @@ final class Bridge {
                 for k in 0..<8 {
                     let bit = knobTouchFirstBit + k
                     let was = isSet(p, bit), now = isSet(b, bit)
-                    if was != now { sendCC(cfg.channel, cfg.knobTouchCCs[k], now ? 127 : 0, "Knob \(k + 1) \(now ? "touch" : "untouch")") }
+                    guard was != now else { continue }
+                    // None in the Komplete Kontrol view, whose knob CCs (21-28) the touch CCs (22-29) would hit. A
+                    // touch sent before switching views still gets its release.
+                    if now, !inMIDIModeKKView {
+                        touchCCSent.insert(k)
+                        sendCC(cfg.channel, cfg.knobTouchCCs[k], 127, "Knob \(k + 1) touch")
+                    } else if !now, touchCCSent.remove(k) != nil {
+                        sendCC(cfg.channel, cfg.knobTouchCCs[k], 0, "Knob \(k + 1) untouch")
+                    }
                 }
             }
             if let cc = cfg.navigateTouchCC, isSet(p, navigateTouchBit) != isSet(b, navigateTouchBit) {
@@ -339,23 +405,37 @@ final class Bridge {
                     r.turnNKS(k, raw: d)
                     continue
                 }
-                let kk = cfg.reaper.kompleteKontrol
-                knobAccum[k] += d
-                let steps = knobAccum[k] / cfg.knobStepsPerCC
+                let kk = cfg.kompleteKontrol
+                let steps = knobSteps(k, d)
                 guard steps != 0 else { continue }
-                knobAccum[k] -= steps * cfg.knobStepsPerCC
                 turn(channel: kk.channel, cc: kk.encoderCCs[k], steps: steps, mode: kk.encoderMode, what: "Knob \(k + 1) turn (KK)")
+                continue
+            }
+            if toReaper, let r = reaper, r.view == .midi {  // MIDI view: the knob's generic CC
+                let m = cfg.reaper.midiView
+                let steps = knobSteps(k, d)
+                guard steps != 0 else { continue }
+                turn(channel: m.channel, cc: midiViewKnobCCs[k], steps: steps, mode: m.knobMode, what: "Knob \(k + 1) turn (MIDI)")
                 continue
             }
             if toReaper, let r = reaper {
                 r.turn(k, raw: d)
                 continue
             }
-            knobAccum[k] += d
-            let steps = knobAccum[k] / cfg.knobStepsPerCC
+            let steps = knobSteps(k, d)
             guard steps != 0 else { continue }
-            knobAccum[k] -= steps * cfg.knobStepsPerCC
-            turn(channel: layer, cc: cfg.knobCCs[k], steps: steps, mode: cfg.knobMode, what: "Knob \(k + 1) turn")
+            if !shiftHeld, inMIDIModeKKView {  // MIDI mode's Komplete Kontrol view: the knob's KK CC
+                let kk = cfg.kompleteKontrol
+                turn(channel: kk.channel, cc: kk.encoderCCs[k], steps: steps, mode: kk.encoderMode, what: "Knob \(k + 1) turn (KK)")
+                continue
+            }
+            // The knobs' channel and page; the Shift layer is always page 1's CCs on the Shift channel, as pages 3-5's
+            // CCs there are the Shift layer's button CCs.
+            if shiftHeld, let sc = cfg.shiftChannel {
+                turn(channel: sc, cc: knobPageCCs[0][k], steps: steps, mode: cfg.knobMode, what: "Knob \(k + 1) turn")
+            } else {
+                turn(channel: cfg.knobChannel, cc: knobCCs[k], steps: steps, mode: cfg.knobMode, what: "Knob \(k + 1) turn")
+            }
         }
         scheduleDisplays()
     }

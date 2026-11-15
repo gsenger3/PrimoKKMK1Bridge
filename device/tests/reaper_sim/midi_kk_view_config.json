@@ -1,0 +1,7 @@
+{
+  "_note": "MIDI mode's Komplete Kontrol view (issue #5): Instance switches; KK CCs on channel 4 from the top-level kompleteKontrol; no touch CCs there.",
+  "kompleteKontrolView": true,
+  "kompleteKontrol": {
+    "channel": 4
+  }
+}

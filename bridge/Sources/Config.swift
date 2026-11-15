@@ -23,9 +23,11 @@ enum TurnMode: String, Codable {
     case relativeSignedBit = "relative-signed-bit"
 }
 
-/// The Komplete Kontrol view: the knobs and navigation buttons send fixed MIDI CCs on the virtual port (an
-/// NKS-style assignment like the Novation Launchkey MK4's) for Komplete Kontrol to pick up. Like the
-/// Launchkey, the bridge doesn't follow KK's pages or presets: it keeps one set of 8 knob values.
+/// The Komplete Kontrol view, in MIDI mode (kompleteKontrolView) and REAPER mode (reaper.kompleteKontrolView): the
+/// knobs and navigation buttons send fixed MIDI CCs on the virtual port (an NKS-style assignment like the Novation
+/// Launchkey MK4's) for Komplete Kontrol to pick up. Like the Launchkey, the bridge doesn't follow KK's pages or
+/// presets: it keeps one set of 8 knob values. In REAPER mode, NKS integration can show and set KK's parameters
+/// instead. The config's top-level kompleteKontrol; earlier configs had it as reaper.kompleteKontrol, which still loads.
 /// (Configs with the earlier pageButtons, presetButtons or hostParameters keys still load; those are ignored.)
 struct KKViewConfig: Codable {
     var channel = 1
@@ -35,9 +37,10 @@ struct KKViewConfig: Codable {
         "PresetUp": 37, "PresetDown": 36, "NavUp": 41, "NavDown": 40, "NavLeft": 42, "NavRight": 43,
         "PageLeft": 42, "PageRight": 43,  // the arrows next to the knobs page KK's NKS pages too, like Navigate ◀ / ▶
     ]
-    /// NKS integration: for an instrument with NKS presets (.nksf), or whose pages were learned (learn-nks-pages), the
-    /// knobs set the parameters on Komplete Kontrol's NKS pages through REAPER, and the displays show their names and
-    /// values. The REAPER script reports which instrument KK hosts. Off: the knobs send encoderCCs for KK's MIDI template.
+    /// NKS integration (REAPER mode only): for an instrument with NKS presets (.nksf), or whose pages were learned
+    /// (learn-nks-pages), the knobs set the parameters on Komplete Kontrol's NKS pages through REAPER, and the displays
+    /// show their names and values. The REAPER script reports which instrument KK hosts. Off: the knobs send encoderCCs
+    /// for KK's MIDI template.
     var nksIntegration = false
     /// With NKS integration, an NKS preset file (.nksf) whose pages to use whatever KK hosts (for tests).
     var nksFile: String?
@@ -63,7 +66,7 @@ struct KKViewConfig: Codable {
         if let user = try c.decodeIfPresent([String: Int?].self, forKey: .buttons) {
             for (name, cc) in user {
                 guard name != "Shift", buttonDefs.contains(where: { $0.name == name }) else {
-                    throw ConfigError(description: "reaper.kompleteKontrol.buttons: unknown button \"\(name)\"")
+                    throw ConfigError(description: "kompleteKontrol.buttons: unknown button \"\(name)\"")
                 }
                 buttons.updateValue(cc, forKey: name)
             }
@@ -72,14 +75,71 @@ struct KKViewConfig: Codable {
 
     func validate() throws {
         guard (1...16).contains(channel) else {
-            throw ConfigError(description: "reaper.kompleteKontrol.channel must be 1-16, got \(channel)")
+            throw ConfigError(description: "kompleteKontrol.channel must be 1-16, got \(channel)")
         }
         guard encoderCCs.count == 8, encoderCCs.allSatisfy({ (0...127).contains($0) }) else {
-            throw ConfigError(description: "reaper.kompleteKontrol.encoderCCs needs 8 CCs, each 0-127")
+            throw ConfigError(description: "kompleteKontrol.encoderCCs needs 8 CCs, each 0-127")
         }
         for (name, cc) in buttons {
             if let cc, !(0...127).contains(cc) {
-                throw ConfigError(description: "reaper.kompleteKontrol.buttons.\(name) must be 0-127, got \(cc)")
+                throw ConfigError(description: "kompleteKontrol.buttons.\(name) must be 0-127, got \(cc)")
+            }
+        }
+    }
+}
+
+/// The knobs' CCs on each knob page, in MIDI mode (knobPages) and REAPER mode's MIDI view (reaper.midiView.pages).
+/// Only MIDI 1.0's undefined controllers (3, 9, 14-31, 85-90, 102-119) and its general-purpose ones (16-19, 80-83),
+/// so nothing a synth already responds to (modulation, volume, pan, expression, sustain, data entry, channel
+/// mode...), less the MIDI view's default button CCs (85-89, 119): 40 CCs, in pages of 8 (3 and 9 are left over).
+/// The knobs send them on a channel of their own (3 by default), where nothing else the bridge sends meets them: the
+/// buttons, knob touch, the Navigate knob, the Komplete Kontrol view, Shift and the Octave buttons all use channel 1.
+let knobPageCCs: [[Int]] = [Array(14...21), Array(22...29), Array(102...109), Array(110...117),
+                            [30, 31, 80, 81, 82, 83, 90, 118]]
+
+/// REAPER mode's MIDI view (issue #5): like the Komplete Kontrol view, but the knobs and the buttons given a CC here
+/// send generic MIDI CCs, for anything that learns CCs. The other buttons keep their REAPER commands. Off by default;
+/// Instance reaches it in place of the Komplete Kontrol view (Shift + Play swaps the two). The knobs have `pages`
+/// pages of CCs (knobPageCCs), which Page ◀ / ▶ go through.
+struct MIDIViewConfig: Codable {
+
+    var enabled = false
+    var channel = 3
+    var pages = 1  // 1 to knobPageCCs.count
+    var knobMode = TurnMode.absolute
+    var buttons: [String: Int?] = [  // Page ◀ / ▶ page the knobs instead
+        "PresetUp": 119, "PresetDown": 85, "NavUp": 86, "NavDown": 87, "NavLeft": 88, "NavRight": 89,
+    ]
+
+    enum CodingKeys: String, CodingKey { case enabled, channel, pages, knobMode, buttons }
+
+    init() {}
+
+    init(from decoder: Decoder) throws {
+        self.init()
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        enabled = try c.decodeIfPresent(Bool.self, forKey: .enabled) ?? enabled
+        channel = try c.decodeIfPresent(Int.self, forKey: .channel) ?? channel
+        pages = try c.decodeIfPresent(Int.self, forKey: .pages) ?? pages
+        knobMode = try c.decodeIfPresent(TurnMode.self, forKey: .knobMode) ?? knobMode
+        if let user = try c.decodeIfPresent([String: Int?].self, forKey: .buttons) {
+            for (name, cc) in user where name != "PageLeft" && name != "PageRight" {  // those page the knobs
+                guard name != "Shift", buttonDefs.contains(where: { $0.name == name }) else {
+                    throw ConfigError(description: "reaper.midiView.buttons: unknown button \"\(name)\"")
+                }
+                buttons.updateValue(cc, forKey: name)
+            }
+        }
+    }
+
+    func validate() throws {
+        guard (1...16).contains(channel) else { throw ConfigError(description: "reaper.midiView.channel must be 1-16, got \(channel)") }
+        guard (1...knobPageCCs.count).contains(pages) else {
+            throw ConfigError(description: "reaper.midiView.pages must be 1-\(knobPageCCs.count), got \(pages)")
+        }
+        for (name, cc) in buttons {
+            if let cc, !(0...127).contains(cc) {
+                throw ConfigError(description: "reaper.midiView.buttons.\(name) must be 0-127, got \(cc)")
             }
         }
     }
@@ -99,7 +159,10 @@ struct ReaperConfig: Codable {
     var resourcePath = "~/Library/Application Support/REAPER"  // where REAPER keeps reaper-screensets.ini
     var lightGuide = true          // show the selected track's colour on the keys (sent by reaper/PrimoKKMK1Bridge_TrackColor.lua)
     var lightGuideBrightness = 50  // percent
-    var kompleteKontrol = KKViewConfig()
+    var kompleteKontrolView = true  // the Komplete Kontrol view (its settings: the top-level kompleteKontrol)
+    var midiView = MIDIViewConfig()
+    /// reaper.kompleteKontrol, from a config written before it moved to the top level (read, never written).
+    private(set) var earlierKompleteKontrol: KKViewConfig?
     var buttons: [String: String?] = [
         "Play": "play", "Stop": "stop", "Rec": "record", "Loop": "repeat", "Rewind": "rewind", "FastForward": "forward",
         "NavUp": "action:1012", "NavDown": "action:1011",  // under the big knob: View: Zoom in / out horizontal
@@ -117,15 +180,37 @@ struct ReaperConfig: Codable {
         "Instance": "learn-nks-pages",  // Komplete Kontrol view with NKS integration
         "Scale": "action:40401",  // Automation: Set track automation mode to read
         "Arp": "action:40402",    // Automation: Set track automation mode to touch
-        "Play": "midiaction:40481",  // MIDI Editor: Options: MIDI inputs as step input mode
+        "Play": "switch-kk-midi-view",  // which of the two Instance reaches; MIDI step input (midiaction:40481) is free
         "NavUp": "action:40111", "NavDown": "action:40112",  // View: Zoom in / out vertical
         "NavLeft": "action:40646", "NavRight": "action:40647",  // View: Move cursor left / right to grid division
     ]
 
     enum CodingKeys: String, CodingKey {
         case enabled, host, sendPort, receivePort, view, followSelectedTrack, knobFullRange, navigateTurn, buttons
-        case shiftButtons, trackNameSeconds, mirrorSelection, resourcePath, kompleteKontrol
+        case shiftButtons, trackNameSeconds, mirrorSelection, resourcePath, kompleteKontrolView, midiView
         case lightGuide, lightGuideBrightness
+        case kompleteKontrol  // read only, from earlier configs
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(enabled, forKey: .enabled)
+        try c.encode(host, forKey: .host)
+        try c.encode(sendPort, forKey: .sendPort)
+        try c.encode(receivePort, forKey: .receivePort)
+        try c.encode(view, forKey: .view)
+        try c.encode(followSelectedTrack, forKey: .followSelectedTrack)
+        try c.encode(knobFullRange, forKey: .knobFullRange)
+        try c.encode(navigateTurn, forKey: .navigateTurn)
+        try c.encode(buttons, forKey: .buttons)
+        try c.encode(shiftButtons, forKey: .shiftButtons)
+        try c.encode(trackNameSeconds, forKey: .trackNameSeconds)
+        try c.encode(mirrorSelection, forKey: .mirrorSelection)
+        try c.encode(resourcePath, forKey: .resourcePath)
+        try c.encode(kompleteKontrolView, forKey: .kompleteKontrolView)
+        try c.encode(midiView, forKey: .midiView)
+        try c.encode(lightGuide, forKey: .lightGuide)
+        try c.encode(lightGuideBrightness, forKey: .lightGuideBrightness)
     }
 
     init() {}
@@ -146,7 +231,9 @@ struct ReaperConfig: Codable {
         resourcePath = try c.decodeIfPresent(String.self, forKey: .resourcePath) ?? resourcePath
         lightGuide = try c.decodeIfPresent(Bool.self, forKey: .lightGuide) ?? lightGuide
         lightGuideBrightness = try c.decodeIfPresent(Int.self, forKey: .lightGuideBrightness) ?? lightGuideBrightness
-        kompleteKontrol = try c.decodeIfPresent(KKViewConfig.self, forKey: .kompleteKontrol) ?? kompleteKontrol
+        kompleteKontrolView = try c.decodeIfPresent(Bool.self, forKey: .kompleteKontrolView) ?? kompleteKontrolView
+        midiView = try c.decodeIfPresent(MIDIViewConfig.self, forKey: .midiView) ?? midiView
+        earlierKompleteKontrol = try c.decodeIfPresent(KKViewConfig.self, forKey: .kompleteKontrol)
         func merge(_ key: CodingKeys, into map: inout [String: String?]) throws {
             guard let user = try c.decodeIfPresent([String: String?].self, forKey: key) else { return }
             for (name, command) in user {
@@ -166,9 +253,9 @@ struct ReaperConfig: Codable {
             guard (1...65535).contains(v) else { throw ConfigError(description: "\(what) must be 1-65535, got \(v)") }
         }
         guard sendPort != receivePort else { throw ConfigError(description: "reaper.sendPort and reaper.receivePort must differ") }
-        try kompleteKontrol.validate()
+        try midiView.validate()
         guard ReaperView.allCases.contains(where: { $0.configName == view }) else {
-            throw ConfigError(description: "reaper.view must be \"mix\", \"track\" or \"komplete-kontrol\", got \"\(view)\"")
+            throw ConfigError(description: "reaper.view must be \"mix\", \"track\", \"komplete-kontrol\" or \"midi\", got \"\(view)\"")
         }
         guard knobFullRange >= 10 else { throw ConfigError(description: "reaper.knobFullRange must be at least 10") }
         guard (1...100).contains(lightGuideBrightness) else {
@@ -196,7 +283,8 @@ struct Config: Codable {
     var shiftChannel: Int? = 2
     var shiftLatch = false  // each press of Shift turns it on or off, instead of holding it (issue #21)
     var buttons: [String: Int?] = Dictionary(uniqueKeysWithValues: buttonDefs.map { ($0.name, Optional($0.cc)) })
-    var knobCCs = Array(14...21)
+    var knobChannel = 3  // the knobs' channel: the CCs of their page (knobPageCCs), apart from everything on channel
+    var knobPages = 1    // knob pages, 1 to knobPageCCs.count: with more than one, Page ◀ / ▶ go through them
     var knobMode = TurnMode.absolute
     var knobStepsPerCC = 4
     var knobTouchCCs = Array(22...29)
@@ -208,13 +296,15 @@ struct Config: Codable {
     var lightIdleBrightness = 6
     var displays = true
     var keyboardSource: String? = "auto"  // merged into the virtual port: "auto" (the keyboard's Port 1), a name, or null
+    var kompleteKontrolView = false  // MIDI mode: Instance switches between it and the Komplete Kontrol view (issue #5)
+    var kompleteKontrol = KKViewConfig()  // the Komplete Kontrol view's settings, for both modes
     var reaper = ReaperConfig()
     var verbose = false  // log every message the bridge sends, like --verbose (issue #7)
 
     enum CodingKeys: String, CodingKey {
-        case portName, channel, shiftChannel, shiftLatch, buttons, knobCCs, knobMode, knobStepsPerCC, knobTouchCCs
+        case portName, channel, shiftChannel, shiftLatch, buttons, knobChannel, knobPages, knobMode, knobStepsPerCC, knobTouchCCs
         case navigateTurnCC, navigateTurnMode, navigateTouchCC, lights, lightBrightness, lightIdleBrightness
-        case displays, reaper, keyboardSource, verbose
+        case displays, reaper, keyboardSource, verbose, kompleteKontrolView, kompleteKontrol
     }
 
     init() {}
@@ -231,7 +321,9 @@ struct Config: Codable {
         channel = try c.decodeIfPresent(Int.self, forKey: .channel) ?? channel
         shiftChannel = try nullable(.shiftChannel, shiftChannel)
         shiftLatch = try c.decodeIfPresent(Bool.self, forKey: .shiftLatch) ?? shiftLatch
-        knobCCs = try c.decodeIfPresent([Int].self, forKey: .knobCCs) ?? knobCCs
+        // (Earlier configs' knobCCs, the knobs' CCs on channel 1, is left alone: the knob pages' CCs replace it.)
+        knobChannel = try c.decodeIfPresent(Int.self, forKey: .knobChannel) ?? knobChannel
+        knobPages = try c.decodeIfPresent(Int.self, forKey: .knobPages) ?? knobPages
         knobMode = try c.decodeIfPresent(TurnMode.self, forKey: .knobMode) ?? knobMode
         knobStepsPerCC = try c.decodeIfPresent(Int.self, forKey: .knobStepsPerCC) ?? knobStepsPerCC
         knobTouchCCs = try c.decodeIfPresent([Int].self, forKey: .knobTouchCCs) ?? knobTouchCCs
@@ -244,6 +336,9 @@ struct Config: Codable {
         displays = try c.decodeIfPresent(Bool.self, forKey: .displays) ?? displays
         if c.contains(.keyboardSource) { keyboardSource = try c.decodeIfPresent(String.self, forKey: .keyboardSource) }
         reaper = try c.decodeIfPresent(ReaperConfig.self, forKey: .reaper) ?? reaper
+        kompleteKontrolView = try c.decodeIfPresent(Bool.self, forKey: .kompleteKontrolView) ?? kompleteKontrolView
+        kompleteKontrol = try c.decodeIfPresent(KKViewConfig.self, forKey: .kompleteKontrol)
+            ?? reaper.earlierKompleteKontrol ?? kompleteKontrol
         verbose = try c.decodeIfPresent(Bool.self, forKey: .verbose) ?? verbose
         if let user = try c.decodeIfPresent([String: Int?].self, forKey: .buttons) {
             for (name, cc) in user {
@@ -265,19 +360,22 @@ struct Config: Codable {
         }
         try ch(channel, "channel")
         if let s = shiftChannel { try ch(s, "shiftChannel") }
-        guard knobCCs.count == 8 else { throw ConfigError(description: "knobCCs needs exactly 8 entries") }
+        try ch(knobChannel, "knobChannel")
+        guard (1...knobPageCCs.count).contains(knobPages) else {
+            throw ConfigError(description: "knobPages must be 1-\(knobPageCCs.count), got \(knobPages)")
+        }
         guard knobTouchCCs.isEmpty || knobTouchCCs.count == 8 else {
             throw ConfigError(description: "knobTouchCCs needs 8 entries, or [] to turn knob touch off")
         }
         guard knobStepsPerCC >= 1 else { throw ConfigError(description: "knobStepsPerCC must be at least 1") }
         for (name, v) in buttons { if let v { try cc(v, "buttons.\(name)") } }
-        for v in knobCCs { try cc(v, "knobCCs") }
         for v in knobTouchCCs { try cc(v, "knobTouchCCs") }
         if let v = navigateTurnCC { try cc(v, "navigateTurnCC") }
         if let v = navigateTouchCC { try cc(v, "navigateTouchCC") }
         for (v, what) in [(lightBrightness, "lightBrightness"), (lightIdleBrightness, "lightIdleBrightness")] {
             guard (0...255).contains(v) else { throw ConfigError(description: "\(what) must be 0-255, got \(v)") }
         }
+        try kompleteKontrol.validate()
         try reaper.validate()
     }
 
@@ -288,7 +386,9 @@ struct Config: Codable {
             if let other = seen[v] { warnings.append("CC\(v) is used by both \(other) and \(what)") } else { seen[v] = what }
         }
         for d in buttonDefs { add(buttons[d.name] ?? nil, d.name) }
-        for (i, v) in knobCCs.enumerated() { add(v, "knob \(i + 1)") }
+        if knobChannel == channel {  // the knobs' pages share channel 1 with the buttons and knob touch
+            for p in 0..<knobPages { for (i, v) in knobPageCCs[p].enumerated() { add(v, "knob \(i + 1) (page \(p + 1))") } }
+        }
         for (i, v) in knobTouchCCs.enumerated() { add(v, "knob \(i + 1) touch") }
         add(navigateTurnCC, "Navigate turn")
         add(navigateTouchCC, "Navigate touch")

@@ -54,6 +54,14 @@ struct SettingsView: View {
 
     private var startView: Binding<String> { $model.config.reaper.view }
 
+    /// Turning a view off also moves REAPER mode's start view off it.
+    private func viewSwitch(_ on: WritableKeyPath<Config, Bool>, view: String) -> Binding<Bool> {
+        Binding(get: { model.config[keyPath: on] }, set: {
+            model.config[keyPath: on] = $0
+            if !$0 && model.config.reaper.view == view { model.config.reaper.view = "mix" }
+        })
+    }
+
     var body: some View {
         Form {
             Section("MIDI Configuration") {
@@ -64,7 +72,8 @@ struct SettingsView: View {
                     IntField(title: "Shift Layer Channel", value: shiftChannel, range: 1...16)
                 }
                 Toggle("Shift Latching Enabled", isOn: $model.config.shiftLatch)
-                Text("The name DAWs see for the bridge's MIDI input and output. Renaming it means picking it again in your DAW. With the Shift layer on, buttons and knobs send on its channel while Shift is held. With Shift latching on, a press of Shift turns it on until the next press, and its light is full while it's on.")
+                IntField(title: "Knob Pages", value: $model.config.knobPages, range: 1...knobPageCCs.count)
+                Text("The name DAWs see for the bridge's MIDI input and output. Renaming it means picking it again in your DAW. With the Shift layer on, buttons and knobs send on its channel while Shift is held. With Shift latching on, a press of Shift turns it on until the next press, and its light is full while it's on. The knobs send on a channel of their own (\(model.config.knobChannel)); with more than one knob page, Page ◀ / ▶ go through them (up to \(knobPageCCs.count), as there are only so many CCs nothing else uses).")
                     .font(.caption).foregroundStyle(.secondary)
             }
 
@@ -105,8 +114,8 @@ struct SettingsView: View {
             if model.config.reaper.enabled {
                 reaperViews
                 lightGuideSettings
-                kompleteKontrolView
             }
+            kompleteKontrolView
 
             loginSettings
 
@@ -180,7 +189,13 @@ struct SettingsView: View {
             Picker("Default View", selection: startView) {
                 Text("Mix view").tag("mix")
                 Text("Track view").tag("track")
-                Text("Komplete Kontrol view").tag("komplete-kontrol")
+                if model.config.reaper.kompleteKontrolView { Text("Komplete Kontrol view").tag("komplete-kontrol") }
+                if model.config.reaper.midiView.enabled { Text("MIDI view").tag("midi") }
+            }
+            Toggle("MIDI View Enabled", isOn: viewSwitch(\.reaper.midiView.enabled, view: "midi"))
+            if model.config.reaper.midiView.enabled {
+                IntField(title: "MIDI View Knob Pages", value: $model.config.reaper.midiView.pages,
+                         range: 1...knobPageCCs.count)
             }
             Toggle("Follow REAPER Track Selection", isOn: $model.config.reaper.followSelectedTrack)
             Toggle("Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)", isOn: $model.config.reaper.mirrorSelection)
@@ -194,7 +209,7 @@ struct SettingsView: View {
                 }
             }
             TextField("REAPER Resource Folder", text: $model.config.reaper.resourcePath)
-            Text("The resource folder is where REAPER keeps reaper-screensets.ini, for the screenset names on the displays.")
+            Text("Instance goes Mix → Track → the Komplete Kontrol view or the MIDI view, whichever is on; with both on, Shift + Play swaps which. The MIDI view's knobs and chosen buttons send plain MIDI CCs on channel \(model.config.reaper.midiView.channel) (set them on the MIDI page); its other buttons keep their REAPER jobs, and Page ◀ / ▶ go through its knob pages (up to \(knobPageCCs.count), as there are only so many CCs nothing else uses). The resource folder is where REAPER keeps reaper-screensets.ini, for the screenset names on the displays.")
                 .font(.caption).foregroundStyle(.secondary)
         }
     }
@@ -312,21 +327,39 @@ struct SettingsView: View {
         refreshScriptStatus()
     }
 
+    /// The Komplete Kontrol view, in MIDI mode or REAPER mode: whether it's on (each mode has its own switch), its
+    /// channel and knob values, and in REAPER mode, NKS integration.
     private var kompleteKontrolView: some View {
         Section("Komplete Kontrol View") {
-            IntField(title: "MIDI Channel", value: $model.config.reaper.kompleteKontrol.channel, range: 1...16)
-            Picker("Knob Values", selection: $model.config.reaper.kompleteKontrol.encoderMode) {
-                ForEach(turnModes, id: \.self) { Text(turnModeTitle($0)).tag($0) }
+            let reaperMode = model.config.reaper.enabled
+            Toggle("Komplete Kontrol View Enabled", isOn: reaperMode
+                   ? viewSwitch(\.reaper.kompleteKontrolView, view: "komplete-kontrol") : $model.config.kompleteKontrolView)
+            if reaperMode ? model.config.reaper.kompleteKontrolView : model.config.kompleteKontrolView {
+                IntField(title: "MIDI Channel", value: $model.config.kompleteKontrol.channel, range: 1...16)
+                Picker("Knob Values", selection: $model.config.kompleteKontrol.encoderMode) {
+                    ForEach(turnModes, id: \.self) { Text(turnModeTitle($0)).tag($0) }
+                }
             }
-            Toggle("NKS Integration Enabled", isOn: $model.config.reaper.kompleteKontrol.nksIntegration)
-            if model.config.reaper.kompleteKontrol.nksIntegration {
-                LabeledContent("REAPER Integration") { scriptControls }
-                LearnedPagesRows(url: model.fileURL.map {
-                    LearnedPages.url(configFile: $0, setting: model.config.reaper.kompleteKontrol.nksPagesFile)
-                })
+            if reaperMode && model.config.reaper.kompleteKontrolView {
+                kompleteKontrolNKS
             }
-            Text("With NKS integration, for instruments with NKS presets (.nksf), the knobs control the parameters on Komplete Kontrol's NKS pages, and the displays show their names and values. The REAPER script (the lightguide's) tells the bridge which instrument Komplete Kontrol hosts. For other instruments, such as Kontakt's, press Shift + Instance in the Komplete Kontrol view to teach the bridge their pages; until then, and with NKS integration off, the knobs send the CCs above. Learned pages aren't part of these settings: renaming or deleting them applies at once.")
-                .font(.caption).foregroundStyle(.secondary)
+            if !reaperMode {
+                Text("Instance switches between the MIDI controls and the Komplete Kontrol view, whose knobs and chosen buttons send CCs for Komplete Kontrol's NKS template (set them on the Komplete Kontrol page). Its other buttons keep their MIDI CCs. Parameter names and values (NKS integration) need REAPER mode.")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
         }
+    }
+
+    /// REAPER mode's NKS integration, in the Komplete Kontrol view's section.
+    @ViewBuilder private var kompleteKontrolNKS: some View {
+        Toggle("NKS Integration Enabled", isOn: $model.config.kompleteKontrol.nksIntegration)
+        if model.config.kompleteKontrol.nksIntegration {
+            LabeledContent("REAPER Integration") { scriptControls }
+            LearnedPagesRows(url: model.fileURL.map {
+                LearnedPages.url(configFile: $0, setting: model.config.kompleteKontrol.nksPagesFile)
+            })
+        }
+        Text("With NKS integration, for instruments with NKS presets (.nksf), the knobs control the parameters on Komplete Kontrol's NKS pages, and the displays show their names and values. The REAPER script (the lightguide's) tells the bridge which instrument Komplete Kontrol hosts. For other instruments, such as Kontakt's, press Shift + Instance in the Komplete Kontrol view to teach the bridge their pages; until then, and with NKS integration off, the knobs send the CCs above. Learned pages aren't part of these settings: renaming or deleting them applies at once.")
+            .font(.caption).foregroundStyle(.secondary)
     }
 }

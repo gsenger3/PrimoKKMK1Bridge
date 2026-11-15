@@ -8,11 +8,11 @@
 //  Licensed under the MIT License. See LICENSE in the project root or
 //  https://github.com/gsenger3/PrimoKKMK1Bridge/blob/main/LICENSE
 //
-//  NKS integration (reaper.kompleteKontrol.nksIntegration): the Komplete Kontrol view's NKS knob pages, for the
+//  NKS integration (kompleteKontrol.nksIntegration): the Komplete Kontrol view's NKS knob pages, for the
 //  instrument that the selected track's Komplete Kontrol plugin hosts. The REAPER script reports that instrument
 //  (SysEx 03 / 04, and 05 for the fingerprint of its parameter names; see Bridge+LightGuide.swift). Its pages are
 //  the ones learned for it (NKSLearn.swift), else those of one of its presets in KK's database.
-//  reaper.kompleteKontrol.nksFile, if set, pins the pages instead. Without NKS integration, the view sends CCs.
+//  kompleteKontrol.nksFile, if set, pins the pages instead. Without NKS integration, the view sends CCs.
 
 import Foundation
 
@@ -20,7 +20,7 @@ extension Bridge {
     /// The Komplete Kontrol view's NKS pages now: none without NKS integration; else the pinned file's, or those
     /// learned for the instrument the REAPER script reports, or its .nksf presets'.
     var currentNKSLayout: NKSLayout? {
-        guard cfg.reaper.kompleteKontrol.nksIntegration else { return nil }
+        guard cfg.kompleteKontrol.nksIntegration else { return nil }
         if let pinned = nksLayout { return pinned }
         if let key = kkInstrumentKey, let learned = learnedPages?.layout(key) { return learned }
         return kkInstrument.flatMap { nksProducts[$0] ?? nil }?.layout
@@ -38,7 +38,7 @@ extension Bridge {
         guard id != kkInstrument else { return }
         kkInstrument = id
         kkFingerprint = nil  // the fingerprint follows (SysEx 05)
-        guard cfg.reaper.kompleteKontrol.nksIntegration else { return }
+        guard cfg.kompleteKontrol.nksIntegration else { return }
         cancelLearning("the instrument changed")
         readLearnedPages()
         defer { reaper?.setNKS(currentNKSLayout) }
@@ -58,22 +58,22 @@ extension Bridge {
     /// a repeat checks whether the learned pages file changed (the editor renames and deletes entries).
     func kkFingerprintReported(_ fp: String) {
         guard fp != kkFingerprint else {
-            if cfg.reaper.kompleteKontrol.nksIntegration, reaper?.learning == nil, readLearnedPages() {
+            if cfg.kompleteKontrol.nksIntegration, reaper?.learning == nil, readLearnedPages() {
                 reaper?.setNKS(currentNKSLayout)
             }
             return
         }
         kkFingerprint = fp
-        guard cfg.reaper.kompleteKontrol.nksIntegration else { return }
+        guard cfg.kompleteKontrol.nksIntegration else { return }
         if verbose, let key = kkInstrumentKey { log("Komplete Kontrol instrument: \(key)") }
         cancelLearning("the instrument changed")
         readLearnedPages()
         reaper?.setNKS(currentNKSLayout)
     }
 
-    /// reaper.kompleteKontrol.nksFile, read once (nil without it).
+    /// kompleteKontrol.nksFile, read once (nil without it).
     func loadNKSLayout() -> NKSLayout? {
-        guard let path = cfg.reaper.kompleteKontrol.nksFile else { return nil }
+        guard let path = cfg.kompleteKontrol.nksFile else { return nil }
         let url = URL(fileURLWithPath: (path as NSString).expandingTildeInPath)
         do {
             let layout = try NKSLayout(contentsOf: url)
@@ -117,7 +117,7 @@ extension Bridge {
             finishLearning()
             return
         }
-        guard cfg.reaper.kompleteKontrol.nksIntegration else {
+        guard cfg.kompleteKontrol.nksIntegration else {
             showMessage("LEARN", "needs NKS integration", "turn it on in the editor's Settings", seconds: 2)
             return
         }

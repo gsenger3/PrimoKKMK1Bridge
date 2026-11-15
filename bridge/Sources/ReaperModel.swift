@@ -21,6 +21,7 @@ enum ReaperCommand: Equatable {
     case goToStart, previousMarker, nextMarker, recordMode, undo, redo, browseFX, closeFX, panic
     case saveProject, renderProject
     case learnNKSPages  // Komplete Kontrol view: teach the instrument's NKS pages (Bridge+NKS.swift)
+    case switchKKMIDIView  // which of the Komplete Kontrol and MIDI views Instance reaches (issue #5)
     case screenset(Int)  // REAPER window set 1-10
     case action(Int)      // a main-section REAPER action, by command ID
     case midiAction(Int)  // a MIDI Editor action, by its own command ID (it acts on the open MIDI editor)
@@ -35,6 +36,7 @@ enum ReaperCommand: Equatable {
         ("record-mode", .recordMode), ("undo", .undo), ("redo", .redo),
         ("browse-fx", .browseFX), ("close-fx", .closeFX), ("panic", .panic),
         ("save-project", .saveProject), ("render-project", .renderProject), ("learn-nks-pages", .learnNKSPages),
+        ("switch-kk-midi-view", .switchKKMIDIView),
     ]
     static var validNames: String {
         named.map(\.0).joined(separator: ", ")
@@ -116,13 +118,14 @@ struct SendStrip {
 }
 
 enum ReaperView: CaseIterable {
-    case mix, track, kk  // kk: the Komplete Kontrol view
+    case mix, track, kk, midi  // kk: the Komplete Kontrol view; midi: the MIDI view (generic CCs, issue #5)
     /// The name in the config (reaper.view) and the logs.
     var configName: String {
         switch self {
         case .mix: return "mix"
         case .track: return "track"
         case .kk: return "komplete-kontrol"
+        case .midi: return "midi"
         }
     }
 }
@@ -136,6 +139,8 @@ enum ReaperEvent {  // trackData: a value of the selected track
     case learnRefused(String)    // a control moved in learn mode wasn't taken, and why
     case learnAssigned(String)   // a control moved in learn mode went on a knob (for the log)
     case learnChanged            // learn mode's pages or selection changed: show them at once
+    case thirdView               // Shift + Play from Mix or Track view: Instance now reaches the other view
+    case thirdViewNeedsBoth      // Shift + Play with the Komplete Kontrol or the MIDI view turned off
 }
 
 /// What a knob controls in the current view and page.

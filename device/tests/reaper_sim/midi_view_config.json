@@ -1,0 +1,12 @@
+{
+  "_note": "REAPER mode's MIDI view (issue #5): Instance, Shift + Play in and out of the third view, 3 knob pages, CCs and REAPER commands.",
+  "reaper": {
+    "enabled": true,
+    "sendPort": 18000,
+    "receivePort": 19000,
+    "midiView": {
+      "enabled": true,
+      "pages": 3
+    }
+  }
+}

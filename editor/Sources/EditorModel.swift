@@ -31,8 +31,18 @@ final class EditorModel: ObservableObject {
     }
     @Published var page: EditorPage = .midi
 
-    /// The pages of the current mode: MIDI without REAPER mode; REAPER and Komplete Kontrol with it.
-    var visiblePages: [EditorPage] { config.reaper.enabled ? [.reaper, .kk, .settings] : [.midi, .settings] }
+    /// The pages of the current mode (issue #5). MIDI mode: MIDI, and Komplete Kontrol with that view on. REAPER mode:
+    /// REAPER, and Komplete Kontrol and MIDI (the MIDI view) with those views on.
+    var visiblePages: [EditorPage] {
+        if config.reaper.enabled {
+            return [.reaper] + (config.reaper.kompleteKontrolView ? [.kk] : []) + (config.reaper.midiView.enabled ? [.midi] : [])
+                + [.settings]
+        }
+        return [.midi] + (config.kompleteKontrolView ? [.kk] : []) + [.settings]
+    }
+
+    /// In REAPER mode, the MIDI page edits the MIDI view; in MIDI mode, MIDI mode itself.
+    var editsMIDIView: Bool { config.reaper.enabled }
     @Published var selection: ControlID? = .button("Play")
     @Published var status = ""
     @Published private(set) var fileURL: URL?
@@ -226,10 +236,16 @@ final class EditorModel: ObservableObject {
         }
     }
 
-    func kkCC(_ button: String) -> Int? { config.reaper.kompleteKontrol.buttons[button] ?? nil }
+    func midiViewCC(_ button: String) -> Int? { config.reaper.midiView.buttons[button] ?? nil }
+
+    func setMidiViewCC(_ button: String, _ cc: Int?) {
+        config.reaper.midiView.buttons.updateValue(cc, forKey: button)
+    }
+
+    func kkCC(_ button: String) -> Int? { config.kompleteKontrol.buttons[button] ?? nil }
 
     func setKKCC(_ button: String, _ cc: Int?) {
-        config.reaper.kompleteKontrol.buttons.updateValue(cc, forKey: button)
+        config.kompleteKontrol.buttons.updateValue(cc, forKey: button)
     }
 
     var knobTouchOn: Bool {
@@ -244,7 +260,8 @@ final class EditorModel: ObservableObject {
 
     func isAssigned(_ id: ControlID) -> Bool {
         switch (page, id) {
-        case (.midi, .button(let b)): return midiCC(b) != nil
+        case (.midi, .button("PageLeft")) where editsMIDIView, (.midi, .button("PageRight")) where editsMIDIView: return true
+        case (.midi, .button(let b)): return (editsMIDIView ? midiViewCC(b) : midiCC(b)) != nil
         case (.reaper, .button(let b)): return b == "Shift" || command(b, shift: false) != nil || command(b, shift: true) != nil
         case (.kk, .button(let b)): return kkCC(b) != nil
         default: return true
@@ -254,17 +271,25 @@ final class EditorModel: ObservableObject {
     func panelLines(_ id: ControlID) -> [String] {
         let cc: (Int?) -> String = { $0.map { "CC \($0)" } ?? "—" }
         switch (page, id) {
+        case (.midi, .button("Instance")) where !editsMIDIView && config.kompleteKontrolView:
+            return ["KK view"]  // it switches to MIDI mode's Komplete Kontrol view and back
+        case (.midi, .button("PageLeft")) where editsMIDIView: return ["◀ Page"]  // the MIDI view's knob pages
+        case (.midi, .button("PageRight")) where editsMIDIView: return ["Page ▶"]
+        case (.midi, .button("PageLeft")) where config.knobPages > 1: return ["◀ Page"]
+        case (.midi, .button("PageRight")) where config.knobPages > 1: return ["Page ▶"]
         case (.midi, .button(let b)):
-            return [cc(midiCC(b))]
-        case (.midi, .navigateKnob):
+            return [editsMIDIView ? (midiViewCC(b).map { "CC \($0)" } ?? "—") : cc(midiCC(b))]
+        case (.midi, .navigateKnob) where !editsMIDIView:
             return ["turn " + cc(config.navigateTurnCC), "push " + cc(midiCC("NavigateClick"))]
+        case (.kk, .navigateKnob) where !config.reaper.enabled:  // MIDI mode's Komplete Kontrol view: MIDI CCs
+            return ["turn " + cc(config.navigateTurnCC), "push " + cc(kkCC("NavigateClick") ?? midiCC("NavigateClick"))]
         case (.reaper, .button(let b)):
             if b == "Shift" { return ["Shift layer"] }
             let main = command(b, shift: false).map(commandShort) ?? cc(midiCC(b))
             return [main, command(b, shift: true).map { "⇧ " + commandShort($0) } ?? ""]
-        case (.reaper, .navigateKnob), (.kk, .navigateKnob):
+        case (.reaper, .navigateKnob), (.kk, .navigateKnob), (.midi, .navigateKnob):
             let turn = config.reaper.navigateTurn.map { $0 == "tracks" ? "Tracks" : "Pages" } ?? cc(config.navigateTurnCC)
-            let press = page == .kk ? kkCC("NavigateClick").map { "CC \($0)" } : nil
+            let press = (page == .kk ? kkCC("NavigateClick") : page == .midi ? midiViewCC("NavigateClick") : nil).map { "CC \($0)" }
             return [turn, "push " + (press ?? command("NavigateClick", shift: false).map(commandShort) ?? cc(midiCC("NavigateClick")))]
         case (.kk, .button(let b)):
             return [kkCC(b).map { "CC \($0)" } ?? "—"]
@@ -278,17 +303,23 @@ final class EditorModel: ObservableObject {
     /// ENCODER as on the keyboard (which shows ENCODER and the knob's number) and the CC it sends.
     func displayText(_ i: Int) -> (String, String) {
         switch page {
+        case .midi where editsMIDIView:  // the MIDI view: the track over MIDI, and each knob's CC
+            let m = config.reaper.midiView
+            if i == 0 { return ("TRACK", m.pages > 1 ? "MIDI 1/\(m.pages)" : "MIDI") }
+            return ("CC \(knobPageCCs[0][i - 1])", m.knobMode == .absolute ? "ABS" : "REL")
         case .midi:
-            if i == 0 { return ("MIDI", "CH \(config.channel)") }
+            if i == 0 { return (config.knobPages > 1 ? "MIDI 1/\(config.knobPages)" : "MIDI", "CH \(config.knobChannel)") }
             let k = i - 1
             let second = knobTouchOn ? "TOUCH \(config.knobTouchCCs[k])" : (config.knobMode == .absolute ? "ABS" : "REL")
-            return ("CC \(config.knobCCs[k])", second)
+            return ("CC \(knobPageCCs[0][k])", second)
         case .reaper:
             if i == 0 { return ("MIX", "1-8") }
             return ("TRACK \(i)", "VOLUME")
         case .kk:
-            let kk = config.reaper.kompleteKontrol
-            if i == 0 { return ("TRACK", "KONTROL") }  // the keyboard shows the selected track's name
+            let kk = config.kompleteKontrol
+            if i == 0 {  // in REAPER mode, the keyboard shows the selected track's name
+                return config.reaper.enabled ? ("TRACK", "KONTROL") : ("KONTROL", "CH \(kk.channel)")
+            }
             return ("ENCODER", "CC \(kk.encoderCCs[i - 1])")
         case .settings:
             return ("", "")

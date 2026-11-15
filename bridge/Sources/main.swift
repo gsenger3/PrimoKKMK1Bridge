@@ -137,7 +137,7 @@ func ranges(_ v: [Int]) -> String {
 if let path = replayPath {
     guard let text = try? String(contentsOfFile: path, encoding: .utf8) else { fail("cannot read \(path)") }
     let bridge = Bridge(cfg: cfg, midi: MIDIPorts(name: cfg.portName, dryRun: true), verbose: true)
-    bridge.learnedPagesURL = cfg.reaper.kompleteKontrol.nksPagesFile.map { URL(fileURLWithPath: ($0 as NSString).expandingTildeInPath) }
+    bridge.learnedPagesURL = cfg.kompleteKontrol.nksPagesFile.map { URL(fileURLWithPath: ($0 as NSString).expandingTildeInPath) }
     bridge.learnedPagesWritable = false
     bridge.nksLookupEnabled = false
     var stamp = "start"
@@ -185,9 +185,9 @@ if let path = replayPath {
 let midi = MIDIPorts(name: cfg.portName, dryRun: false, keysSource: cfg.keyboardSource)
 let bridge = Bridge(cfg: cfg, midi: midi, verbose: verbose)
 bridge.logOSC = logOSC
-// Learned NKS pages: reaper.kompleteKontrol.nksPagesFile, else NKSPages.json next to the config file.
+// Learned NKS pages: kompleteKontrol.nksPagesFile, else NKSPages.json next to the config file.
 bridge.learnedPagesURL = LearnedPages.url(configFile: URL(fileURLWithPath: configFile ?? Config.defaultURL.path),
-                                           setting: cfg.reaper.kompleteKontrol.nksPagesFile)
+                                           setting: cfg.kompleteKontrol.nksPagesFile)
 midi.onControlChange = { bridge.feedback(channel: $0, cc: $1, value: $2) }
 midi.onSysEx = { bridge.sysEx($0) }
 let ctx = Unmanaged.passUnretained(bridge).toOpaque()
@@ -251,7 +251,8 @@ for sig in [SIGINT, SIGTERM] {
 
 print("PrimoKKMK1Bridge \(appVersionString): Komplete Kontrol MK1 → virtual MIDI port \"\(cfg.portName)\"")
 print("  buttons on ch\(cfg.channel)" + (cfg.shiftChannel.map { " (ch\($0) while Shift is \(cfg.shiftLatch ? "latched" : "held"))" } ?? "")
-      + ", knobs \(ranges(cfg.knobCCs)) \(cfg.knobMode.rawValue), knob touch \(ranges(cfg.knobTouchCCs))")
+      + ", knobs \(ranges(knobPageCCs[0])) on ch\(cfg.knobChannel) \(cfg.knobMode.rawValue)"
+      + (cfg.knobPages > 1 ? " (\(cfg.knobPages) pages, Page ◀ / ▶)" : "") + ", knob touch \(ranges(cfg.knobTouchCCs))")
 print("  Navigate turn \(cfg.navigateTurnCC.map { "CC\($0) \(cfg.navigateTurnMode.rawValue)" } ?? "off")"
       + ", Navigate touch \(cfg.navigateTouchCC.map { "CC\($0)" } ?? "off")")
 if cfg.lights {
@@ -261,6 +262,10 @@ if cfg.lights {
     print("  lights: off")
 }
 print("  displays: \(cfg.displays ? "on" : "off")")
+if !cfg.reaper.enabled && cfg.kompleteKontrolView {
+    print("  Komplete Kontrol view: Instance switches to it (knobs \(ranges(cfg.kompleteKontrol.encoderCCs)) on"
+          + " ch\(cfg.kompleteKontrol.channel)) and back")
+}
 if verbose { print("  verbose logging: on" + (verboseFlag ? " (--verbose)" : " (verbose in the config)")) }
 if cfg.keyboardSource != nil {
     midi.onKeysChanged = { names in
@@ -273,9 +278,11 @@ if cfg.keyboardSource != nil {
 }
 if cfg.reaper.enabled {
     let r = cfg.reaper
+    let third = [r.kompleteKontrolView ? "komplete-kontrol" : nil, r.midiView.enabled ? "midi" : nil].compactMap { $0 }
     print("  REAPER: OSC to \(r.host):\(r.sendPort), listening on port \(r.receivePort); starts in \(r.view) view"
-          + " (Instance: mix -> track -> komplete-kontrol). Hold Shift for the MIDI CC layer, and in mix view to"
-          + " turn the tracks' pans.")
+          + " (Instance: \((["mix", "track"] + (third.isEmpty ? [] : [third.joined(separator: " or ")])).joined(separator: " -> "))"
+          + (third.count == 2 ? ", Shift + Play swaps the last two" : "") + "). Hold Shift for the MIDI CC layer, and in"
+          + " mix view to turn the tracks' pans.")
     bridge.startReaper()
 }
 

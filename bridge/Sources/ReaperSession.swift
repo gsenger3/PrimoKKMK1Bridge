@@ -18,6 +18,9 @@ final class ReaperSession {
     let cfg: ReaperConfig
     private let link: OSCLink
     private(set) var view: ReaperView
+    /// The view Instance reaches after Track view: the Komplete Kontrol view or the MIDI view, whichever is on; with
+    /// both on, the one Shift + Play last chose (switch-kk-midi-view). Nil with both off.
+    private(set) var third: ReaperView?
     private(set) var bank = [TrackStrip](repeating: TrackStrip(), count: bankSize)
     private(set) var track = TrackStrip()
     private(set) var sends = [SendStrip](repeating: SendStrip(), count: sendSlots)
@@ -63,7 +66,10 @@ final class ReaperSession {
     init(cfg: ReaperConfig, nks: NKSLayout? = nil) throws {
         self.cfg = cfg
         self.nks = nks
-        view = ReaperView.allCases.first { $0.configName == cfg.view } ?? .mix
+        let kkOn = cfg.kompleteKontrolView, midiOn = cfg.midiView.enabled
+        third = cfg.view == "midi" && midiOn ? .midi : kkOn ? .kk : midiOn ? .midi : nil
+        let start = ReaperView.allCases.first { $0.configName == cfg.view } ?? .mix
+        view = start == .kk && !kkOn || start == .midi && !midiOn ? .mix : start  // a view that's off: Mix view
         link = try OSCLink(host: cfg.host, sendPort: cfg.sendPort, receivePort: cfg.receivePort)
         link.onMessage = { [weak self] in self?.receive($0, $1) }
     }
@@ -206,6 +212,7 @@ final class ReaperSession {
         case .mute: return track.mute
         case .solo: return track.solo
         case .learnNKSPages: return learning != nil
+        case .switchKKMIDIView: return third == .midi
         default: return false
         }
     }
@@ -242,12 +249,16 @@ final class ReaperSession {
                 let p = max(0, min(sendPages - 1, sendPage + (up ? 1 : -1)))
                 if p != sendPage { sendPage = p; onEvent?(.values) }
             }
-        case .toggleView:  // Instance: mix -> track -> Komplete Kontrol -> mix
+        case .toggleView:  // Instance: mix -> track -> Komplete Kontrol (or MIDI) -> mix
             switch view {
             case .mix: show(.track)
-            case .track: show(.kk)
-            case .kk: show(.mix)
+            case .track: show(third ?? .mix)
+            case .kk, .midi: show(.mix)
             }
+        case .switchKKMIDIView:  // swap the Komplete Kontrol and MIDI views: in one of them, go to the other
+            guard cfg.kompleteKontrolView && cfg.midiView.enabled, let t = third else { onEvent?(.thirdViewNeedsBoth); return }
+            third = t == .kk ? .midi : .kk
+            if view == .kk || view == .midi { show(third!) } else { onEvent?(.thirdView) }
         case .mute: send("/track/mute/toggle")
         case .metronome: send("/click")  // toggles
         case .goToStart: send("/action", [.int(goToStartAction)])
@@ -480,7 +491,7 @@ final class ReaperSession {
 
     func target(_ k: Int) -> KnobTarget? {
         switch view {
-        case .kk:
+        case .kk, .midi:
             return nil  // the knobs send MIDI CCs (Bridge.handleUI)
         case .mix:
             return bank[k].exists ? .bankVolume(k) : nil

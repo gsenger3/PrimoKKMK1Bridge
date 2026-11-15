@@ -138,11 +138,25 @@ extension Bridge {
     /// Touched knobs get a framed value bar; everything else stays where it is.
     func renderMIDI(_ touched: Set<Int>) {
         let shiftHeld = shiftOn(prev)
-        let ch = (shiftHeld ? cfg.shiftChannel : nil) ?? cfg.channel
-        displays.write(row: 0, cell: 0, "MIDI")
+        if inMIDIModeKKView && !shiftHeld {  // the Komplete Kontrol view: like REAPER mode's, without NKS pages
+            let kk = cfg.kompleteKontrol
+            displays.write(row: 0, cell: 0, "KONTROL")
+            displays.write(row: 1, cell: 0, "CH \(kk.channel)")
+            for k in 0..<8 {
+                displays.write(row: 0, cell: k + 1, "ENCODER")
+                displays.write(row: 1, cell: k + 1, "\(k + 1)")
+                let v = kk.encoderMode == .absolute ? absValues[kk.channel * 128 + kk.encoderCCs[k]] ?? 64 : nil
+                displays.setBar(cell: k + 1, v.map { Double($0) / 127 }, framed: touched.contains(k))
+            }
+            return
+        }
+        // The knobs' channel and page, or with Shift, the Shift layer: page 1's CCs on the Shift channel.
+        let shiftLayer = shiftHeld && cfg.shiftChannel != nil
+        let ch = shiftLayer ? cfg.shiftChannel! : cfg.knobChannel
+        displays.write(row: 0, cell: 0, !shiftLayer && cfg.knobPages > 1 ? "MIDI \(knobPage + 1)/\(cfg.knobPages)" : "MIDI")
         displays.write(row: 1, cell: 0, "CH \(ch)")
         for k in 0..<8 {
-            let cc = cfg.knobCCs[k]
+            let cc = shiftLayer ? knobPageCCs[0][k] : knobCCs[k]
             displays.write(row: 0, cell: k + 1, "CC \(cc)")
             if cfg.knobMode == .absolute {
                 let v = absValues[ch * 128 + cc] ?? 64
@@ -153,6 +167,28 @@ extension Bridge {
                 displays.setBar(cell: k + 1, nil, framed: touched.contains(k))
             }
         }
+    }
+
+    /// Each knob's CC, and the value it last sent (absolute) or REL, as MIDI mode shows them.
+    private func writeCCKnobs(channel: Int, ccs: [Int], mode: TurnMode, _ touched: Set<Int>) {
+        for k in 0..<8 {
+            displays.write(row: 0, cell: k + 1, "CC \(ccs[k])")
+            if mode == .absolute {
+                let v = absValues[channel * 128 + ccs[k]] ?? 64
+                displays.write(row: 1, cell: k + 1, "\(v)")
+                displays.setBar(cell: k + 1, Double(v) / 127, framed: touched.contains(k))
+            } else {
+                displays.write(row: 1, cell: k + 1, "REL")
+                displays.setBar(cell: k + 1, nil, framed: touched.contains(k))
+            }
+        }
+    }
+
+    /// The Komplete Kontrol and MIDI views while Shift is on (held, or latched): the knobs send MIDI mode's Shift
+    /// layer, so that's what the displays show, with SHIFT on the left.
+    private func renderShiftLayerKnobs(_ touched: Set<Int>) {
+        displays.write(row: 1, cell: 0, "SHIFT")
+        writeCCKnobs(channel: cfg.shiftChannel ?? cfg.knobChannel, ccs: knobPageCCs[0], mode: cfg.knobMode, touched)
     }
 
     func renderReaper(_ r: ReaperSession, _ touched: Set<Int>) {
@@ -200,7 +236,7 @@ extension Bridge {
         case .kk:
             // Like Novation's Launchkey: Komplete Kontrol's parameter names and values aren't available, so each
             // display shows its knob's number, and a bar of the value the knob last sent (absolute values).
-            let kk = cfg.reaper.kompleteKontrol
+            let kk = cfg.kompleteKontrol
             if let l = r.learning {  // learn mode: each knob's parameter so far, and a frame round the next to fill
                 displays.write(row: 0, cell: 0, "LEARN")
                 displays.write(row: 1, cell: 0, fitValue("PAGE \(l.page + 1)/\(l.pages.count)", cellWidth))
@@ -214,6 +250,7 @@ extension Bridge {
             }
             // The left display: the selected track (whose plugin the knobs are on), and KONTROL for the view.
             displays.write(row: 0, cell: 0, abbreviate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
+            if shiftHeld { renderShiftLayerKnobs(touched); return }
             if r.nksActive, let pages = r.nks?.pages.count {  // NKS pages: their names, REAPER's values
                 displays.write(row: 1, cell: 0, fitValue("PAGE \(r.nksPage + 1)/\(pages)", cellWidth))
                 for k in 0..<8 {
@@ -231,6 +268,13 @@ extension Bridge {
                 let v = kk.encoderMode == .absolute ? absValues[kk.channel * 128 + kk.encoderCCs[k]] ?? 64 : nil
                 displays.setBar(cell: k + 1, v.map { Double($0) / 127 }, framed: touched.contains(k))
             }
+            return
+        case .midi:  // the MIDI view: like MIDI mode, each knob's CC and the value it last sent
+            let m = cfg.reaper.midiView
+            displays.write(row: 0, cell: 0, abbreviate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
+            if shiftHeld { renderShiftLayerKnobs(touched); return }
+            displays.write(row: 1, cell: 0, m.pages > 1 ? "MIDI \(midiViewPage + 1)/\(m.pages)" : "MIDI")
+            writeCCKnobs(channel: m.channel, ccs: midiViewKnobCCs, mode: m.knobMode, touched)
             return
         case .mix:
             let numbers = r.bank.filter(\.exists).map(\.number)

@@ -41,7 +41,7 @@ struct LearnedPages: Codable {
         try e.encode(self).write(to: url, options: .atomic)
     }
 
-    /// Where the file is: reaper.kompleteKontrol.nksPagesFile, else NKSPages.json next to the config file.
+    /// Where the file is: kompleteKontrol.nksPagesFile, else NKSPages.json next to the config file.
     static func url(configFile: URL, setting: String?) -> URL {
         setting.map { URL(fileURLWithPath: ($0 as NSString).expandingTildeInPath) }
             ?? configFile.deletingLastPathComponent().appendingPathComponent("NKSPages.json")

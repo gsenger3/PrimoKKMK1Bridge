@@ -119,13 +119,13 @@ The pages, chosen in the toolbar, follow the mode you're in:
 
 | Section | What's in it |
 | --- | --- |
-| **MIDI Configuration** | The bridge's **Port name** and **Channel**, and the Shift layer: **Shift Layer Enabled**, **Shift Layer Channel**, and **Shift Latching Enabled** (see [MIDI mode](#midi-mode)) |
+| **MIDI Configuration** | The bridge's **Port name** and **Channel**, the Shift layer: **Shift Layer Enabled**, **Shift Layer Channel**, and **Shift Latching Enabled**, and **Knob Pages** (see [MIDI mode](#midi-mode)) |
 | **MIDI Keys & Controls** | **Merge Keys and Controls**: whether the keys and strips also come through the bridge's port. **Automatic (Port 1)** takes them from the keyboard's own port, **From MIDI Source by Name** from the source you name, and **Disabled** leaves them on the keyboard's port only |
 | **Lights and Displays** | **Enabled** drives the button lights, at **Active Brightness** when lit and **Idle Brightness** otherwise. **Enable Displays** drives the nine displays |
 | **REAPER Mode** | **Enabled** turns REAPER mode on. **Address**, **Local Listen Port** and **Device Port** match REAPER's OSC device ([Set up REAPER](#set-up-REAPER-once)) |
-| **REAPER Views** | **Default View**: the view the bridge starts in. **Follow REAPER Track Selection**: the keyboard follows the track you click in REAPER. **Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)**: in those views, the track you pick on the keyboard becomes REAPER's selected track. **Track Name Display Duration**: how long the displays show the track's name after you change track. **REAPER Resource Folder**: where the screenset names come from |
+| **REAPER Views** | **Default View**: the view the bridge starts in. **MIDI View Enabled**: the [MIDI view](#midi-view), off by default. **Follow REAPER Track Selection**: the keyboard follows the track you click in REAPER. **Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)**: in those views, the track you pick on the keyboard becomes REAPER's selected track. **Track Name Display Duration**: how long the displays show the track's name after you change track. **REAPER Resource Folder**: where the screenset names come from |
 | **REAPER Lightguide** | The selected track's color illuminated on the Komplete Kontrol lightguide, and the REAPER integration script. See [REAPER Lightguide](#REAPER-lightguide) |
-| **Komplete Kontrol View** | That view's **MIDI Channel** and **Knob Values** mode, and **NKS Integration Enabled**, with the REAPER integration script's controls and the **Learned Pages** list. See [NKS Pages](#nks-pages) |
+| **Komplete Kontrol View** | **Komplete Kontrol View Enabled** (each mode has its own: off in MIDI mode, on in REAPER mode by default), that view's **MIDI Channel** and **Knob Values** mode, and in REAPER mode **NKS Integration Enabled**, with the REAPER integration script's controls and the **Learned Pages** list. See [NKS Pages](#nks-pages) |
 | **Login** | **Launch Bridge at Login**: start the bridge when you log in, without the editor. It applies right away, without saving. See [Start the Bridge at Login](#start-the-bridge-at-login) |
 | **Logging** | **Verbose Logging**: the bridge writes every message it sends to its log, for tracking down a problem. Turn it off again afterwards, as the log grows quickly. **Show Log** opens the log |
 
@@ -141,12 +141,15 @@ Other things in the editor:
 
 ## MIDI Mode
 
-MIDI mode is the default. Every control sends a MIDI CC on **Primo Komplete Kontrol MK1**, **Channel 1**, for MIDI learn in any DAW. Buttons send `127` when pressed and `0` when released; knobs send absolute values (`0–127`).
+MIDI mode is the default. Every control sends a MIDI CC on **Primo Komplete Kontrol MK1**, **Channel 1**, for MIDI learn in any DAW, except the knobs, which have **Channel 3** to themselves. Buttons send `127` when pressed and `0` when released; knobs send absolute values (`0–127`).
+
+**Knob pages.** **Knob Pages** on the editor's Settings page (1 to 5, default 1) gives the knobs more pages, each with its own CCs; **Page ◀ / ▶** go through them, stopping at the first and last, and send their CCs only with Shift held. The left display shows the page (*MIDI 2/3*), and each page keeps its own values. The pages' CCs are the same as the [MIDI view's](#midi-view): page 1 is CC14–21, page 2 CC22–29, page 3 CC102–109, page 4 CC110–117, page 5 CC30, 31, 80–83, 90, 118, all on the knobs' channel, where nothing else meets them. The limit of 5 is how many CCs MIDI leaves undefined or general-purpose. Change the knobs' channel on the MIDI page, but keep it apart from Channel 1 and the Shift layer's.
 
 **Shift layer.** Holding Shift moves the buttons, knob turns and the Navigate knob turn to **Channel 2**, so every
 control has a second assignment with the same CC numbers.
 
 - Shift itself sends CC108 on Channel 1.
+- Knob turns with Shift send page 1's CCs (14–21) on Channel 2, whatever the page: pages 3–5's CCs on Channel 2 are the Shift layer's button CCs.
 - Knob touch and Navigate touch always use Channel 1.
 - A release goes out on the channel of its press, even if you let go of Shift first.
 - **Latching Shift:** with **Shift Latching Enabled** on the editor's Settings page, you don't hold Shift: a press
@@ -157,15 +160,24 @@ control has a second assignment with the same CC numbers.
 
 - Lights its button (any value above `0`) or dims it (`0`),
 - On Channel 2, sets the light shown while Shift is held,
-- For encoders, moves that encoder's value, so it carries on from the DAW's value instead of jumping.
+- For a knob's CC on the knobs' channel (Channel 3; or page 1's on Channel 2, for the Shift layer), moves that knob's value, so it carries on from the DAW's value instead of jumping.
 
 The keys, pitch strip (pitch bend) and mod strip (`CC1`) work as always, and Octave − / + transpose the keys on the
 keyboard as well as sending their CCs. The CC of every control is in [Default Assignments](#midi-mode-defaults).
+
+**Komplete Kontrol view.** With **Komplete Kontrol View Enabled** on the editor's Settings page (off by default), **Instance** switches between the MIDI controls and the [Komplete Kontrol view](#komplete-kontrol-view), and no longer sends its CC. Instance is dim with the MIDI controls and bright in the Komplete Kontrol view.
+
+- In that view, the knobs and the buttons given a Komplete Kontrol CC send the CCs of Komplete Kontrol's NKS template, set on the editor's **Komplete Kontrol** page. The other buttons, and the Navigate knob, keep their MIDI CCs.
+- Knob touch sends no CCs there, since they would land on the template's knob CCs.
+- Holding Shift gives the MIDI Shift layer, as with the MIDI controls.
+- Parameter names and values ([NKS pages](#nks-pages)) need REAPER mode; here the view only sends CCs.
 
 ## REAPER Mode
 
 In REAPER mode the bridge talks to REAPER over the Open Sound Control (OSC) protocol, REAPER's own control-surface protocol. The transport and
 editing buttons run REAPER commands, and the encoder bank supports three different views - **Mix → Track → Komplete Kontrol → Mix**. The **Instance** buttons steps through the three views, illuminating based on which view is active; `Off` in Mix, `Dim` in Track, and `Bright` in Komplete Kontrol.
+
+The third view can instead be the [MIDI view](#midi-view), which sends plain MIDI CCs. Turn each on or off on the editor's Settings page: **Komplete Kontrol View Enabled** (on by default) and **MIDI View Enabled** (off by default). With both on, **Shift + Play** swaps which of the two Instance reaches. In one of them, it switches to the other; in Mix or Track view, the displays say which one Instance now leads to. With neither on, Instance goes between Mix and Track only.
 
 ### REAPER Configuration (_One Time_)
 
@@ -239,6 +251,10 @@ The left display shows the track's name and *TRK n*, or the page, such as *PAGE 
 
 The knobs and eight navigation buttons send fixed CCs for Komplete Kontrol's NKS MIDI template, similar to Novation's Launchkey keyboards. CCs are transmitted on `Primo Komplete Kontrol MK1`, Channel 1. The other buttons passthru their REAPER assignments. Turning the Navigate knob picks the previous or next track and keeps you in this view; the track you pick also becomes REAPER's only selected track, and REAPER scrolls to it.
 
+While Shift is on (held or latched), the knobs send MIDI mode's Shift layer instead, and the displays show its CCs and values, with *SHIFT* on the left.
+
+The view is on by default; turn it off with **Komplete Kontrol View Enabled** on the editor's Settings page. MIDI mode can have it too (see [MIDI Mode](#midi-mode)), with the same CCs.
+
 | Control | CC | Does in Komplete Kontrol |
 | --- | --- | --- |
 | Knobs 1–8 | 21–28 | The 8 parameters on the current NKS page |
@@ -290,6 +306,26 @@ Page ◀ / ▶ and Navigate ◀ / ▶ page through Komplete Kontrol and the disp
 To rename or delete an instrument's learned pages, use the **Learned Pages** list on the editor's Settings page, under **Komplete Kontrol View** (with NKS integration on). It starts closed, showing how many instruments there are; click it to open the list. Each row shows the name (the track's name when you taught it), the plugin, the number of pages and the date. Renaming and deleting apply at once, without saving, and the bridge picks up the change within a couple of seconds. After a delete, the instrument goes back to its NKS presets' pages, or to CCs.
 
 `NKSPages.json` can also be edited by hand. Under `instruments`, each instrument's key is its plugin ID and the fingerprint of its parameter names, as the REAPER script reports them (`VST3:<ID>/<fingerprint>`). Each entry has a `label`, the `learned` date, and `pages`: lists of 8 knobs, each `{"id": 6, "name": "Balance"}` or `null` for an empty knob. The `id` is the number in REAPER's name for the parameter minus 101 (`107 Balance` is 6). The `name` is only for reading the file, since the displays show REAPER's current name.
+
+### MIDI View
+
+The MIDI view works like the Komplete Kontrol view, but its knobs and buttons send plain MIDI CCs, for anything that learns CCs: a plugin's MIDI learn, or REAPER's own actions. Turn it on with **MIDI View Enabled** on the editor's Settings page, under **REAPER Views**. Its CCs are set on the editor's **MIDI** page, which in REAPER mode is the MIDI view's.
+
+- **Channel 3.** The MIDI view has a channel of its own, so its CCs never meet the Komplete Kontrol view's, Shift's or the Octave buttons' (all on channel 1) or the Shift layer's (channel 2). Change it on the MIDI page, but keep it apart from those.
+- **Knob pages.** **MIDI View Knob Pages** (Settings ▸ REAPER Views) sets how many pages of knobs there are, 1 to 5; **Page ◀ / ▶** go through them, stopping at the first and last. Each display shows its knob's CC and the value it last sent, with the selected track's name and the page (*MIDI 2/3*) on the left. Each page keeps its own values.
+- **Which CCs.** The knobs only use CCs that MIDI leaves undefined or general-purpose, so nothing a synth already responds to (modulation, volume, pan, expression, sustain…). There are 40 of those beside the buttons' CCs, which is where the limit of 5 pages comes from:
+
+  | Page | Knobs 1–8 |
+  | --- | --- |
+  | 1 | CC14–21 |
+  | 2 | CC22–29 |
+  | 3 | CC102–109 |
+  | 4 | CC110–117 |
+  | 5 | CC30, 31, 80–83, 90, 118 |
+
+- **Buttons:** by default Preset ▲ / ▼ and Navigate ▲ ▼ ◀ ▶ send their MIDI-mode CCs; set any other button's CC, or turn one off, on the MIDI page. The other buttons keep their REAPER jobs.
+- **The Navigate knob** picks tracks, as in the Komplete Kontrol view.
+- **Holding Shift** (or latching it) gives the Shift commands and the MIDI Shift layer, as in the other REAPER views. The displays then show the Shift layer's CCs and values, with *SHIFT* on the left.
 
 ### REAPER Lightguide
 
@@ -364,7 +400,7 @@ With Shift held, every button and knob turn sends the same CC on channel 2.
 | Navigate knob press | 90 | 127 / 0 | Channel 2 |
 | Navigate knob turn | 30 | Relative: 64 ± steps | Channel 2 |
 | Navigate knob touch | 31 | 127 touched, 0 released | Always channel 1 |
-| Knobs 1–8 turn | 14–21 | Absolute 0–127, starting at 64 | Channel 2, with its own values |
+| Knobs 1–8 turn | 14–21 on Channel 3 (page 1; see Knob pages above) | Absolute 0–127, starting at 64 | 14–21 on Channel 2, with its own values |
 | Knobs 1–8 touch | 22–29 | 127 touched, 0 released | Always channel 1 |
 | Keys / pitch strip / mod strip | Notes / pitch bend / CC1 | | Unchanged |
 
@@ -374,7 +410,7 @@ With Shift held, every button and knob turn sends the same CC on channel 2.
 
 | Button | Press | Shift + press |
 | --- | --- | --- |
-| Play | Play | MIDI inputs as step input, on / off, in the open MIDI editor (MIDI Editor action 40481) |
+| Play | Play | Swap the Komplete Kontrol and MIDI views (which one Instance reaches; see [REAPER Mode](#reaper-mode)) |
 | Stop | Stop | Go to the start of the project |
 | Rec | Record | Metronome on / off |
 | Loop | Repeat on / off | Record mode: normal ↔ time-selection auto-punch |
@@ -412,13 +448,28 @@ section of REAPER's Action List.
 | Page ◀ / ▶ | Previous/Next Komplete Kontrol Parameter Page (42 / 43) | CC113 / 114, channel 2 |
 | Every other button | Passthru existing REAPER actions, see previous table | |
 
+In MIDI mode's Komplete Kontrol view, the same CCs apply, and the other buttons keep their MIDI CCs.
+
+### MIDI View Defaults
+
+REAPER mode's [MIDI view](#midi-view), when it's on. The buttons' CCs are MIDI mode's, on channel 3.
+
+| Control | CC (channel 3) |
+| --- | --- |
+| Knobs 1–8 | 14–21 on page 1, absolute (the other pages: [MIDI View](#midi-view)) |
+| Preset ▲ / ▼ | 119 / 85 |
+| Navigate ▲ / ▼ | 86 / 87 |
+| Navigate ◀ / ▶ | 88 / 89 |
+| Page ◀ / ▶ | The previous / next knob page |
+| Every other button | Its REAPER command, as in the REAPER defaults table |
+
 ## Lights and Displays
 
 The bridge drives the 21 button lights, the nine displays and the light guide. Octave − / + and the Navigate knob have no light.
 
 | | MIDI mode | REAPER mode |
 | --- | --- | --- |
-| Button lights | A button with a CC glows dimly and lights fully while held; the DAW can light it ([MIDI mode](#midi-mode)) | Play, Rec and Loop follow REAPER's transport; Browse is lit while a plugin window of the track is open; Instance shows the view. While Shift is held, Rec shows the metronome, Loop shows auto-punch, and Instance is lit in NKS learn mode. Other buttons glow dimly and light fully while held. |
+| Button lights | A button with a CC glows dimly and lights fully while held; the DAW can light it ([MIDI mode](#midi-mode)) | Play, Rec and Loop follow REAPER's transport; Browse is lit while a plugin window of the track is open; Instance shows the view (in MIDI mode with the Komplete Kontrol view on, it's dim with the MIDI controls and bright in that view). While Shift is held, Rec shows the metronome, Loop shows auto-punch, and Instance is lit in NKS learn mode. Other buttons glow dimly and light fully while held. |
 | Left display | *MIDI* and the channel (*CH 2* while Shift is held) | *MIX* and the tracks, the track and *TRK n*, or the track and *KONTROL*. |
 | Knob displays | Each knob's CC, its value and a bar | Each view's names, values and bars, as described above. Touching a knob frames its bar. |
 | Light guide (above the keys) | Off | [REAPER Lightguide](#REAPER-lightguide) |
@@ -445,7 +496,8 @@ Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` pr
 | `shiftChannel` | Channel used while Shift is held, or `null` to make Shift a plain button |
 | `shiftLatch` | `true`: each press of Shift turns it on or off, instead of holding it (default `false`) |
 | `buttons` | Button name → CC number, or `null` to silence that button (Octave − / + still transpose the keys) |
-| `knobCCs` | 8 CCs for knobs 1–8 |
+| `knobChannel` | The knobs' channel (default 3); their CCs come from their page (see [MIDI Mode](#midi-mode)). Earlier configs' `knobCCs` is ignored |
+| `knobPages` | Knob pages, 1–5 (default 1). With more than one, Page ◀ / ▶ go through them |
 | `knobMode` | `absolute` (0–127, starts at 64), `relative-binary-offset` (64 ± n), `relative-twos-complement` (1–63 up, 127–65 down), `relative-signed-bit` (1–63 up, 65–127 down) |
 | `knobStepsPerCC` | Knob resolution: raw position units (the knobs report 0–999, wrapping) per MIDI step. Default 4; higher is finer and slower |
 | `knobTouchCCs` | 8 CCs for knob touch, or `[]` to turn touch off |
@@ -457,9 +509,13 @@ Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` pr
 | `displays` | `true` to drive the displays above the knobs |
 | `keyboardSource` | Merge the keyboard's own MIDI (keys, strips, pedals) into the bridge's port: `"auto"` (default: the keyboard's *Port 1*, found again after a replug), a MIDI source name, or `null` to keep the keys on the keyboard's port only |
 | `verbose` | `true` to log every message the bridge sends, like `--verbose` (default `false`) |
+| `kompleteKontrolView` | MIDI mode: `true` to have Instance switch to the [Komplete Kontrol view](#midi-mode) and back (default `false`) |
+| `kompleteKontrol` | The Komplete Kontrol view, in both modes (earlier configs had it as `REAPER.kompleteKontrol`, which still loads): `channel` (default 1), `encoderCCs` (default 21–28), `encoderMode` (same modes as `knobMode`, default `absolute`), `buttons` (button name → CC), `nksIntegration` (default off; see [NKS Pages](#nks-pages)), `nksPagesFile` (the learned pages; default `NKSPages.json` next to the config file), and `nksFile` (for testing: an NKS preset whose pages are used whatever Komplete Kontrol hosts) |
 | `REAPER.enabled` | `true` for REAPER mode |
 | `REAPER.host`, `REAPER.sendPort`, `REAPER.receivePort` | Where REAPER is: its IP, its *Local listen port* (default 8000) and its *Device port* (default 9000) |
-| `REAPER.view` | The view at start: `mix` (default), `track` or `komplete-kontrol` |
+| `REAPER.view` | The view at start: `mix` (default), `track`, `komplete-kontrol` or `midi` (a view that's turned off starts in `mix`) |
+| `REAPER.kompleteKontrolView` | The Komplete Kontrol view in REAPER mode, on or off (default on) |
+| `REAPER.midiView` | The [MIDI view](#midi-view): `enabled` (default off), `channel` (default 3), `pages` (knob pages, 1–5, default 1), `knobMode` (same modes as `knobMode`, default `absolute`), and `buttons` (button name → CC, or `null` to keep its REAPER command; Page ◀ / ▶ can't have one) |
 | `REAPER.followSelectedTrack` | `true` (default): the keyboard follows the track you click in REAPER |
 | `REAPER.mirrorSelection` | `true` (default): in Track view and the Komplete Kontrol view, a track picked on the keyboard becomes REAPER's only selected track and is scrolled into view |
 | `REAPER.knobFullRange` | How far to turn a knob for a fader's full range, in raw knob units (default 600; lower is faster) |
@@ -467,8 +523,7 @@ Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` pr
 | `REAPER.resourcePath` | REAPER's resource folder, for the screenset names and the track color script (default `~/Library/Application Support/REAPER`) |
 | `REAPER.navigateTurn` | What turning the Navigate knob steps through: `tracks` (default), `pages`, or `null` for its CC |
 | `REAPER.lightGuide`, `REAPER.lightGuideBrightness` | The track color on the keys, on or off (default on), and its brightness, 1–100 percent (default 50). See [REAPER Lightguide](#REAPER-lightguide) |
-| `REAPER.kompleteKontrol` | The Komplete Kontrol view: `channel` (default 1), `encoderCCs` (default 21–28), `encoderMode` (same modes as `knobMode`, default `absolute`), `buttons` (button name → CC), `nksIntegration` (default off; see [NKS Pages](#nks-pages)), `nksPagesFile` (the learned pages; default `NKSPages.json` next to the config file), and `nksFile` (for testing: an NKS preset whose pages are used whatever Komplete Kontrol hosts) |
-| `REAPER.buttons` | Button name → REAPER command, or `null` to give the button back its CC. Commands: `play`, `stop`, `record`, `repeat`, `rewind`, `forward`, `metronome`, `record-mode`, `go-to-start`, `previous-marker`, `next-marker`, `undo`, `redo`, `browse-fx`, `close-fx`, `panic`, `save-project`, `render-project`, `screenset:1` … `screenset:10`, `previous-track`, `next-track`, `previous-page`, `next-page`, `toggle-view`, `mute`, `solo`, `action:<ID>` for any REAPER action (in REAPER's Action List, right-click it ▸ *Copy selected action command ID*), or `midiaction:<ID>` for an action from the Action List's MIDI Editor section |
+| `REAPER.buttons` | Button name → REAPER command, or `null` to give the button back its CC. Commands: `play`, `stop`, `record`, `repeat`, `rewind`, `forward`, `metronome`, `record-mode`, `go-to-start`, `previous-marker`, `next-marker`, `undo`, `redo`, `browse-fx`, `close-fx`, `panic`, `save-project`, `render-project`, `screenset:1` … `screenset:10`, `previous-track`, `next-track`, `previous-page`, `next-page`, `toggle-view`, `switch-kk-midi-view`, `learn-nks-pages`, `mute`, `solo`, `action:<ID>` for any REAPER action (in REAPER's Action List, right-click it ▸ *Copy selected action command ID*), or `midiaction:<ID>` for an action from the Action List's MIDI Editor section |
 | `REAPER.shiftButtons` | The same, for buttons pressed while Shift is held. A button not listed sends its CC on the Shift channel |
 
 The defaults for `buttons`, `REAPER.buttons` and `REAPER.shiftButtons` are the tables in

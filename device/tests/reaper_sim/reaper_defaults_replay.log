@@ -202,9 +202,8 @@ start REAPER selected track 1 "Kick"
              display |1-8     |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |CENTER  |
              display |         |     #   |     #   |     #   |     #   |     #   |     #   |     #   |     #   |
 12:00:04.410 Shift + Play down
-12:00:04.410 → REAPER /midiaction 40481
+             display |VIEW    |SHIFT + |PLAY    |SWAPS   |THE     |KOMPLETE|KONTROL |AND MIDI|VIEWS   |
+             display |        |TURN    |BOTH ON |IN      |SETTINGS|        |        |        |        |
+             display |         |         |         |         |         |         |         |         |         |
 12:00:04.540 Shift up                CC108 ch1 = 0
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
-             display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
-             display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
 replayed 483 HID reports from device/tests/reaper_sim/reaper_defaults_test.log

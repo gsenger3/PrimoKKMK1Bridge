@@ -150,8 +150,17 @@ start REAPER selected track 1 "Kick"
 12:00:01.610 Stop down
 12:00:01.610 → REAPER /stop 1
 12:00:01.710 Shift down              CC108 ch1 = 127
+             display |KICK    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |SHIFT   |64      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:01.720 Knob 1 turn +2          CC14 ch2 = 66
+             display |KICK    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |SHIFT   |66      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:01.730 Shift up                CC108 ch1 = 0
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:01.790 Instance down
 12:00:01.790 REAPER mix view
              display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |

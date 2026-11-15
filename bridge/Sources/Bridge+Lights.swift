@@ -22,15 +22,19 @@ extension Bridge {
             return UInt8(shiftLatched ? cfg.lightBrightness : cfg.lightIdleBrightness)
         }
         // The button lights are single-colour, so Instance shows the view by brightness: mix off, track
-        // half-way, Komplete Kontrol full.
+        // half-way, Komplete Kontrol (or MIDI) full.
         if let r = reaper, !shiftHeld, reaperCommands[def.bit] == .toggleView {
             switch r.view {
             case .mix: return 0
             case .track: return UInt8(cfg.lightBrightness / 4)
-            case .kk: return UInt8(cfg.lightBrightness)
+            case .kk, .midi: return UInt8(cfg.lightBrightness)
             }
         }
-        if let r = reaper, !shiftHeld, r.view == .kk, kkButtonCCs[def.bit] != nil {
+        // MIDI mode with the Komplete Kontrol view: Instance glows in the MIDI controls, and is full in that view.
+        if !cfg.reaper.enabled, cfg.kompleteKontrolView, !shiftHeld, def.name == "Instance" {
+            return UInt8(midiModeKKView ? cfg.lightBrightness : cfg.lightIdleBrightness)
+        }
+        if !shiftHeld, viewButtonCC(def.bit) != nil {  // a CC from the view: glows, and is full while held
             return UInt8(held.contains(def.bit) ? cfg.lightBrightness : cfg.lightIdleBrightness)
         }
         if let r = reaper, let command = (shiftHeld ? reaperShiftCommands : reaperCommands)[def.bit] {
@@ -79,8 +83,14 @@ extension Bridge {
 
     /// A control change the DAW sent back to the feedback port.
     func feedback(channel: Int, cc: Int, value: Int) {
+        // A knob's CC (any of its pages on the knobs' channel, or the Shift layer's): the knob carries on from there.
+        if cfg.knobMode == .absolute,
+           channel == cfg.knobChannel && knobPageCCs.prefix(cfg.knobPages).contains(where: { $0.contains(cc) })
+            || channel == cfg.shiftChannel && knobPageCCs[0].contains(cc) {
+            absValues[channel * 128 + cc] = value
+            scheduleDisplays()
+        }
         guard channel == cfg.channel || channel == cfg.shiftChannel else { return }
-        if cfg.knobMode == .absolute, cfg.knobCCs.contains(cc) { absValues[channel * 128 + cc] = value; scheduleDisplays() }
         if cfg.navigateTurnMode == .absolute, cfg.navigateTurnCC == cc { absValues[channel * 128 + cc] = value }
         guard let bit = buttonByCC[cc] else { return }
         lightState[channel * 32 + bit] = value

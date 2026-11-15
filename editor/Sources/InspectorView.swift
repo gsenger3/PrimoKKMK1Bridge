@@ -149,6 +149,9 @@ struct InspectorView: View {
                     note("The keyboard sends CC1 (modulation) from this strip by itself, on its own MIDI port and merged into \(model.config.portName). Not assignable.")
                 case (_, .keys):
                     note("The keys send notes on channel 1 by themselves. With Keyboard source set to Automatic (Settings), they're also merged into \(model.config.portName), so one DAW input gets keys and controls.")
+                case (.midi, .button(let b)) where model.editsMIDIView: midiViewButton(b)
+                case (.midi, .knob(let k)) where model.editsMIDIView: midiViewKnob(k)
+                case (.midi, .navigateKnob) where model.editsMIDIView: midiViewNavigate()
                 case (.midi, .button(let b)): midiButton(b)
                 case (.midi, .knob(let k)): midiKnob(k)
                 case (.midi, .navigateKnob): midiNavigate()
@@ -202,6 +205,17 @@ struct InspectorView: View {
         Binding(get: { model.kkCC(b) }, set: { model.setKKCC(b, $0) })
     }
 
+    private func midiViewCC(_ b: String) -> Binding<Int?> {
+        Binding(get: { model.midiViewCC(b) }, set: { model.setMidiViewCC(b, $0) })
+    }
+
+    /// What a button does in a CC view (Komplete Kontrol or MIDI) when it has no CC there: its REAPER job in REAPER
+    /// mode, its MIDI CC in MIDI mode.
+    private func usualJob(_ b: String) -> String {
+        guard model.config.reaper.enabled else { return model.midiCC(b).map { "sending CC \($0)" } ?? "nothing: it has no MIDI CC" }
+        return model.command(b, shift: false).map(commandTitle) ?? "sending its MIDI CC"
+    }
+
     private var shiftText: String {
         model.config.shiftChannel.map { "channel \($0)" } ?? "(the Shift layer is off)"
     }
@@ -209,6 +223,11 @@ struct InspectorView: View {
     // MARK: MIDI page
 
     @ViewBuilder private func midiButton(_ b: String) -> some View {
+        if b == "Instance" && model.config.kompleteKontrolView {
+            Section("Komplete Kontrol view") {
+                note("With the Komplete Kontrol view on (Settings), Instance switches between the MIDI controls and that view, and sends no CC. With Shift held, it sends its CC on \(shiftText).")
+            }
+        }
         Section("MIDI") {
             CCField(title: "CC on channel \(model.config.channel)", value: midiCC(b), fallback: defaultCC(b))
             if b == "Shift" {
@@ -219,6 +238,9 @@ struct InspectorView: View {
                 note("Sends 127 when pressed and 0 when released. With Shift held: the same CC on \(shiftText).")
             }
             if b.hasPrefix("Octave") { note("Also transposes the keys on the keyboard itself.") }
+            if (b == "PageLeft" || b == "PageRight") && model.config.knobPages > 1 {
+                note("With \(model.config.knobPages) knob pages (Settings), it goes through them instead, and sends this CC only with Shift held.")
+            }
             if lightSlot[b] != nil {
                 note("Its light glows dimly while it has a CC and lights fully while held; a DAW can light it by sending the CC back to the \(model.config.portName) output.")
             }
@@ -227,13 +249,17 @@ struct InspectorView: View {
 
     @ViewBuilder private func midiKnob(_ k: Int) -> some View {
         Section("Knob \(k + 1)") {
-            IntField(title: "Turn CC", value: $model.config.knobCCs[k], range: 0...127)
-            if model.knobTouchOn {
-                IntField(title: "Touch CC", value: $model.config.knobTouchCCs[k], range: 0...127)
+            ForEach(0..<model.config.knobPages, id: \.self) { p in
+                LabeledContent(model.config.knobPages > 1 ? "Turn, page \(p + 1)" : "Turn",
+                               value: "CC \(knobPageCCs[p][k]) on channel \(model.config.knobChannel)")
             }
-            note("With Shift held, the turn goes out on \(shiftText), with its own value.")
+            if model.knobTouchOn {
+                IntField(title: "Touch CC (channel \(model.config.channel))", value: $model.config.knobTouchCCs[k], range: 0...127)
+            }
+            note("Each knob page has its own CCs, chosen so they don't clash with anything else the bridge or the keyboard sends; set how many pages in Settings. With Shift held, the turn goes out as CC \(knobPageCCs[0][k]) on \(shiftText), with its own value.")
         }
         Section("All eight knobs") {
+            IntField(title: "Knobs' channel", value: $model.config.knobChannel, range: 1...16)
             Picker("Turn values", selection: $model.config.knobMode) {
                 ForEach(turnModes, id: \.self) { Text(turnModeTitle($0)).tag($0) }
             }
@@ -305,9 +331,14 @@ struct InspectorView: View {
                               noneTitle: "Send its MIDI CC on channel \(shiftChannel)")
             }
             reaperCCSection(b)
-            if let v = model.kkCC(b) {
+            if model.config.reaper.kompleteKontrolView, let v = model.kkCC(b) {
                 Section("In the Komplete Kontrol view") {
                     note("This button sends CC \(v) there instead. See the Komplete Kontrol page.")
+                }
+            }
+            if model.config.reaper.midiView.enabled, let v = model.midiViewCC(b) {
+                Section("In the MIDI view") {
+                    note("This button sends CC \(v) there instead. See the MIDI page.")
                 }
             }
         }
@@ -318,7 +349,13 @@ struct InspectorView: View {
             LabeledContent("Mix view", value: "Volume of track \(k + 1) of the bank")
             LabeledContent("Mix view + Shift", value: "Pan of track \(k + 1) of the bank")
             LabeledContent("Track view", value: "\(trackViewTargets[k]) (page 1)")
-            LabeledContent("Komplete Kontrol view", value: "CC \(model.config.reaper.kompleteKontrol.encoderCCs[k])")
+            if model.config.reaper.kompleteKontrolView {
+                LabeledContent("Komplete Kontrol view", value: "CC \(model.config.kompleteKontrol.encoderCCs[k])")
+            }
+            if model.config.reaper.midiView.enabled {
+                LabeledContent("MIDI view", value: "CC \(knobPageCCs[0][k])"
+                               + (model.config.reaper.midiView.pages > 1 ? " (page 1; Page ◀ / ▶ for the others)" : ""))
+            }
             note("Track view pages 2 and on: sends 4–11, 12–16. Track view, Shift + turn: the volume goes to 0 dB, the pan to centre, record arm sets monitoring; other knobs send their MIDI CC on \(shiftText).")
         }
         Section("All knobs in REAPER mode") {
@@ -360,13 +397,14 @@ struct InspectorView: View {
     @ViewBuilder private func kkButton(_ b: String) -> some View {
         if b == "Shift" {
             Section("Komplete Kontrol view") { note("Shift keeps its job in this view and can't send a CC here.") }
+        } else if b == "Instance" {
+            Section("Komplete Kontrol view") { note("Instance keeps switching the views, so it can't send a CC here.") }
         } else {
             Section("Komplete Kontrol view") {
-                CCField(title: "CC on channel \(model.config.reaper.kompleteKontrol.channel)", value: kkCC(b), fallback: 44,
+                CCField(title: "CC on channel \(model.config.kompleteKontrol.channel)", value: kkCC(b), fallback: 44,
                         offText: "Off")
                 if model.kkCC(b) == nil {
-                    let job = model.command(b, shift: false).map(commandTitle) ?? "sending its MIDI CC"
-                    note("Off here: in this view the button keeps its REAPER job (\(job)).")
+                    note("Off here: in this view the button keeps its \(model.config.reaper.enabled ? "REAPER job" : "MIDI job") (\(usualJob(b))).")
                 } else {
                     note("Sends 127 when pressed and 0 when released. Komplete Kontrol's NKS template decides what it does, such as the next page or preset.")
                 }
@@ -376,7 +414,7 @@ struct InspectorView: View {
 
     @ViewBuilder private func kkKnob(_ k: Int) -> some View {
         Section("Knob \(k + 1)") {
-            IntField(title: "CC", value: $model.config.reaper.kompleteKontrol.encoderCCs[k], range: 0...127)
+            IntField(title: "CC", value: $model.config.kompleteKontrol.encoderCCs[k], range: 0...127)
             note("Its display on the keyboard reads ENCODER \(k + 1), with a bar of the value it last sent.")
         }
         kkKnobSettings
@@ -384,8 +422,8 @@ struct InspectorView: View {
 
     @ViewBuilder private var kkKnobSettings: some View {
         Section("All knobs in this view") {
-            IntField(title: "MIDI channel", value: $model.config.reaper.kompleteKontrol.channel, range: 1...16)
-            Picker("Turn values", selection: $model.config.reaper.kompleteKontrol.encoderMode) {
+            IntField(title: "MIDI channel", value: $model.config.kompleteKontrol.channel, range: 1...16)
+            Picker("Turn values", selection: $model.config.kompleteKontrol.encoderMode) {
                 ForEach(turnModes, id: \.self) { Text(turnModeTitle($0)).tag($0) }
             }
             note("Komplete Kontrol's NKS template reads absolute values; relative values left its parameters stuck near 50%. Like Novation's Launchkey, the bridge keeps one set of 8 knob values for every page, track and preset; Komplete Kontrol's parameter names and values aren't available to it.")
@@ -394,8 +432,59 @@ struct InspectorView: View {
 
     @ViewBuilder private func kkNavigate() -> some View {
         Section("Turn") {
-            note("\(navigateTurnTitle(model.config.reaper.navigateTurn, cc: model.config.navigateTurnCC)), as in the other REAPER views (change it on the REAPER page).")
+            if model.config.reaper.enabled {
+                note("\(navigateTurnTitle(model.config.reaper.navigateTurn, cc: model.config.navigateTurnCC)), as in the other REAPER views (change it on the REAPER page).")
+            } else {
+                note("Sends its MIDI CC (\(model.config.navigateTurnCC.map { "CC \($0)" } ?? "off")), as set on the MIDI page.")
+            }
         }
         kkButton("NavigateClick")
+    }
+
+    // MARK: MIDI page in REAPER mode: the MIDI view (issue #5)
+
+    @ViewBuilder private func midiViewButton(_ b: String) -> some View {
+        if b == "Shift" {
+            Section("MIDI view") { note("Shift keeps its job in this view and can't send a CC here.") }
+        } else if b == "Instance" {
+            Section("MIDI view") { note("Instance keeps switching the views, so it can't send a CC here.") }
+        } else if b == "PageLeft" || b == "PageRight" {
+            Section("MIDI view") {
+                note("Page ◀ / ▶ go through the MIDI view's knob pages (\(model.config.reaper.midiView.pages) now; set how many in Settings ▸ REAPER Views), stopping at the first and last.")
+            }
+        } else {
+            Section("MIDI view") {
+                CCField(title: "CC on channel \(model.config.reaper.midiView.channel)", value: midiViewCC(b),
+                        fallback: defaultCC(b), offText: "Off")
+                if model.midiViewCC(b) == nil {
+                    note("Off here: in this view the button keeps its REAPER job (\(usualJob(b))).")
+                } else {
+                    note("Sends 127 when pressed and 0 when released, for anything that learns MIDI CCs.")
+                }
+            }
+        }
+    }
+
+    @ViewBuilder private func midiViewKnob(_ k: Int) -> some View {
+        Section("Knob \(k + 1)") {
+            ForEach(0..<model.config.reaper.midiView.pages, id: \.self) { p in
+                LabeledContent("Page \(p + 1)", value: "CC \(knobPageCCs[p][k])")
+            }
+            note("Each page has its own CCs, chosen so they don't clash with anything else the bridge or the keyboard sends. Its display on the keyboard shows the CC and the value it last sent.")
+        }
+        Section("All knobs in this view") {
+            IntField(title: "MIDI channel", value: $model.config.reaper.midiView.channel, range: 1...16)
+            Picker("Turn values", selection: $model.config.reaper.midiView.knobMode) {
+                ForEach(turnModes, id: \.self) { Text(turnModeTitle($0)).tag($0) }
+            }
+            note("For anything that learns MIDI CCs. In absolute values, each knob starts at 64.")
+        }
+    }
+
+    @ViewBuilder private func midiViewNavigate() -> some View {
+        Section("Turn") {
+            note("\(navigateTurnTitle(model.config.reaper.navigateTurn, cc: model.config.navigateTurnCC)), as in the other REAPER views (change it on the REAPER page).")
+        }
+        midiViewButton("NavigateClick")
     }
 }

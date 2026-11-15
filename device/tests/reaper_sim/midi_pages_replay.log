@@ -1,0 +1,135 @@
+             display |MIDI 1/3|CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 3    |64      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.010 Knob 1 turn +2          CC14 ch3 = 66
+             display |MIDI 1/3|CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 3    |66      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.020 Knob 1 turn +2          CC14 ch3 = 68
+             display |MIDI 1/3|CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 3    |68      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.030 Knob 1 turn +2          CC14 ch3 = 70
+             display |MIDI 1/3|CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 3    |70      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.040 Knob 1 turn +2          CC14 ch3 = 72
+             display |MIDI 1/3|CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 3    |72      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.050 Knob 1 turn +2          CC14 ch3 = 74
+             display |MIDI 1/3|CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 3    |74      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.260 Knob 2 touch            CC23 ch1 = 127
+             display |MIDI 1/3|CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 3    |74      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  |[####+  ]| ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.370 Knob 2 untouch          CC23 ch1 = 0
+             display |MIDI 1/3|CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 3    |74      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.380 PageRight down (knob page 2/3)
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |64      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.700 Knob 1 turn +2          CC22 ch3 = 66
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |66      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.710 Knob 1 turn +2          CC22 ch3 = 68
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |68      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.720 Knob 1 turn +2          CC22 ch3 = 70
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |70      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.730 Knob 1 turn +2          CC22 ch3 = 72
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |72      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.740 Knob 1 turn +2          CC22 ch3 = 74
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |74      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:01.950 PageRight down (knob page 3/3)
+             display |MIDI 3/3|CC 102  |CC 103  |CC 104  |CC 105  |CC 106  |CC 107  |CC 108  |CC 109  |
+             display |CH 3    |64      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.270 PageRight down (knob page 3/3)
+12:00:02.590 Knob 1 turn +2          CC102 ch3 = 66
+             display |MIDI 3/3|CC 102  |CC 103  |CC 104  |CC 105  |CC 106  |CC 107  |CC 108  |CC 109  |
+             display |CH 3    |66      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.600 Knob 1 turn +2          CC102 ch3 = 68
+             display |MIDI 3/3|CC 102  |CC 103  |CC 104  |CC 105  |CC 106  |CC 107  |CC 108  |CC 109  |
+             display |CH 3    |68      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.610 Knob 1 turn +2          CC102 ch3 = 70
+             display |MIDI 3/3|CC 102  |CC 103  |CC 104  |CC 105  |CC 106  |CC 107  |CC 108  |CC 109  |
+             display |CH 3    |70      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.620 Knob 1 turn +2          CC102 ch3 = 72
+             display |MIDI 3/3|CC 102  |CC 103  |CC 104  |CC 105  |CC 106  |CC 107  |CC 108  |CC 109  |
+             display |CH 3    |72      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.630 Knob 1 turn +2          CC102 ch3 = 74
+             display |MIDI 3/3|CC 102  |CC 103  |CC 104  |CC 105  |CC 106  |CC 107  |CC 108  |CC 109  |
+             display |CH 3    |74      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.840 Shift down              CC108 ch1 = 127
+             display |MIDI    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 2    |64      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.950 Knob 1 turn +2          CC14 ch2 = 66
+             display |MIDI    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 2    |66      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.960 Knob 1 turn +2          CC14 ch2 = 68
+             display |MIDI    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 2    |68      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.970 Knob 1 turn +2          CC14 ch2 = 70
+             display |MIDI    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 2    |70      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.980 Knob 1 turn +2          CC14 ch2 = 72
+             display |MIDI    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 2    |72      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:02.990 Knob 1 turn +2          CC14 ch2 = 74
+             display |MIDI    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |CH 2    |74      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:03.000 PageRight down          CC114 ch2 = 127
+12:00:03.110 PageRight up            CC114 ch2 = 0
+12:00:03.320 Shift up                CC108 ch1 = 0
+             display |MIDI 3/3|CC 102  |CC 103  |CC 104  |CC 105  |CC 106  |CC 107  |CC 108  |CC 109  |
+             display |CH 3    |74      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:03.530 PageLeft down (knob page 2/3)
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |74      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:03.850 Knob 1 turn +2          CC22 ch3 = 76
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |76      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:03.860 Knob 1 turn +2          CC22 ch3 = 78
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |78      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | #####+  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:03.870 Knob 1 turn +2          CC22 ch3 = 80
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |80      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ######  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:03.880 Knob 1 turn +2          CC22 ch3 = 82
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |82      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ######  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+12:00:03.890 Knob 1 turn +2          CC22 ch3 = 84
+             display |MIDI 2/3|CC 22   |CC 23   |CC 24   |CC 25   |CC 26   |CC 27   |CC 28   |CC 29   |
+             display |CH 3    |84      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ######  | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
+replayed 439 HID reports from device/tests/reaper_sim/midi_pages_test.log

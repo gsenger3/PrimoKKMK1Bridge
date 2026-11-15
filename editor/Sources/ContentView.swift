@@ -58,7 +58,8 @@ struct ContentView: View {
         }
     }
 
-    /// What this page edits. (The MIDI page shows only with REAPER mode off; REAPER and Komplete Kontrol only with it on.)
+    /// What this page edits. In REAPER mode the MIDI page is the MIDI view's; the Komplete Kontrol and MIDI view pages
+    /// show only while those views are on.
     private var pageBanner: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
             Text(pageDescription).font(.callout).foregroundStyle(.secondary)
@@ -68,10 +69,19 @@ struct ContentView: View {
 
     private var pageDescription: String {
         switch model.page {
+        case .midi where model.editsMIDIView:
+            return "MIDI view: the CCs the knobs and chosen buttons send (channel \(model.config.reaper.midiView.channel)), for anything that learns MIDI CCs. Other buttons keep their REAPER jobs."
         case .midi:
-            return "MIDI: the CC each control sends (channel \(model.config.channel); Shift layer on \(model.config.shiftChannel.map { "channel \($0)" } ?? "off"))."
-        case .reaper: return "REAPER: the command each button runs, alone and with Shift. Instance switches the views: Mix → Track → Komplete Kontrol."
-        case .kk: return "Komplete Kontrol view: the CCs the knobs and chosen buttons send for Komplete Kontrol's NKS template. Other buttons keep their REAPER jobs."
+            return "MIDI: the CC each control sends (channel \(model.config.channel), the knobs on channel \(model.config.knobChannel); Shift layer on \(model.config.shiftChannel.map { "channel \($0)" } ?? "off"))."
+                + (model.config.kompleteKontrolView ? " Instance switches to the Komplete Kontrol view." : "")
+        case .reaper:
+            let r = model.config.reaper
+            let third = r.kompleteKontrolView && r.midiView.enabled ? " → Komplete Kontrol or MIDI (Shift + Play swaps them)"
+                : r.kompleteKontrolView ? " → Komplete Kontrol" : r.midiView.enabled ? " → MIDI" : ""
+            return "REAPER: the command each button runs, alone and with Shift. Instance switches the views: Mix → Track\(third)."
+        case .kk:
+            return "Komplete Kontrol view: the CCs the knobs and chosen buttons send for Komplete Kontrol's NKS template. Other buttons keep their "
+                + (model.config.reaper.enabled ? "REAPER jobs." : "MIDI CCs; Instance switches back.")
         case .settings: return ""
         }
     }

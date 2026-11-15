@@ -127,9 +127,15 @@ start REAPER selected track 1 "Kick"
 12:00:00.960 PageLeft down (KK)      CC42 ch1 = 127
 12:00:01.010 PageLeft up (KK)        CC42 ch1 = 0
 12:00:01.210 Shift down              CC108 ch1 = 127
+             display |KICK    |CC 14   |CC 15   |CC 16   |CC 17   |CC 18   |CC 19   |CC 20   |CC 21   |
+             display |SHIFT   |64      |64      |64      |64      |64      |64      |64      |64      |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:01.260 PageRight down          CC114 ch2 = 127
 12:00:01.310 PageRight up            CC114 ch2 = 0
 12:00:01.360 Shift up                CC108 ch1 = 0
+             display |KICK    |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |ENCODER |
+             display |KONTROL |1       |2       |3       |4       |5       |6       |7       |8       |
+             display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:01.560 Instance down
 12:00:01.560 REAPER mix view
              display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
