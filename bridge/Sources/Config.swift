@@ -351,6 +351,35 @@ struct Config: Codable {
         }
     }
 
+    /// Every key, and null for an optional control that's off (shiftChannel, navigateTurnCC, navigateTouchCC,
+    /// keyboardSource): reading the file back treats a missing key as "the default", so a synthesized encoder, which
+    /// leaves nil out, turned those back on at the next load.
+    func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(portName, forKey: .portName)
+        try c.encode(channel, forKey: .channel)
+        try c.encode(shiftChannel, forKey: .shiftChannel)
+        try c.encode(shiftLatch, forKey: .shiftLatch)
+        try c.encode(buttons, forKey: .buttons)
+        try c.encode(knobChannel, forKey: .knobChannel)
+        try c.encode(knobPages, forKey: .knobPages)
+        try c.encode(knobMode, forKey: .knobMode)
+        try c.encode(knobStepsPerCC, forKey: .knobStepsPerCC)
+        try c.encode(knobTouchCCs, forKey: .knobTouchCCs)
+        try c.encode(navigateTurnCC, forKey: .navigateTurnCC)
+        try c.encode(navigateTurnMode, forKey: .navigateTurnMode)
+        try c.encode(navigateTouchCC, forKey: .navigateTouchCC)
+        try c.encode(lights, forKey: .lights)
+        try c.encode(lightBrightness, forKey: .lightBrightness)
+        try c.encode(lightIdleBrightness, forKey: .lightIdleBrightness)
+        try c.encode(displays, forKey: .displays)
+        try c.encode(keyboardSource, forKey: .keyboardSource)
+        try c.encode(kompleteKontrolView, forKey: .kompleteKontrolView)
+        try c.encode(kompleteKontrol, forKey: .kompleteKontrol)
+        try c.encode(reaper, forKey: .reaper)
+        try c.encode(verbose, forKey: .verbose)
+    }
+
     func validate() throws {
         func ch(_ v: Int, _ what: String) throws {
             guard (1...16).contains(v) else { throw ConfigError(description: "\(what) must be 1-16, got \(v)") }
