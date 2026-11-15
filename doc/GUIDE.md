@@ -122,9 +122,9 @@ The pages, chosen in the toolbar, follow the mode you're in:
 | **MIDI Configuration** | The bridge's **Port name** and **Channel**, the Shift layer: **Shift Layer Enabled**, **Shift Layer Channel**, and **Shift Latching Enabled**, and **Knob Pages** (see [MIDI mode](#midi-mode)) |
 | **MIDI Keys & Controls** | **Merge Keys and Controls**: whether the keys and strips also come through the bridge's port. **Automatic (Port 1)** takes them from the keyboard's own port, **From MIDI Source by Name** from the source you name, and **Disabled** leaves them on the keyboard's port only |
 | **Lights and Displays** | **Enabled** drives the button lights, at **Active Brightness** when lit and **Idle Brightness** otherwise. **Enable Displays** drives the nine displays |
-| **REAPER Mode** | **Enabled** turns REAPER mode on. **Address**, **Local Listen Port** and **Device Port** match REAPER's OSC device ([Set up REAPER](#set-up-REAPER-once)) |
+| **REAPER Mode** | **Enabled** turns REAPER mode on. **Address**, **Local Listen Port** and **Device Port** match REAPER's OSC device ([Set up REAPER](#reaper-configuration-one-time)) |
 | **REAPER Views** | **Default View**: the view the bridge starts in. **MIDI View Enabled**: the [MIDI view](#midi-view), off by default. **Follow REAPER Track Selection**: the keyboard follows the track you click in REAPER. **Select Active Keyboard Track in REAPER (Track and Komplete Kontrol Views)**: in those views, the track you pick on the keyboard becomes REAPER's selected track. **Track Name Display Duration**: how long the displays show the track's name after you change track. **REAPER Resource Folder**: where the screenset names come from |
-| **REAPER Lightguide** | The selected track's color illuminated on the Komplete Kontrol lightguide, and the REAPER integration script. See [REAPER Lightguide](#REAPER-lightguide) |
+| **REAPER Lightguide** | The selected track's color illuminated on the Komplete Kontrol lightguide, and the REAPER integration script. See [REAPER Lightguide](#reaper-lightguide) |
 | **Komplete Kontrol View** | **Komplete Kontrol View Enabled** (each mode has its own: off in MIDI mode, on in REAPER mode by default), that view's **MIDI Channel** and **Knob Values** mode, and in REAPER mode **NKS Integration Enabled**, with the REAPER integration script's controls and the **Learned Pages** list. See [NKS Pages](#nks-pages) |
 | **Login** | **Launch Bridge at Login**: start the bridge when you log in, without the editor. It applies right away, without saving. See [Start the Bridge at Login](#start-the-bridge-at-login) |
 | **Logging** | **Verbose Logging**: the bridge writes every message it sends to its log, for tracking down a problem. Turn it off again afterwards, as the log grows quickly. **Show Log** opens the log |
@@ -222,7 +222,7 @@ The buttons do the same in all three views, apart from the Komplete Kontrol view
   Touching a knob ends that early.
 - **Clicking a track in REAPER** selects it on the keyboard too.
 
-The full list of what each button does, alone and with Shift, is in [REAPER mode defaults](#REAPER-mode-defaults).
+The full list of what each button does, alone and with Shift, is in [REAPER mode defaults](#reaper-mode-defaults).
 One of them needs a note: REAPER doesn't report the record mode over OSC, so Shift + Loop (normal ↔ time-selection
 auto-punch) follows the last mode set from the keyboard. If you change the mode in REAPER, one extra press brings
 them back in step.
@@ -289,7 +289,7 @@ For Komplete Kontrol to receive the CCs, its track needs **Primo Komplete Kontro
 
 With **NKS Integration Enabled** (Settings ▸ **Komplete Kontrol View**), the Komplete Kontrol view shows the instrument's NKS pages: each knob's parameter name and value, and the page on the left, such as *PAGE 2/7*. The knobs set those parameters through REAPER instead of sending CCs, so they don't jump.
 
-It needs the REAPER integration script (see [REAPER Lightguide](#REAPER-lightguide); the same section of Settings has its **Install…** button). The script tells the bridge which instrument Komplete Kontrol hosts on the selected track.
+It needs the REAPER integration script (see [REAPER Lightguide](#reaper-lightguide); the same section of Settings has its **Install…** button). The script tells the bridge which instrument Komplete Kontrol hosts on the selected track.
 
 Where the pages come from:
 
@@ -487,7 +487,7 @@ The bridge drives the 21 button lights, the nine displays and the light guide. O
 | Button lights | A button with a CC glows dimly and lights fully while held; the DAW can light it ([MIDI mode](#midi-mode)) | Play, Rec and Loop follow REAPER's transport; Browse is lit while a plugin window of the track is open; Instance shows the view (in MIDI mode with the Komplete Kontrol view on, it's dim with the MIDI controls and bright in that view). While Shift is held, Rec shows the metronome, Loop shows auto-punch, and Instance is lit in NKS learn mode. Other buttons glow dimly and light fully while held. |
 | Left display | *MIDI* and the channel (*CH 2* while Shift is held) | *MIX* and the tracks, the track and *TRK n*, or the track and *KONTROL*. |
 | Knob displays | Each knob's CC, its value and a bar | Each view's names, values and bars, as described above. Touching a knob frames its bar. |
-| Light guide (above the keys) | Off | [REAPER Lightguide](#REAPER-lightguide) |
+| Light guide (above the keys) | Off | [REAPER Lightguide](#reaper-lightguide) |
 | Short notices | — | *PANIC*, *SAVE*, *RENDER*, *SCREEN SET n* with the screenset's name, *FX 2/3* with the plugin's name, and the record mode. |
 
 ## The Config File
@@ -539,7 +539,7 @@ Everything the editor sets, by key. `PrimoKKMK1Bridge --print-default-config` pr
 | `REAPER.trackNameSeconds` | After a track change, how long only the track's number and name show (default 2; 0 is only until REAPER has sent the new track's values) |
 | `REAPER.resourcePath` | REAPER's resource folder, for the screenset names and the track color script (default `~/Library/Application Support/REAPER`) |
 | `REAPER.navigateTurn` | What turning the Navigate knob steps through: `tracks` (default), `pages`, or `null` for its CC |
-| `REAPER.lightGuide`, `REAPER.lightGuideBrightness` | The track color on the keys, on or off (default on), and its brightness, 1–100 percent (default 50). See [REAPER Lightguide](#REAPER-lightguide) |
+| `REAPER.lightGuide`, `REAPER.lightGuideBrightness` | The track color on the keys, on or off (default on), and its brightness, 1–100 percent (default 50). See [REAPER Lightguide](#reaper-lightguide) |
 | `REAPER.buttons` | Button name → REAPER command, or `null` to give the button back its CC. Commands: `play`, `stop`, `record`, `repeat`, `rewind`, `forward`, `metronome`, `record-mode`, `go-to-start`, `previous-marker`, `next-marker`, `undo`, `redo`, `browse-fx`, `close-fx`, `panic`, `save-project`, `render-project`, `screenset:1` … `screenset:10`, `previous-track`, `next-track`, `previous-page`, `next-page`, `toggle-view`, `switch-kk-midi-view`, `learn-nks-pages`, `mute`, `solo`, `action:<ID>` for any REAPER action (in REAPER's Action List, right-click it ▸ *Copy selected action command ID*), or `midiaction:<ID>` for an action from the Action List's MIDI Editor section |
 | `REAPER.shiftButtons` | The same, for buttons pressed while Shift is held. A button not listed sends its CC on the Shift channel |
 
@@ -556,7 +556,7 @@ with plain MIDI learn everywhere.
 | --- | --- |
 | The knobs send nothing | The keyboard is back in its own MIDI mode. The bridge switches it back when you replug it or the Mac wakes; otherwise press a page arrow next to the knobs, and the bridge notices and switches it back. If the bridge isn't running, turn it on. |
 | Every note plays twice | A track has both Primo Komplete Kontrol MK1 and the keyboard's own Port 1, or *All MIDI inputs*. Give it one of them. |
-| The displays say *waiting for OSC from REAPER* | REAPER isn't running (the bridge connects a few seconds after it starts), or its OSC device doesn't match the ports under **REAPER Mode** on the editor's Settings page (8000 / 9000). See [Set up REAPER](#set-up-REAPER-once) |
+| The displays say *waiting for OSC from REAPER* | REAPER isn't running (the bridge connects a few seconds after it starts), or its OSC device doesn't match the ports under **REAPER Mode** on the editor's Settings page (8000 / 9000). See [Set up REAPER](#reaper-configuration-one-time) |
 | You want to see what the bridge is doing | Turn on **Verbose Logging** under **Logging** on the editor's Settings page, and save; the bridge restarts with it. **Show Log** (or Bridge ▸ Show Bridge Log) then lists every MIDI CC, button press and OSC message it sends. Turn it off when you're done. |
 | The displays say *OSC port 9000 is in use* (and the keys are red) | Another program, often a second bridge started in Terminal or at login, already listens on that port. Quit it; the bridge tries again every 3 seconds and connects by itself. Or change **Device Port** under **REAPER Mode**, and REAPER's device port to match. |
 | The bridge switch turns itself off again | The bridge stopped right away. The editor shows the end of its log; Bridge ▸ Show Bridge Log has all of it. |
