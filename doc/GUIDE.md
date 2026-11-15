@@ -421,7 +421,7 @@ With Shift held, every button and knob turn sends the same CC on channel 2.
 
 ### REAPER Mode Defaults
 
-![The keyboard in REAPER mode, with each button's command and its Shift command](img/keyboard-REAPER.png)
+![The keyboard in REAPER mode, with each button's command and its Shift command](img/keyboard-reaper.png)
 
 | Button | Press | Shift + press |
 | --- | --- | --- |
