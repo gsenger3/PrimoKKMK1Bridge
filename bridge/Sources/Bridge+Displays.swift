@@ -232,7 +232,7 @@ extension Bridge {
                 displays.write(row: 0, cell: 0, "LEARN")
                 displays.write(row: 1, cell: 0, fitValue("PAGE \(l.page + 1)/\(l.pages.count)", cellWidth))
                 for k in 0..<8 {
-                    displays.write(row: 0, cell: k + 1, l.pages[l.page][k].map { abbreviate($0.name, cellWidth) } ?? "-")
+                    displays.write(row: 0, cell: k + 1, l.pages[l.page][k].map { truncate($0.name, cellWidth) } ?? "-")
                     if l.slot == k { displays.write(row: 1, cell: k + 1, "> NEXT") }
                     displays.setBar(cell: k + 1, nil, framed: l.slot == k)
                 }
@@ -240,13 +240,13 @@ extension Bridge {
                 return
             }
             // The left display: the selected track (whose plugin the knobs are on), and KONTROL for the view.
-            displays.write(row: 0, cell: 0, abbreviate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
+            displays.write(row: 0, cell: 0, truncate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
             if shiftHeld { renderShiftLayerKnobs(touched); return }
             if r.nksActive, let pages = r.nks?.pages.count {  // NKS pages: their names, REAPER's values
                 displays.write(row: 1, cell: 0, fitValue("PAGE \(r.nksPage + 1)/\(pages)", cellWidth))
                 for k in 0..<8 {
                     guard let i = r.nksInfo(k) else { displays.setBar(cell: k + 1, nil, framed: false); continue }
-                    displays.write(row: 0, cell: k + 1, abbreviate(i.short, cellWidth))
+                    displays.write(row: 0, cell: k + 1, truncate(i.short, cellWidth))
                     displays.write(row: 1, cell: k + 1, fitValue(i.value, cellWidth))
                     displays.setBar(cell: k + 1, i.bar, framed: touched.contains(k))
                 }
@@ -262,7 +262,7 @@ extension Bridge {
             return
         case .midi:  // the MIDI view: like MIDI mode, each knob's CC and the value it last sent
             let m = cfg.reaper.midiView
-            displays.write(row: 0, cell: 0, abbreviate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
+            displays.write(row: 0, cell: 0, truncate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
             if shiftHeld { renderShiftLayerKnobs(touched); return }
             displays.write(row: 1, cell: 0, m.pages > 1 ? "MIDI \(midiViewPage + 1)/\(m.pages)" : "MIDI")
             writeCCKnobs(channel: m.channel, ccs: midiViewKnobCCs, mode: m.knobMode, names: m.knobLabels, page: midiViewPage, touched)
@@ -272,13 +272,13 @@ extension Bridge {
             displays.write(row: 0, cell: 0, shiftHeld ? "PAN" : "MIX")
             displays.write(row: 1, cell: 0, numbers.isEmpty ? "NO TRKS" : "\(numbers.first!)-\(numbers.last!)")
         case .track:
-            displays.write(row: 0, cell: 0, abbreviate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
+            displays.write(row: 0, cell: 0, truncate(r.track.exists ? r.track.label : "NO TRACK", cellWidth))
             displays.write(row: 1, cell: 0, r.sendPage == 0 ? "TRK \(r.track.number)" : "PAGE \(r.sendPage + 1)/\(r.sendPages)")
         }
         for k in 0..<8 {
             guard let t = targets[k] else { continue }
             let i = info(k, t)
-            displays.write(row: 0, cell: k + 1, abbreviate(i.short, cellWidth))
+            displays.write(row: 0, cell: k + 1, truncate(i.short, cellWidth))
             displays.write(row: 1, cell: k + 1, fitValue(i.value, cellWidth))
         }
     }

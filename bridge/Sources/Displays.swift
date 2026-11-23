@@ -59,21 +59,15 @@ func displayCells(_ s: String) -> [DisplayCell] {
     return out
 }
 
-/// Shorten a name to fit `width` cells: drop vowels word by word (longest first), then trim the longest
-/// word, keeping at least two letters of each; drop the spaces only if that still doesn't fit.
-func abbreviate(_ s: String, _ width: Int) -> String {
-    let t = s.trimmingCharacters(in: .whitespaces)
-    guard displayCells(t).count > width else { return t }
-    var words = t.split(whereSeparator: { " _-".contains($0) }).map(String.init)
-    func fits(_ w: [String], _ sep: String) -> Bool { displayCells(w.joined(separator: sep)).count <= width }
-    for i in words.indices.sorted(by: { words[$0].count > words[$1].count }) where !fits(words, " ") {
-        let w = words[i]
-        words[i] = String(w.prefix(1)) + w.dropFirst().filter { !"aeiouAEIOU".contains($0) }
+/// A name cut to the characters that fit `width` cells, from the start (issue #45: easier to read than an
+/// abbreviation). A "." or "," shares the cell of the character before it; spaces left at the end are dropped.
+func truncate(_ s: String, _ width: Int) -> String {
+    var out = ""
+    for ch in s.trimmingCharacters(in: .whitespaces) {
+        guard displayCells(out + String(ch)).count <= width else { break }
+        out.append(ch)
     }
-    while !fits(words, " "), let i = words.indices.max(by: { words[$0].count < words[$1].count }), words[i].count > 2 {
-        words[i].removeLast()
-    }
-    return fits(words, " ") ? words.joined(separator: " ") : words.joined()
+    return out.trimmingCharacters(in: .whitespaces)
 }
 
 /// Shorten a value ("-12.0 dB") by dropping spaces when it doesn't fit.

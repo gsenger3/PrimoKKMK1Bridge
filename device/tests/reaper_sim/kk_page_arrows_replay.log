@@ -69,40 +69,40 @@ start REAPER connected (OSC on port 19000)
              display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
              display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|        |        |
              display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|        |        |
              display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|        |        |
              display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|        |        |
              display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |        |
              display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |        |
              display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |        |
              display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |        |
              display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
              display |        |KICK    |        |        |        |        |        |        |        |
@@ -138,57 +138,57 @@ start REAPER selected track 1 "Kick"
              display |         | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   | ####+   |
 12:00:01.560 Instance down
 12:00:01.560 REAPER mix view
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
 12:00:01.810 PageRight down
 12:00:01.810 → REAPER /device/track/bank/+ 1
-             display |MIX     |DRUM BUS|SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |TRACK 12|KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |TRACK 12|KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |TRACK 12|KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |TRACK 12|KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ |         | ######+ | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |TRACK 12|KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |TRACK 12|KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |-INF DB |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ |         | ######+ | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ |         | ######+ | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |TRACK 13|LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |TRACK 13|LEAD VOC|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ |         | ######+ | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |TRACK 13|LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |TRACK 13|LEAD VOC|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ |         |         | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |TRACK 13|LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |TRACK 13|LEAD VOC|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |-INF DB |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ |         |         | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |LEAD VOC|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ |         |         | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |TRACK 14|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |TRACK 14|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ |         |         | ######+ | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |TRACK 14|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |TRACK 14|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ |         |         |         | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |TRACK 14|BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |TRACK 14|BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |-INF DB |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ |         |         |         | ######+ | ######+ |
-             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |BCK VCLS|GUITAR  |
+             display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |BACKING |GUITAR  |
              display |9-8     |0.00DB   |0.00DB   |0.00DB   |        |        |        |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ |         |         |         | ######+ | ######+ |
              display |MIX     |DRUM BUS|REVERB  |DELAY   |        |        |        |TRACK 15|GUITAR  |

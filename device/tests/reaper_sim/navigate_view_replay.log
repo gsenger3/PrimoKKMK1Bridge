@@ -69,40 +69,40 @@ start REAPER connected (OSC on port 19000)
              display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |        |        |        |
              display |1-5     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|        |        |
              display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|        |        |
              display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|        |        |
              display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|        |        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|        |        |
              display |1-6     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |        |
              display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |        |
              display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |        |
              display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|        |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |        |
              display |1-7     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |1-      |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |         |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |        |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
              display |        |KICK    |        |        |        |        |        |        |        |
@@ -159,7 +159,7 @@ start REAPER selected track 1 "Kick"
              display |         |         |         |         |         |         |         |         |         |
 12:00:03.060 Instance down
 12:00:03.060 REAPER mix view
-             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VCL|BCK VCLS|GUITAR  |
+             display |MIX     |KICK    |SNARE   |TRACK 3 |BASS    |KEYS    |LEAD VOC|BACKING |GUITAR  |
              display |1-8     |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |0.00DB   |
              display |         | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ | ######+ |
 12:00:03.480 Navigate turn -1

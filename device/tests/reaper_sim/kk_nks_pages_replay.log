@@ -19,88 +19,88 @@ start REAPER selected track 1 "Kick"
              display |         |         |         |         |         |         |         |         |         |
 start → REAPER /device/fxinstparam/count 12
 start → REAPER /device/fxinstparam/bank/select 10
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|50HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[####+  ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.120 → REAPER /fxinstparam/2/value 0.513333
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|51HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[####+  ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.130 → REAPER /fxinstparam/2/value 0.526667
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|51HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[#####  ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|53HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[#####  ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.140 → REAPER /fxinstparam/2/value 0.54
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|54HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[#####  ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.150 → REAPER /fxinstparam/2/value 0.553333
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|55HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[#####  ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.160 → REAPER /fxinstparam/2/value 0.566667
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|57HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[#####  ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.170 → REAPER /fxinstparam/2/value 0.58
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|57HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[#####+ ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|58HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[#####+ ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.180 → REAPER /fxinstparam/2/value 0.593333
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|59HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[#####+ ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.190 → REAPER /fxinstparam/2/value 0.606667
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|59HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[#####+ ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|61HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[#####+ ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.200 → REAPER /fxinstparam/2/value 0.62
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|62HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[#####+ ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.210 → REAPER /fxinstparam/2/value 0.633333
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|62HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[###### ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|63HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         |[###### ]| ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|63HZ    |50%     |50%     |        |50MS    |50MS    |50%     |50MS    |
              display |         | ######  | ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.630 → REAPER /fxinstparam/4/value 0.486667
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|63HZ    |50%     |49%     |        |50MS    |50MS    |50%     |50MS    |
              display |         | ######  | ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.640 → REAPER /fxinstparam/4/value 0.473333
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|63HZ    |50%     |49%     |        |50MS    |50MS    |50%     |50MS    |
              display |         | ######  | ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|63HZ    |50%     |47%     |        |50MS    |50MS    |50%     |50MS    |
              display |         | ######  | ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.650 → REAPER /fxinstparam/4/value 0.46
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|63HZ    |50%     |46%     |        |50MS    |50MS    |50%     |50MS    |
              display |         | ######  | ####+   | ####+   |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.660 → REAPER /fxinstparam/4/value 0.446667
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|63HZ    |50%     |46%     |        |50MS    |50MS    |50%     |50MS    |
              display |         | ######  | ####+   | ####    |         | ####+   | ####+   | ####+   | ####+   |
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|63HZ    |50%     |45%     |        |50MS    |50MS    |50%     |50MS    |
              display |         | ######  | ####+   | ####    |         | ####+   | ####+   | ####+   | ####+   |
 12:00:01.670 → REAPER /fxinstparam/4/value 0.433333
-             display |KICK    |CUTOFF  |RESO    |ENV AMNT|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
+             display |KICK    |CUTOFF  |RESO    |ENV AMOU|        |ATTACK  |DECAY   |SUSTAIN |RELEASE |
              display |PAGE 1/3|63HZ    |50%     |43%     |        |50MS    |50MS    |50%     |50MS    |
              display |         | ######  | ####+   | ####    |         | ####+   | ####+   | ####+   | ####+   |
 12:00:02.330 PageRight down (KK)     CC43 ch1 = 127
