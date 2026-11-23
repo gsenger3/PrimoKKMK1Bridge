@@ -115,7 +115,7 @@ start REAPER selected track 1 "Kick"
 12:00:00.810 Navigate turn +1
 12:00:00.810 REAPER track view
              display |KICK    |VOLUME  |PAN     |MUTE    |SOLO    |REC ARM |DRUM BUS|REVERB  |DELAY   |
-             display |TRK 1   |0.00DB   |CENTER  |OFF     |OFF     |OFF     |-6.24DB  |-6.24DB  |-6.24DB  |
+             display |TRK 1   |0.00DB   |CENTER  |OFF     |OFF     |OFF     |▷-6.24DB |▷-6.24DB |▷-6.24DB |
              display |         | ######+ |     #   |         |         |         | ####+   | ####+   | ####+   |
 12:00:00.810 → REAPER /device/track/+ 1
 12:00:00.810 → REAPER /action 40297
@@ -165,7 +165,7 @@ start REAPER selected track 1 "Kick"
 12:00:03.480 Navigate turn -1
 12:00:03.480 REAPER track view
              display |SNARE   |VOLUME  |PAN     |MUTE    |SOLO    |REC ARM |DRUM BUS|REVERB  |        |
-             display |TRK 2   |0.00DB   |CENTER  |OFF     |OFF     |OFF     |-6.24DB  |-6.24DB  |        |
+             display |TRK 2   |0.00DB   |CENTER  |OFF     |OFF     |OFF     |▷-6.24DB |▷-6.24DB |        |
              display |         | ######+ |     #   |         |         |         | ####+   | ####+   |         |
 12:00:03.480 → REAPER /device/track/- 1
 12:00:03.480 → REAPER /action 40297

@@ -115,7 +115,7 @@ start REAPER selected track 1 "Kick"
 12:00:00.210 Instance down
 12:00:00.210 REAPER track view
              display |KICK    |VOLUME  |PAN     |MUTE    |SOLO    |REC ARM |DRUM BUS|REVERB  |DELAY   |
-             display |TRK 1   |0.00DB   |CENTER  |OFF     |OFF     |OFF     |-6.24DB  |-6.24DB  |-6.24DB  |
+             display |TRK 1   |0.00DB   |CENTER  |OFF     |OFF     |OFF     |▷-6.24DB |▷-6.24DB |▷-6.24DB |
              display |         | ######+ |     #   |         |         |         | ####+   | ####+   | ####+   |
 12:00:00.460 Instance down
 12:00:00.460 REAPER komplete-kontrol view

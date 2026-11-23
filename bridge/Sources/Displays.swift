@@ -37,7 +37,7 @@ let glyphSpecs: [(Character, String)] = [
     ("-", "g"), ("+", "g i l"), ("/", "j k"), ("\\", "h m"), ("*", "g h i j k l m"), ("_", "d"), ("=", "d g"),
     ("<", "j m"), (">", "h k"), ("(", "j m"), (")", "h k"), ("[", "a d e f"), ("]", "a b c d"), ("'", "i"),
     ("\"", "b i"), ("|", "i l"), ("%", "a1 c d2 f g i j k l"), ("?", "a b g2 l"), ("!", "b c"),
-    ("$", "a c d f g i l"), ("^", "k m"),
+    ("$", "a c d f g i l"), ("^", "k m"), ("▷", "e f h k"),  // the send mark (sendLevel): ">" looks like ")"
 ]
 let glyphs: [Character: UInt16] = Dictionary(uniqueKeysWithValues: glyphSpecs.map { ch, spec in
     (ch, spec.split(separator: " ").reduce(UInt16(0)) { $0 | segmentBits[String($1)]! })
@@ -74,6 +74,19 @@ func truncate(_ s: String, _ width: Int) -> String {
 func fitValue(_ s: String, _ width: Int) -> String {
     let t = s.trimmingCharacters(in: .whitespaces)
     return displayCells(t).count > width ? t.replacingOccurrences(of: " ", with: "") : t
+}
+
+/// A send's level with "▷" in front, so a send reads differently from the track's own volume. A level such as
+/// "-12.04dB" uses 7 cells (the point shares a cell), leaving one for the mark; one that fills the display (below
+/// -100 dB) loses decimals to make room.
+func sendLevel(_ s: String) -> String {
+    var v = fitValue(s, cellWidth - 1)
+    while displayCells(v).count > cellWidth - 1,
+          let r = v.range(of: #"\.\d+(?=\s*dB)"#, options: [.regularExpression, .caseInsensitive]) {
+        let digits = v[r].dropFirst()  // the last decimal goes, and the point with it when it was the only one
+        v.replaceSubrange(r, with: digits.count > 1 ? "." + digits.dropLast() : "")
+    }
+    return "▷" + v
 }
 
 final class Displays {

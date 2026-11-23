@@ -279,7 +279,11 @@ extension Bridge {
             guard let t = targets[k] else { continue }
             let i = info(k, t)
             displays.write(row: 0, cell: k + 1, truncate(i.short, cellWidth))
-            displays.write(row: 1, cell: k + 1, fitValue(i.value, cellWidth))
+            if case .send = t {  // Track view: a send's level, marked
+                displays.write(row: 1, cell: k + 1, sendLevel(i.value))
+            } else {
+                displays.write(row: 1, cell: k + 1, fitValue(i.value, cellWidth))
+            }
         }
     }
 }

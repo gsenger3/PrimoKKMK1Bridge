@@ -257,7 +257,7 @@ track, and REAPER scrolls to it.
 | 5 | Record arm: right on, left off | Record monitoring: right on, left off |
 | 6–8 | Sends 1–3 | CC19–21, channel 2 |
 
-**Page ▶** shows the next 8 sends (page 2: sends 4–11, page 3: sends 12–16), and **Page ◀** goes back. Only sends that are routed somewhere appear, in order, each with the track it feeds and its level.
+**Page ▶** shows the next 8 sends (page 2: sends 4–11, page 3: sends 12–16), and **Page ◀** goes back. Only sends that are routed somewhere appear, in order, each with the track it feeds and its level. A send's level has a *▷* in front (*▷-6.24DB*), so it doesn't read as the track's own volume.
 
 The left display shows the track's name and *TRK n*, or the page, such as *PAGE 2/2*. The record-arm display also shows the monitoring (*ON MON*, *off AUTO*); while Shift is held it shows *MONITOR*.
 
