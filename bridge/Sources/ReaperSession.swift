@@ -728,9 +728,17 @@ final class ReaperSession {
         case "track" where p.count >= 2:
             if let n = Int(p[1]) {  // /track/N/...: a track of the current bank
                 guard n >= 1 else { return }
-                guard n <= bankSize else { handshake(); return }  // REAPER's page is bigger than ours: it restarted
+                let rest = p.dropFirst(2).joined(separator: "/")
+                guard n <= bankSize else {
+                    // A bank message past our 8: REAPER's page is bigger than ours, so it restarted. Only one we read
+                    // counts: REAPER numbers others by the track's place in the project (/track/10/fxeq/...), and a
+                    // handshake for those sent REAPER back to the last touched track.
+                    var probe = TrackStrip()
+                    if update(&probe, rest, address, args) { handshake() }
+                    return
+                }
                 var s = bank[n - 1]
-                guard update(&s, p.dropFirst(2).joined(separator: "/"), address, args) else { return }
+                guard update(&s, rest, address, args) else { return }
                 let moved = s.number != bank[n - 1].number || s.name != bank[n - 1].name
                 bank[n - 1] = s
                 onEvent?(moved ? .bank : .values)
