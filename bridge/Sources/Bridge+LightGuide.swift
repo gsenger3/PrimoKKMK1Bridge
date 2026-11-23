@@ -50,7 +50,7 @@ extension Bridge {
         sendLightGuide()
     }
 
-    /// What the light guide shows now, in REAPER colour values (0-127 each; nil = off), and what that is, for the log.
+    /// What the light guide shows now, before the white balance (nil = off), and what that is, for the log.
     func lightGuideState() -> (colour: (red: Int, green: Int, blue: Int)?, what: String) {
         guard lightGuideInUse else { return (nil, "off") }
         if lightGuideScriptInstalled {
@@ -58,7 +58,7 @@ extension Bridge {
             if !(reaper?.connected ?? false) { return ((64, 0, 127), "purple, waiting for REAPER") }
         }
         guard let c = trackColor else { return (nil, "off") }
-        return (c, "track colour \(c.red) \(c.green) \(c.blue)")
+        return (ledColour(c), "track colour \(c.red) \(c.green) \(c.blue)")
     }
 
     /// After connecting: clear the light guide if it's not in use. In use, with the script installed, play the
@@ -135,7 +135,8 @@ extension Bridge {
         timer.resume()
     }
 
-    /// Send one colour per key (REAPER colour values, 0-127 each), white-balanced and at reaper.lightGuideBrightness.
+    /// Send one colour per key (0-127 each; more where the white balance brings it down), white-balanced and at
+    /// reaper.lightGuideBrightness.
     /// False if nothing was sent: the same as last time, no keyboard, or the report failed.
     @discardableResult
     func writeLightGuide(_ keys: [[Double]]) -> Bool {
@@ -153,6 +154,34 @@ extension Bridge {
         lightGuideSent = payload
         return true
     }
+}
+
+/// The light guide's colour for each hue (degrees, red at 0), before the white balance, with straight lines between.
+/// Orange and yellow were picked against REAPER's on an S61 MK1 (2026-11-22): their red is above 127 so that the
+/// white balance leaves it at 127, as yellow needs twice as much red as green. The others are the plain colours.
+let ledHues: [(hue: Double, rgb: [Double])] = [
+    (0, [127, 0, 0]), (30, [169, 27, 0]), (60, [169, 64, 0]), (120, [0, 127, 0]),
+    (180, [0, 127, 127]), (240, [0, 0, 127]), (300, [127, 0, 127]), (360, [127, 0, 0]),
+]
+
+/// A REAPER track colour (0-127 each) for the light guide, before the white balance. Sent as they are, REAPER's
+/// values made orange and yellow lean green and brown look grey: on the keys a mix's look depends on its hue, and a
+/// muted colour looks grey. So the hue's colour comes from ledHues; saturation is raised by half, and a dark colour
+/// dimmed further (both from brown, picked on the keyboard). White and greys keep their mix.
+func ledColour(_ c: (red: Int, green: Int, blue: Int)) -> (red: Int, green: Int, blue: Int) {
+    let r = Double(c.red) / 127, g = Double(c.green) / 127, b = Double(c.blue) / 127
+    let top = max(r, g, b), range = top - min(r, g, b)
+    guard top > 0 else { return c }
+    var hue = 0.0
+    if range > 0 {
+        hue = top == r ? 60 * (g - b) / range : top == g ? 60 * (b - r) / range + 120 : 60 * (r - g) / range + 240
+        if hue < 0 { hue += 360 }
+    }
+    let i = ledHues.lastIndex { $0.hue <= hue }!, from = ledHues[i], to = ledHues[i + 1]
+    let f = (hue - from.hue) / (to.hue - from.hue)
+    let saturation = min(1, 1.5 * range / top), level = pow(top, 1.33)
+    let out = (0..<3).map { k in (127 * (1 - saturation) + (from.rgb[k] + (to.rgb[k] - from.rgb[k]) * f) * saturation) * level }
+    return (Int(out[0].rounded()), Int(out[1].rounded()), Int(out[2].rounded()))
 }
 
 /// A fully saturated, full-brightness colour for a hue from 0 (red) through 1/3 (green) and 2/3 (blue): red, green

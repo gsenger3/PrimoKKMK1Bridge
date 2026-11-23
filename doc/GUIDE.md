@@ -346,7 +346,7 @@ The MIDI view works like the Komplete Kontrol view, but its knobs and buttons se
 
 In REAPER mode, the keyboard's light guide (the lights above the keys) shows the **selected track's color on every key**. Its settings are in the **REAPER Lightguide** section of the editor's Settings page.
 
-- **Brightness:** 50% by default. The color is corrected so a white track looks white rather than purple.
+- **Brightness:** 50% by default. The color is corrected so a white track looks white rather than purple, and so colors look as they do on screen: yellow and orange don't lean green, and muted colors such as brown show as a deeper, dimmer shade rather than gray.
 - **No color:** a track without a color of its own leaves the keys dark, and so does having no track selected.
 - **Turning it off:** turn off **Enable Lightguide**.
 
